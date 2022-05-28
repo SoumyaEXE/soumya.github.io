@@ -10,8 +10,8 @@ url: "" # The base hostname & protocol for your site, e.g. http://example.com
 #-------------------------------
 # Author Settings
 author:
-  name: 0xd4y - Segev Eliezer
-  avatar: '/images/15.jpg'
+  name: 0xd4y
+  avatar: '/images/beach_chess_smaller.jpg'
 
 
 #-------------------------------
