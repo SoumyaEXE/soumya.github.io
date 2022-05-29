@@ -554,19 +554,3 @@ if(isset($_POST\['login'\])){        
 {% endhighlight %}
 
 This piece of code was responsible for the SQLi. Note the user query is passed directly into the sql variable, which is used during the connection to the internal SQL server. The user input is passed into the voter variable which is surrounded by single quotes in the SQL query. This was the reason for the SQLi working upon prepending a single quote to the beginning of the input. Note that this same vulnerability is present within C:\\xampp\\htdocs\\omrs\\admin\\login.php.
-
-Beta.php Vulnerability
-----------------------
-
-The beta.php file located at C:\\xampp\\htdocs\\FFS\\beta.php was responsible for the initial foothold on the box. The code performs the curl function on the user query, but does not first check it for potentially malicious characters or strings:
-
-{% highlight php %}
-if(isset($_POST\['read'\]))                    
-  {                           $file\=trim($_POST\['file'\]);         $curl = curl_init();                                                            
-       curl_setopt ($curl, CURLOPT_URL, $file);                    
-       curl_exec ($curl);                  
-       curl_close ($curl);  
- }
-{% endhighlight %}
-
-Hardening this code will require a blacklist which should contain strings such as file (to prevent file:///) and localhost.
