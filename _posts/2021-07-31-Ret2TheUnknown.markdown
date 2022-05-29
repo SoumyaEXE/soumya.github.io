@@ -1,3 +1,14 @@
+---
+layout: post
+title:  Ret2The-Unknown Writeup
+description: This challenge was about exploiting a binary via a return-to-libc attack (due to the enabled NX bit). The address of printf was provided to faciliate exploitation, however it was only given after passing in user input. This address could not be used for future execution of the binary due to the presence of ASLR. Nevertheless, despite the presence of the enabled NX bit and ASLR, the binary was vulnerable.
+date:   2021-08-22 
+image:  '/images/0xd4y-logo-gray.png'
+tags:   [Ret2Libc, Binary Exploitation, ASLR Bypass]
+---
+
+**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/Writeups/reports/Ret2The-Unknown%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+
 Ret2The-Unknown
 
 Return-to-libc attack with ASLR
