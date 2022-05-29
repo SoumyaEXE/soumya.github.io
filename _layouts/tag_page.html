@@ -1,6 +1,8 @@
 ---
 layout: default
 ---
+
+{% include pagination.html %}
 <div class="container">
   <div class="row">
     <div class="col col-8 col-d-10 col-m-12 push-m-0 push-d-1 push-2">
@@ -17,7 +19,7 @@ layout: default
     <div class="col col-12 col-d-10 col-m-12 push-m-0 push-d-1">
       <div class="container__inner">
         <div class="row grid">
-          {% for post in paginator.posts %}
+          {% for post in page.posts %}
             {% include article-content.html %}
           {% endfor %}
         </div>
