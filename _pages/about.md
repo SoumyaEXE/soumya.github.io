@@ -2,7 +2,7 @@
 layout: page
 title: About
 permalink: /about/
-image: '/images/60.jpg'
+image: '/images/cool_chess_image.jpg'
 ---
 
 ![Beach Chess]({{site.baseurl}}/images/beach_chess.jpg#center)
