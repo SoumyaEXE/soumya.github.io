@@ -1,3 +1,14 @@
+---
+layout: post
+title:  Behemoth Writeup
+description: Behemoth is the sequel to Narnia and is rated to be slightly harder. In comparison to Narnia, it involved more reverse engineering exercises and required more knowledge of C. Each binary contained a different vulnerability ranging from PATH environment variable privilege escalation to buffer overflows, format string exploits, and bypassing shellcode filtering.
+date:   2021-04-20
+image:  '/images/0xd4y-logo-gray.png'
+tags:   [Format String, Shellcode Filter Bypass, PATH privesc, Buffer Overflow, Shellcode, Binary Exploitation]
+---
+
+**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/Writeups/reports/Behemoth%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+
 Behemoth
 
 A look into the exploitation of vulnerable binaries
