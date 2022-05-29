@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  Writer Writeup
-description: This system contained an SQL injection vulnerability which could be leveraged to not only log into an application with admin privileges, but also could be used to read local files on the target. After leaking the source code of the website, an insecure usage of handling files was exploited to get RCE. With a www-data shell on the system, an insecure password of a local user located in the SQL database was cracked. Eventually the system was fully compromised through misconfigurations relating to SMTP and APT.
-date:   2021-08-22 
+title:  Wreath Writeup
+description: This challenge involved exploiting a vulnerable network of three computers. Two of which were susceptible to exploitations of outdated software. The last machine involved a unique foothold centered around the creation of a malicious image file. I highly encourage you to read this writeup, as I go into detail about how Mimikatz, evil-winrm, and network pivoting work.
+date:   2021-03-22 
 image:  '/images/0xd4y-logo-gray.png'
-tags:   [SQLi, SMTP, RCE, APT]
+tags:   [Windows, Linux, Network pivoting, RCE, CVE]
 ---
 
 <div>
@@ -19,7 +19,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c0 c39 c71">   </span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 333.50px; height: 344.19px;">![](_reports/Wreath/0xd4y-logo-gray.png)</span>
 
-**This report can be read both on this site, and as its <a href = "https://zezul.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://zezul.github.io/reports/Archangel%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 
 <span class="c30 c44 c51">0xd4y</span>
