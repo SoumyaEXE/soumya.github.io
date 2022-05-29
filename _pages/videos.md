@@ -2,7 +2,7 @@
 layout: page
 title: Videos 
 permalink: /videos/
-image: '/images/YouTube-logo-black-background.png'
+image: '/images/youtube_banner.jpg'
 ---
 
 Here are some of the videos that I posted on my <a href="https://www.youtube.com/channel/UCSumP9z5Rzquqih-jpusTOQ">YouTube channel</a>. They range from external and internal penetration testing, to cloud penetration tests. I hope you find these videos interesting and instructive! 
