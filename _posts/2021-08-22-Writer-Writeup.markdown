@@ -152,9 +152,9 @@ The web page does not properly check if an uploaded file is an image, as it was 
 
 An addition to the image upload feature is the ability to upload files given a url. This could be utilized to cause the server to perform GET requests to an arbitrary website of the user’s choice:
 
-{% highlight bash %} 
 Request
 
+{% highlight bash %} 
 POST /dashboard/stories/add HTTP/1.1Host: 10.10.11.101  
 User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0  
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,\*/\*;q=0.8  
