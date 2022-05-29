@@ -382,8 +382,7 @@ This code can further be inspected using the html source code (inspect element) 
    }
 
 ?>
-{% endhighlight %}
-{% highlight php %}
+
 <?php include 'includes/header.php'; ?>
 
 <body class\="hold-transition login-page"\>
@@ -504,7 +503,7 @@ def callShell():
 print("Start a NC listner on the port you choose above and run...")  
 sendPayload()  
 callShell()
-{% endhighlight}
+{% endhighlight %}
 
 Some code was removed to not clutter up this report
 
@@ -530,3 +529,71 @@ msiexec /quiet /qn /i 0xd4y.msi
 ![](/reports/Love/image3.png)
 
 A shell is then returned as the system user.
+
+Post Exploitation Analysis
+==========================
+
+* * *
+
+SQL Injection
+-------------
+
+The SQL injection led to the leakage of the Admin password hash. This was due to the lack of user-input sanitization. The following code snippet was taken from C:\\xampp\\htdocs\\omrs\\login.php, and is running on the root page of http://10.10.10.239:
+
+{% highlight php %}
+if(isset($_POST\['login'])){          
+   $voter = $_POST\['voter'];                                              
+   $password = $_POST\['password'];                                        
+                               
+   $sql = "SELECT \* FROM voters WHERE voters_id = '$voter'";              
+   $query = $conn->query($sql);
+{% endhighlight %}
+
+This piece of code was responsible for the SQLi. Note the user query is passed directly into the sql variable, which is used during the connection to the internal SQL server. The user input is passed into the voter variable which is surrounded by single quotes in the SQL query. This was the reason for the SQLi working upon prepending a single quote to the beginning of the input. Note that this same vulnerability is present within C:\\xampp\\htdocs\\omrs\\admin\\login.php.
+
+Beta.php Vulnerability
+----------------------
+
+The beta.php file located at C:\\xampp\\htdocs\\FFS\\beta.php was responsible for the initial foothold on the box. The code performs the curl function on the user query, but does not first check it for potentially malicious characters or strings:
+
+{% highlight php %}
+if(isset($_POST\['read']))                    
+  {                           $file\=trim($_POST\['file']);         $curl = curl_init();                                                            
+       curl_setopt ($curl, CURLOPT_URL, $file);                    
+       curl_exec ($curl);                  
+       curl_close ($curl);  
+ }
+{% endhighlight %}
+
+
+Hardening this code will require a blacklist which should contain strings such as file (to prevent file:///) and localhost.
+
+Conclusion
+==========
+
+* * *
+This Windows system contained multiple vulnerabilities. The foothold on the machine started with an insecure file scanner feature located on the HTTPS server. The file scanner fails to sanitize user input. Thus, sensitive files located locally on the system could be read using the file:/// delimiter at the beginning of the query. Furthermore, sensitive services which are not able to be accessed by outside users, can be accessed by forcing the file scanner to perform a query on itself.
+
+A vulnerable version of Voting System software was installed which resulted in the ability to upload malicious PHP files to get a reverse shell. After obtaining a reverse shell, it was found that the box has a misconfiguration relating to the installation feature of Windows, and the enabled AlwaysInstallElevated group policy resulted in the privilege escalation to SYSTEM. The following remediations should be seriously considered:
+
+*   Harden SQL code in login.php
+
+*   Sanitize user query (character escaping, blacklist characters, validate input)
+*   Use stored procedures or parameterized queries
+
+*   Perform sanitization on user query in the beta.php file
+*   Update Voting System software
+
+*   Poor validation within an image file upload feature resulted in the successful upload of malicious PHP to get a reverse shell
+
+*   Modify AlwaysInstallElevated policy
+
+*   Enabling this group policy resulted in escalating privileges from a local account to SYSTEM
+*   This policy should be changed from 1 to 0
+* * *
+
+[\[1]](#ftnt_ref1) [https://github.com/OJ/gobuster](https://www.google.com/url?q=https://github.com/OJ/gobuster&sa=D&source=editors&ust=1653797783782138&usg=AOvVaw0cPtGGMIRnJTXphEo5G4y6) 
+
+[\[2]](#ftnt_ref2) [https://owasp.org/www-community/attacks/Log_Injection](https://www.google.com/url?q=https://owasp.org/www-community/attacks/Log_Injection&sa=D&source=editors&ust=1653797783783115&usg=AOvVaw0vjegYg7h-fRsbQvX2GpfN) 
+
+[\[3]](#ftnt_ref3) [https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec](https://www.google.com/url?q=https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec&sa=D&source=editors&ust=1653797783783679&usg=AOvVaw3LvA2X25v-kmvKWMfYpmG-)
