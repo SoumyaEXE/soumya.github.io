@@ -3,21 +3,13 @@ layout: post
 title:  Writer Writeup
 description: This system contained an SQL injection vulnerability which could be leveraged to not only log into an application with admin privileges, but also could be used to read local files on the target. After leaking the source code of the website, an insecure usage of handling files was exploited to get RCE. With a www-data shell on the system, an insecure password of a local user located in the SQL database was cracked. Eventually the system was fully compromised through misconfigurations relating to SMTP and APT.
 date:   2021-08-22 
-image:  '/images/0xd4y-logo-gray.jpg'
+image:  '/images/0xd4y-logo-gray.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
-***
-# Writer
-***
+
 
    ![](images/image3.png)
-
-## 0xd4y
-
-*August 22, 2021*
-
-### 0xd4y Writeups
 
 LinkedIn: [https://www.linkedin.com/in/segev-eliezer/](https://www.google.com/url?q=https://www.linkedin.com/in/segev-eliezer/&sa=D&source=editors&ust=1653773864786089&usg=AOvVaw02OXACudSej5nWLBZ4W3Vk) 
 
@@ -86,7 +78,7 @@ Enumeration
 
 To examine potential vulnerabilities, the ports of the target were first scanned:
 
-```bash
+{% highlight bash %}
 \# Nmap 7.91 scan initiated Tue Aug 17 14:52:04 2021 as: nmap -sC -sV -oA nmap/nmap 10.10.11.101  
 Nmap scan report for 10.10.11.101  
 Host is up (0.065s latency).  
@@ -116,7 +108,7 @@ Host script results:
   
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .  
 \# Nmap done at Tue Aug 17 14:52:20 2021 -- 1 IP address (1 host up) scanned in 15.70 seconds
-```
+{% endhighlight %}
 
 From the nmap scan, it is apparent that the SSH, HTTP, and SMB services are running on the target.  The SMB service is of interest, however there is no anonymous access to any of the shares:
 
