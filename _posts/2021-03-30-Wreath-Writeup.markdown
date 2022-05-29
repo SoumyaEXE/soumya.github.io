@@ -17,7 +17,7 @@ tags:   [Windows, Linux, Network pivoting, RCE, CVE]
 
 <span>A look into the exploitation of a vulnerable network and “secure” PC.</span>
 
-<span class="c0 c39 c71">   </span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 333.50px; height: 344.19px;">![](/_reports/Wreath/0xd4y-logo-gray.png)</span>
+<span class="c0 c39 c71">   </span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 333.50px; height: 344.19px;">![](/images/0xd4y-logo-gray.png)</span>
 
 **This report can be read both on this site, and as its <a href = "https://zezul.github.io/reports/Archangel%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
