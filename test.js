@@ -135,7 +135,7 @@
             throw new Error("SimpleJekyllSearch --- " + e)
         }
         var a = {
-                searchInput: null,
+                searchInput: "a",
                 resultsContainer: null,
                 json: [],
                 searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>',
