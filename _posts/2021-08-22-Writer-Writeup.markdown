@@ -7,7 +7,7 @@ image:  '/images/0xd4y-logo-gray.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/Writeups/reports/Wreath%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/Writeups/images/reports/Wreath%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 ![](/images/0xd4y-logo-gray.png)
 
@@ -112,7 +112,7 @@ Service detection performed. Please report any incorrect results at https://nma
 
 From the nmap scan, it is apparent that the SSH, HTTP, and SMB services are running on the target.  The SMB service is of interest, however there is no anonymous access to any of the shares:
 
-![](/reports/Writer/image1.png)
+![](/images/reports/Writer/image1.png)
 
 Seeing as all of the services are up to date, it follows that the HTTP service must be searched for potential vulnerabilities.
 
@@ -120,7 +120,7 @@ Seeing as all of the services are up to date, it follows that the HTTP service m
 
 Users visiting the target’s web server are met with the following home page:
 
-![](/reports/Writer/image4.png)
+![](/images/reports/Writer/image4.png)
 
 Enumerating the directories of the webpage with gobuster[\[1\]](#ftnt1), the following directories are found:
 
@@ -137,7 +137,7 @@ Enumerating the directories of the webpage with gobuster[\[1\]](#ftnt1), the fol
 
 A directory of particular interest is /administrative, especially since it cannot be found without brute forcing directories. Visiting this directory reveals a simple login form which asks for a username and password:
 
-![](/reports/Writer/image2.png)
+![](/images/reports/Writer/image2.png)
 
 Note the domain of the target (namely writer.htb). However, no virtual host routing is present.
 
@@ -146,7 +146,7 @@ SQL Injection
 
 When inputting ’OR 1=1-- - as the username and choosing a random value for the password, the user is automatically authenticated, thus confirming the presence of SQL injection. As an authenticated user, stories can be edited and created, and pictures can be uploaded:
 
-![](/reports/Writer/image5.png)
+![](/images/reports/Writer/image5.png)
 
 The web page does not properly check if an uploaded file is an image, as it was possible to upload a reverse shell by the name of php-reverse-shell.jpg.php. This, however, did not lead to RCE as the web page nevertheless treated the file as an image. Furthermore, uploading a malicious image with PHP code did not work.
 
