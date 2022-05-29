@@ -92,3 +92,14 @@
     }
   }
 }
+
+.search-results-list {
+  .no-results {
+    width: 100%;
+    list-style: none;
+    h3 {
+      font-size: 28px;
+      text-align: center;
+    }
+  }
+}
