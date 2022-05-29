@@ -541,7 +541,7 @@ SQL Injection
 The SQL injection led to the leakage of the Admin password hash. This was due to the lack of user-input sanitization. The following code snippet was taken from C:\\xampp\\htdocs\\omrs\\login.php, and is running on the root page of http://10.10.10.239:
 
 {% highlight php %}
-{% raw %}
+{% endraw %}
 if(isset($_POST\['login'])){          
    $voter = $_POST\['voter'];                                              
    $password = $_POST\['password'];                                        
