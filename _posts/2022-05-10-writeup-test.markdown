@@ -7,7 +7,9 @@ image:  '/images/0xd4y-logo-gray.jpg'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
+***
 # Writer
+***
 
    ![](images/image3.png)
 
@@ -84,6 +86,7 @@ Enumeration
 
 To examine potential vulnerabilities, the ports of the target were first scanned:
 
+```bash
 \# Nmap 7.91 scan initiated Tue Aug 17 14:52:04 2021 as: nmap -sC -sV -oA nmap/nmap 10.10.11.101  
 Nmap scan report for 10.10.11.101  
 Host is up (0.065s latency).  
@@ -113,6 +116,7 @@ Host script results:
   
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .  
 \# Nmap done at Tue Aug 17 14:52:20 2021 -- 1 IP address (1 host up) scanned in 15.70 seconds
+```
 
 From the nmap scan, it is apparent that the SSH, HTTP, and SMB services are running on the target.  The SMB service is of interest, however there is no anonymous access to any of the shares:
 
