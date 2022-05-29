@@ -541,12 +541,14 @@ SQL Injection
 The SQL injection led to the leakage of the Admin password hash. This was due to the lack of user-input sanitization. The following code snippet was taken from C:\\xampp\\htdocs\\omrs\\login.php, and is running on the root page of http://10.10.10.239:
 
 {% highlight php %}
+{% raw %}
 if(isset($_POST\['login'])){          
    $voter = $_POST\['voter'];                                              
    $password = $_POST\['password'];                                        
                                
    $sql = "SELECT \* FROM voters WHERE voters_id = '$voter'";              
    $query = $conn->query($sql);
+{% raw %}
 {% endhighlight %}
 
 This piece of code was responsible for the SQLi. Note the user query is passed directly into the sql variable, which is used during the connection to the internal SQL server. The user input is passed into the voter variable which is surrounded by single quotes in the SQL query. This was the reason for the SQLi working upon prepending a single quote to the beginning of the input. Note that this same vulnerability is present within C:\\xampp\\htdocs\\omrs\\admin\\login.php.
