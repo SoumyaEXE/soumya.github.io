@@ -73,13 +73,11 @@ kramdown:
 
 paginate: 8
 paginate_path: "/page/:num"
-paginate_path: "/page/hackthebox/:num"
 
 # Pages Path
 defaults:
   - scope:
       path: '_pages'
-      path: '_pages/hackthebox'
     values:
       permalink: /:basename:output_ext
 
