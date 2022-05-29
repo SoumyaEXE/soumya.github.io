@@ -575,7 +575,6 @@ Conclusion
 ==========
 
 * * *
-
 This Windows system contained multiple vulnerabilities. The foothold on the machine started with an insecure file scanner feature located on the HTTPS server. The file scanner fails to sanitize user input. Thus, sensitive files located locally on the system could be read using the file:/// delimiter at the beginning of the query. Furthermore, sensitive services which are not able to be accessed by outside users, can be accessed by forcing the file scanner to perform a query on itself.
 
 A vulnerable version of Voting System software was installed which resulted in the ability to upload malicious PHP files to get a reverse shell. After obtaining a reverse shell, it was found that the box has a misconfiguration relating to the installation feature of Windows, and the enabled AlwaysInstallElevated group policy resulted in the privilege escalation to SYSTEM. The following remediations should be seriously considered:
@@ -594,7 +593,6 @@ A vulnerable version of Voting System software was installed which resulted in t
 
 *   Enabling this group policy resulted in escalating privileges from a local account to SYSTEM
 *   This policy should be changed from 1 to 0
-
 * * *
 
 [\[1\]](#ftnt_ref1) [https://github.com/OJ/gobuster](https://www.google.com/url?q=https://github.com/OJ/gobuster&sa=D&source=editors&ust=1653797783782138&usg=AOvVaw0cPtGGMIRnJTXphEo5G4y6) 
