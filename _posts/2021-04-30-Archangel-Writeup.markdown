@@ -7,6 +7,7 @@ image:  '/images/0xd4y-logo-gray.png'
 tags:   [LFI, Log Poisoning, RCE, Binary Exploitation]
 ---
 
+**This report can be read both on this site, and as its <a href = "https://zezul.github.io/reports/Archangel%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 
 Archangel
