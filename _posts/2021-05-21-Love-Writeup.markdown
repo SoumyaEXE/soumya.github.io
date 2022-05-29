@@ -13,7 +13,7 @@ Love
 
 Exploitation of misconfigurations and insecure code
 
-   ![](/reports/Love/image9.png)
+   ![](/images/0xd4y-logo-gray.png)
 
 0xd4y
 
