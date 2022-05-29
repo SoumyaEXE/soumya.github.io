@@ -382,7 +382,8 @@ This code can further be inspected using the html source code (inspect element) 
    }
 
 ?>
-
+{% endhighlight %}
+{% highlight php %}
 <?php include 'includes/header.php'; ?>
 
 <body class\="hold-transition login-page"\>
