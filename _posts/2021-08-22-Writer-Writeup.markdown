@@ -7,6 +7,8 @@ image:  '/images/0xd4y-logo-gray.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
+This report can be read both on this site, and as its <a href = "https://zezul.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the PDF instead because it is better formatted.
+
 ![](images/test/image3.png)
 
 LinkedIn: [https://www.linkedin.com/in/segev-eliezer/](https://www.google.com/url?q=https://www.linkedin.com/in/segev-eliezer/&sa=D&source=editors&ust=1653773864786089&usg=AOvVaw02OXACudSej5nWLBZ4W3Vk) 
