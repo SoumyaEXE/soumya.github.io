@@ -116,15 +116,15 @@ Exploiting the Web Server
 
 Seeing as http is open, we can visit the website to find potential vulnerabilities.
 
-![](/images/reports/Archangel/image1.png)
+![](/reports/Archangel/image1.png)
 
 After browsing around the web page and running a gobuster scan on it, nothing interesting came into view. However, in the front page of the website is an email:
 
-![](/images/reports/Archangel/image2.png)
+![](/reports/Archangel/image2.png)
 
 Most notably, we can see the domain of the email as mafialive.thm. Adding this domain to our /etc/hosts file and visiting the website at mafialive.thm, we are met with the following webpage:
 
-![](/images/reports/Archangel/image5.png)
+![](/reports/Archangel/image5.png)
 
 The website seems to be a simple HTTP server. There may be some interesting files / directories that can be revealed using a gobuster scan.
 
@@ -176,7 +176,7 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 
 The scan found an interesting file by the name of test.php. Visiting this PHP file and clicking on the button, we are met with the following webpage:
 
-![](/images/reports/Archangel/image9.png)
+![](/reports/Archangel/image9.png)
 
 We can see that there is a view parameter in the URL with the full path of a PHP file called mrrobot.php. This full path is a hint that there may be an LFI (Local File Inclusion) vulnerability within the test.php script.
 
@@ -190,7 +190,7 @@ http://mafialive.thm/test.php?view=php://filter/convert.base64-encode/resource=/
 
 Output:
 
-![](/images/reports/Archangel/image3.png)
+![](/reports/Archangel/image3.png)
 
 Expectedly, the output of this URL is a base64 string relating to the source code of the mrrobot.php file. Decoding this string we see the following:
 
@@ -207,7 +207,7 @@ http://mafialive.thm/test.php?view=/var/www/html/development_testing/mrrobot.php
 
 Output:
 
-![](/images/reports/Archangel/image7.png)
+![](/reports/Archangel/image7.png)
 
 The webpage provides an error message that says “Sorry, Thats not allowed”. Judging by this error message and the unsuccessful attempt at including the targeted file, we can conclude that there is a filter inside the test.php script that is detecting attempts at including local files. Implementing the same methodology that we used to read the source code for the mrrobot.php file, we can view the source code of the test.php file.
 
@@ -243,7 +243,7 @@ http://mafialive.thm/test.php?view=/var/www/html/development_testing/..//..//../
 
 Output:
 
-![](/images/reports/Archangel/image10.png)
+![](/reports/Archangel/image10.png)
 
 The payload successfully works, and we are able to include any local file that we have read permissions to. From the /etc/passwd file, we see that there is a local user by the name of archangel. Seeing as there is an open ssh port on the box, I tried to read the user’s private ssh key to login as the user. However, the attempt to include this file proved to be unsuccessful (this may be due to us not having proper permissions, or the archangel user may not have a private ssh key).
 
@@ -267,7 +267,7 @@ Content-Type: text/html; charset=iso-8859-1                         
 
 We can confirm if this attempt was successful by including this log file and viewing the output of the webpage.
 
-![](/images/reports/Archangel/image6.png)
+![](/reports/Archangel/image6.png)
 
 Seeing as the log file outputs the PHP info, we can conclude that the malicious GET request succeeded, and the PHP code was executed on the web server. Therefore, we can send another GET request to create a PHP webshell:
 
@@ -304,7 +304,7 @@ Note that a url-encoded netcat reverse shell was used  
 
 The revshell[\[2\]](#ftnt2) tool was used to create the reverse shell payload, and we are able to get a shell as the www-data user.
 
-![](/images/reports/Archangel/image4.png)
+![](/reports/Archangel/image4.png)
 
 Horizontal Privilege Escalation
 -------------------------------

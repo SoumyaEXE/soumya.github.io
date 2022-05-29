@@ -204,11 +204,11 @@ The services running on each port do not appear to be outdated, and there are mo
 
 Visiting the page on 10.10.10.239, the server responds with a simple login page.
 
-![](/images/reports/Love/image13.png)
+![](/reports/Love/image13.png)
 
 Attempting to login with common default credentials does not work:
 
-![](/images/reports/Love/image10.png)
+![](/reports/Love/image10.png)
 
 However, a useful error message pops up that says “Cannot find voter with the ID”. Accordingly, it may be viable to attain usernames by brute forcing ID’s.
 
@@ -216,7 +216,7 @@ However, a useful error message pops up that says “Cannot find voter with the 
 
 A common vulnerability among login pages is SQLi, so it makes sense to attempt this on the webpage:
 
-![](/images/reports/Love/image12.png) 
+![](/reports/Love/image12.png) 
 
 Upon inputting a SQL query into the username field, an “Incorrect password” message pops up instead of “Cannot find voter with the ID”. Judging from this output, it is likely that this webpage is vulnerable to SQLi.
 
@@ -334,11 +334,11 @@ Along with enumerating the SQL server, the directories of the web service were a
 
 The /admin directory in particular stands out as a potentially interesting directory. The page on this directory, however, looks exactly like the one on the root directory:
 
-![](/images/reports/Love/image8.png)
+![](/reports/Love/image8.png)
 
 Nevertheless, this web page functions differently as the error message differs from “Cannot find voter with the ID”. In any case, this error may hint at a potential username leak via brute forcing usernames. Attempting to use default credentials such as admin:password results in an “Incorrect Password” error message:
 
-![](/images/reports/Love/image6.png)
+![](/reports/Love/image6.png)
 
 Therefore, it is highly likely that there is an account with the username of “admin” (the SQLi dump also supports this).
 
@@ -346,7 +346,7 @@ Therefore, it is highly likely that there is an account with the username of “
 
 After enumerating the HTTP service, the HTTPS web page is still left for examination. Before being able to visit the web page, it is essential to first add the domain name found by Nmap (staging.love.htb) to the /etc/hosts file. After doing so, it is possible to visit the web page:
 
-![](/images/reports/Love/image15.png)
+![](/reports/Love/image15.png)
 
 This service appears to be made for scanning files. To the right is a potentially interesting “Sign up” box which could potentially be interesting to test out for an XSS attack. At the top left of the web page are two links: Home, a link leading to the root directory, and Demo, a link which leads to beta.php.
 
@@ -354,11 +354,11 @@ This service appears to be made for scanning files. To the right is a potentiall
 
 Upon clicking Demo, we are met with the following page:
 
-![](/images/reports/Love/image5.png)
+![](/reports/Love/image5.png)
 
 The file scanner, which goes by the name of beta.php, expects a url and performs a GET request on the specified file. This can be abused by using the file:/// prefix to access local files. Seeing as this box is running a Windows Apache server, it is likely there is a web page hosted on C:/xampp/htdocs/omrs/index.php:
 
-![](/images/reports/Love/image11.png)
+![](/reports/Love/image11.png)
 
 This code can further be inspected using the html source code (inspect element) feature:
 
@@ -459,11 +459,11 @@ This code can further be inspected using the html source code (inspect element) 
 After enumerating multiple potentially sensitive files, nothing interesting was found. Furthermore, attempts to perform a log injection / poisoning attack[\[2]](#ftnt2) were unsuccessful.  
 Looking back at the Nmap scan, a peculiar HTTP service running on port 5000 was found. However, this service could not be accessed due to the 403 Forbidden error. Nevertheless, due to this file scanner having the functionality of making GET requests, this page could indirectly be accessed through forcing the file scanner to make a request to this service.
 
-![](/images/reports/Love/image14.png)
+![](/reports/Love/image14.png)
 
 After completing the request, credentials to a user by the name of admin are leaked. Piecing this information together with the [Admin Page](#h.4wslswsfx98j) found during the HTTP enumeration, it follows that we can login as the administrator. Using the credentials of admin:@LoveIsInTheAir!!!!, the user’s account could successfully be accessed:
 
-![](/images/reports/Love/image7.png)
+![](/reports/Love/image7.png)
 
 The result is a page with many different functionalities, but nothing interesting appeared. At the bottom of the page is a copyright from 2018 assigned to a website called Sourcecodester.
 
@@ -474,7 +474,7 @@ After researching “Voting System sourcecodester” on Google, results related 
 
 The exploit works due to improper sanitization of image files. To upload a php shell as an image file, the exploit simply modifies the data of the POST request to replicate an image file:
 
-![](/images/reports/Love/image1.png)
+![](/reports/Love/image1.png)
 
 Note the “image/png” line
 
@@ -509,14 +509,14 @@ Some code was removed to not clutter up this report
 
 Key parts of the exploit can be seen above. Note the modification of the variables toward the top of the page as well as the URL. Now, executing the script results in a reverse shell as the user phoebe:
 
-![](/images/reports/Love/image2.png)
+![](/reports/Love/image2.png)
 
 Privilege Escalation
 --------------------
 
 After obtaining a shell as the user phoebe, the next task is to escalate to Administrator or SYSTEM.
 
-![](/images/reports/Love/image4.png)
+![](/reports/Love/image4.png)
 
 From the output it can be seen that winPEAS detected a misconfiguration in the AlwaysInstallElevated group policy. By default, this policy is set to 0, and it is extremely dangerous to modify this value. When this policy is set to 1, Microsoft Windows Installer Packages (MSI) are installed with system privileges. Therefore, a malicious MSI file that returns a reverse shell can be used to get a shell as the SYSTEM user:
 
@@ -526,7 +526,7 @@ After downloading the malicious MSI file onto the box, it is important to start 
 
 msiexec /quiet /qn /i 0xd4y.msi
 
-![](/images/reports/Love/image3.png)
+![](/reports/Love/image3.png)
 
 A shell is then returned as the system user.
 
