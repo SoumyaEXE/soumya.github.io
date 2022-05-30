@@ -8,7 +8,7 @@
   z-index: 100;
   opacity: 0;
   visibility: hidden;
-  background-color: $darkest;
+  background-color: $dark;
   transition: all .25s ease;
 
   &.is-visible {
