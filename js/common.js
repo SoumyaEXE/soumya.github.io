@@ -99,13 +99,45 @@ $(document).ready(function() {
   })
 
 
+	// =====================
+  // Ajax Load More
+  // =====================
+  var $load_posts_button = $('.load-more-posts');
+
+  $load_posts_button.click(function(e) {
+    e.preventDefault();
+    var loadMore = $('.load-more-section');
+    var request_next_link = pagination_next_url.split('/page')[0] + '/page/' + pagination_next_page_number + '/';
+
+    $.ajax({
+      url: request_next_link,
+      beforeSend: function() {
+        $load_posts_button.text('Loading...');
+      }
+    }).done(function(data) {
+      var posts = $('.grid__post', data);
+      $('.grid').append(posts);
+
+      var lazyLoadInstance = new LazyLoad({
+        elements_selector: '.lazy'
+      })
+
+      $load_posts_button.text('Load more');
+      pagination_next_page_number++;
+
+      if (pagination_next_page_number > pagination_available_pages_number) {
+        loadMore.addClass('hide');
+      }
+    });
+  });
+
+
   /* =======================
   // Responsive Videos
   ======================= */
   $(".post__content, .page__content").fitVids({
     customSelector: ['iframe[src*="ted.com"]', 'iframe[src*="player.twitch.tv"]', 'iframe[src*="facebook.com"]']
   });
-
 
   /* =======================
   // Zoom Image
