@@ -70,8 +70,8 @@ $(document).ready(function() {
     searchInput: document.getElementById("js-search-input"),
     resultsContainer: document.getElementById("js-results-container"),
     json: "/search.json",
-    searchResultTemplate: '{article}',
-    noResultsText: '<li class="no-results"><h3>No results found</h3></li>'
+		searchResultTemplate: '<div class="search-results__item"><a class="search-results__image" href="{url}" style="background-image: url({image})"></a> <a class="search-results__link" hr    ef="{url}"><span class="search-results-date"> <time datetime="{date}">{date}</time></span><div class="search-result-title">{title}</div></a></div>',
+		noResultsText: '<li class="no-results"><h3>No results found</h3></li>'
   });
 
 

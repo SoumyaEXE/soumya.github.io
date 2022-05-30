@@ -19,7 +19,7 @@
   @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
     -webkit-backdrop-filter: saturate(180%) blur(10px);
     backdrop-filter: saturate(180%) blur(10px);
-    background-color: rgba($darkest, .95);
+    background-color: rgba($dark, .95);
   }
 }
 
