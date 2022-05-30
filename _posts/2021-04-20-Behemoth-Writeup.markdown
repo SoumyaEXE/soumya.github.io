@@ -309,7 +309,7 @@ Then this payload can be inputted to the binary and it will execute the shellcod
 
 {% highlight bash %}
 pwndbg> r < <(python -c "print 'A'*71+'B'*4+'C'*23")  
-pwndbg> x/100x $esp\-100                                                                                                                                                        
+pwndbg> x/100x $esp-100                                                                                                                                                        
 0xffffcfdc:     0x00000000      0xf7fa6000      0xf7fa6000      0xffffd038              
 0xffffcfec:     0x08048474      0x0804850c      0x41414180      0x41414141              
 0xffffcffc:     0x41414141      0x41414141      0x41414141      0x41414141              
@@ -514,7 +514,7 @@ Furthermore, two system calls are executed. One is within the if statement and o
 
 {% highlight bash %}
 behemoth2@behemoth:/behemoth$ file behemoth2  
-behemoth2: setuid ELF 32\-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=87daf01f3941b5f8f815d758ed9e90589a9d315c, not stripped
+behemoth2: setuid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=87daf01f3941b5f8f815d758ed9e90589a9d315c, not stripped
 {% endhighlight %}
 
 Seeing as this binary is in LSB format, the “ tac” string should actually be read backwards, revealing that this is “cat “. Thus, the program first touches the a file then cats it after 2000 seconds.
@@ -605,7 +605,7 @@ We can begin the analysis by downloading the target binary on the attack box and
 └──╼ $checksec behemoth3  
 [*] '/home/0xd4y/business/other/overthewire/behemoth/3/behemoth3'   Arch:     i386-32-little   RELRO:    No RELRO   Stack:    No canary found   NX:       NX disabled   PIE:      No PIE (0x8048000)   RWX:      Has RWX segments  
 ┌─[0xd4y@Writeup]─[~/business/other/overthewire/behemoth/3]  
-└──╼ $file behemoth3behemoth3: ELF 32\-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=4c39bd8f6f54ab267675a6c5e2186d65e1eb4821, not stripped
+└──╼ $file behemoth3behemoth3: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=4c39bd8f6f54ab267675a6c5e2186d65e1eb4821, not stripped
 {% endhighlight %}
 
 From the results of checksec and file, note that the binary essentially has no protection on it. Everything that could possibly hinder debug analysis on the program is disabled. Additionally, the file is not stripped, so debug symbols will be available.

@@ -75,7 +75,7 @@ Before performing any kind of enumeration, it is essential to start with port en
 
 ### Port Enumeration
 
-We can enumerate the ports of the machine with nmap -sC (default scripts) \-sV (version detection).
+We can enumerate the ports of the machine with nmap -sC (default scripts) -sV (version detection).
 
 {% highlight bash %}
 # Nmap 7.91 scan initiated Sat May  1 01:38:36 2021 as: nmap -sC -sV -oA nmap/nmap 10.10.72.16
@@ -336,7 +336,7 @@ total 16
 drwxrwxrwx  3 root      root      4096 May  1 08:23 .  
 drwxr-xr-x 22 root      root      4096 Nov 16 15:39 ..  
 drwxrwx---  2 archangel archangel 4096 Nov 20 15:04 backupfiles  
-\-rwxrwxrwx  1 archangel archangel  66 May  1 08:22 helloworld.sh
+-rwxrwxrwx  1 archangel archangel  66 May  1 08:22 helloworld.sh
 {% endhighlight %}
 
 Furthermore, we can see from /etc/crontab that there is a cronjob executing it as the archangel user.
@@ -353,7 +353,7 @@ SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin  
   
 # m h dom mon dow user  command  
-\*/1 \*   \* \* \*   archangel /opt/helloworld.sh17 \*    \* \* \*   root    cd / && run-parts \--report /etc/cron.hourly25 6    \* \* \*   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )47 6    \* \* 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )52 6    1 \* \*   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )  
+\*/1 \*   \* \* \*   archangel /opt/helloworld.sh17 \*    \* \* \*   root    cd / && run-parts --report /etc/cron.hourly25 6    \* \* \*   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )47 6    \* \* 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )52 6    1 \* \*   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )  
 #
 {% endhighlight %}
 

