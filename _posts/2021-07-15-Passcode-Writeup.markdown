@@ -359,7 +359,7 @@ pwndbg> x/x 0x804a000
 When stepping one instruction, it is expected that from the printf() call, the program will look at the GOT entry of printf(). The program will then be tricked to believe that the code for printf() can be found at 0x08045d7, and the EIP will therefore point to 0x08045d7:
 
 {% highlight bash %}
-\=> 0x080485a0 <+60>:    call   0x8048420 <printf@plt>
+=> 0x080485a0 <+60>:    call   0x8048420 <printf@plt>
 
 pwndbg> x/x $eip  
 0x80485a0 <login+60>:   0xfffe7be8
