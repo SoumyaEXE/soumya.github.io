@@ -1,16 +1,6 @@
 ---
 layout: null
 ---
-String.prototype.escapeSpecialChars = function() {
-    return this.replace(/\\n/g, "\\n")
-               .replace(/\\'/g, "\\'")
-               .replace(/\\"/g, '\\"')
-               .replace(/\\&/g, "\\&")
-               .replace(/\\r/g, "\\r")
-               .replace(/\\t/g, "\\t")
-               .replace(/\\b/g, "\\b")
-               .replace(/\\f/g, "\\f");
-};
 [
   {% for post in site.posts %}
     {
@@ -19,7 +9,7 @@ String.prototype.escapeSpecialChars = function() {
       "tags"     : "{{ post.tags | array_to_sentence_string }}",
       "url"      : "{{ site.baseurl }}{{ post.url }}",
       "date"     : "{{ post.date | date: '%b %-d, %Y' }}",
-      "content"  : "{{ post.content.escapeSpecialChars() | strip_html | strip_newlines }}",
+      "content"  : "{{ post.content | strip_html | strip_newlines }}",
       "image": "{{ post.image }}"
     } {% unless forloop.last %},{% endunless %}
   {% endfor %}
