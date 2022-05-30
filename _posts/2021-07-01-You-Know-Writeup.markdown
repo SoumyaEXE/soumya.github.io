@@ -1,10 +1,10 @@
 ---
-layout\: post
-title\:  You Know Writeup
-description\: This challenge involved exploiting a vulnerable program that did not perform proper boundary checks as due to the gets() function.
-date\:   2021-07-01 
-image\:  '/images/0xd4y-logo-gray.png'
-tags\:   [Buffer Overflow, Shellcode]
+layout: post
+title:  You Know Writeup
+description: This challenge involved exploiting a vulnerable program that did not perform proper boundary checks as due to the gets() function.
+date:   2021-07-01 
+image:  '/images/0xd4y-logo-gray.png'
+tags:   [Buffer Overflow, Shellcode]
 ---
 
 **This report can be read both on this site, and as its <a href = "https\://0xd4y.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**

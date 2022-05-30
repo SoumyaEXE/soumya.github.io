@@ -1,10 +1,10 @@
 ---
-layout\: post
-title\:  Archangel Writeup
-description\: This box is a great introduction to the exploitation of a web server. It involves exploiting a web service through an LFI vulnerability and upgrading that to an RCE exploit via log poisoning. The method of escalating to root privileges is also instructive.
-date\:   2021-04-30
-image\:  '/images/0xd4y-logo-gray.png'
-tags\:   [LFI, Log Poisoning, RCE, Binary Exploitation]
+layout: post
+title:  Archangel Writeup
+description: This box is a great introduction to the exploitation of a web server. It involves exploiting a web service through an LFI vulnerability and upgrading that to an RCE exploit via log poisoning. The method of escalating to root privileges is also instructive.
+date:   2021-04-30
+image:  '/images/0xd4y-logo-gray.png'
+tags:   [LFI, Log Poisoning, RCE, Binary Exploitation]
 ---
 
 **This report can be read both on this site, and as its <a href = "https\://0xd4y.github.io/reports/Archangel%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**

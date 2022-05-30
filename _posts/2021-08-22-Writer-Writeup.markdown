@@ -1,10 +1,10 @@
 ---
-layout\: post
-title\:  Writer Writeup
-description\: This system contained an SQL injection vulnerability which could be leveraged to not only log into an application with admin privileges, but also could be used to read local files on the target. After leaking the source code of the website, an insecure usage of handling files was exploited to get RCE. With a www-data shell on the system, an insecure password of a local user located in the SQL database was cracked. Eventually the system was fully compromised through misconfigurations relating to SMTP and APT.
-date\:   2021-08-22 
-image\:  '/images/0xd4y-logo-gray.png'
-tags\:   [SQLi, SMTP, RCE, APT]
+layout: post
+title:  Writer Writeup
+description: This system contained an SQL injection vulnerability which could be leveraged to not only log into an application with admin privileges, but also could be used to read local files on the target. After leaking the source code of the website, an insecure usage of handling files was exploited to get RCE. With a www-data shell on the system, an insecure password of a local user located in the SQL database was cracked. Eventually the system was fully compromised through misconfigurations relating to SMTP and APT.
+date:   2021-08-22 
+image:  '/images/0xd4y-logo-gray.png'
+tags:   [SQLi, SMTP, RCE, APT]
 ---
 
 **This report can be read both on this site, and as its <a href = "https\://0xd4y.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**

@@ -1,11 +1,11 @@
 ---
-layout\: post
-title\:  Wreath Writeup
-description\: This challenge involved exploiting a vulnerable network of three computers. Two of which were susceptible to exploitations of outdated software. The last machine involved a unique foothold centered around the creation of a malicious image file. I highly encourage you to read this writeup, as I go into detail about how Mimikatz, evil-winrm, and network pivoting work.
-date\:   2021-03-30 
-image\:  '/images/0xd4y-logo-gray.png'
-category\: tryhackme 
-tags\:   [RCE, Network Pivoting, CVE, Windows, Linux]
+layout: post
+title:  Wreath Writeup
+description: This challenge involved exploiting a vulnerable network of three computers. Two of which were susceptible to exploitations of outdated software. The last machine involved a unique foothold centered around the creation of a malicious image file. I highly encourage you to read this writeup, as I go into detail about how Mimikatz, evil-winrm, and network pivoting work.
+date:   2021-03-30 
+image:  '/images/0xd4y-logo-gray.png'
+category: tryhackme 
+tags\\:   [RCE, Network Pivoting, CVE, Windows, Linux]
 ---
 
 **This report can be read both on this site, and as its <a href = "https\://0xd4y.github.io/reports/Wreath%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**

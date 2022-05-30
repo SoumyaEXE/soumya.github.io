@@ -1,10 +1,10 @@
 ---
-layout\: post
-title\:  Narnia Writeup
-description\: This challenge was about binary exploitation. There were a total of nine binaries which increased in difficulty after each exploit. Common binary exploitation techniques are discussed in this report including ret2libc, shellcode injection, format string exploitation, among others.
-date\:   2021-04-22 
-image\:  '/images/0xd4y-logo-gray.png'
-tags\:   [Binary Exploitation, Ret2Libc, Shellcode, Format String]
+layout: post
+title:  Narnia Writeup
+description: This challenge was about binary exploitation. There were a total of nine binaries which increased in difficulty after each exploit. Common binary exploitation techniques are discussed in this report including ret2libc, shellcode injection, format string exploitation, among others.
+date:   2021-04-22 
+image:  '/images/0xd4y-logo-gray.png'
+tags:   [Binary Exploitation, Ret2Libc, Shellcode, Format String]
 ---
 
 **This report can be read both on this site, and as its <a href = "https\://0xd4y.github.io/reports/Narnia%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**

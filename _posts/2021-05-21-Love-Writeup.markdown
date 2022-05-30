@@ -1,11 +1,11 @@
 ---
-layout\: post
-title\:  Love Writeup
-description\: This Windows box dealt with exploiting an SSRF vulnerability which allowed for the viewing of a sensitive webpage hosted internally on the target. After exploting a vulnerable version of “voting system” software, a shell as a low-privileged user was returned. Finally, by taking advantage of an HKLM misconfiguration, a shell as the SYSTEM user could be obtained (namely by installing a malicious MSI package).
-date\:   2021-05-21
-image\:  '/images/0xd4y-logo-gray.png'
-category\: hackthebox
-tags\:   [Windows, SSRF, CVE, HKLM, MSI]
+layout: post
+title:  Love Writeup
+description: This Windows box dealt with exploiting an SSRF vulnerability which allowed for the viewing of a sensitive webpage hosted internally on the target. After exploting a vulnerable version of “voting system” software, a shell as a low-privileged user was returned. Finally, by taking advantage of an HKLM misconfiguration, a shell as the SYSTEM user could be obtained (namely by installing a malicious MSI package).
+date:   2021-05-21
+image:  '/images/0xd4y-logo-gray.png'
+category: hackthebox
+tags\\:   [Windows, SSRF, CVE, HKLM, MSI]
 ---
 
 **This report can be read both on this site, and as its <a href = "https\://0xd4y.github.io/reports/Love%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
