@@ -6,8 +6,8 @@ $(document).ready(function() {
     menuList = $(".menu-overlay"),
     searchOpenIcon = $(".search-button"),
     searchCloseIcon = $(".search__close"),
-    searchInput = $(".search__text"),
-    searchBox = $(".search");
+    searchBox = $(".search"),
+    searchInput = $(".search__text");
 
 
   /* =======================
@@ -41,14 +41,14 @@ $(document).ready(function() {
     searchBox.addClass("is-visible");
     setTimeout(function () {
       searchInput.focus();
-    }, 300);
+    }, 150);
   }
 
   function searchClose() {
     searchBox.removeClass("is-visible");
   }
 
-  $('.search, .search__box').on('click keyup', function (event) {
+  $('.search, .search__box').on('click keyup', function(event) {
     if (event.target == this || event.keyCode == 27) {
       $('.search').removeClass('is-visible');
     }
@@ -63,6 +63,22 @@ $(document).ready(function() {
   },150)
 
 
+  /* =======================
+  // Hero parallax effect
+  ======================= */
+  hero();
+
+  function hero() {
+    $(window).on('scroll', function () {
+      var scroll = $(this).scrollTop();
+
+      $('.hero__image img').css({
+        transform: 'translate3d(0, ' + scroll / 3 + 'px, 0)'
+      });
+    });
+  }
+
+
   // =====================
   // Simple Jekyll Search
   // =====================
@@ -70,7 +86,7 @@ $(document).ready(function() {
     searchInput: document.getElementById("js-search-input"),
     resultsContainer: document.getElementById("js-results-container"),
     json: "/search.json",
-    searchResultTemplate: '{article}',
+    searchResultTemplate: '<div class="search-results__item"><a class="search-results__image" href="{url}" style="background-image: url({image})"></a> <a class="search-results__link" href="{url}"><span class="search-results-date"> <time datetime="{date}">{date}</time></span><div class="search-result-title">{title}</div></a></div>',
     noResultsText: '<li class="no-results"><h3>No results found</h3></li>'
   });
 
@@ -81,39 +97,6 @@ $(document).ready(function() {
   var lazyLoadInstance = new LazyLoad({
     elements_selector: '.lazy'
   })
-
-
-  // =====================
-  // Ajax Load More
-  // =====================
-  var $load_posts_button = $('.load-more-posts');
-
-  $load_posts_button.click(function(e) {
-    e.preventDefault();
-    var loadMore = $('.load-more-section');
-    var request_next_link = pagination_next_url.split('/page')[0] + '/page/' + pagination_next_page_number + '/';
-
-    $.ajax({
-      url: request_next_link,
-      beforeSend: function() {
-        $load_posts_button.text('Loading...');
-      }
-    }).done(function(data) {
-      var posts = $('.grid__post', data);
-      $('.grid').append(posts);
-
-      var lazyLoadInstance = new LazyLoad({
-        elements_selector: '.lazy'
-      })
-
-      $load_posts_button.text('Load more');
-      pagination_next_page_number++;
-
-      if (pagination_next_page_number > pagination_available_pages_number) {
-        loadMore.addClass('hide');
-      }
-    });
-  });
 
 
   /* =======================
