@@ -3,7 +3,7 @@ layout: post
 title:  You Know Writeup
 description: This challenge involved exploiting a vulnerable program that did not perform proper boundary checks as due to the gets() function.
 date:   2021-07-01 
-image:  '/images/You_Know.jpg'
+image:  '/images/You_Know.png'
 tags:   [Buffer Overflow, Shellcode]
 ---
 
