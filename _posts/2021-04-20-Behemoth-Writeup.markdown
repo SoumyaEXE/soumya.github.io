@@ -3,7 +3,7 @@ layout: post
 title:  Behemoth Writeup
 description: Behemoth is the sequel to Narnia and is rated to be slightly harder. In comparison to Narnia, it involved more reverse engineering exercises and required more knowledge of C. Each binary contained a different vulnerability ranging from PATH environment variable privilege escalation to buffer overflows, format string exploits, and bypassing shellcode filtering.
 date:   2021-04-20
-image:  'behemoth.webp'
+image:  'behemoth.jpg'
 tags:   [Format String, Shellcode Filter Bypass, PATH privesc, Buffer Overflow, Shellcode, Binary Exploitation]
 ---
 
