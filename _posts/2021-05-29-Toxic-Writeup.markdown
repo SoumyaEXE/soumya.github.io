@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Writer Writeup
+title:  Toxic Writeup
 description: This was a challenge hosted on HackTheBox that involved exploting a PHP deserilization vulnerability to gain LFI and eventually RCE. 
 date:   2021-05-29
 image:  '/images/toxic.png'
