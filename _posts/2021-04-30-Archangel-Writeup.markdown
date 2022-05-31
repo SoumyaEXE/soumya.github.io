@@ -3,7 +3,7 @@ layout: post
 title:  Archangel Writeup
 description: This box is a great introduction to the exploitation of a web server. It involves exploiting a web service through an LFI vulnerability and upgrading that to an RCE exploit via log poisoning. The method of escalating to root privileges is also instructive.
 date:   2021-04-30
-image:  '/images/archangel.png'
+image:  '/images/archangel.jpg'
 tags:   [LFI, Log Poisoning, RCE, Binary Exploitation]
 ---
 
