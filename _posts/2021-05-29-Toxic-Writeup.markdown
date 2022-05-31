@@ -3,7 +3,7 @@ layout: post
 title:  Writer Writeup
 description: This was a challenge hosted on HackTheBox that involved exploting a PHP deserilization vulnerability to gain LFI and eventually RCE. 
 date:   2021-05-29
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/images/toxic.png'
 tags:   [RCE, PHP Deserialization, LFI]
 ---
 

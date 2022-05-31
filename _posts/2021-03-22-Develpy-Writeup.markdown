@@ -3,13 +3,11 @@ layout: post
 title:  Develpy Writeup
 description: This box had a fun foothold, and it was a nice little challenge that showed the importance of making your programs secure. I highly recommend you read this writeup, as after exploiting the program, I go over how to patch it to make it more secure.
 date:   2021-03-21 
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/reports/Develpy/image8.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
 **This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Develpy%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
-
-![](/reports/Develpy/image8.png)
 
 ![](/reports/Develpy/image28.png)
 

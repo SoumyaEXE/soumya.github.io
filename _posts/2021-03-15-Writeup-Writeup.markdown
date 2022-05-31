@@ -3,13 +3,12 @@ layout: post
 title:  Writeup Writeup
 description: Yes, this box is called Writeup. This box did not have many open ports and even included a DoS protection script to prevent gobusters. The problem is we had to discover certain directories in order to extract essential information about the web server. Come check out my writeup for Writeup, as you will learn a lot about hashes and enumeration.
 date:   2021-03-15 
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/reports/Writeup/image2.png'
 tags:   [SQLi, Hash Cracking, Enumeration]
 ---
 
 **This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Writeup%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
-![](/reports/Writeup/image2.png)
 ![](/reports/Writeup/image9.png)
 
 What better opportunity to write a writeup than to write a writeup of a box named Writeup? This box made evident the importance of enumeration. The interesting thing about this box is that gobuster would not work due to a DoS protection against 404 http errors. So how would we find the potentially vulnerable web pages of the web server?

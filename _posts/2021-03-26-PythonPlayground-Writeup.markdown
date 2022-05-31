@@ -3,13 +3,11 @@ layout: post
 title:  PythonPlayground Writeup
 description: Python has a lot of features that some people may not know about. In this challenge, it was important to be creative throughout each step of exploitation and piece each compromised puzzle piece together.
 date:   2021-03-26
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/reports/PythonPlayground/image18.png'
 tags:   [Python, PATH Injection, Logic]
 ---
 
 **This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/PythonPlayground%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
-
-![](/reports/PythonPlayground/image18.png)
 
 ![](/reports/PythonPlayground/image16.png)
 
