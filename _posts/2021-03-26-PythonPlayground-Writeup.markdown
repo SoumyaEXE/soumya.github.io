@@ -3,7 +3,7 @@ layout: post
 title:  PythonPlayground Writeup
 description: Python has a lot of features that some people may not know about. In this challenge, it was important to be creative throughout each step of exploitation and piece each compromised puzzle piece together.
 date:   2021-03-26
-image:  '/reports/PythonPlayground/image18.png'
+image:  '/images/python.png'
 tags:   [Python, PATH Injection, Logic]
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title:  Develpy Writeup
 description: This box had a fun foothold, and it was a nice little challenge that showed the importance of making your programs secure. I highly recommend you read this writeup, as after exploiting the program, I go over how to patch it to make it more secure.
 date:   2021-03-21 
-image:  '/reports/Develpy/image8.png'
+image:  '/images/python.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
