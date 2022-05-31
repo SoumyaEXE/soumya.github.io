@@ -3,14 +3,12 @@ layout: post
 title:  Bank Writeup
 description: This is a really cool box that has a couple of interesting twists. I go through the unintended solution (the way I went about the machine) and the intended solution. There is a lot to learn here about web security and networking, and I highly encourage you to read this writeup.
 date:   2021-02-21 
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/reports/Bank/image5.png'
 tags:   [Open Redirect, RCE]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Bank%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
-
-![](/reports/Bank/image5.png)
 ![](/reports/Bank/image3.png)
 
 Never underestimate the power of BurpSuite! In this box, I will go through the unintended and intended solution. There is a lot to learn in the unintended solution, and this is actually how I went about rooting the box. After I show you the unintended solution, I will demonstrate how the author of the box, @makelarisjr, intended to go about rooting the machine.

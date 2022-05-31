@@ -3,13 +3,11 @@ layout: post
 title:  Active Writeup
 description: This was a fantastic box about the Windows Active Directory service. It showed the importance of managing your passwords in a secure way, as well as having strong passwords that are hard to crack. Something that really makes this box stand out is not so much the vulnerabilities themselves, but rather the reason why they are easily exploitable in the first place. Microsoft essentially made themselves vulnerable, as they spoke a little bit too much on THEIR OWN website! Come check out the writeup to see what I mean.
 date:   2021-03-07
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/reports/Active/image4.png'
 tags:   [SMB, GPP, Windows]
 ---
 
 **This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Active%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
-
-![](/reports/Active/image4.png)
 
 ![](/reports/Active/image8.png)
 

@@ -3,13 +3,12 @@ layout: post
 title:  Bastion Writeup
 description: A very realistic box with many things to learn. Misconfigurations can be a dealbreaker when it comes to a certain attack vector. There has always been a conflict between security and convenience, and this box highlights it. I go very in-depth about multiple aspects in this box relating to bastion hosts and credential databases. I hope you learn as much from this writeup as I did from this challenge!
 date:   2021-02-27
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/reports/Bastion/image12.png'
 tags:   [SMB, NTLM Relay]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Bastion%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
-![](/reports/Bastion/image12.png)
 
 ![](/reports/Bastion/image21.png)
 

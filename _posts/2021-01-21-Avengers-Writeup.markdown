@@ -3,7 +3,7 @@ layout: post
 title:  Avengers Writeup
 description: A fun CTF-like box with an easter egg and cool (unintended) foothold. I root this box in a quite unique way, which the author of the box certainly did not intend.
 date:   2021-08-22 
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/images/avengers.png'
 tags:   [SQLi, RCE, Bash Injection]
 ---
 

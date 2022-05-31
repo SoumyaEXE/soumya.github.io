@@ -3,7 +3,7 @@ layout: post
 title:  Keldagrim Writeup
 description: A realistic box. Many things were learned during this challenge, and I highly recommend reading this writeup.
 date:   2021-02-05 
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/images/keldagrim.png'
 tags:   [Python, SSTI]
 ---
 
