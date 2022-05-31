@@ -4,7 +4,7 @@ title:  AWS Security Specialty Notes
 description: Notes that I wrote in preparation for the Certified AWS Security - Specialty exam. These notes cover fundamental information about the AWS infrastructure. It is recommended that you install Obsidian and download the zip file instead. This way you can navigate through these notes a lot more quickly.
 
 date:   2022-03-15 
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/images/aws_logo.jpg'
 tags:   [AWS Security]
 ---
 

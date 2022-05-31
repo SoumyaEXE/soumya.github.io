@@ -3,7 +3,7 @@ layout: post
 title: Passcode Writeup
 description: scanf() is a function that is widely used in C programs. This binary, which is seemingly secure, made subtle but dangerous programming mistakes that resulted in a security hole through which a user can manipulate memory. Since this binary is dynamically linked, overwriting the GOT entry subsequently forces the program to jump to memory of the attacker’s choice when the manipulated function pointer gets called.
 date:   2021-07-15 
-image:  '/images/0xd4y-logo-gray.png'
+image:  '/images/passcode.png'
 tags:   [GOT, dynamic, Binary Exploitation]
 ---
 
