@@ -3,7 +3,7 @@ layout: post
 title:  Bank Writeup
 description: This is a really cool box that has a couple of interesting twists. I go through the unintended solution (the way I went about the machine) and the intended solution. There is a lot to learn here about web security and networking, and I highly encourage you to read this writeup.
 date:   2021-02-21 
-image:  '/reports/Bank/image5.png'
+image:  '/images/Bank.png'
 tags:   [Open Redirect, RCE]
 ---
 

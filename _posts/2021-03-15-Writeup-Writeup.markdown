@@ -3,7 +3,7 @@ layout: post
 title:  Writeup Writeup
 description: Yes, this box is called Writeup. This box did not have many open ports and even included a DoS protection script to prevent gobusters. The problem is we had to discover certain directories in order to extract essential information about the web server. Come check out my writeup for Writeup, as you will learn a lot about hashes and enumeration.
 date:   2021-03-15 
-image:  '/reports/Writeup/image2.png'
+image:  '/images/Writeup.png'
 tags:   [SQLi, Hash Cracking, Enumeration]
 ---
 
