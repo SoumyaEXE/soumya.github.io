@@ -4,7 +4,6 @@ title:  Wreath Writeup
 description: This challenge involved exploiting a vulnerable network of three computers. Two of which were susceptible to exploitations of outdated software. The last machine involved a unique foothold centered around the creation of a malicious image file. I highly encourage you to read this writeup, as I go into detail about how Mimikatz, evil-winrm, and network pivoting work.
 date:   2021-03-30 
 image:  '/images/wreath.png'
-category: tryhackme 
 tags:   [RCE, Network Pivoting, CVE, Windows, Linux]
 ---
 
