@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  How To Hack Any Flash Game Video
+title:  How To Hack Any Flash Game
 description: This video showcases how to hack any flash game using BurpSuite and JPEXS Decompiler. Note that the information showed in this video should not be used for any illegal purposes.
 date:   2022-01-03 
 image:  '/images/how-to-hack-any-flash-game.png'
