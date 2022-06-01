@@ -58,7 +58,9 @@ img {
         <div class="row grid">
           {% if site.posts.size > 0 %}
             {% for post in paginator.posts %}
-              {% include article-content.html %}
+							{% if post.category == "Video" %}
+              	{% include article-content.html %}
+							{% endif %}
             {% endfor %}
           {% endif %}
         </div>
