@@ -1,10 +1,11 @@
 ---
 layout: post
-title:  Writer Writeup
-description: This system contained an SQL injection vulnerability which could be leveraged to not only log into an application with admin privileges, but also could be used to read local files on the target. After leaking the source code of the website, an insecure usage of handling files was exploited to get RCE. With a www-data shell on the system, an insecure password of a local user located in the SQL database was cracked. Eventually the system was fully compromised through misconfigurations relating to SMTP and APT.
-date:   2021-08-22 
-image:  '/images/Writer.png'
-tags:   [Video, SMTP, RCE, Flash]
+title:  How To Hack Any Flash Game Video
+description: This video showcases how to hack any flash game using BurpSuite and JPEXS Decompiler. Note that the information showed in this video should not be used for any illegal purposes.
+date:   2022-01-03 
+image:  '/images/how-to-hack-any-flash-game.png'
+category: Video
+tags:   [Video, Flash]
 ---
 
 This video showcases how to hack any flash game using BurpSuite and JPEXS Decompiler. Note that the information showed in this video should not be used for any illegal purposes.
