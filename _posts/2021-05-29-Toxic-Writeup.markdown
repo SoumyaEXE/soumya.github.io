@@ -13,7 +13,7 @@ Toxic
 
 Exploiting PHP Deserialization
 
-   ![](/images/0xd4y-logo-gray.png)
+   ![](/images/0xd4y-logo-gray-centered.png)
 
 0xd4y
 

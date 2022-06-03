@@ -1,7 +1,7 @@
 #-------------------------------
 # General Site Settings
 title: 0xd4y
-logo: /images/0xd4y-logo-gray-small.png # You can add own logo. For example '/images/logo.png'.
+logo: /images/0xd4y-logo-gray-small-centered.png # You can add own logo. For example '/images/logo.png'.
 description: Cybersecurity writeups and videos.
 baseurl: "" # The subpath of your site, e.g. /blog
 url: "" # The base hostname & protocol for your site, e.g. http://example.com

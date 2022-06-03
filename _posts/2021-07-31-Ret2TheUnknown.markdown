@@ -13,7 +13,7 @@ Ret2The-Unknown
 
 Return-to-libc attack with ASLR
 
-   ![](/images/0xd4y-logo-gray.png)
+   ![](/images/0xd4y-logo-gray-centered.png)
 
 0xd4y
 

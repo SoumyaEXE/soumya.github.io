@@ -13,7 +13,7 @@ Wreath Network
 
 A look into the exploitation of a vulnerable network and “secure” PC.
 
-   ![](/images/0xd4y-logo-gray.png)
+   ![](/images/0xd4y-logo-gray-centered.png)
 
 0xd4y
 
