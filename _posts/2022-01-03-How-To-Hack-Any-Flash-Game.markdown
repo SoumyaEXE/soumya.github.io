@@ -10,6 +10,8 @@ tags:   [Video, Flash]
 
 This video showcases how to hack any flash game using BurpSuite and JPEXS Decompiler. Note that the information showed in this video should not be used for any illegal purposes.
 
+<iframe src="https://www.youtube.com/embed/bnSUBy9YrOc" frameborder="0" allowfullscreen></iframe>
+
 [00:00](https://www.youtube.com/watch?v=bnSUBy9YrOc&t=0s) - Video context  
 [00:49](https://www.youtube.com/watch?v=bnSUBy9YrOc&t=49s) - Tools used for the hack  
 [02:22](https://www.youtube.com/watch?v=bnSUBy9YrOc&t=142s) - Swords and Sandals 2 before hack  
