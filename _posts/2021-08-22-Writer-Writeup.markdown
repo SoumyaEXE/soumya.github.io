@@ -7,7 +7,7 @@ image:  '/images/Writer.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Writer%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 ![](/images/0xd4y-logo-gray-centered.png)
 
@@ -15,7 +15,7 @@ LinkedIn: [https://www.linkedin.com/in/segev-eliezer/](https://www.google.com/ur
 
 Email: [0xd4yWriteups@gmail.com](mailto:0xd4yWriteups@gmail.com)
 
-Web: [https://0xd4y.github.io/](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/&sa=D&source=editors&ust=1653773864786836&usg=AOvVaw0_jePr-Y_ezgNebGNMiTPl) 
+Web: [https://0xd4y.com/](https://www.google.com/url?q=https://0xd4y.com/Writeups/&sa=D&source=editors&ust=1653773864786836&usg=AOvVaw0_jePr-Y_ezgNebGNMiTPl) 
 
 Table of Contents
 

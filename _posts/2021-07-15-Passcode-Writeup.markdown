@@ -7,7 +7,7 @@ image:  '/images/passcode.png'
 tags:   [GOT, dynamic, Binary Exploitation]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Passcode%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Passcode%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 
 Passcode
@@ -26,7 +26,7 @@ LinkedIn: [https://www.linkedin.com/in/segev-eliezer/](https://www.google.com/ur
 
 Email: [0xd4yWriteups@gmail.com](mailto:0xd4yWriteups@gmail.com)
 
-Web: [https://0xd4y.github.io/](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/&sa=D&source=editors&ust=1653864729106200&usg=AOvVaw2tq2KTfBNW818Jkz7e9Wy2) 
+Web: [https://0xd4y.com/](https://www.google.com/url?q=https://0xd4y.com/Writeups/&sa=D&source=editors&ust=1653864729106200&usg=AOvVaw2tq2KTfBNW818Jkz7e9Wy2) 
 
 Table of Contents
 

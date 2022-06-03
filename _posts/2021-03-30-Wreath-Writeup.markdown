@@ -7,7 +7,7 @@ image:  '/images/wreath.png'
 tags:   [RCE, Network Pivoting, CVE, Windows, Linux]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Wreath%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Wreath%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 Wreath Network
 
@@ -25,7 +25,7 @@ LinkedIn: [https://www.linkedin.com/in/segev-eliezer/](https://www.google.com/ur
 
 Email: [0xd4yWriteups@gmail.com](mailto:0xd4yWriteups@gmail.com)
 
-Web: [https://0xd4y.github.io/](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/&sa=D&source=editors&ust=1653838005015197&usg=AOvVaw0pgz6wlNqT0zFVbmvWRxvI) 
+Web: [https://0xd4y.com/](https://www.google.com/url?q=https://0xd4y.com/Writeups/&sa=D&source=editors&ust=1653838005015197&usg=AOvVaw0pgz6wlNqT0zFVbmvWRxvI) 
 
 Table of Contents
 
@@ -622,7 +622,7 @@ The goals of this penetration test were met. As requested by the client, I was a
 
 [[6]](#ftnt_ref6) [https://github.com/samratashok/nishang](https://www.google.com/url?q=https://github.com/samratashok/nishang&sa=D&source=editors&ust=1653838005065364&usg=AOvVaw1yBNhpiAJM99kh-lW5N-c1) 
 
-[[7]](#ftnt_ref7) [https://0xd4y.github.io/Writeups/HackTheBox/Bastion%20Writeup.pdf](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/HackTheBox/Bastion%2520Writeup.pdf&sa=D&source=editors&ust=1653838005062635&usg=AOvVaw2eiFI282lB5D35Qvi1kVWp) 
+[[7]](#ftnt_ref7) [https://0xd4y.com/Writeups/HackTheBox/Bastion%20Writeup.pdf](https://www.google.com/url?q=https://0xd4y.com/Writeups/HackTheBox/Bastion%2520Writeup.pdf&sa=D&source=editors&ust=1653838005062635&usg=AOvVaw2eiFI282lB5D35Qvi1kVWp) 
 
 [[8]](#ftnt_ref8) This website can be particularly fast in cracking unsalted hashes because it uses a rainbow table.
 

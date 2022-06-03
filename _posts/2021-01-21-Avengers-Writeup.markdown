@@ -7,7 +7,7 @@ image:  '/images/avengers.png'
 tags:   [SQLi, RCE, Bash Injection]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Avengers%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Avengers%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 This was an interesting room from TryHackMe that taught basic SQLi injection. It was structured in a CTF format in which the student would achieve each flag from solving a task (more on this later). Although this box was structured in a way to guide the student, I like to try to complete the box without the hints provided by the questions, and rather than taking you through how to complete each task in sequential order as the author intended, I will explain how I went through this box. As a result, I went the extra mile when completing this box without realizing it! After completing this box, I read many write ups but not one mentioned the secret flag, and more interestingly, no write ups rooted the box (I only found out later that the author of this box did not intend for the student to root the box \[perhaps the author did not realize how the RCE vulnerability could be exploited\]). We will explore this more in detail further in this writeup.
 

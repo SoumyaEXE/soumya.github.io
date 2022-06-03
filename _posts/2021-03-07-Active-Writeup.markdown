@@ -7,7 +7,7 @@ image:  '/images/Active.png'
 tags:   [SMB, GPP, Windows]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Active%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Active%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 ![](/reports/Active/image8.png)
 
@@ -35,7 +35,7 @@ smbmap -H active.htb -R Replication
 
 ![](/reports/Active/image17.png)
 
-At this point I was stuck for a while. As it turns out, there is something wrong with the smbmap tool on my machine. Even after updating smbmap, for some reason the recursive search does not show all the files in the Replication directory. Every pentester should know the extent of their tools, as well as the reliability of each tool. Some tools can be more reliable, or stealthier, or faster (whatever it is that you are looking for). It is important to understand the difference in each tool, and to know which one to use depending on what you need. I found out that mounting the share proved to be the most reliable (and convenient! \[check out the [Bastion writeup](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/HackTheBox/Bastion%2520Writeup.pdf&sa=D&source=editors&ust=1653954214354606&usg=AOvVaw07JijrAw4Y8WAm8K1Pbij4) to see what I mean\]). So let’s mount the share with the command
+At this point I was stuck for a while. As it turns out, there is something wrong with the smbmap tool on my machine. Even after updating smbmap, for some reason the recursive search does not show all the files in the Replication directory. Every pentester should know the extent of their tools, as well as the reliability of each tool. Some tools can be more reliable, or stealthier, or faster (whatever it is that you are looking for). It is important to understand the difference in each tool, and to know which one to use depending on what you need. I found out that mounting the share proved to be the most reliable (and convenient! \[check out the [Bastion writeup](https://www.google.com/url?q=https://0xd4y.com/Writeups/HackTheBox/Bastion%2520Writeup.pdf&sa=D&source=editors&ust=1653954214354606&usg=AOvVaw07JijrAw4Y8WAm8K1Pbij4) to see what I mean\]). So let’s mount the share with the command
 
 mount -t cifs active.htb/Replication mnt/ -o username=guest ![](/reports/Active/image16.png)
 

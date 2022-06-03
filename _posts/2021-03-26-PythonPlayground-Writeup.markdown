@@ -7,7 +7,7 @@ image:  '/images/python.png'
 tags:   [Python, PATH Injection, Logic]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/PythonPlayground%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/PythonPlayground%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 ![](/reports/PythonPlayground/image16.png)
 
@@ -77,7 +77,7 @@ Unfortunately, this does not work as there is some sort of blacklist on the impo
 
 ![](/reports/PythonPlayground/image8.png)
 
-Unfortunately, the exec function is blacklisted as well. However, if you have read my [Develpy Writeup](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/TryHackMe/Develpy%2520Writeup.pdf&sa=D&source=editors&ust=1653953672145946&usg=AOvVaw2ZXMcxIegK7B_X2o89fk8o), then you know there is one more thing we have left to try:
+Unfortunately, the exec function is blacklisted as well. However, if you have read my [Develpy Writeup](https://www.google.com/url?q=https://0xd4y.com/Writeups/TryHackMe/Develpy%2520Writeup.pdf&sa=D&source=editors&ust=1653953672145946&usg=AOvVaw2ZXMcxIegK7B_X2o89fk8o), then you know there is one more thing we have left to try:
 
 ![](/reports/PythonPlayground/image13.png)
 

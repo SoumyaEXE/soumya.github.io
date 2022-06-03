@@ -7,7 +7,7 @@ image:  '/images/Bastion.png'
 tags:   [SMB, NTLM Relay]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Bastion%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Bastion%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 
 ![](/reports/Bastion/image21.png)

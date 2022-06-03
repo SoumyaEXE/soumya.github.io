@@ -7,7 +7,7 @@ image:  '/images/Writeup.png'
 tags:   [SQLi, Hash Cracking, Enumeration]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Writeup%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Writeup%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 ![](/reports/Writeup/image9.png)
 

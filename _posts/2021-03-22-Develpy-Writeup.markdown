@@ -7,7 +7,7 @@ image:  '/images/python.png'
 tags:   [SQLi, SMTP, RCE, APT]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Develpy%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Develpy%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 ![](/reports/Develpy/image28.png)
 

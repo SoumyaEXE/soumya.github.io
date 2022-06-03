@@ -7,7 +7,7 @@ image:  '/images/behemoth.png'
 tags:   [Format String, Shellcode Filter Bypass, PATH privesc, Buffer Overflow, Shellcode, Binary Exploitation]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Behemoth%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Behemoth%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 Behemoth
 
@@ -25,7 +25,7 @@ LinkedIn: [https://www.linkedin.com/in/segev-eliezer/](https://www.google.com/ur
 
 Email: [0xd4yWriteups@gmail.com](mailto:0xd4yWriteups@gmail.com)
 
-Web: [https://0xd4y.github.io/](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/&sa=D&source=editors&ust=1653865765679892&usg=AOvVaw23x5CqH5aRkEdVU5Z7lpKm) 
+Web: [https://0xd4y.com/](https://www.google.com/url?q=https://0xd4y.com/Writeups/&sa=D&source=editors&ust=1653865765679892&usg=AOvVaw23x5CqH5aRkEdVU5Z7lpKm) 
 
 Table of Contents
 
@@ -130,7 +130,7 @@ Table of Contents
 Executive Summary
 =================
 
-In contrast to [Narnia](https://www.google.com/url?q=https://0xd4y.github.io/Writeups/Misc/Narnia%2520Writeup.pdf&sa=D&source=editors&ust=1653865765692359&usg=AOvVaw1Xq8CpHqiNKgfYHfxwYd2z), the source code for each binary is not given.  Nevertheless, all eight binaries were successfully analyzed and exploited. Attack techniques such as shellcode injection, format string exploitation, and path privilege escalation are covered in this report. Some binaries were more of a reverse engineering exercise ([Behemoth 5](#h.7apgrhmap56f) and [Behemoth 6](#h.1iiwc3vpzmaj) for example) while others typically involved buffer overflow and format string exploits such as in [Behemoth 7](#h.tqwpdz749mlq), a challenge which showcases an interesting way of bypassing shellcode filters.
+In contrast to [Narnia](https://www.google.com/url?q=https://0xd4y.com/Writeups/Misc/Narnia%2520Writeup.pdf&sa=D&source=editors&ust=1653865765692359&usg=AOvVaw1Xq8CpHqiNKgfYHfxwYd2z), the source code for each binary is not given.  Nevertheless, all eight binaries were successfully analyzed and exploited. Attack techniques such as shellcode injection, format string exploitation, and path privilege escalation are covered in this report. Some binaries were more of a reverse engineering exercise ([Behemoth 5](#h.7apgrhmap56f) and [Behemoth 6](#h.1iiwc3vpzmaj) for example) while others typically involved buffer overflow and format string exploits such as in [Behemoth 7](#h.tqwpdz749mlq), a challenge which showcases an interesting way of bypassing shellcode filters.
 
 The binaries were mainly vulnerable due to a lack of boundary checks and input validation. It is critical that the SETUID bits of these binaries are removed until the remedies in the [Conclusion](#h.i7o2yd759joa) section are observed. Below is the full listing of all passwords obtained from the compromised users:
 

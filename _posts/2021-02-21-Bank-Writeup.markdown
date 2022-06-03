@@ -7,7 +7,7 @@ image:  '/images/Bank.png'
 tags:   [Open Redirect, RCE]
 ---
 
-**This report can be read both on this site, and as its <a href = "https://0xd4y.github.io/reports/Bank%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
+**This report can be read both on this site, and as its <a href = "https://0xd4y.com/reports/Bank%20Writeup.pdf">original report form</a>. It is highly recommended that you read the original report form instead because it is better formatted.**
 
 ![](/reports/Bank/image3.png)
 
