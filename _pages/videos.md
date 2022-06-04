@@ -9,7 +9,6 @@ image: '/images/youtube_banner.png'
   <div class="row">
    <div class="col col-12">
    	<a href="https://www.youtube.com/channel/UCSumP9z5Rzquqih-jpusTOQ"><img src="https://0xd4y.com/images/0xd4y-logo-gray-medium-centered.png" class="body"></a>
- 	 </div>
   </div>
 </div>
 
