@@ -1,0 +1,26 @@
+---
+layout: default 
+---
+
+{% include pagination.html %}
+{% include featured-posts.html %}
+
+<div class="container">
+  <div class="row">
+    <div class="col col-12">
+      <div class="container__inner">
+        <div class="row grid">
+          {% if site.posts.size > 0 %}
+            {% for post in paginator.posts %}
+							{% if post.category != "Video" %}
+              	{% include article-content.html %}
+							{% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include pagination.html %}

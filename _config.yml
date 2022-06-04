@@ -84,6 +84,7 @@ defaults:
 
 include:
   - _pages
+  - test
 
 # Tags
 tag_page_dir: tag
