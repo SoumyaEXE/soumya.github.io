@@ -82,13 +82,11 @@ paginate_multiple:
 defaults:
   - scope:
       path: '_pages'
-      path: 'test'
     values:
       permalink: /:basename:output_ext
 
 include:
   - _pages
-  - test
 
 # Tags
 tag_page_dir: tag
