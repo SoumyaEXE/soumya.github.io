@@ -72,9 +72,11 @@ plugins:
 kramdown:
   parse_block_html: true
 
-paginate: 8
-paginate_path: "/page/:num"
-paginate_path: "/test/page/:num/"
+paginate_multiple:
+  - paginate: 8 
+    paginate_path: "/page:num"
+  - paginate: 8
+    paginate_path: "/test/page:num/"
 
 # Pages Path
 defaults:
