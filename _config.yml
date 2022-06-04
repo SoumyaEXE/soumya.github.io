@@ -2,7 +2,7 @@
 # General Site Settings
 title: 0xd4y
 logo: /images/0xd4y-logo-gray-small-centered.png # You can add own logo. For example '/images/logo.png'.
-description: Cybersecurity writeups and videos.
+description: Cybersecurity reports and videos.
 baseurl: "" # The subpath of your site, e.g. /blog
 url: "" # The base hostname & protocol for your site, e.g. http://example.com
 excerpt_separator: ""
@@ -19,7 +19,7 @@ author:
 # Hero Settings
 hero:
   title: 0xd4y
-  description: Penetration Tester | Security Engineer | Top 0.1% at TryHackMe and HackTheBox
+  description: Penetration Tester | Security Engineer | Global Top 0.1% at TryHackMe and HackTheBox
   image: '/images/cool_windows_terminal.jpg'
 
 
