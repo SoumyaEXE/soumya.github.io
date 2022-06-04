@@ -74,7 +74,7 @@ kramdown:
 
 paginate: 8
 paginate_path: "/page/:num"
-paginate_path: "/test/page:num"
+paginate_path: "/test/page:num/"
 
 # Pages Path
 defaults:
