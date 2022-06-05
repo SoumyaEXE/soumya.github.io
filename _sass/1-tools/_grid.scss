@@ -19,9 +19,10 @@ html{
 body{
   height: calc(100vh - 8em);
   padding: 4em;
-  color: rgba(255,255,255,.75);
-  font-family: 'Anonymous Pro', monospace;  
-  background-color: rgb(25,25,25);  
+  line-height: $base-line-height;
+  color: $text-color;
+  font-family: $base-font-family;
+  background-color: $background-color;
 }
 .line-1{
     position: relative;
