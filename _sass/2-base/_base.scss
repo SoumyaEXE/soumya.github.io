@@ -140,8 +140,8 @@ blockquote {
    b .7s infinite steps(1),   
    t calc(var(--n)*.05s) steps(var(--n)) forwards;
   .a:link{
-		color:$dark
-		opacity:1
+		color:$dark;
+		opacity:1;
 		
 	}
 }
