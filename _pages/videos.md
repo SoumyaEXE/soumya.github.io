@@ -18,8 +18,7 @@ Here are some of the videos that I posted on my <a href="https://www.youtube.com
   <div class="col col-12">
    <div class="container__inner">
    <div class="row grid">
-<iframe width="210" height="158" src="https://www.youtube.com/embed/fD4FQAqoGYM" frameborder="0" allowfullscreen></iframe>
-<iframe width="210" height="158" src="https://www.youtube.com/embed/bnSUBy9YrOc" frameborder="0" allowfullscreen></iframe>
+   {% include how-to-hack-any-flash-game.html %}
    </div>
    </div>
   </div>
