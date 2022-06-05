@@ -18,8 +18,8 @@ Here are some of the videos that I posted on my <a href="https://www.youtube.com
   <div class="col col-12">
    <div class="container__inner">
    <div class="row grid">
-<iframe width="420" height="315" src="https://www.youtube.com/embed/fD4FQAqoGYM" frameborder="0" allowfullscreen></iframe>
-<iframe width="420" height="315" src="https://www.youtube.com/embed/bnSUBy9YrOc" frameborder="0" allowfullscreen></iframe>
+<iframe width="210" height="158" src="https://www.youtube.com/embed/fD4FQAqoGYM" frameborder="0" allowfullscreen></iframe>
+<iframe width="210" height="158" src="https://www.youtube.com/embed/bnSUBy9YrOc" frameborder="0" allowfullscreen></iframe>
    </div>
    </div>
   </div>
