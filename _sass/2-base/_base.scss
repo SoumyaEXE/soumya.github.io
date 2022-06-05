@@ -130,7 +130,7 @@ blockquote {
 .type {
   color:$light-gray;
   background:
-    linear-gradient(-90deg,$background-color 5px,#0000 0) 10px 0,
+    linear-gradient(-90deg,$light-gray 5px,#0000 0) 10px 0,
     linear-gradient($background-color 0 0) 0 0;
   background-size:calc(var(--n)*1ch) 200%;
   -webkit-background-clip:padding-box,text;
