@@ -3,44 +3,6 @@
   box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700');
-$animation-font-family: 'Source Code Pro', monospace;
-
-html{
-  min-height: 100%;
-  overflow: hidden;
-}
-
-body {
-  font-family: monospace;
-  font-weight: 700;
-  font-size:50px;
-  padding:20px;
-  font-family: $animation-font-family;  
-  color:#00DFFC
-}
-
-.type {
-  color:#0000;
-  background:
-    linear-gradient(-90deg,#0e6b0e 20px,#0000 0) 10px 0,
-    linear-gradient(#AAA 0 0) 0 0;
-  background-size:calc(var(--n)*1ch) 200%;
-  -webkit-background-clip:padding-box,text;
-  background-clip:padding-box,text;
-  background-repeat:no-repeat;
-  animation: 
-   b 4s infinite steps(1),   
-   t calc(var(--n)*.05s) steps(var(--n)) forwards;
-}
-
-@keyframes t{
-  from {background-size:0 200%}
-}
-@keyframes b{
-  50% {background-position:0 -100%,0 0}
-}
-
 body {
   font-family: $base-font-family;
   font-size: $base-font-size;
