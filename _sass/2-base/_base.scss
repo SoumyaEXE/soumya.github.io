@@ -141,6 +141,8 @@ blockquote {
    t calc(var(--n)*.05s) steps(var(--n)) forwards;
   .a:link{
 		color:$dark
+		opacity:1
+		
 	}
 }
 
