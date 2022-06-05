@@ -139,10 +139,10 @@ blockquote {
   animation: 
    b .7s infinite steps(1),   
    t calc(var(--n)*.05s) steps(var(--n)) forwards;
-  .a:link{
-		color:$dark;
+  &-link{
+		color: $dark !important;
 		opacity:1;
-		background: $dark;
+		background: $dark !important;
 		
 	}
 }
