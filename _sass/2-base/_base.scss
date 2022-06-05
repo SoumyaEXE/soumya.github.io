@@ -128,7 +128,7 @@ blockquote {
 }
 
 .type {
-  color:#0000;
+  color:$light-gray;
   background:
     linear-gradient(-90deg,$background-color 5px,#0000 0) 10px 0,
     linear-gradient($background-color 0 0) 0 0;
