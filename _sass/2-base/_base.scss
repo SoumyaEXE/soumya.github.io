@@ -128,43 +128,11 @@ blockquote {
 }
 
 
-/* Global */
-html{
-  min-height: 100%;
-  overflow: hidden;
-}
-.line-1{
-    position: relative;
-    top: 50%;  
-    width: 24em;
-    margin: 0 auto;
-    border-right: 2px solid rgba(255,255,255,.75);
-    font-size: 18px;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    transform: translateY(-50%);    
-}
-
-/* Animation */
-.anim-typewriter{
-  animation: typewriter 4s steps(44) 1s 1 normal both,
-             blinkTextCursor 500ms steps(44) infinite normal;
-}
-@keyframes typewriter{
-  from{width: 0;}
-  to{width: 24em;}
-}
-@keyframes blinkTextCursor{
-  from{border-right-color: rgba(255,255,255,.75);}
-  to{border-right-color: transparent;}
-}
-
 .type {
-  color:#0000;
+  color:$light-gray;
   background:
-    linear-gradient(-90deg,#09080f 5px,#0000 0) 10px 0,
-    linear-gradient(#09080f 0 0) 0 0;
+    linear-gradient(-90deg,$background-color 5px,#0000 0) 10px 0,
+    linear-gradient($background-color 0 0) 0 0;
   background-size:calc(var(--n)*1ch) 200%;
   -webkit-background-clip:padding-box,text;
   background-clip:padding-box,text;
