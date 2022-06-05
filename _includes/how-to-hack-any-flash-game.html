@@ -1,5 +1,5 @@
 {% for post in site.posts %}
-	{% if post.category = "Video" %}
+	{% if post.category != blank %}
 
 				<div class="article col {% if forloop.index <= 2 and page.url == '/' %}col-6 col-t-12 grid__post animate article--big{% else %}col-4 col-d-6 col-t-12 grid__post animate{% endif %}">
 					<div class="article__inner">
