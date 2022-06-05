@@ -12,12 +12,14 @@ Here are some of the videos that I posted on my <a href="https://www.youtube.com
 ## Latest Video
 <iframe src="https://www.youtube.com/embed/bnSUBy9YrOc" frameborder="0" allowfullscreen></iframe>
 
+## Other Videos
 <div class="container">
  <div class="row">
   <div class="col col-12">
    <div class="container__inner">
    <div class="row grid">
 <iframe src="https://www.youtube.com/embed/fD4FQAqoGYM" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/bnSUBy9YrOc" frameborder="0" allowfullscreen></iframe>
    </div>
    </div>
   </div>
