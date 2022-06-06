@@ -189,7 +189,6 @@ h6 {
   font-size: 18px;
   font-family: $base-font-family;
   position: relative;
-  position: relative;
   width: max-content;
   display: inline;
 }
@@ -202,6 +201,7 @@ h6::after {
   right: 0;
   bottom: 0;
   left: 0;
+	font-weight: normal
 }
 
 h6::before {
@@ -211,7 +211,7 @@ h6::before {
 }
 
 h6::after {
-  width: 0.3em;
+  width: 0.5em;
   background: $white;
   animation: typewriter var(--typewriterSpeed)
       steps(var(--typewriterCharacters)) 1.5s forwards,
