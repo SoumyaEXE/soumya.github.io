@@ -186,16 +186,6 @@ blockquote {
   --typewriterCharacters: 24;
 }
 
-body {
-  margin: 0;
-  font-family: "Source Sans Pro", sans-serif;
-  min-height: 100vh;
-  display: grid;
-  place-content: center;
-  text-align: center;
-  background: var(--bg-color);
-}
-
 h6 {
   font-size: clamp(1rem, 3vw + 1rem, 4rem);
   position: relative;
