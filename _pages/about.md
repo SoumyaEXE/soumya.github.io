@@ -1,7 +1,7 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: Whoami
+permalink: /whoami/
 image: '/images/cool_chess_image.jpg'
 ---
 
