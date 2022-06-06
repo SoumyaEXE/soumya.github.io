@@ -181,8 +181,8 @@ blockquote {
 }
 
 :root {
-  --typewriterSpeed: 6s;
-  --typewriterCharacters: 24;
+  --typewriterSpeed: 3s;
+  --typewriterCharacters: 16;
 }
 
 h6 {
@@ -191,6 +191,7 @@ h6 {
   font-family: "Source Code Pro", monospace;
   position: relative;
   width: max-content;
+  display: inline;
 }
 
 h6::before,
@@ -206,12 +207,12 @@ h6::after {
 h6::before {
   background: $dark;
   animation: typewriter var(--typewriterSpeed)
-    steps(var(--typewriterCharacters)) 1s forwards;
+    steps(var(--typewriterCharacters)) 1.5s forwards;
 }
 
 h6::after {
   width: 0.125em;
-  background: black;
+  background: #0000;
   animation: typewriter var(--typewriterSpeed)
       steps(var(--typewriterCharacters)) 1s forwards,
     blink 750ms steps(var(--typewriterCharacters)) infinite;
