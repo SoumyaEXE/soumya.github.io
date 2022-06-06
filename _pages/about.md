@@ -31,4 +31,3 @@ I initially created this website because I felt overwhelmed when first getting i
 I am a team player and open-minded individual who is looking to learn as much as possible. Please <a href="https://0xd4y.com/contact/">contact</a> me if you have any questions, comments, suggestions, or would simply like to reach out!
 </div>
 </body>
-</div>
