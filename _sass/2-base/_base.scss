@@ -178,6 +178,8 @@ blockquote {
 :root {
   --typewriterSpeed: 2s;
   --typewriterCharacters: 16;
+  --typewriterSpeed5: 2s;
+  --typewriterCharacters5: 6;
 }
 
 h6 {
@@ -226,15 +228,10 @@ h6::after {
   }
 }
 
-
-:root {
-  --typewriterSpeed5: 2s;
-  --typewriterCharacters5: 6;
-}
-
 h5 {
   font-size: 18px;
   font-family: $base-font-family;
+	color: $light-gray
 	font-weight: normal;
   position: relative;
   width: max-content;
