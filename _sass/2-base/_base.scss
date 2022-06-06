@@ -187,6 +187,7 @@ blockquote {
 
 h6 {
   font-size: 18px;
+  font-family: $base-font-family
   position: relative;
   position: relative;
   width: max-content;
@@ -211,10 +212,10 @@ h6::before {
 
 h6::after {
   width: 0.125em;
-  background: $background-color;
+  background: $white;
   animation: typewriter var(--typewriterSpeed)
       steps(var(--typewriterCharacters)) 1.5s forwards,
-    blink 750ms steps(var(--typewriterCharacters)) infinite;
+    blink steps(var(--typewriterCharacters)) infinite;
 }
 
 @keyframes typewriter {
