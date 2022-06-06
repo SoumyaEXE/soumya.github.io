@@ -204,16 +204,16 @@ h6::after {
 }
 
 h6::before {
-  background: #0000;
+  background: $background-color;
   animation: typewriter var(--typewriterSpeed)
     steps(var(--typewriterCharacters)) 1.5s forwards;
 }
 
 h6::after {
   width: 0.125em;
-  background: #0000;
+  background: $background-color;
   animation: typewriter var(--typewriterSpeed)
-      steps(var(--typewriterCharacters)) 1s forwards,
+      steps(var(--typewriterCharacters)) 1.5s forwards,
     blink 750ms steps(var(--typewriterCharacters)) infinite;
 }
 
