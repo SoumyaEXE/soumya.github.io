@@ -205,7 +205,7 @@ h6::after {
 }
 
 h6::before {
-  background: var(--bg-color);
+  background: $dark;
   animation: typewriter var(--typewriterSpeed)
     steps(var(--typewriterCharacters)) 1s forwards;
 }
