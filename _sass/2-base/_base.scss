@@ -211,7 +211,7 @@ h6::after {
   background: $white;
   animation: typewriter var(--typewriterSpeed)
       steps(var(--typewriterCharacters)) 1.5s forwards,
-    blink steps(var(--typewriterCharacters)) infinite;
+    blink steps(var(--typewriterCharacters)) 3.5s forwards;
 }
 
 @keyframes typewriter {
