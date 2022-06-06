@@ -15,11 +15,11 @@ function showText(){
   document.getElementById("delayedText").style.visibility = "visible";
 }
 </script>
-</head>
+<div class="container">
+  <span class="0xd4y-text" style="color: CornflowerBlue">┌─[</span><span class="0xd4y-text" style="color:LightGray">0xd4y</span><span class="0xd4y-text" style="color: Gold">@</span><span class="0xd4y-text" style="color: Gray">Writeup</span><span class="0xd4y-text" style="color: CornflowerBlue">]─[/root/Writeups]<br>└──╼</span><span class="0xd4y-text" style="color: Gold"> $</span> <span class="type" style="--n:379">whoami</span>
+</div>
 <body>
 <div id="delayedText" style="visibility:hidden">
-                        Thanks for visiting my site! On this page you can find my written reports, but please also check out my <b><u><a href="https://0xd4y.com/videos">videos</b></a></u>on my<b><u><a href="https://www.youtube.com/channel/UCSumP9z5Rzquqih-jpusTOQ">YouTube channel</a></u></b>. I plan on uploading more often on subjects ranging from external and internal penetration tests, to cloud penetration tests. <b>You can search for videos and writeups by using the search feature located at the top right of the webpage.</b></span>
-
 ![Beach Chess]({{site.baseurl}}/images/beach_chess.jpg#center)
 
 Thanks for visiting my website! My name is Segev Eliezer. I first started learning cybersecurity in January 2016 and instantly fell in love with it. My passion for chess gave me a big headstart in the cybersecurity field, as I already possessed the abilities to focus under pressure, think critically, and problem solve. Since then I have penetrated and secured over 200 machines (some of these engagements are posted on this website).
