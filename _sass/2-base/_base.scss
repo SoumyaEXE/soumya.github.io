@@ -181,13 +181,12 @@ blockquote {
 }
 
 :root {
-  --bg-color: hsl(49 37% 94%);
   --typewriterSpeed: 6s;
   --typewriterCharacters: 24;
 }
 
 h6 {
-  font-size: clamp(1rem, 3vw + 1rem, 4rem);
+  font-size: 16px;
   position: relative;
   font-family: "Source Code Pro", monospace;
   position: relative;
