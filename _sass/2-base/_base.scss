@@ -142,7 +142,7 @@ blockquote {
   background-repeat:no-repeat;
   animation: 
    b infinite steps(1),   
-   t calc(var(--n)*.12s) steps(var(--n)) forwards;
+   t calc(var(--n)*.12s) steps(var(--n)) 1s forwards;
   &-link{
 		color: $dark !important;
 		opacity:1;
