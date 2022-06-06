@@ -16,7 +16,7 @@ function showText(){
 }
 </script>
 <div class="container">
-  <span class="0xd4y-text" style="color: CornflowerBlue">┌─[</span><span class="0xd4y-text" style="color:LightGray">0xd4y</span><span class="0xd4y-text" style="color: Gold">@</span><span class="0xd4y-text" style="color: Gray">Writeup</span><span class="0xd4y-text" style="color: CornflowerBlue">]─[/root/Writeups]<br>└──╼</span><span class="0xd4y-text" style="color: Gold"> $</span> <span class="type" style="--n:379">whoami</span>
+  <span class="0xd4y-text" style="color: CornflowerBlue">┌─[</span><span class="0xd4y-text" style="color:LightGray">0xd4y</span><span class="0xd4y-text" style="color: Gold">@</span><span class="0xd4y-text" style="color: Gray">Writeup</span><span class="0xd4y-text" style="color: CornflowerBlue">]─[/root/Writeups]<br>└──╼</span><span class="0xd4y-text" style="color: Gold"> $</span> <span class="type2" style="--n:379">whoami</span>
 </div>
 <body>
 <div id="delayedText" style="visibility:hidden">

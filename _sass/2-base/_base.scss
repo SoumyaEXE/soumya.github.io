@@ -152,6 +152,27 @@ blockquote {
 	}
 }
 
+.type2 {
+  color:#0000;
+  background:
+    linear-gradient(-90deg,$light-gray 5px,#0000 0) 15px 0,
+    linear-gradient($light-gray 0 0) 0 0;
+  background-size:calc(var(--n)*1ch) 200%;
+  -webkit-background-clip:padding-box,text;
+  background-clip:padding-box,text;
+  background-repeat:no-repeat;
+  animation: 
+   b infinite steps(1),   
+   t calc(var(--n)*.16s) steps(var(--n)) forwards;
+  &-link{
+		color: $dark !important;
+		opacity:1;
+		background: $dark !important;
+		text-decoration: underline;
+		
+	}
+}
+
 @keyframes t{
   from {background-size:0 200%}
 }
