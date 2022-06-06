@@ -55,7 +55,6 @@ h1,
 h2,
 h3,
 h4,
-h5,
 {
   font-family: $heading-font-family;
   font-weight: $heading-font-weight;
@@ -226,6 +225,59 @@ h6::after {
     visibility: hidden;
   }
 }
+
+
+:root {
+  --typewriterSpeed5: 2s;
+  --typewriterCharacters5: 6;
+}
+
+h5 {
+  font-size: 18px;
+  font-family: $base-font-family;
+	font-weight: normal;
+  position: relative;
+  width: max-content;
+  display: inline;
+}
+
+h5::before,
+h5::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+	font-weight: normal
+}
+
+h5::before {
+  background: $background-color;
+  animation: typewriter var(--typewriterSpeed5)
+    steps(var(--typewriterCharacters5)) 1.5s forwards;
+}
+
+h5::after {
+  width: 0.5em;
+  background: $white;
+  animation: typewriter var(--typewriterSpeed5)
+      steps(var(--typewriterCharacters5)) 1.5s forwards,
+    blink steps(var(--typewriterCharacters5)) 3.5s forwards;
+}
+
+@keyframes typewriter {
+  to {
+    left: 100%;
+  }
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
 
 
 
