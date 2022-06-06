@@ -141,8 +141,8 @@ blockquote {
   background-clip:padding-box,text;
   background-repeat:no-repeat;
   animation: 
-   b infinite steps(1),   
-   t calc(var(--n)*.12s) steps(var(--n)) 1s forwards;
+   b infinite steps(1) 1s forwards,   
+   t calc(var(--n)*.12s) steps(var(--n));
   &-link{
 		color: $dark !important;
 		opacity:1;
