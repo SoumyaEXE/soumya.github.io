@@ -257,9 +257,10 @@ h5::before {
 
 h5::after {
   width: 0.5em;
+  background: $white;
   animation: typewriter var(--typewriterSpeed5)
       steps(var(--typewriterCharacters5)) 1.5s forwards,
-    blink steps(var(--typewriterCharacters5)) 1.5s forwards;
+    blink steps(var(--typewriterCharacters5)) 3.5s forwards;
 }
 
 @keyframes typewriter {
