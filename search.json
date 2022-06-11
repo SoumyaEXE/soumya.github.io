@@ -4,11 +4,13 @@
       "title"    : "Hacking in the Cloud - Cloudgoat: vulnerable_lambda",
       "category" : "Video",
       "tags"     : "Video, SQLi, Cloudgoat, AWS",
-      "url"      : "/video/2022/06/10/Hacking-in-the-Cloud-Cloudgoat:-vulnerable_lambda/",
+      "url"      : "/video/2022/06/10/Vulnerable-Lambda/",
       "date"     : "Jun 10, 2022",
       "content"  : "",
-      "image"    : "/images/how-to-hack-any-flash-game.png"
+      "image": "/images/vulnerable_lambda.png"
 		},
+
+		{
       "title"    : "How To Hack Any Flash Game",
       "category" : "Video",
       "tags"     : "Video, Flash",
