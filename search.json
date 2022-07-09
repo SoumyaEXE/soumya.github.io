@@ -9,6 +9,7 @@
       "content"  : "",
       "image": "/images/iam_privesc_by_rollback.png"
 		},
+		{
       "title"    : "Hacking in the Cloud - Cloudgoat: vulnerable_lambda",
       "category" : "Video",
       "tags"     : "Video, SQLi, Cloudgoat, AWS",
