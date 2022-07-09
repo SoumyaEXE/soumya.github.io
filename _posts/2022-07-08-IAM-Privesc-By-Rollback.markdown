@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hacking in the Cloud - IAM Privesc by Rollback
+title: Hacking in the Cloud - iam_privesc_by_rollback
 description: This is the second scenario in the CloudGoat series, and it is the simplest one at the time of writing. We start off as a high-privileged user who can change their defualt policy version. One of the versions of this user's managed policy allows for performing any action on any resource. The user can therefore change their default version to this policy version and obtain Administrator access.
 date:   2022-07-08
 image:  '/images/iam_privesc_by_rollback.png'
