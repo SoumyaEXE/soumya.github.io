@@ -4,7 +4,7 @@
       "title"    : "Hacking in the Cloud - Cloudgoat: iam_privesc_by_rollback",
       "category" : "Videos",
       "tags"     : "Videos, IAM, Cloudgoat, AWS",
-      "url"      : "/videos/2022/07/08/IAM-Privesc-By-Rollback/",
+      "url"      : "/videos/2022/07/08/IAM-Rollback/",
       "date"     : "Jun 10, 2022",
       "content"  : "",
       "image": "/images/iam_privesc_by_rollback.png"
