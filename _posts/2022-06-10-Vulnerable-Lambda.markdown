@@ -5,7 +5,7 @@ description: This is the first scenario in the CloudGoat series. We start off as
 date:   2022-06-10 
 image:  '/images/vulnerable_lambda.png'
 category: Videos
-tags:   [Videos, SQLi, Cloudgoat, AWS]
+tags:   [Videos, SQLi, Cloudgoat, AWS, Lambda]
 ---
 
 This is the first scenario in the CloudGoat series. We start off as a low-privileged user that can assume a role which gives Lambda:Invoke permissions. Using this permission we are able to exploit a high-privileged Lambda function via an SQL injection and obtain Administrator access.
