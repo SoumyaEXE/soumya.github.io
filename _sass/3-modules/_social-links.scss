@@ -38,13 +38,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     font-size: 45px;
     line-height: 40px;
-    border-radius: 8px;
+    border-radius: 16px;
     color: $white;
-		margin: 0 15px 5px 0;
+		margin: 0 25px 5px 0;
     background-color: $blue-dark;
     &:hover {
       color: $dark;
