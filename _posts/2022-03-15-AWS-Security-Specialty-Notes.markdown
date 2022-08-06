@@ -8,744 +8,1685 @@ image:  '/images/aws.png'
 tags:   [AWS Security]
 ---
 
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>AWS Security Specialty</title><style>
-/* cspell:disable-file */
-/* webkit printing magic: print all background colors */
-html {
-	-webkit-print-color-adjust: exact;
-}
-* {
-	box-sizing: border-box;
-	-webkit-print-color-adjust: exact;
-}
-
-html,
-body {
-	margin: 0;
-	padding: 0;
-}
-@media only screen {
-	body {
-		margin: 2em auto;
-		max-width: 900px;
-		color: rgb(55, 53, 47);
-	}
-}
-
-body {
-	line-height: 1.5;
-	white-space: pre-wrap;
-}
-
-a,
-a.visited {
-	color: inherit;
-	text-decoration: underline;
-}
-
-.pdf-relative-link-path {
-	font-size: 80%;
-	color: #444;
-}
-
-h1,
-h2,
-h3 {
-	letter-spacing: -0.01em;
-	line-height: 1.2;
-	font-weight: 600;
-	margin-bottom: 0;
-}
-
-.page-title {
-	font-size: 2.5rem;
-	font-weight: 700;
-	margin-top: 0;
-	margin-bottom: 0.75em;
-}
-
-h1 {
-	font-size: 1.875rem;
-	margin-top: 1.875rem;
-}
-
-h2 {
-	font-size: 1.5rem;
-	margin-top: 1.5rem;
-}
-
-h3 {
-	font-size: 1.25rem;
-	margin-top: 1.25rem;
-}
-
-.source {
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	padding: 1.5em;
-	word-break: break-all;
-}
-
-.callout {
-	border-radius: 3px;
-	padding: 1rem;
-}
-
-figure {
-	margin: 1.25em 0;
-	page-break-inside: avoid;
-}
-
-figcaption {
-	opacity: 0.5;
-	font-size: 85%;
-	margin-top: 0.5em;
-}
-
-mark {
-	background-color: transparent;
-}
-
-.indented {
-	padding-left: 1.5em;
-}
-
-hr {
-	background: transparent;
-	display: block;
-	width: 100%;
-	height: 1px;
-	visibility: visible;
-	border: none;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
-}
-
-img {
-	max-width: 100%;
-}
-
-@media only print {
-	img {
-		max-height: 100vh;
-		object-fit: contain;
-	}
-}
-
-@page {
-	margin: 1in;
-}
-
-.collection-content {
-	font-size: 0.875rem;
-}
-
-.column-list {
-	display: flex;
-	justify-content: space-between;
-}
-
-.column {
-	padding: 0 1em;
-}
-
-.column:first-child {
-	padding-left: 0;
-}
-
-.column:last-child {
-	padding-right: 0;
-}
-
-.table_of_contents-item {
-	display: block;
-	font-size: 0.875rem;
-	line-height: 1.3;
-	padding: 0.125rem;
-}
-
-.table_of_contents-indent-1 {
-	margin-left: 1.5rem;
-}
-
-.table_of_contents-indent-2 {
-	margin-left: 3rem;
-}
-
-.table_of_contents-indent-3 {
-	margin-left: 4.5rem;
-}
-
-.table_of_contents-link {
-	text-decoration: none;
-	opacity: 0.7;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
-}
-
-table,
-th,
-td {
-	border: 1px solid rgba(55, 53, 47, 0.09);
-	border-collapse: collapse;
-}
-
-table {
-	border-left: none;
-	border-right: none;
-}
-
-th,
-td {
-	font-weight: normal;
-	padding: 0.25em 0.5em;
-	line-height: 1.5;
-	min-height: 1.5em;
-	text-align: left;
-}
-
-th {
-	color: rgba(55, 53, 47, 0.6);
-}
-
-ol,
-ul {
-	margin: 0;
-	margin-block-start: 0.6em;
-	margin-block-end: 0.6em;
-}
-
-li > ol:first-child,
-li > ul:first-child {
-	margin-block-start: 0.6em;
-}
-
-ul > li {
-	list-style: disc;
-}
-
-ul.to-do-list {
-	text-indent: -1.7em;
-}
-
-ul.to-do-list > li {
-	list-style: none;
-}
-
-.to-do-children-checked {
-	text-decoration: line-through;
-	opacity: 0.375;
-}
-
-ul.toggle > li {
-	list-style: none;
-}
-
-ul {
-	padding-inline-start: 1.7em;
-}
-
-ul > li {
-	padding-left: 0.1em;
-}
-
-ol {
-	padding-inline-start: 1.6em;
-}
-
-ol > li {
-	padding-left: 0.2em;
-}
-
-.mono ol {
-	padding-inline-start: 2em;
-}
-
-.mono ol > li {
-	text-indent: -0.4em;
-}
-
-.toggle {
-	padding-inline-start: 0em;
-	list-style-type: none;
-}
-
-/* Indent toggle children */
-.toggle > li > details {
-	padding-left: 1.7em;
-}
-
-.toggle > li > details > summary {
-	margin-left: -1.1em;
-}
-
-.selected-value {
-	display: inline-block;
-	padding: 0 0.5em;
-	background: rgba(206, 205, 202, 0.5);
-	border-radius: 3px;
-	margin-right: 0.5em;
-	margin-top: 0.3em;
-	margin-bottom: 0.3em;
-	white-space: nowrap;
-}
-
-.collection-title {
-	display: inline-block;
-	margin-right: 1em;
-}
-
-.simple-table {
-	margin-top: 1em;
-	font-size: 0.875rem;
-	empty-cells: show;
-}
-.simple-table td {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table th {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table-header-color {
-	background: rgb(247, 246, 243);
-	color: black;
-}
-.simple-table-header {
-	font-weight: 500;
-}
-
-time {
-	opacity: 0.5;
-}
-
-.icon {
-	display: inline-block;
-	max-width: 1.2em;
-	max-height: 1.2em;
-	text-decoration: none;
-	vertical-align: text-bottom;
-	margin-right: 0.5em;
-}
-
-img.icon {
-	border-radius: 3px;
-}
-
-.user-icon {
-	width: 1.5em;
-	height: 1.5em;
-	border-radius: 100%;
-	margin-right: 0.5rem;
-}
-
-.user-icon-inner {
-	font-size: 0.8em;
-}
-
-.text-icon {
-	border: 1px solid #000;
-	text-align: center;
-}
-
-.page-cover-image {
-	display: block;
-	object-fit: cover;
-	width: 100%;
-	max-height: 30vh;
-}
-
-.page-header-icon {
-	font-size: 3rem;
-	margin-bottom: 1rem;
-}
-
-.page-header-icon-with-cover {
-	margin-top: -0.72em;
-	margin-left: 0.07em;
-}
-
-.page-header-icon img {
-	border-radius: 3px;
-}
-
-.link-to-page {
-	margin: 1em 0;
-	padding: 0;
-	border: none;
-	font-weight: 500;
-}
-
-p > .user {
-	opacity: 0.5;
-}
-
-td > .user,
-td > time {
-	white-space: nowrap;
-}
-
-input[type="checkbox"] {
-	transform: scale(1.5);
-	margin-right: 0.6em;
-	vertical-align: middle;
-}
-
-p {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-
-.image {
-	border: none;
-	margin: 1.5em 0;
-	padding: 0;
-	border-radius: 0;
-	text-align: center;
-}
-
-.code,
-code {
-	background: rgba(135, 131, 120, 0.15);
-	border-radius: 3px;
-	padding: 0.2em 0.4em;
-	border-radius: 3px;
-	font-size: 85%;
-	tab-size: 2;
-}
-
-code {
-	color: #eb5757;
-}
-
-.code {
-	padding: 1.5em 1em;
-}
-
-.code-wrap {
-	white-space: pre-wrap;
-	word-break: break-all;
-}
-
-.code > code {
-	background: none;
-	padding: 0;
-	font-size: 100%;
-	color: inherit;
-}
-
-blockquote {
-	font-size: 1.25em;
-	margin: 1em 0;
-	padding-left: 1em;
-	border-left: 3px solid rgb(55, 53, 47);
-}
-
-.bookmark {
-	text-decoration: none;
-	max-height: 8em;
-	padding: 0;
-	display: flex;
-	width: 100%;
-	align-items: stretch;
-}
-
-.bookmark-title {
-	font-size: 0.85em;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	height: 1.75em;
-	white-space: nowrap;
-}
-
-.bookmark-text {
-	display: flex;
-	flex-direction: column;
-}
-
-.bookmark-info {
-	flex: 4 1 180px;
-	padding: 12px 14px 14px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.bookmark-image {
-	width: 33%;
-	flex: 1 1 180px;
-	display: block;
-	position: relative;
-	object-fit: cover;
-	border-radius: 1px;
-}
-
-.bookmark-description {
-	color: rgba(55, 53, 47, 0.6);
-	font-size: 0.75em;
-	overflow: hidden;
-	max-height: 4.5em;
-	word-break: break-word;
-}
-
-.bookmark-href {
-	font-size: 0.75em;
-	margin-top: 0.25em;
-}
-
-.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
-.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
-.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
-.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
-.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
-.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
-.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
-.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
-.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
-.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
-.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
-.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
-.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.highlight-default {
-	color: rgba(55, 53, 47, 1);
-}
-.highlight-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.highlight-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.highlight-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.highlight-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.highlight-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.highlight-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.highlight-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.highlight-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.highlight-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.highlight-gray_background {
-	background: rgba(241, 241, 239, 1);
-}
-.highlight-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.highlight-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.highlight-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.highlight-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.highlight-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.highlight-purple_background {
-	background: rgba(244, 240, 247, 0.8);
-}
-.highlight-pink_background {
-	background: rgba(249, 238, 243, 0.8);
-}
-.highlight-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.block-color-default {
-	color: inherit;
-	fill: inherit;
-}
-.block-color-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.block-color-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.block-color-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.block-color-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.block-color-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.block-color-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.block-color-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.block-color-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.block-color-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.block-color-gray_background {
-	background: rgba(241, 241, 239, 1);
-}
-.block-color-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.block-color-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.block-color-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.block-color-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.block-color-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.block-color-purple_background {
-	background: rgba(244, 240, 247, 0.8);
-}
-.block-color-pink_background {
-	background: rgba(249, 238, 243, 0.8);
-}
-.block-color-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
-.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
-.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
-.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
-.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
-.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
-.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
-.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
-.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
-.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
-
-.checkbox {
-	display: inline-flex;
-	vertical-align: text-bottom;
-	width: 16;
-	height: 16;
-	background-size: 16px;
-	margin-left: 2px;
-	margin-right: 5px;
-}
-
-.checkbox-on {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-
-.checkbox-off {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
-}
+# AWS Security Specialty
+These are all the notes that I took after reading the entire exam guide for the AWS Ceritifed Security - Specialty exam (ISBN-13: 978-1789534474). It is recommended that you install Obsidian and download the <a href="https://github.com/0xd4y/notes/blob/main/AWS%20-%20Security%20Specialty/AWS-notes.zip">zip file</a> instead, as this will allow you to quickly and easily navigate through these notes. You can also download the <a href="https://github.com/0xd4y/notes/blob/main/AWS%20-%20Security%20Specialty/AWS%20-%20Security%20Specialty.pdf">PDF file</a>, as this contains rendered images related to the notes.
+
+# Things to Know on Exam
+- need to know logging
+	- how to handle monitoring and logging
+	- how to automate responses to incidents found in those logs
+- know troubleshooting
+	- if logs from lambda are not showing up in cloudwatch, why is this?
+
+
+Knowledge Domain | % of Exam
+------------|------
+Incident Response | 12%
+Logging and Monitoring | 20%
+Infrastructure Security | 26%
+Identity and Access Management | 20%
+Data Protection | 22%
+
+- scenario-based
+	- automating response to security issues
+- know format of policies in json
+- order in which thigs are resolved
+	- explicit deny, explicit allow, default implicit deny
+- know cloudwatch, KMS, IAM, cloudtrail, etc.
+# Table of Contents
+[[AWS Questions]]
+[[AWS/Cloud Security - Specialist/Misc|Misc]]
+## Section 2: Security Responsibility & Access Management
+[[Access Management]]
+[[Access Policies]]
+[[Federated and Mobile Access]]
+[[Shared Responsibility Model]]
+
+## Section 3: Security - A Layered Approach
+
+[[Configuring Infrastructure Security]]
+[[Implementing Application Security]]
+[[Securing EC2 Instances]]
+[[DDoS Protection]]
+[[Incident Response]]
+[[Secure Connections to AWS Environment]]
+
+## Section 4: Monitoring, Logging, and Auditing
+[[Implementing Logging Mechanisms]]
+[[Auditing and Governance]]
+
+## Section 5: Best Practices and Automation
+[[Automation]]
+[[Discovering Security Best Practices]]
+
+## Section 6: Encryption and Data Security
+[[Managing Key Infrastructure]]
+[[Managing Data Security]]
+
+
+# Identity and Access Management (IAM)
+[[AWS Contents]]
+[[AWS Questions]]
+
+- contains details and credentials of root user account
+- access keys should not be configured for root user (additional user with relevant privileges should be created instead)
+	- limit access methods to root account
+
+## Groups
+- groups are associated with set of permissions allowing members of that group to inherit those permissions
+	- groups don't have credentials associated with it
+	- object within IAM
+
+## Roles
+- associated set of permissions that allows access to AWS resources
+	- not associated with users or groups
+	- sort of works like discord roles
+### Examples of roles:
+#### Service Roles
+- allows other AWS services to perform actions on one's behalf
+- only exist in account in which they were created (can't be used for cross-account access)
+- when using EC2 roles for deploying and running EC2 instances, it is best practice to associate EC2 instances with a role (removes the need to store credentials on any instance)
+	- role itself
+	- instance profile
+		- container for role
+		- used to pass data to EC2 instance
+
+
+#### User Roles
+- when user assumes a role, their current permissions get temporarily replaced by the role's permissions
+
+#### Web Identity Federate Role
+- allows a single sign on (SSO) approach
+- federated access means user has been authenticated by external source 
+	- can be through well-known identity providers (IDPs) such as Amazon, Google, or Facebook
+
+#### SAML 2.0 federated roles
+- allows creation of roles that have been federated through one's internal corporate directory 
+- the external authentication system is one's own corporate directory of users
+	- e.g. Microsoft Active Directory (MSAD) # Access Policies 
+[[AWS Contents]]
+[[AWS Questions#Access Policies]]
+
+- define who or what can or can't access AWS resources
+
+<u>Policy Structure</u>:
+1. Version
+	- shows version of policy language
+2. Statement
+	- acts as group for parameters in json structure
+3. Sid
+	- statement identification
+4. Effect
+	- can be either *allow* or *deny*
+		- allows or denies access to resource
+5. Action
+	- list of actions to be allowed or denied access to
+		- action is first defined by service and then preceded with action
+6. Resource
+	- provides Amazon Resource Name (ARN)
+		- tells which resource the permissions apply to 
+7. Condition
+	- optional
+	- dictates under what conditions policy is in effect
 	
-</style></head><body><article id="c25e48ed-c119-4f06-9ea8-d26ddd7da320" class="page sans"><header><h1 class="page-title">AWS Security Specialty</h1></header><div class="page-body"><nav id="960a5942-c16c-45ea-bb07-19794b1ee45f" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#77a4f81e-ef20-4968-b540-d48276e94e5e">Description</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c8615327-0d36-4cea-bccf-bf75b204d5ad">Things to Know on Exam</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ee3d7af7-26ff-4b89-9de2-c82994375e1c">Section 3: Security - A Layered Approach</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6d82a09a-b7ad-47d0-b365-b4aac64aaa25">Section 4: Monitoring, Logging, and Auditing</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f415b279-744f-4c5a-9952-42c52532cafb">Section 5: Best Practices and Automation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#65538210-cecf-4720-afd5-ba2bcd1f3e00">Section 6: Encryption and Data Security</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3480603b-733a-47b4-889e-bfcbbe7ad761">Identity and Access Management (IAM)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e8b8986d-d9bb-4c4b-98d5-34760e44440f">Groups</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#546e86e9-c788-4a73-b136-3f31098ac469">Roles</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#34293b7d-01e2-4291-8bb0-21a45f28b269">User Roles</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#7d4f4684-be08-4228-90a1-1a1f237cd00f">Web Identity Federate Role</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#904830e4-193c-46b6-8222-3b88c2c3beb6">SAML 2.0 federated roles</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#31d14e2f-ca3e-4ab0-ba24-c3d39e2d2873">Policy evaluation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e7beb052-081c-460f-8e6e-840c90435c70">Social Federation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#482a290b-7148-4b97-a556-7b2f621609d3">Amazon Cognito</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b67cd383-2230-4522-b0af-26fc1e1cc0d5">Shared Responsibility Model</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6449ac5f-2ea1-4262-a4f5-0977c99a06bd">Subnets</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3a968e04-54b0-4e97-9f9d-7939baa308a2">Flow Logs Tab</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1717f459-1103-467b-a01d-6339d706dabf">Internet Gateway (IGW)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d294a84f-5c09-4f36-81cf-6b0af63ce69e">Network Access Control Lists (NACLs)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4fc9866f-4c6c-4c69-8c85-673a90bdb2fc">Security Groups</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1de7721a-65cc-4309-a422-4efedd5abf06">Bastion Hosts</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#957852ec-920a-43dd-a1b8-67d86c29df46">NAT Instances and NAT Gateways</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f95d095b-2e27-4680-b689-9bed776f8b8e">NAT Gateway</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1ec8154c-d799-480d-8be4-24aa32951d64">HTTP Floods</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#94bd85a3-b44d-4e77-97e1-b945c8414ee0">Ping of Death (POD)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#52695659-a3ff-4ec8-b133-2b588b0389bd">AWS Shield</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#7974eac5-1fa9-44fa-8b46-2641c1397423">AWS Shield Advanced</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6b8819fa-cf96-4e87-b039-7d680874ad73">Rate-Based Rules</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#dc342539-8345-437f-9778-b8ec01686344">AWS CloudFront and Amazon Route 53</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8c92c773-ff5b-4d97-a521-8e3e670fb812">AWS WAF</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f42a3942-5128-42a0-842b-7d5f0fd6552e">AWS Firewall Manager</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#461da990-c940-41ba-bf2f-a12b282020d6">Managing Security Configuration of ELBs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e59f9b37-04c9-4263-9fe3-3b98bff3d43b">Securing APIs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#33fe4373-93a5-4de4-aa01-3ee1dc216ddd">AWS Cloud Adoption Framework (CAF)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3f968612-077b-4420-b03f-937ee73f2f4d">Threat Detection and Management</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6a59aa7d-4c73-407b-9e36-a1c8dd9ca90a">AWS GuardDuty</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#38173ada-d093-4043-8858-a3b9afa9bba6">AWS Security Hub</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cb035165-c3e4-4d1f-bcb5-3cc67140a022">Forensics</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d8fa22c5-1d6f-4d59-8f5c-884dbe683432">Common Infrastructure Security Incident</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9605c17c-6132-4fdc-b6b4-6456cbe6950c">AWS VPN</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#59976d24-f7f0-4692-b67b-a4db332dce6a">AWS Direct Connect</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#05dfaf88-0fc7-4afd-ba84-54b59fd09188">Virtual Interfaces</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1158ce88-7629-4cb2-b9b0-65cd60db9de3">Key Pairs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#69c1d8bf-5665-4aac-83d4-ad78bb80b3e7">Monitoring and Logging</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#49089c29-7400-431c-9883-14a5cd526791">AWS CloudTrail</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#750db7be-d6a0-4537-952a-95a0d5362acd">AWS Config</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e6c14d8d-eabf-4116-bb2c-156da7608713">Amazon CloudWatch</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1a84fa23-b567-4c99-bf36-0fb186172022">VPC Flow Logs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#020956b0-58f6-44ed-9921-0778310aa321">Isolation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4cc21b4f-dd1b-47cb-a838-fa78b2235d82">Systems Manager (SSM)</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#0bea18d3-f317-4192-9376-7c351ba538fc">Run Command</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#425c0a27-336f-49d2-a115-f7406502f08c">Distributor</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#a9f23557-31e9-47ea-b209-94313a7cd0ad">State Manager</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2bffb249-ffbf-4015-a77f-24d9680c2ffb">Patch Manager</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1adde498-e0a2-4872-acd4-935b431710b3">Securing with CloudTrail</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#a4c99f62-3d24-42a6-abbe-509db1df4643">AWS Config</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#43d06c0a-fb2f-4447-9f8b-dd4c6c6aece8">Configuration Items (CI)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7badf2f8-d311-4533-80e0-8fb421697257">Amazon Macie</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ace56958-1299-455c-9a11-c2d0459d14fd">Amazon S3 Logging</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e5d5df88-58d7-4181-8c8d-85d8821d12e4">Server Access Logs</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#df7d1e95-004c-4e2a-934f-01ac901d5acf">Object-Level Logging</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#7d17a080-a2da-4fa6-960b-c10f0db1058f">Flow Logs</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9d26e8f9-1d0e-4d00-b814-b6a43d2526d1">VPC Traffic Mirroring</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d1a02e33-76d8-4601-bfc6-65d9a373b95e">CloudTrail</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#07e35c6e-c800-4e86-ae48-144228bf31b8">Understanding CloudTrail Logs</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#76e0b692-c885-4d7c-b8e1-44aa5e060fc9">Amazon Athena</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6febc6d4-d251-4bd4-b0a4-ae80f5d6a2d2">CloudWatch</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#89d29ae4-28cf-4705-a18d-38ecf09f5d53">Automation</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2d014300-2e8e-44b5-8997-6d80885603ef">Automating Security Detection and Remediation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6fbfa229-6b98-4c95-b366-3dda07c4b8b9">Using CloudWatch Events with AWS Lambda and SNS</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#e75356b9-94d2-4348-9a50-23cd749b230b">Amazon GuardDuty</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#bdb16f02-6c40-4a78-b9a6-3847cfb37d5b">AWS Security Hub</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d44831a1-6feb-4485-920a-a1778bf93d13">Pentesting AWS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7e05b7c5-8abe-4d0e-a027-43f1880f7147">Amazon EBS Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ee8c9b37-55a4-469b-944e-f05c6fea01d7">Amazon EBS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b4287663-042a-4bc6-9cc3-14758138bb2e">Amazon S3</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5168718d-09f7-4442-be7b-3368120c266a">SSE-S3</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#486ba2c3-029b-409d-ad06-3b1cc40e5f52">Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#09db00ea-fd51-4068-99cb-af4b549f3570">Decryption</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#56a8fdfe-e3d2-4c8a-ab41-6e9514f3b447">SSE-KMS</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#fd1ddf02-2ef4-468d-8d4f-e80fe2aaba8a">Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9a197b30-8c35-48a4-9afc-2fde880efaac">SSE-C</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#506b171d-841c-4af1-bc1a-8a09402ac028">Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#20c12098-6db5-4254-9bc8-13c3ea19deb4">Decryption</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#59b3fed9-c2d1-4630-aea7-fe0eab80cc19">CSE-KMS</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#3e5bd7b5-5e60-4229-9284-d0ad4e3f332b">Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9fb9b38e-9e0a-4186-b6da-7e45337784ec">Decryption</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c1522a8c-93ce-4403-ac3c-fd1c97490392">CSE-C</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#91b222ed-ce59-40d9-b3ea-51fe6cc44674">Encryption</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#1016231d-fe3c-45eb-bf34-d976312659bc">Decryption</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d4573249-2ed5-4c79-bab8-d2ec01ac4c19">Amazon RDS</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ee4948ee-0522-4e0a-ac68-db3735e2e1d4">Amazon DynamoDB</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#94596cdb-d870-4315-951e-43e2b3e575d7">AWS Key Management Service (KMS)</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d14a8c72-7ff0-430e-9949-e28095f4ae0e">Customer Master Keys (CMK)</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c7a9df52-bce7-40de-9593-eeca79725db3">Data Encryption Keys (DEKs)</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#240fc463-6323-4f48-a9b5-8fc611e3a834">SSE-KMS Decryption</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ceaf67bc-f740-4b6b-8e95-457a9e59eecc">Key Material</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#cf8c1109-3bfb-49d7-a068-840b70d5eeea">Key Policies</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6782a603-1001-4f15-be25-6c4c1bd70991">AWS CloudHSM</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#721599e4-1ed5-40b0-849b-eca46ca6ab8d">Cloud HSM Users</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#274072cf-e875-4565-8c70-2fc05c72edfe">Precrypto Office (PRECO)</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#340dae07-eca0-41b9-8cd6-46174f464708">Crypto Office (CO)</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#00f629f8-2430-4ccc-a137-42d131656d8a">Crypto User (CU)</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#2b50b58a-f700-4ec9-99a8-e7d0389da087">Appliance User (AU)</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d2c5ca2f-fb03-4672-9135-c71c047480e5">AWS Secrets Manager</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cd889a58-c015-4c93-b9e9-f57c1f654f62">AWS Questions</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ea2bdc4b-9860-4c42-be38-2c4d1eb6d254">Federated and Mobile Access</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b306aea3-bbc5-4a65-a14a-f833f6257d07">Shared Responsibility Model</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1319bec6-62d6-488b-b6ea-cdd36e5fa438">Section 3: Security - A Layered Approach</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d1c759b3-3510-4a6d-ba8e-7be0df8a8b30">Securing EC2 Instances</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#38ae23de-49fe-4a66-9cc7-1c9436b0a586">Configuring Infrastructure Security</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d674c753-f3c6-4e98-b1ed-506db2fb6cc4">Implementing Application Security</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f88b7f69-6d3f-4a3d-bf18-047bb2566093">DDoS Protection</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#73905dfe-0529-472a-a3c4-72e72a18f858">Incident Response</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#a3b0a2c0-bc76-41ea-a281-438657825311">Secure Connections to AWS Environment</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d1cd725b-1fc2-4736-95ab-dff232601b38">Section 4: Monitoring, Logging, and Auditing</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#f8c85666-6945-4431-bf56-7050bfca6dad">Implementing Logging Mechanisms</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#87d94ad6-d9fd-47d2-bfff-91213001f236">Auditing and Governance</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f0c0dd4d-b90f-4448-8112-62e58968a469">Section 5: Best Practices and Automation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5cfae0c7-091b-4899-912f-84b6aa08d772">Automation</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9d28a46d-9012-4479-9134-e3bc7bbdceb8">Discovering Security Best Practices</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#2e27b7a2-7cbf-4e67-a248-fe42fa2cb528">Section 6: Encryption and Data Security</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#abdd3bf8-45d4-4eec-ab5e-abd578e62561">Managing Key Infrastructure</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#72155c09-93a6-4efa-b996-75859f824dc8">Managing Data Security</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ee994c16-a6a3-4551-98e1-e2aa01d25b54">Misc</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#27c8e720-3052-4932-8dbb-7aa27d2d2217">Questions</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#eb058b3b-8962-4110-a1b2-4eaf17c6052f">Mock Exam 1</a></div></nav><h1 id="77a4f81e-ef20-4968-b540-d48276e94e5e" class="">Description</h1><p id="7ae49935-558c-4523-83e5-83b584e41033" class="">These are all the notes that I took after reading the entire exam guide for the AWS Ceritifed Security - Specialty exam (ISBN-13: 978-1789534474). It is recommended that you install Obsidian and download the zip file instead, as this will allow you to quickly and easily navigate through these notes.</p><h1 id="c8615327-0d36-4cea-bccf-bf75b204d5ad" class="">Things to Know on Exam</h1><ul id="23e064a8-0e7c-4054-abe3-a7e7d0cbf044" class="bulleted-list"><li style="list-style-type:disc">need to know logging<ul id="cf125fbd-8d8e-4571-a98f-5a60a17d631c" class="bulleted-list"><li style="list-style-type:circle">how to handle monitoring and logging</li></ul><ul id="3a408a2f-0495-4550-a1f6-3b3a2b20982f" class="bulleted-list"><li style="list-style-type:circle">how to automate responses to incidents found in those logs</li></ul></li></ul><ul id="1e67f3bf-0d67-4224-8604-17825a67e347" class="bulleted-list"><li style="list-style-type:disc">know troubleshooting<ul id="def14d6e-f09f-4cb4-bbbb-da62b0aaaa8c" class="bulleted-list"><li style="list-style-type:circle">if logs from lambda are not showing up in cloudwatch, why is this?</li></ul></li></ul><div id="8c68717d-edbe-4209-95dd-df8b305c442a" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Knowledge Domain</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesNumber"><path d="M4.46191,0 C3.8667,0 3.38428,0.482422 3.38428,1.07751 L3.38428,3.38425 L1.07764,3.38425 C0.482422,3.38425 0,3.86667 0,4.46179 C0,5.05688 0.482422,5.53931 1.07764,5.53931 L3.38428,5.53931 L3.38428,8.46063 L1.07764,8.46063 C0.482422,8.46063 0,8.94308 0,9.53818 C0,10.1333 0.482422,10.6157 1.07764,10.6157 L3.38428,10.6157 L3.38428,12.9224 C3.38428,13.5175 3.8667,13.9999 4.46191,13.9999 C5.05664,13.9999 5.53906,13.5175 5.53906,12.9224 L5.53906,10.6157 L8.46045,10.6157 L8.46045,12.9224 C8.46045,13.5175 8.94287,13.9999 9.53809,13.9999 C10.1333,13.9999 10.6157,13.5175 10.6157,12.9224 L10.6157,10.6157 L12.9224,10.6157 C13.5176,10.6157 14,10.1333 14,9.53818 C14,8.94308 13.5176,8.46063 12.9224,8.46063 L10.6157,8.46063 L10.6157,5.53931 L12.9224,5.53931 C13.5176,5.53931 14,5.05688 14,4.46179 C14,3.86667 13.5176,3.38425 12.9224,3.38425 L10.6157,3.38425 L10.6157,1.07751 C10.6157,0.482422 10.1333,0 9.53809,0 C8.94287,0 8.46045,0.482422 8.46045,1.07751 L8.46045,3.38425 L5.53906,3.38425 L5.53906,1.07751 C5.53906,0.482422 5.05664,0 4.46191,0 Z M5.53906,8.46063 L5.53906,5.53931 L8.46045,5.53931 L8.46045,8.46063 L5.53906,8.46063 Z"></path></svg></span>% of Exam</th></tr></thead><tbody><tr id="d86f12ef-f4d5-4945-b8db-a38d87a0cd58"><td class="cell-title"><a href="https://www.notion.so/Incident-Response-d86f12eff4d54945b8dba38d87a0cd58">Incident Response</a></td><td class="cell-qGq?">12%</td></tr><tr id="273cc068-1538-4db4-aab0-baa2c8a4e653"><td class="cell-title"><a href="https://www.notion.so/Logging-and-Monitoring-273cc06815384db4aab0baa2c8a4e653">Logging and Monitoring</a></td><td class="cell-qGq?">20%</td></tr><tr id="da4ecc87-951d-46c7-9e59-45644c2b0ba7"><td class="cell-title"><a href="https://www.notion.so/Infrastructure-Security-da4ecc87951d46c79e5945644c2b0ba7">Infrastructure Security</a></td><td class="cell-qGq?">26%</td></tr><tr id="17f68555-f068-4ffa-9b29-02711af84a44"><td class="cell-title"><a href="https://www.notion.so/Identity-and-Access-Management-17f68555f0684ffa9b2902711af84a44">Identity and Access Management</a></td><td class="cell-qGq?">20%</td></tr><tr id="2839541c-e002-449c-8c84-c4408a222b16"><td class="cell-title"><a href="https://www.notion.so/Data-Protection-2839541ce002449c8c84c4408a222b16">Data Protection</a></td><td class="cell-qGq?">22%</td></tr></tbody></table></div><ul id="cbfe5b4d-a1b8-4bb2-b22d-acbf18201f74" class="bulleted-list"><li style="list-style-type:disc">scenario-based<ul id="30b3c8a8-bc9c-4057-87cb-5bc846eb6147" class="bulleted-list"><li style="list-style-type:circle">automating response to security issues</li></ul></li></ul><ul id="7f07596d-20df-4dca-8de7-b129f8dc7844" class="bulleted-list"><li style="list-style-type:disc">know format of policies in json</li></ul><ul id="e1466b8c-7b6f-401b-a655-6d0c945d52d7" class="bulleted-list"><li style="list-style-type:disc">order in which thigs are resolved<ul id="b6e32ca5-da8e-4c06-8ea4-b2fa99f25c91" class="bulleted-list"><li style="list-style-type:circle">explicit deny, explicit allow, default implicit deny</li></ul></li></ul><ul id="4146904c-b01b-4ad3-bade-be5fa4334da1" class="bulleted-list"><li style="list-style-type:disc">know cloudwatch, KMS, IAM, cloudtrail, etc. # Table of Contents [<a href="about:blank#aws-questions">AWS Questions</a>] [[AWS/Cloud Security - Specialist/Misc|Misc]] ## Section 2: Security Responsibility &amp; Access Management [[Access Management]] [[Access Policies]] [<a href="about:blank#federated-and-mobile-access">Federated and Mobile Access</a>] [<a href="about:blank#shared-responsibility-model-1">Shared Responsibility Model</a>]</li></ul><h2 id="ee3d7af7-26ff-4b89-9de2-c82994375e1c" class="">Section 3: Security - A Layered Approach</h2><p id="9433fb9c-575c-48e5-b691-3047c547223a" class="">[<a href="about:blank#configuring-infrastructure-security">Configuring Infrastructure Security</a>] [<a href="about:blank#implementing-application-security">Implementing Application Security</a>] [<a href="about:blank#securing-ec2-instances">Securing EC2 Instances</a>] [<a href="about:blank#ddos-protection">DDoS Protection</a>] [<a href="about:blank#incident-response">Incident Response</a>] [<a href="about:blank#secure-connections-to-aws-environment">Secure Connections to AWS Environment</a>]</p><h2 id="6d82a09a-b7ad-47d0-b365-b4aac64aaa25" class="">Section 4: Monitoring, Logging, and Auditing</h2><p id="620d922c-4037-41a7-9659-6b4d9cdfce91" class="">[<a href="about:blank#implementing-logging-mechanisms">Implementing Logging Mechanisms</a>] [<a href="about:blank#auditing-and-governance">Auditing and Governance</a>]</p><h2 id="f415b279-744f-4c5a-9952-42c52532cafb" class="">Section 5: Best Practices and Automation</h2><p id="df84c200-0a4b-48fa-9d74-c91354e1261a" class="">[<a href="about:blank#automation-1">Automation</a>] [<a href="about:blank#discovering-security-best-practices">Discovering Security Best Practices</a>]</p><h2 id="65538210-cecf-4720-afd5-ba2bcd1f3e00" class="">Section 6: Encryption and Data Security</h2><p id="d8831ec1-7018-4ab4-afd2-65ffb76ce87a" class="">[<a href="about:blank#managing-key-infrastructure">Managing Key Infrastructure</a>] [<a href="about:blank#managing-data-security">Managing Data Security</a>]</p><h1 id="3480603b-733a-47b4-889e-bfcbbe7ad761" class="">Identity and Access Management (IAM)</h1><p id="4507c1c8-bdcd-4382-86d0-590d4ba4f939" class="">[[AWS Contents]] [<a href="about:blank#aws-questions">AWS Questions</a>]</p><ul id="2082b059-7293-47b0-9e6f-ce9bef1d4019" class="bulleted-list"><li style="list-style-type:disc">contains details and credentials of root user account</li></ul><ul id="5736d9cc-bc99-481c-af01-c36c8361d7f9" class="bulleted-list"><li style="list-style-type:disc">access keys should not be configured for root user (additional user with relevant privileges should be created instead)<ul id="1cf68350-1a47-47cd-bbb7-b9475b438d18" class="bulleted-list"><li style="list-style-type:circle">limit access methods to root account</li></ul></li></ul><h2 id="e8b8986d-d9bb-4c4b-98d5-34760e44440f" class="">Groups</h2><ul id="bf6c9049-f6dd-4729-a0f7-13a2bbd35d7d" class="bulleted-list"><li style="list-style-type:disc">groups are associated with set of permissions allowing members of that group to inherit those permissions<ul id="8c985245-672c-4aaf-95af-62ed2d44b4b2" class="bulleted-list"><li style="list-style-type:circle">groups don’t have credentials associated with it</li></ul><ul id="e2f055cb-6ef5-4ef1-935b-cb2cc0788ba1" class="bulleted-list"><li style="list-style-type:circle">object within IAM</li></ul></li></ul><h2 id="546e86e9-c788-4a73-b136-3f31098ac469" class="">Roles</h2><ul id="8fd562f6-cca8-45c0-aa02-83594d1c503f" class="bulleted-list"><li style="list-style-type:disc">associated set of permissions that allows access to AWS resources<ul id="e7708832-a72b-4e6d-9faf-5569a0f63c6f" class="bulleted-list"><li style="list-style-type:circle">not associated with users or groups</li></ul><ul id="d7902879-2cff-4db6-8799-805752ce7760" class="bulleted-list"><li style="list-style-type:circle">sort of works like discord roles ### Examples of roles: #### Service Roles</li></ul></li></ul><ul id="b028a970-a6b9-413a-8ede-b7f3b375e520" class="bulleted-list"><li style="list-style-type:disc">allows other AWS services to perform actions on one’s behalf</li></ul><ul id="6579ccff-b06f-4ffe-95bc-cd49c99395fa" class="bulleted-list"><li style="list-style-type:disc">only exist in account in which they were created (can’t be used for cross-account access)</li></ul><ul id="cc6f067e-4112-4769-9970-b2315044fcf7" class="bulleted-list"><li style="list-style-type:disc">when using EC2 roles for deploying and running EC2 instances, it is best practice to associate EC2 instances with a role (removes the need to store credentials on any instance)<ul id="cec7e6f8-867e-4fa1-90bc-4d7231b5d30d" class="bulleted-list"><li style="list-style-type:circle">role itself</li></ul><ul id="2fae7c79-e429-4912-8a22-c6889c785b2f" class="bulleted-list"><li style="list-style-type:circle">instance profile<ul id="aca324df-a19b-4970-8494-396f78dad674" class="bulleted-list"><li style="list-style-type:square">container for role</li></ul><ul id="1ea31e60-d729-47ee-8a9f-0422e7ec7ecb" class="bulleted-list"><li style="list-style-type:square">used to pass data to EC2 instance</li></ul></li></ul></li></ul><h3 id="34293b7d-01e2-4291-8bb0-21a45f28b269" class="">User Roles</h3><ul id="3144ff91-77f0-47a9-ae37-2ae3cfa06587" class="bulleted-list"><li style="list-style-type:disc">when user assumes a role, their current permissions get temporarily replaced by the role’s permissions</li></ul><h3 id="7d4f4684-be08-4228-90a1-1a1f237cd00f" class="">Web Identity Federate Role</h3><ul id="f9f0da32-86be-4eb3-b376-006a97fd7e87" class="bulleted-list"><li style="list-style-type:disc">allows a single sign on (SSO) approach</li></ul><ul id="a4a1a658-7072-4875-a7cd-a35a7fc9fcde" class="bulleted-list"><li style="list-style-type:disc">federated access means user has been authenticated by external source<ul id="0a6aa850-8b40-4e1f-80ab-aec6bacc3d9f" class="bulleted-list"><li style="list-style-type:circle">can be through well-known identity providers (IDPs) such as Amazon, Google, or Facebook</li></ul></li></ul><h3 id="904830e4-193c-46b6-8222-3b88c2c3beb6" class="">SAML 2.0 federated roles</h3><ul id="f89a81e1-f78e-416a-a9f9-8b5b65cd0936" class="bulleted-list"><li style="list-style-type:disc">allows creation of roles that have been federated through one’s internal corporate directory</li></ul><ul id="be507e54-1e73-431f-8233-bf3f471d75ba" class="bulleted-list"><li style="list-style-type:disc">the external authentication system is one’s own corporate directory of users<ul id="38ca08f4-58e3-4efe-8792-5e6f4231db73" class="bulleted-list"><li style="list-style-type:circle">e.g. Microsoft Active Directory (MSAD) # Access Policies [[AWS Contents]] [[AWS Questions#Access Policies]]</li></ul></li></ul><ul id="e2e3e27c-e70b-442b-9162-eab99ddc2801" class="bulleted-list"><li style="list-style-type:disc">define who or what can or can’t access AWS resources</li></ul><p id="0a8f68a8-c23e-4bf1-8370-6a0fe7f727db" class=""><span style="border-bottom:0.05em solid">Policy Structure</span>: 1. Version - shows version of policy language 2. Statement - acts as group for parameters in json structure 3. Sid - statement identification 4. Effect - can be either <em>allow</em> or <em>deny</em> - allows or denies access to resource 5. Action - list of actions to be allowed or denied access to - action is first defined by service and then preceded with action 6. Resource - provides Amazon Resource Name (ARN) - tells which resource the permissions apply to 7. Condition - optional - dictates under what conditions policy is in effect</p><p id="7b0d8bc0-0474-498a-843e-ef95a07a3fb8" class="">[[Pasted image 20220131192503.png]] - Policy Types: ## Identity-based Policies - attached to IAM user, group, or role - controls what actions an identity (users, groups of users, roles) can perform on which resources and under what conditions - e.g. allowing user John to run the EC2 <code>RunInstances</code> action - can be AWS-managed, customer-managed or in-line policies ### AWS-managed - policies that are created and managed by AWS ### Customer-managed - custom policy that is made by the customer ### In-line - added directly to user, group, or role - deleted when the identity is deleted ## Resource-based Policies - very similar to in-line policies except they are attached to resources instead of identities - can be attached to buckets and S3 objects - lets you specify who has access to resource and what actions they can perform on it - policy looks the same as in the example policy, however includes a <em>Principal</em> parameter - identifies user, role, account, or federated user that permissions should be applied to ## Permissions boundaries - governs maximum permissions an identity-based policy can associate with any user or role ## Access Control Lists (ACLs) - can attach to buckets and S3 objects - similar to resource-based policies - use only to control cross-account access from different AWS account or public access ## Organization SCPs - SCP stands for Service Control Policy - used by AWS organizations to manage multiple AWS accounts - similar to permissions boundaries within identity objects - they also set maximum permission level that can be given to members of an AWS account or organization unit (OU) - restrict permissions for resource-based and identity-based policies - restricts permissions, doesn’t grant permissions</p><h2 id="31d14e2f-ca3e-4ab0-ba24-c3d39e2d2873" class="">Policy evaluation</h2><p id="3da285d6-60a0-46d7-8c51-bc44279cf471" class="">Determination of permissions when accessing resource: 1. Authentication 2. Determine context of request - request processed and associated permissions are defined - actions, resources, principals, environment data, and resource data are examined 3. Policy evaluation - policy types evaluated in order of identity-based, resource-based, IAM permissions boundaries, and SCPs 4. Permission Result - access granted or denied</p><ul id="b44135fd-3c2e-403d-be5c-f7b026f16a01" class="bulleted-list"><li style="list-style-type:disc">deny actions overrule allow actions # Federated and Mobile Access [[AWS Contents]] [[AWS Questions#Federated and Mobile Access]]</li></ul><ul id="652efe56-b70a-4988-bf3a-4c9f67483ae7" class="bulleted-list"><li style="list-style-type:disc">used for providing resource to a large amount of users<ul id="bf1a8bc2-8560-40e8-8288-c8a54908b17e" class="bulleted-list"><li style="list-style-type:circle">unfeasible to create individual IAM accounts for every user to access the resource</li></ul></li></ul><ul id="29839c64-6c69-405d-84d4-54023fa3146c" class="bulleted-list"><li style="list-style-type:disc">allows access to AWS resources without IAM user account</li></ul><ul id="b60d0502-3a46-4554-9684-cf3f30f06c5c" class="bulleted-list"><li style="list-style-type:disc">credentials federated by identity provider (IDP)<ul id="07510868-efd7-409c-aaaf-7be571a68315" class="bulleted-list"><li style="list-style-type:circle">e.g. Microsoft Active Directory Accounts, Google, Facebook, etc.</li></ul></li></ul><p id="be903bd7-424c-4808-a8c6-f988fede7d6f" class=""><span style="border-bottom:0.05em solid">Security Assertion Markup Language (SAML)</span> - allows secure exchange of authentication data between different domains - users security tokens between an IdP and a SAML consumer</p><h2 id="e7beb052-081c-460f-8e6e-840c90435c70" class="">Social Federation</h2><h3 id="482a290b-7148-4b97-a556-7b2f621609d3" class="">Amazon Cognito</h3><ul id="ea61be6f-7958-4609-a36d-4268df4d37f5" class="bulleted-list"><li style="list-style-type:disc">made for enabling secure authentication and access control for new and existing users accessing web or mobile applications</li></ul><ul id="f6eb8649-9809-4649-8210-0c9555e7ecf6" class="bulleted-list"><li style="list-style-type:disc">generate tokens after authentication that manages access</li></ul><ul id="67955ee2-9c8d-4369-8781-ab6457fa8337" class="bulleted-list"><li style="list-style-type:disc">best practice when creating applications that require social IdPs for authentication</li></ul><p id="c95f87a3-4692-469d-b1ee-c555fdbc4c57" class="">Two main Components:</p><ol type="1" id="20701b0b-5d4c-47dd-9418-60679119c828" class="numbered-list" start="1"><li>User Pools<ul id="864424d7-0dfd-4fa4-822b-231a39780f77" class="bulleted-list"><li style="list-style-type:disc">scalable user directories</li></ul><ul id="c6d9669e-b57f-4129-bdcd-bc271716066f" class="bulleted-list"><li style="list-style-type:disc">allow users to login to mobile application</li></ul><ul id="8712cc18-487a-4033-800b-f949fe3e1497" class="bulleted-list"><li style="list-style-type:disc">[[Pasted image 20220203163059.png]]</li></ul></li></ol><ol type="1" id="49172cd6-8ce3-4df7-84ab-0006b8400654" class="numbered-list" start="2"><li>Identity Pools<ul id="2ca53278-7e33-4943-96e3-4ba3da88ff14" class="bulleted-list"><li style="list-style-type:disc">assigns permissions to user to access AWS resources (uses temporary credentials</li></ul><ul id="8a30586f-2cab-4ecd-a976-3c5dcd22c36b" class="bulleted-list"><li style="list-style-type:disc">[[Pasted image 20220203163348.png]]</li></ul></li></ol><h1 id="b67cd383-2230-4522-b0af-26fc1e1cc0d5" class="">Shared Responsibility Model</h1><p id="d017eeb4-4e1a-4a1f-8a2f-e190fc49a55a" class="">[[AWS Contents]] [[AWS Questions#Shared Responsibility Model]]</p><p id="2beff447-aa48-4f9d-b2de-28a2ea586c99" class="">Three different shared responsibility models: 1. Infrastructure - most common model - covers infrastructure as a Service (IaaS) services such as Elastic Compute Cloud (EC2) - [[Pasted image 20220131154703.png]] - AWS responsible for security of the cloud, customer is responsible for security in the cloud 2. Container - customer does not have access to some of infrastructure-level components such as the operating system - examples of services in container model: Elastic MapReduce (EMR), Relational Database Service (RDS), Elastic Beanstalk - [[Pasted image 20220131161816.png]] - AWS has more responsibilities with this model than the infrastructure model - platform and application management, operating system, and network configuration are responsibility of AWS 3. Abstract - [[Pasted image 20220131162045.png]] - AWS responsible for even more security - in addition manages server-side encryption and network traffic protection - examples of services in abstract model: Simple Queue Service (SQS), DynamoDB, and S3 - accessed through endpoints - no access to operating system (infrastructure) or platform running these services (container)# Configuring Infrastructure Security [[AWS Contents]] [[AWS Questions#Configuring Infrastructure Security]] ## Virtual Private Cloud (VPC) - private section of AWS network - can be public-face</p><h3 id="6449ac5f-2ea1-4262-a4f5-0977c99a06bd" class="">Subnets</h3><ul id="d1576272-8707-4a8f-a355-929720be6c8f" class="bulleted-list"><li style="list-style-type:disc">can only reside in a single availability zone (e.g. only in eu-west-1bAZ)</li></ul><ul id="8f0a54ba-0cb7-47c6-9333-9cfc42e2e87c" class="bulleted-list"><li style="list-style-type:disc">each subnet should be configured for a specific use (i.e. segmentation); this is security best practice<ul id="6d02fda3-4e05-40d3-b8c1-80221bc2f7b8" class="bulleted-list"><li style="list-style-type:circle">e.g. subnet can contain only application servers, other subnet can contain only database servers, etc.</li></ul></li></ul><ul id="9fa81fdb-8af0-42b0-9930-99d61ea9900e" class="bulleted-list"><li style="list-style-type:disc">falls within CIDR (classless inter-domain routing) block of VPC
-: table subnet uses for routing traffic<ul id="b8c2ef5e-2a29-46e3-8f3b-25f7608e8f34" class="bulleted-list"><li style="list-style-type:circle">e.g. if VPC CIDR block is 10.0.0.0/16, subnets can be the following:<ul id="4a2d0729-b31d-4157-9e56-a87cc9e1f400" class="bulleted-list"><li style="list-style-type:square">10.0.1.0/24<ul id="66b8ce96-a513-4aa8-a0eb-55180c83f598" class="bulleted-list"><li style="list-style-type:disc">10.0.1.0 - Network address</li></ul><ul id="6baa3c00-77a1-4f29-8b2e-1597d9d31e92" class="bulleted-list"><li style="list-style-type:disc">10.0.1.1 - AWS routing</li></ul><ul id="64f883cd-317d-4617-97cd-24a870738617" class="bulleted-list"><li style="list-style-type:disc">10.0.1.2 - AWS DNS</li></ul><ul id="0687cbcc-19df-44e0-9bc8-3e836af5a448" class="bulleted-list"><li style="list-style-type:disc">10.0.1.3 - AWS future use</li></ul><ul id="b158ea30-5f5d-46df-bd9d-2f4d7e8029bc" class="bulleted-list"><li style="list-style-type:disc">10.0.1.255 - Broadcast address</li></ul></li></ul><ul id="8276f157-dcf8-4f98-ba1e-e49c87945c22" class="bulleted-list"><li style="list-style-type:square">10.0.2.0/24</li></ul><ul id="530d67d1-5b59-468d-b605-3285dd68e136" class="bulleted-list"><li style="list-style-type:square">10.0.3.0/24</li></ul><ul id="61a8244f-9619-4ff3-bc21-3c1015630759" class="bulleted-list"><li style="list-style-type:square">etc.</li></ul></li></ul><ul id="b0e54d80-510c-42e7-b54a-4717b7b5e2b9" class="bulleted-list"><li style="list-style-type:circle">note the first address is reserved for the network address, and the last address is reserved for the broadcast address</li></ul><ul id="306c332f-42c3-4b40-84a0-dcbf3fa5d536" class="bulleted-list"><li style="list-style-type:circle">AWS reserves the first three host addresses in any subnet<ul id="d9d63fdf-e32d-48eb-98ca-4e28f8e27834" class="bulleted-list"><li style="list-style-type:square">first host address reserved for internal AWS VPC routing</li></ul><ul id="cbe2ffa4-b2db-4a7e-978f-c5fecaf02b38" class="bulleted-list"><li style="list-style-type:square">second host address for AWS DNS</li></ul><ul id="3e1c9a33-9a7a-4a9a-854e-1d7823c80da4" class="bulleted-list"><li style="list-style-type:square">third host address for future use</li></ul></li></ul><ul id="7a37a1d1-8cb3-4061-ade5-cd237de21c26" class="bulleted-list"><li style="list-style-type:circle">therefore, 251 (out of 256) available host addresses for customer use in /16 subnet</li></ul><p id="82990e8b-afe8-4ef3-ad45-600bd9c7ecaf" class=""><span style="border-bottom:0.05em solid">Route Table</span></p><ul id="dd63080d-64b3-47a5-a2c5-ea7af7f522a3" class="bulleted-list"><li style="list-style-type:circle">if no route table is defined, default VPC route table is used</li></ul></li></ul><h3 id="3a968e04-54b0-4e97-9f9d-7939baa308a2" class="">Flow Logs Tab</h3><ul id="6b4c6634-a33a-4b0d-b190-b1cb3b44d47e" class="bulleted-list"><li style="list-style-type:disc">captures IP traffic sent between network interfaces of subnet</li></ul><ul id="c641fba1-4335-4bc5-9777-74a5184e25e9" class="bulleted-list"><li style="list-style-type:disc">captured within CloudWatch</li></ul><h2 id="1717f459-1103-467b-a01d-6339d706dabf" class="">Internet Gateway (IGW)</h2><ul id="24c260b7-5caa-4553-a56f-30e7650fab5a" class="bulleted-list"><li style="list-style-type:disc">helps create a public subnet</li></ul><ul id="a16ffa27-afd9-4152-ac0d-fd550612493b" class="bulleted-list"><li style="list-style-type:disc">allows traffic to traverse from subnet in VPC to internet and vice versa</li></ul><h2 id="d294a84f-5c09-4f36-81cf-6b0af63ce69e" class="">Network Access Control Lists (NACLs)</h2><ul id="b8dbdcd6-d167-47ff-bd56-528397109637" class="bulleted-list"><li style="list-style-type:disc">virtual network level firewalls</li></ul><ul id="8c9a55e1-4bcf-4c64-a20b-f6d64fdeefd5" class="bulleted-list"><li style="list-style-type:disc">stateless</li></ul><ul id="20572752-372d-4123-b8be-f4c75fd32bf4" class="bulleted-list"><li style="list-style-type:disc">default NACL created when VPC is created<ul id="51a67528-e58d-43f5-ac49-906ad7b5216c" class="bulleted-list"><li style="list-style-type:circle">all traffic allowed by default (therefore default NACL is insecure)</li></ul></li></ul><ul id="78f9d947-f88f-4ebe-ba34-5044865c7064" class="bulleted-list"><li style="list-style-type:disc">two fundamental components<ol type="1" id="cb3b5f73-5f10-442e-98c5-e57d136fc7ea" class="numbered-list" start="1"><li>Inbound Rules</li></ol><ol type="1" id="6f659037-a885-43b0-8617-106e27bbb660" class="numbered-list" start="2"><li>Outbound Rules</li></ol></li></ul><ul id="7c6ac203-ae21-4fb0-90b3-8e59f5dc1cd8" class="bulleted-list"><li style="list-style-type:disc">final rule of NACL is that any traffic that isn’t categorized by any of the rules gets dropped</li></ul><ul id="f44f2f53-ee31-482b-a4db-dff4cb7a5afe" class="bulleted-list"><li style="list-style-type:disc">rules read in ascending order until match is found</li></ul><h2 id="4fc9866f-4c6c-4c69-8c85-673a90bdb2fc" class="">Security Groups</h2><ul id="79456e6d-8dcf-49cf-ac6c-c512f7940cd0" class="bulleted-list"><li style="list-style-type:disc">similar to NACLs (provide virtual firewall) except operates at instance level rather than network level</li></ul><ul id="357cf9c7-cc21-4046-a756-b0cb63c1fcf6" class="bulleted-list"><li style="list-style-type:disc">associated with instances rather than subnets</li></ul><ul id="93cb28e6-0139-42b5-ba9a-0bc68f7c31da" class="bulleted-list"><li style="list-style-type:disc">controls traffic to and from instances within VPC</li></ul><ul id="5bc7b394-cabf-470b-8bec-e8725aa1aee0" class="bulleted-list"><li style="list-style-type:disc">stateful</li></ul><ul id="23cc1181-7eb4-4758-a70f-989390997c08" class="bulleted-list"><li style="list-style-type:disc">no field for <em>Allow</em> or <em>Deny</em> traffic, as all rules in security group are assumed to be allowed (traffic not categorized as such is dropped)<ul id="6edb13ea-3f83-4277-ae53-5451e1c631b4" class="bulleted-list"><li style="list-style-type:circle">works as a whitelist for traffic</li></ul></li></ul><ul id="f7dc306c-2840-4d50-a3c9-c8e1678a3b1d" class="bulleted-list"><li style="list-style-type:disc">all rules evaluated before decision is made</li></ul><h2 id="1de7721a-65cc-4309-a422-4efedd5abf06" class="">Bastion Hosts</h2><ul id="04ea065f-d53c-42c1-958c-cc8d42724472" class="bulleted-list"><li style="list-style-type:disc">used to gain access to instances that reside within private subnets</li></ul><ul id="896d7a12-9a5f-4c03-acf2-bd9aa666de7c" class="bulleted-list"><li style="list-style-type:disc">bastion host resides within public subnet</li></ul><ul id="ab045057-9245-4703-b206-930d1dfdf58f" class="bulleted-list"><li style="list-style-type:disc">hardened EC2 instance with restrictive controls</li></ul><ul id="0cca2169-46c3-4a94-8444-53be8ad9dcf4" class="bulleted-list"><li style="list-style-type:disc">acts as ingress gateway</li></ul><p id="83ab1a8b-b146-4f58-ba11-800c4a3d903f" class=""><span style="border-bottom:0.05em solid">Public Subnet</span>: a subnet associated with a route table pointing to an internet gateway (IGW) with a destination address of 0.0.0.0/0</p><ul id="1a984807-cb9b-418f-bd8d-8e824ceceebe" class="bulleted-list"><li style="list-style-type:disc">no packet is directly exchanged between internet and IPs inside private subnet (it goes first through the bastion host)</li></ul><h2 id="957852ec-920a-43dd-a1b8-67d86c29df46" class="">NAT Instances and NAT Gateways</h2><ul id="6a12499d-93f9-4742-a43f-b789ca26c9dd" class="bulleted-list"><li style="list-style-type:disc">kind of like the opposite of bastion host</li></ul><ul id="768615fb-2013-4531-bd0d-281686ffb04e" class="bulleted-list"><li style="list-style-type:disc">allows instances in private subnets to initiate a connection out to the internet via NAT resource</li></ul><ul id="2eee95a8-9f5a-4b9b-bcaf-afd4b3ec5683" class="bulleted-list"><li style="list-style-type:disc">blocks all inbound public-initiated traffic</li></ul><ul id="4d291434-8adb-4fc8-ba19-4ce663d4385e" class="bulleted-list"><li style="list-style-type:disc">allows private instances access to internet<ul id="1041f990-c0e4-429a-9e7d-d45bd2135bfa" class="bulleted-list"><li style="list-style-type:circle">usually used for maintenance-related tasks such as updates</li></ul></li></ul><h3 id="f95d095b-2e27-4680-b689-9bed776f8b8e" class="">NAT Gateway</h3><ul id="ef57abe1-73f3-449a-9b8a-94f5110298c2" class="bulleted-list"><li style="list-style-type:disc">AWS managed resource</li></ul><ul id="786fac8a-4220-47a9-a162-1876a9f86ecb" class="bulleted-list"><li style="list-style-type:disc">offers enhanced bandwidth and availability in comparison to NAT instance</li></ul><ul id="da9f735a-48b0-4a07-b15c-a178662451b6" class="bulleted-list"><li style="list-style-type:disc">requires far less administrative configuration than NAT instance# DDoS Protection [[AWS Contents]] [[AWS Questions#DDoS Protection]]</li></ul><ul id="a49e1650-d964-448e-abe5-17d9bb280a8c" class="bulleted-list"><li style="list-style-type:disc">protections include AWS Shield Advanced ($3000 a month) and AWS Shield Standard (free) ## DDoS Patterns ### SYN Floods</li></ul><ul id="b73ec447-4009-4763-9bcd-de801a66ba2c" class="bulleted-list"><li style="list-style-type:disc">abuses three-way handshake when connection is being established between client and server [[Pasted image 20220213185859.png]]</li></ul><ul id="c876718d-8f9c-467a-8ec1-717d5acc7bb7" class="bulleted-list"><li style="list-style-type:disc">the final ACK completes the handshake, but this is dropped in SYN Flood attack to leave connection open</li></ul><h3 id="1ec8154c-d799-480d-8be4-24aa32951d64" class="">HTTP Floods</h3><ul id="0952f974-c0eb-4bd0-b3f5-e20b78d7bc3b" class="bulleted-list"><li style="list-style-type:disc">many GET or POST requests sent to server</li></ul><h3 id="94bd85a3-b44d-4e77-97e1-b945c8414ee0" class="">Ping of Death (POD)</h3><ul id="74aae909-c2e6-4be6-bf2a-dd44792965b9" class="bulleted-list"><li style="list-style-type:disc">oversized ping packets sent to target</li></ul><ul id="48611b96-c51b-4905-acf6-63c929db5d44" class="bulleted-list"><li style="list-style-type:disc">maximum size of packet is 65,535 bytes, but with fragmentation you can send a lot of data to target</li></ul><h2 id="52695659-a3ff-4ec8-b133-2b588b0389bd" class="">AWS Shield</h2><ul id="0b7962f5-cb6b-4b21-b024-1f967a353469" class="bulleted-list"><li style="list-style-type:disc">specify ARN of resources and services Shield should protect</li></ul><ul id="ffc99d3a-2598-4a38-aea0-d49ca3689bb2" class="bulleted-list"><li style="list-style-type:disc">Elastic IP Address (EIP) should be specified first for EC2 instance in order to use Shield on it ### AWS Shield Standard</li></ul><ul id="c08557cc-8298-4ff5-ad36-ffeee88cc894" class="bulleted-list"><li style="list-style-type:disc">free</li></ul><ul id="c14efb96-7af0-4f64-b763-f5132e02af43" class="bulleted-list"><li style="list-style-type:disc">helps protect against common DDoS attacks operating at network and transport layers</li></ul><h3 id="7974eac5-1fa9-44fa-8b46-2641c1397423" class="">AWS Shield Advanced</h3><ul id="8a00bc58-7a9e-4887-9d4f-11c448096e03" class="bulleted-list"><li style="list-style-type:disc">$3000 per month</li></ul><ul id="b61a601c-9dc3-48a3-b92d-8e227b8b0bcb" class="bulleted-list"><li style="list-style-type:disc">application traffic monitoring</li></ul><ul id="7af20640-55f0-43e9-b62e-1b07c633fe20" class="bulleted-list"><li style="list-style-type:disc">monitors network, transport, and application layers</li></ul><ul id="7b7d73b0-f88d-41af-9bbe-bd33bfc881f0" class="bulleted-list"><li style="list-style-type:disc">comes with AWS DDoS Response Team (known as DRT)</li></ul><h3 id="6b8819fa-cf96-4e87-b039-7d680874ad73" class="">Rate-Based Rules</h3><ul id="0183b4e2-abcc-4a37-984a-fabf24695893" class="bulleted-list"><li style="list-style-type:disc">counts number of requests received from IP address over 5 minutes</li></ul><ul id="7500d06f-7ac7-42fe-a8ef-a7b9a7d6b437" class="bulleted-list"><li style="list-style-type:disc">can define max number of request from singe IP within 5 minutes (must be over 2000)</li></ul><h3 id="dc342539-8345-437f-9778-b8ec01686344" class="">AWS CloudFront and Amazon Route 53</h3><ul id="9a787236-7164-4639-abb6-5a68188863d3" class="bulleted-list"><li style="list-style-type:disc">edge services</li></ul><ul id="a97a7e23-1e89-4913-99aa-10651c63e3ab" class="bulleted-list"><li style="list-style-type:disc">recommended to use these in conjunction with Shield to further decrease chances of compromise</li></ul><ul id="8965bf34-eec1-4d50-85a3-296989f718e6" class="bulleted-list"><li style="list-style-type:disc">helps detect DDoS attacks</li></ul><ul id="d3a3e5f6-7909-461d-9f43-65e7b8285138" class="bulleted-list"><li style="list-style-type:disc">allows for layer 3, 4, and 7 attack mitigation (also 6 in the case of CloudFront used in conjunction with AWS WAF) # Implementing Application Security [[AWS Contents]] [[AWS Questions#Implementing Application Security]]</li></ul><h2 id="8c92c773-ff5b-4d97-a521-8e3e670fb812" class="">AWS WAF</h2><p id="fc6339bb-7610-4126-bad8-9d70dd46325a" class="">Three primary elements: 1. Web ACL (Access Control List) - contains rules and rule groups (defines what should be inspected within requests) 2. Rules - defines specific criteria for what web ACL should be inspecting and what action to take (allow/block/count) 3. Rule Groups - allows you to group a set of rules</p><h3 id="f42a3942-5128-42a0-842b-7d5f0fd6552e" class="">AWS Firewall Manager</h3><ul id="c49b26c4-e002-471d-989f-c69effae61d9" class="bulleted-list"><li style="list-style-type:disc">manages WAF rules across multi-account environment when using AWS Organizations</li></ul><ul id="50c70a88-2119-4500-b741-65705deaa891" class="bulleted-list"><li style="list-style-type:disc">uses WAF rules that are grouped together within a rule group</li></ul><h2 id="461da990-c940-41ba-bf2f-a12b282020d6" class="">Managing Security Configuration of ELBs</h2><ul id="e0256c45-76cb-440e-b696-204ad6a72e91" class="bulleted-list"><li style="list-style-type:disc">ELB stands for Elastic Load Balancing<ul id="2650d496-cf36-476e-ba7f-fbddd905b581" class="bulleted-list"><li style="list-style-type:circle">controls, manages, and distributes incoming requests to a specified resource group</li></ul></li></ul><ul id="4f6f32d3-0c18-43a3-bdc1-f9c9f4f6ebbb" class="bulleted-list"><li style="list-style-type:disc">can be internal or internet-facing<ul id="801abd41-b148-438d-8878-8c400b7a1f9b" class="bulleted-list"><li style="list-style-type:circle">internal ELBs only have private internal IP addresses and can only serve requests originating from within VPC</li></ul><ul id="dd077708-cccd-44dd-aae5-bb77bc832907" class="bulleted-list"><li style="list-style-type:circle">internet-facing ELBs have public DNS names and have public and internal IP addresses ### Types of ELBs Three different ELBs:<p id="a5d8e276-a368-4b03-9560-8e6bdd385888" class=""><span style="border-bottom:0.05em solid">Application Load Balancer</span></p></li></ul></li></ul><ul id="99c71dae-0a6b-4605-9747-e2056d65bd84" class="bulleted-list"><li style="list-style-type:disc">supports incoming traffic for web applications running HTTP or HTTPS</li></ul><ul id="1638cccf-0584-492d-8534-92e296e1b21d" class="bulleted-list"><li style="list-style-type:disc">allows routing of requests such as to different ports</li></ul><p id="0b07b9a6-90b7-45a6-af91-6463cd9159f1" class=""><span style="border-bottom:0.05em solid">Network Load Balancer</span> - supports millions of incoming requests per second - ideal if low latency and high performance are priorities</p><p id="3fb589f2-ecab-4222-8335-236903645479" class=""><span style="border-bottom:0.05em solid">Classic Load Balancer</span> Using a Classic Load Balancer instead of an Application Load Balancer has the following benefits: - Support for EC2-Classic - Support for TCP and SSL listeners - Support for sticky sessions using application-generated cookies</p><h2 id="e59f9b37-04c9-4263-9fe3-3b98bff3d43b" class="">Securing APIs</h2><ul id="439b0b0f-f35c-409a-9899-eacf1d7b6e83" class="bulleted-list"><li style="list-style-type:disc">AWS API gateway ### Controlling Access to APIs Methods for controlling authentication and authorization: #### IAM Roles and Policies</li></ul><ul id="6425540a-ad72-4cef-9f5e-09c49cbaaf43" class="bulleted-list"><li style="list-style-type:disc">using IAM, policies can be associated with user, role, or group to dictate permissions #### IAM Tags</li></ul><ul id="db0deeab-4dad-47bd-9c33-c0849b72a328" class="bulleted-list"><li style="list-style-type:disc">can be used in conjunction with IAM policies</li></ul><ul id="d32ef5d9-48d6-4ff7-beed-0d9013f1d4ff" class="bulleted-list"><li style="list-style-type:disc">used for references pertaining to security controls such as in the following example: a user being able to perform a specific action based on the resource tag #### Resource Policies</li></ul><ul id="2c1f07d6-bac0-4926-9f77-6bc96d6f88a1" class="bulleted-list"><li style="list-style-type:disc">attached to resources (unlike IAM which is attached to identity)</li></ul><ul id="501571e6-640f-47a9-bb15-ee50b6e686a1" class="bulleted-list"><li style="list-style-type:disc">specifies principal that has been granted or denied access to invoke associate API #### VPC Endpoint Policies</li></ul><ul id="5e93dc96-c80c-4586-b8ad-643345acce66" class="bulleted-list"><li style="list-style-type:disc">also a resource-based policy, but is a VPC endpoint<ul id="27f24420-1186-490f-a1bd-102b97d70c7a" class="bulleted-list"><li style="list-style-type:circle">VPC endpoints allows access to AWS services using private IP addresses</li></ul></li></ul><ul id="24db31dd-aba7-46e8-9bab-3036aacaa9cb" class="bulleted-list"><li style="list-style-type:disc">controls access to private APIs</li></ul><ul id="5b961b2c-a698-4a72-a685-9205aff3a862" class="bulleted-list"><li style="list-style-type:disc">can be used in conjunction with API Gateway resource policies for additional security #### Lambda Authorizers</li></ul><ul id="72c02aa9-9a9b-4347-9252-528aa41d96e6" class="bulleted-list"><li style="list-style-type:disc">uses AWS Lambda functions to restrict who can invoke REST API methods</li></ul><ul id="62f3eea3-7525-4f0a-8106-b0706d803175" class="bulleted-list"><li style="list-style-type:disc">can use bearer-based tokens or HTML headers, paths, query string parameters, and stage variables #### Amazon Cognito User Pools</li></ul><ul id="0f3ef81b-0a91-4b6c-ab34-a1520eb342a6" class="bulleted-list"><li style="list-style-type:disc">APIs can be configured to have <code>COGNITO_USER_POOLS</code> authorizer to authenticate users via Amazon Cognito user pool API gateway<ul id="47370805-b16d-4102-b4ce-dbdeff9027dd" class="bulleted-list"><li style="list-style-type:circle">token is validated before allowing access# Incident Response [[AWS Contents]] [[AWS Questions#Incident Response]]</li></ul></li></ul><h2 id="33fe4373-93a5-4de4-aa01-3ee1dc216ddd" class="">AWS Cloud Adoption Framework (CAF)</h2><p id="e26391a2-7275-47b9-9398-3d18536a28cd" class="">Addresses four primary control areas: 1. Directive Controls - establishes governance, risk, and compliance models 2. Preventative Controls - protects workloads and mitigates threats and vulnerabilities 3. Detective Controls - provides full visibility and transparency over operation of deployments 4. Responsive Controls - drives the remediation of potential deviation from security baselines</p><h2 id="3f968612-077b-4420-b03f-937ee73f2f4d" class="">Threat Detection and Management</h2><h3 id="6a59aa7d-4c73-407b-9e36-a1c8dd9ca90a" class="">AWS GuardDuty</h3><ul id="b2bf7995-b72b-4282-a4f0-c63dd8a3ed79" class="bulleted-list"><li style="list-style-type:disc">regional-based managed service</li></ul><ul id="ff111c4c-7a50-4f31-b53d-7d4689e85569" class="bulleted-list"><li style="list-style-type:disc">powered machine learning</li></ul><ul id="f54d5a25-4e96-4a91-ab1c-4c16ff894a96" class="bulleted-list"><li style="list-style-type:disc">monitors logs and detects unexpected / unusual behavior</li></ul><h3 id="38173ada-d093-4043-8858-a3b9afa9bba6" class="">AWS Security Hub</h3><ul id="c8fc7622-fc25-46d4-8e41-b4bfc15c441a" class="bulleted-list"><li style="list-style-type:disc">brings security statistical data into single place<ul id="c01ee4c7-c744-4248-ae15-c4626b022d20" class="bulleted-list"><li style="list-style-type:circle">presented in series of tables and graphs</li></ul></li></ul><ul id="75be9fe2-ab89-4ed3-880f-59f257247851" class="bulleted-list"><li style="list-style-type:disc">insights - grouping of findings that meet specific criteria base from specific filters and statements<ul id="ad49e49e-78bd-458c-99ae-afc95c5c50d6" class="bulleted-list"><li style="list-style-type:circle">e.g. users with most suspicious activity, S3 buckets with public write or read permissions, EC2 instances with missing security patches, etc.</li></ul></li></ul><h2 id="cb035165-c3e4-4d1f-bcb5-3cc67140a022" class="">Forensics</h2><ul id="867b8487-1486-49dd-8797-5efa21f716d7" class="bulleted-list"><li style="list-style-type:disc">recommended to have an account with preconfigured settings dedicated to forensics<ul id="ecfb3924-45fd-417d-8285-dde9b0b75b12" class="bulleted-list"><li style="list-style-type:circle">compromised instances can be moved to forensics account</li></ul><ul id="c5f023b8-05e6-42f8-99a0-36cb751a15a6" class="bulleted-list"><li style="list-style-type:circle">note that the instance cannot be moved to different AWS account</li></ul></li></ul><ul id="5115daab-9015-4725-9e27-eaed8bee6398" class="bulleted-list"><li style="list-style-type:disc">can also create forensic instance for forensic analysis<ul id="01cc54cb-ded3-4afd-9873-1b2dd39bdc0b" class="bulleted-list"><li style="list-style-type:circle">could take snapshot of compromised instance / EBS volume and attach it to forensic instance</li></ul></li></ul><h2 id="d8fa22c5-1d6f-4d59-8f5c-884dbe683432" class="">Common Infrastructure Security Incident</h2><p id="dff8477e-7f86-4b76-a9c8-66c220b58691" class="">Common approach in a breach scenario (blue side): 1. Capture - obtain metadata from instance 2. Protect - prevent EC2 instance from being terminated (enable termination protection) 3. Isolate - isolate instance by modifying security group or updated NACL to deny all traffic destined for IP address of instance 4. Detach - remove affected instance from any autoscaling groups 5. Deregister - remove EC2 instance from any associated ELBs 6. Snapshot - take snapshot of EBS volumes for forensics 7. Tag - highlight instance that is prepared for forensic investigation # Secure Connections to AWS Environment [[AWS Contents]] [[AWS Questions#Secure Connections to AWS Environment]] - can connect securely using either VPN connection or Direct Connect connection</p><h2 id="9605c17c-6132-4fdc-b6b4-6456cbe6950c" class="">AWS VPN</h2><p id="d0e1efac-e94d-48ed-b3f2-a0c1ce4ea3fc" class="">Uses two components: 1. Virtual Private Gateway (VPN gateway) - resides within AWS - consists of two endpoints located in different data centers 2. Customer gateway</p><p id="60aebe9e-522d-4159-ac88-fe193cd77a39" class="">[[Pasted image 20220215120110.png]] - consists of two IPsec tunnel - <span style="border-bottom:0.05em solid">IPsec Tunnel</span>: secure network protocol allowing encrypted communication between two endpoints - implemented at IP layer - uses public network to establish connection ### Routing Route table example:</p><div id="785c6978-69c3-44ad-b28f-31f0c4589210" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Destination</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Target</th></tr></thead><tbody><tr id="1dd0d723-768a-4065-856a-40d703bf7044"><td class="cell-title"><a href="https://www.notion.so/10-0-0-0-16-1dd0d723768a4065856a40d703bf7044">10.0.0.0/16</a></td><td class="cell-&gt;ygl">Local</td></tr><tr id="8974cec5-a7ac-43c9-a4e6-9b11d656e838"><td class="cell-title"><a href="https://www.notion.so/172-16-0-0-16-8974cec5a7ac43c9a4e69b11d656e838">172.16.0.0/16</a></td><td class="cell-&gt;ygl">pcx-1234abcd</td></tr><tr id="be64d295-6d30-4c9d-aca9-5211e741b340"><td class="cell-title"><a href="https://www.notion.so/172-16-1-0-24-be64d2956d304c9daca95211e741b340">172.16.1.0/24</a></td><td class="cell-&gt;ygl">vgw-wxyz6789</td></tr></tbody></table></div><ol type="1" id="b650ebfe-91bf-4276-b1f8-f325eb589acc" class="numbered-list" start="1"><li>First route is local route of VPC (found in every route table)</li></ol><ol type="1" id="40b890df-d971-4495-b839-b94d3caa189d" class="numbered-list" start="2"><li>Second route points to target relating to VPC peering connection</li></ol><ol type="1" id="692e0d7e-9654-4da5-8a32-7e2d993d4757" class="numbered-list" start="3"><li>Third route point to VPN gateway</li></ol><ul id="36d78652-6664-41f0-a23a-01d0c6d09366" class="bulleted-list"><li style="list-style-type:disc">if packet is meant for destination that is covered by two subnets, it will go to the more specific subnet<ul id="283a6a12-55d3-4e49-9a84-a236a42f9807" class="bulleted-list"><li style="list-style-type:circle">e.g. if packet is meant for 172.16.1.5, it will go to the third route even though route 1 and route 2 both cover that destination</li></ul></li></ul><ul id="cd188ab4-11ad-49ab-9f64-a13f90882f8c" class="bulleted-list"><li style="list-style-type:disc">route propagation can be enabled in VPN gateway to automatically add site-to-site VPN connections to route table</li></ul><h2 id="59976d24-f7f0-4692-b67b-a4db332dce6a" class="">AWS Direct Connect</h2><ul id="f7c09b1a-bea2-48db-8fe9-6aaaed34be52" class="bulleted-list"><li style="list-style-type:disc">like VPN connection; joins your own infrastructure with AWS architecture as if it were a single network</li></ul><ul id="fc1bfccc-f31d-4766-b227-f865bbbd5dbe" class="bulleted-list"><li style="list-style-type:disc">generally provides more consistent and reliable connection</li></ul><ul id="ead728c3-9b10-4156-9bd7-384f4ec7bd4e" class="bulleted-list"><li style="list-style-type:disc">Connection runs across private network via an AWS Direct Connect location [[Pasted image 20220216094601.png]] Three distinct locations involved to establish link:</li></ul><ol type="1" id="214ae906-ac58-468c-a182-ef65d251c44f" class="numbered-list" start="1"><li>Corporate site where your own private network resides</li></ol><ol type="1" id="bc550c44-353c-4383-b6b6-bfb5286251ac" class="numbered-list" start="2"><li>AWS Direct Connect location (typically owned by AWS partner)</li></ol><ol type="1" id="8be44af0-eac2-4975-9fc5-533cdd0e1f8d" class="numbered-list" start="3"><li>AWS VPC within specific AWS region</li></ol><p id="c5dceab0-1fcb-4594-8ec8-06a01e717b88" class="">Prerequisites for configuring and establish connection: 1. Your organization works with an AWS Direct Connect partner who is a member of AWS Partner Network (APN) 2. Your network has co-location connection to AWS Direct Connect location 3. Your organization works with an IPS allowing connection to AWS Direct Connect</p><p id="7b3b5395-b371-4efe-9900-ce0b6e749e24" class="">Once physical network connection to AWS Direct Connect location established, network must follow this criteria: 1. Authentication - router must support Border Gateway Protocol (BGP) and MD5 2. Network must use single-mode fiber 3. Manually configured speed and full-duplex enabled 4. 802.1Q VLAN encapsulation support enabled</p><h3 id="05dfaf88-0fc7-4afd-ba84-54b59fd09188" class="">Virtual Interfaces</h3><ul id="98b3dc40-02e7-4800-b139-44b88fd13d9f" class="bulleted-list"><li style="list-style-type:disc">connection can be partitioned into virtual interfaces</li></ul><ul id="783684ef-e8e4-4502-8514-271c9cf965f0" class="bulleted-list"><li style="list-style-type:disc">allows access to other AWS services other than what is within your VPC # Securing EC2 Instances [[AWS Contents]] [[AWS Questions#Securing EC2 Instances]]</li></ul><ul id="a84fabbb-8a76-49a2-a8f3-0a2007481d5b" class="bulleted-list"><li style="list-style-type:disc">Elastic Compute Cloud (EC2) is the most common of the compute services</li></ul><ul id="dcf5d199-89c5-49a0-a660-fc3ce31157a0" class="bulleted-list"><li style="list-style-type:disc">can use Amazon Inspector (vulnerability scanner)</li></ul><h2 id="1158ce88-7629-4cb2-b9b0-65cd60db9de3" class="">Key Pairs</h2><ul id="7689e101-9688-4b96-9ac0-a519878f320e" class="bulleted-list"><li style="list-style-type:disc">used to allow connection to instance</li></ul><ul id="5785c3ac-0b75-4150-9aaa-9a516e5de108" class="bulleted-list"><li style="list-style-type:disc">uses public key cryptography (2048 bit SSH-2 RSA)</li></ul><ul id="39950bda-1386-4779-b231-09981474e1c5" class="bulleted-list"><li style="list-style-type:disc">public key maintained by EC2 instance, private key is with customer<ul id="377efefc-d24b-4793-bbd2-81479636aca8" class="bulleted-list"><li style="list-style-type:circle">keys are unrecoverable if lost</li></ul><ul id="813f6bf0-9cb8-4143-bcab-1efa57cfa43b" class="bulleted-list"><li style="list-style-type:circle">public key encrypts creds, private key decrypts</li></ul></li></ul><h2 id="69c1d8bf-5665-4aac-83d4-ad78bb80b3e7" class="">Monitoring and Logging</h2><h3 id="49089c29-7400-431c-9883-14a5cd526791" class="">AWS CloudTrail</h3><ul id="8e3a6c81-40c2-4680-876a-2ddcfa859842" class="bulleted-list"><li style="list-style-type:disc">tracks and records API calls</li></ul><ul id="51772871-4b3b-4d4f-aa52-3e66202e4802" class="bulleted-list"><li style="list-style-type:disc">for every API call the following is tracked:<ul id="3ac72519-1897-468d-ac93-b2c9a3bdb6d3" class="bulleted-list"><li style="list-style-type:circle">API that was called</li></ul><ul id="5ffa9136-5baf-47b8-9b69-2e20ec578f09" class="bulleted-list"><li style="list-style-type:circle">service to which API call was made against</li></ul><ul id="8bd7a46a-132e-49bc-b4dd-834f25c2fdec" class="bulleted-list"><li style="list-style-type:circle">timestamp when it was called</li></ul><ul id="fe3875cc-5c68-48be-9fe6-049da73957b7" class="bulleted-list"><li style="list-style-type:circle">source IP address of requester</li></ul></li></ul><h3 id="750db7be-d6a0-4537-952a-95a0d5362acd" class="">AWS Config</h3><ul id="8a2e477a-3a64-4785-b808-929b92118ef0" class="bulleted-list"><li style="list-style-type:disc">logs any change to resources</li></ul><ul id="58d629de-0790-4637-bedb-df708c3d2963" class="bulleted-list"><li style="list-style-type:disc">acts as resource inventory</li></ul><ul id="ec199d5e-41a4-48a6-a153-4413f76de297" class="bulleted-list"><li style="list-style-type:disc">stores and reviews configuration history of resources</li></ul><ul id="dc2ac1fa-28dc-4b00-9377-40fd12d9ac2d" class="bulleted-list"><li style="list-style-type:disc">integrates with CloudTrail<ul id="5e8f18dd-8c36-490a-ad9b-5c84ad8d378d" class="bulleted-list"><li style="list-style-type:circle">shows which API call made specific changes</li></ul></li></ul><ul id="5944da3f-6baa-4ac8-b913-95ad00a1576e" class="bulleted-list"><li style="list-style-type:disc">checks compliance rules</li></ul><h3 id="e6c14d8d-eabf-4116-bb2c-156da7608713" class="">Amazon CloudWatch</h3><ul id="eae765f0-3ed8-4b03-8206-d1facc1c52cf" class="bulleted-list"><li style="list-style-type:disc">most common AWS monitoring service</li></ul><ul id="34926db4-390b-482f-85df-1cb4b5bca404" class="bulleted-list"><li style="list-style-type:disc">monitors resource performance over time</li></ul><ul id="6129d855-b1fd-4eb8-ad76-6146ed9425e4" class="bulleted-list"><li style="list-style-type:disc">can be used with unified Cloud Agent to collect logs of applications</li></ul><h3 id="1a84fa23-b567-4c99-bf36-0fb186172022" class="">VPC Flow Logs</h3><ul id="6a5b79e7-143a-4998-ae0c-a3295922def8" class="bulleted-list"><li style="list-style-type:disc">Virtual Private Cloud (VPC)</li></ul><ul id="a297a59f-6fa9-42cb-9edf-203204aa5b4f" class="bulleted-list"><li style="list-style-type:disc">captures all IP traffic</li></ul><h2 id="020956b0-58f6-44ed-9921-0778310aa321" class="">Isolation</h2><ul id="f3cec573-fe0e-4e2f-bc0e-cb7705c69c3d" class="bulleted-list"><li style="list-style-type:disc">security group should be created so that a compromised instance can quickly be changed to this group<ul id="96dab44e-a02b-4bcd-a431-b7200ed067e5" class="bulleted-list"><li style="list-style-type:circle">the group should not be able to communicate with any other resources</li></ul></li></ul><ul id="8591143a-4cc4-4f8c-8699-336feb4cea76" class="bulleted-list"><li style="list-style-type:disc">log data should be stored in dedicated S3 bucket</li></ul><ul id="7cdc2fb6-3be5-428f-ab0c-d568f3b45212" class="bulleted-list"><li style="list-style-type:disc">create IAM roles that only allow read-only access to resources<ul id="30042e1c-3e4a-45a8-bd2f-c085cd8dbaba" class="bulleted-list"><li style="list-style-type:circle">prevents accidentally changing data on instance</li></ul></li></ul><h2 id="4cc21b4f-dd1b-47cb-a838-fa78b2235d82" class="">Systems Manager (SSM)</h2><ul id="bc63cb7b-1769-4824-adfd-f1deff6f1660" class="bulleted-list"><li style="list-style-type:disc">allows to quickly administer and perform operational actions against instances without SSH or RDP ### Actions #### Automation</li></ul><ul id="cb38cdb4-6419-4dff-916b-abb706efeb81" class="bulleted-list"><li style="list-style-type:disc">automate processes against groups of resources via SSM documents</li></ul><ul id="5f53ac92-8094-4c5a-ad89-3d5cdc5b24c2" class="bulleted-list"><li style="list-style-type:disc">e.g. patching EC2 instances or creating AMI (Amazon Machine Image)</li></ul><h3 id="0bea18d3-f317-4192-9376-7c351ba538fc" class="">Run Command</h3><ul id="592094b8-9abe-4363-adcd-4e629bcc26c9" class="bulleted-list"><li style="list-style-type:disc">manage fleet of EC2 instances remotely and securely</li></ul><ul id="1da8aca7-ffd6-4bb2-bf68-9dfa1365db5a" class="bulleted-list"><li style="list-style-type:disc">can perform maintenance and management without logging into instances</li></ul><ul id="0a0ce8e0-a19f-4b5a-9fe4-969664db5f21" class="bulleted-list"><li style="list-style-type:disc">uses SSM documents to help perform administrative tasks and configuration changes</li></ul><h3 id="425c0a27-336f-49d2-a115-f7406502f08c" class="">Distributor</h3><ul id="2f09d82d-1658-4e54-ad94-af1f48439a9f" class="bulleted-list"><li style="list-style-type:disc">distributes software across instances</li></ul><h3 id="a9f23557-31e9-47ea-b209-94313a7cd0ad" class="">State Manager</h3><ul id="f93e1600-4008-468f-8910-1f4cd7cde994" class="bulleted-list"><li style="list-style-type:disc">maintains state of EC2 instances</li></ul><ul id="b9d68bf7-d3bf-45a0-ac54-9bd736a2a499" class="bulleted-list"><li style="list-style-type:disc">uses of state manager:<ul id="fe190e38-9c3a-453f-858a-7b267534f335" class="bulleted-list"><li style="list-style-type:circle">configuring network settings</li></ul><ul id="8280a9a5-48aa-46d6-9089-ca4d56643f29" class="bulleted-list"><li style="list-style-type:circle">bootstrapping instances</li></ul><ul id="9d9223bf-ba58-49aa-b5c5-56152c184dcd" class="bulleted-list"><li style="list-style-type:circle">ensuring installation of agents are schedually updated</li></ul><ul id="dbd720ca-8e98-4002-bf2b-5e60ab8caab5" class="bulleted-list"><li style="list-style-type:circle">running scripts on instances</li></ul></li></ul><h3 id="2bffb249-ffbf-4015-a77f-24d9680c2ffb" class="">Patch Manager</h3><ul id="7b8af307-8dc4-4cc1-984f-aa9b46fc30dd" class="bulleted-list"><li style="list-style-type:disc">automates management of patch updates across EC2 instances</li></ul><ul id="1ac327b3-b5b5-4b89-a522-73adf4eab272" class="bulleted-list"><li style="list-style-type:disc">you can create patch groups which associates a number of instances with a group<ul id="436dceed-4239-4215-a3c1-04224c505798" class="bulleted-list"><li style="list-style-type:circle">allows you to associate a group with a single patch baseline</li></ul><ul id="b27050db-d0df-49a4-b0ff-e1b683b035c1" class="bulleted-list"><li style="list-style-type:circle">instances not associated with patch group will receive default patch baseline# Auditing and Governance [[AWS Contents]] [[AWS Questions#Auditing and Governance]] ## AWS Artifact</li></ul></li></ul><ul id="56c82fee-5d7d-4986-9862-8f58a478bc40" class="bulleted-list"><li style="list-style-type:disc">on-demand portal allowing viewing and downloading AWS security and compliance reports and online agreements<ul id="a258e295-5a39-4637-aa93-41c94041449a" class="bulleted-list"><li style="list-style-type:circle">these reports are undetaken by external auditors of AWS</li></ul><ul id="e8f16652-a1a1-47df-bdef-bd900d994043" class="bulleted-list"><li style="list-style-type:circle">agreements for accounts made with AWS</li></ul></li></ul><h2 id="1adde498-e0a2-4872-acd4-935b431710b3" class="">Securing with CloudTrail</h2><ul id="5f4f4515-f39e-434e-9e2d-81f2e6c146b9" class="bulleted-list"><li style="list-style-type:disc">data (logs) can be encrypted with SSE-KMS</li></ul><ul id="99b2706f-8980-4f6a-8b4d-1b775cbc315c" class="bulleted-list"><li style="list-style-type:disc">SHA-256 used for file validation</li></ul><ul id="9dadf44d-dc5d-4cde-a2a5-15adfdb1ca74" class="bulleted-list"><li style="list-style-type:disc">when validation is enabled, digest files are created<ul id="cf3980f6-44e3-42ce-a166-5094dd400831" class="bulleted-list"><li style="list-style-type:circle">digest files reference every log file delivered within specific timeframe along with associated hash</li></ul><ul id="308a09e2-487a-43c5-b3ca-5cf9f5f23806" class="bulleted-list"><li style="list-style-type:circle">digest files are signed using private key of a public/private key pair used by CloudTrail for that region</li></ul></li></ul><p id="a6006a9f-09c5-4217-85bc-e726871ddded" class="">Validating if log was tampered with or moved: <code>aws cloudtrail validate-logs --trail-arn &lt;trailARN&gt; --start-time &lt;start-time&gt;</code></p><h2 id="a4c99f62-3d24-42a6-abbe-509db1df4643" class="">AWS Config</h2><ul id="da77c97f-8f63-4e5b-a016-e58e7f6a7a2e" class="bulleted-list"><li style="list-style-type:disc">useful for seeing history of modifications to a resource via looking at the history of configuration items</li></ul><p id="cd5e2849-8111-41ed-abde-3249d92877ec" class="">Components of AWS Config: - Configuration items - Configuration streams - Configuration history - Configuration snapshots - Configuration recorder - Config rules - Resource relationships - Config role</p><h3 id="43d06c0a-fb2f-4447-9f8b-dd4c6c6aece8" class="">Configuration Items (CI)</h3><ul id="18712704-4b1e-4796-8da3-5cdb512d0d00" class="bulleted-list"><li style="list-style-type:disc">fundamental element of AWS Config</li></ul><ul id="e02c88df-64ae-44b2-ac48-fd3c0836cf0c" class="bulleted-list"><li style="list-style-type:disc">contains point-in-time snapshot info on configuration data of attributes of an AWS resource such as:<ul id="3b343819-a511-417a-b0e8-e9da9ef4fd44" class="bulleted-list"><li style="list-style-type:circle">current configuration</li></ul><ul id="b4a87d88-ec27-49bc-a353-9d1a2d534567" class="bulleted-list"><li style="list-style-type:circle">direct relationships resource has with other resources</li></ul><ul id="82266062-c593-4d33-8898-9de0c4c2adfb" class="bulleted-list"><li style="list-style-type:circle">metadata</li></ul><ul id="90f8c4e8-ae58-40be-8be4-fd0cf3a437af" class="bulleted-list"><li style="list-style-type:circle">events</li></ul></li></ul><ul id="ab31c63c-f0fa-445f-88e6-682d5ff37113" class="bulleted-list"><li style="list-style-type:disc">CI updated each time change is made on resource (e.g. create, update, or delete API call made against resource)</li></ul><p id="07c0558d-b28e-4cf0-8f18-f658d2e4753f" class="">Components of Configuration Item: <strong>Metadata</strong>: info and data about config item <strong>Attributes</strong>: data of actual resource that CI relates to <strong>Relationship</strong>: data related to any connected resource (e.g. if CI is related to a subnet, the relationship could contain data related to associated VPC that subnet is part of) <strong>Current Configuration</strong>: shows same info that would be generated upon performing a <em>describe</em> or <em>list</em> API call</p><h2 id="7badf2f8-d311-4533-80e0-8fb421697257" class="">Amazon Macie</h2><ul id="05c77e0e-f691-4ed9-82a1-dc8c286fcdd7" class="bulleted-list"><li style="list-style-type:disc">managed service backed by machine learning</li></ul><ul id="15ed7748-1ec0-4497-908f-8b9e478f718a" class="bulleted-list"><li style="list-style-type:disc">automatically detects, protects, and classifies data within S3 buckets</li></ul><ul id="8934455d-cedd-41a6-be9d-bdc599ee04f6" class="bulleted-list"><li style="list-style-type:disc">classifies data to determine its level of sensitivity# Implementing Logging Mechanisms [[AWS Contents]] [[AWS Questions#Implementing Logging Mechanisms]]</li></ul><h2 id="ace56958-1299-455c-9a11-c2d0459d14fd" class="">Amazon S3 Logging</h2><ul id="1afd4ca9-37bb-4cc4-904f-9c02b2088298" class="bulleted-list"><li style="list-style-type:disc">most common AWS storage service</li></ul><ul id="7d028340-6a8d-4bdd-b6da-701fa0058a8e" class="bulleted-list"><li style="list-style-type:disc">logs can be sent to S3 or Amazon CloudWatch Logs</li></ul><p id="451b9990-610c-485c-b09d-6138e236eead" class="">Two types of logging within S3: 1. Server access logs 2. Object-level logs</p><h3 id="e5d5df88-58d7-4181-8c8d-85d8821d12e4" class="">Server Access Logs</h3><p id="686e2fd8-a868-4a91-9a5e-8e29fc2db532" class="">Log details captured: - identity of requester accessing bucket - name of bucket being accessed - timestamp of when action was carried against bucket - action that was done - HTML response status - any error codes  - source and target buckets must be in same region</p><h3 id="df7d1e95-004c-4e2a-934f-01ac901d5acf" class="">Object-Level Logging</h3><ul id="da4d408a-3a52-40de-a88f-d34cb3231223" class="bulleted-list"><li style="list-style-type:disc">must be associated with CloudTrail which will record write and read API activity</li></ul><h3 id="7d17a080-a2da-4fa6-960b-c10f0db1058f" class="">Flow Logs</h3><ul id="fe9fdf0e-c65a-4340-b4aa-f6922190036a" class="bulleted-list"><li style="list-style-type:disc">captures IP traffic across network interfaces</li></ul><ul id="13dbb3a3-6a47-4f3f-b08b-f47bd30954e3" class="bulleted-list"><li style="list-style-type:disc">default log file format:</li></ul><pre id="b8302c2a-3d61-4d95-98a4-f0a57152cc77" class="code code-wrap"><code>${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}</code></pre><ol type="1" id="18b2b69d-c844-432e-a4cd-c8f4cae22748" class="numbered-list" start="1"><li>version: version of the flow log</li></ol><ol type="1" id="3588f286-f2bb-4608-b66e-4b0af62cb5ce" class="numbered-list" start="2"><li>account-id: AWS account ID</li></ol><ol type="1" id="aa346a9d-5740-471c-8ca5-487116ab0218" class="numbered-list" start="3"><li>interface-id: interface ID that log stream data applies to</li></ol><ol type="1" id="bedeb830-65a5-4f89-90c8-8e0d9db7a983" class="numbered-list" start="4"><li>srcaddr: IP source address</li></ol><ol type="1" id="c613b7f7-6fd5-4d73-901a-7e85651514fe" class="numbered-list" start="5"><li>dstaddr: IP destination address</li></ol><ol type="1" id="413c05f8-ebcb-4fb5-8806-ba8103b63bb0" class="numbered-list" start="6"><li>srcport: source port used for traffic</li></ol><ol type="1" id="45b35b3c-d8b1-4619-bd8f-176022c2c50a" class="numbered-list" start="7"><li>dstport: destination port for traffic</li></ol><ol type="1" id="8c83aabc-dc90-4fad-8df4-443328c4c13b" class="numbered-list" start="8"><li>protocol: protocol number being used for traffic</li></ol><ol type="1" id="c8999e3b-9af6-4138-b10c-0a0fe91c5914" class="numbered-list" start="9"><li>packets: total number of packets sent during capture</li></ol><ol type="1" id="f19ca8b8-c5fc-43b3-bff5-1c0000ebcd14" class="numbered-list" start="10"><li>bytes: total number of bytes sent during capture</li></ol><ol type="1" id="475080b0-7e23-4466-9255-7c102a71a53e" class="numbered-list" start="11"><li>start: timestamp of when capture window started</li></ol><ol type="1" id="e4521b15-fd0c-4eb1-8ed8-3d66ff2dbd6c" class="numbered-list" start="12"><li>end: timestamp of when capture windows finished</li></ol><ol type="1" id="7cd57118-0e81-43bb-97d1-9065f96d7ec2" class="numbered-list" start="13"><li>action: whether traffic was accepted or rejected by security groups</li></ol><ol type="1" id="3cac9705-111c-434c-90d5-47c7e3a8179e" class="numbered-list" start="14"><li>log-status: status of logging, which is one of three codes:<ul id="030f7611-35d9-4880-afe1-9279acd280d7" class="bulleted-list"><li style="list-style-type:disc">OK: data is being received</li></ul><ul id="de342058-c867-4101-9b6d-c7c9ae3e60cc" class="bulleted-list"><li style="list-style-type:disc">NoData: no traffic to capture during capture window</li></ul><ul id="10b0223c-9d1c-4762-b020-4be76d0724f9" class="bulleted-list"><li style="list-style-type:disc">SkipData: some data within log was captured due to an error</li></ul></li></ol><h2 id="9d26e8f9-1d0e-4d00-b814-b6a43d2526d1" class="">VPC Traffic Mirroring</h2><ul id="7105dc7b-6ade-4ee9-97cb-02dda1d564cf" class="bulleted-list"><li style="list-style-type:disc">duplicates network traffic from elastic network interfaces attached to instances<ul id="b6174e95-b35a-432f-baf2-0a9d28f93018" class="bulleted-list"><li style="list-style-type:circle">duplicated traffic sent to third-party tools and services for analysis</li></ul></li></ul><h2 id="d1a02e33-76d8-4601-bfc6-65d9a373b95e" class="">CloudTrail</h2><p id="f0e62342-44ff-4968-9988-b3401ae0c030" class=""><strong>Trails</strong>: contain configurable options for what to monitor and track <strong>Events</strong>: every API call is stored as an event <strong>Log Files</strong>: created every 5 minutes; stored within S3 bucket <strong>CloudWatch Logs</strong>: logs can be sent to CloudWatch for analysis and monitoring <strong>API Activity Filters</strong>: provide search and filter functionality when looking at API activity</p><h3 id="07e35c6e-c800-4e86-ae48-144228bf31b8" class="">Understanding CloudTrail Logs</h3><p id="f2d23da3-6fa1-44c9-a6c7-ce5c27a8dc02" class="">Example of CloudTrail Log</p><pre id="5fccf9c7-a82a-4a04-bcd6-f83d10f9d88b" class="code code-wrap"><code>&quot;awsRegion&quot;: &quot;eu-west-1&quot;,&quot;eventID&quot;: &quot;6ce47c89-5908-452d-87cc-a7c251ac4ac0&quot;,&quot;eventName&quot;: &quot;PutObject&quot;,&quot;eventSource&quot;: &quot;s3.amazonaws.com&quot;,&quot;eventTime&quot;: &quot;2019-11-27T23:54:21Z&quot;,&quot;eventType&quot;: &quot;AwsApiCall&quot;,&quot;eventVersion&quot;: &quot;1.05&quot;,&quot;readOnly&quot;: false,&quot;recipientAccountId&quot;: &quot;730739171055&quot;,&quot;requestID&quot;: &quot;95BAC3B3C83CCC5D&quot;,&quot;requestParameters&quot;: {&quot;bucketName&quot;: &quot;cloudtrailpackt&quot;,&quot;Host&quot;: &quot;cloudtrailpackt.s3.eu-west-1.amazonaws.com&quot;,&quot;key&quot;: &quot;Packt/AWSLogs/730739171055/CloudTrail/eu-west-1/2019/11/27/730739171055_CloudTrail_eu-west-1_20191127T2321Z_oDOj4tmndoN0pCW3.json.gz&quot;,&quot;x-amz-acl&quot;: &quot;bucket-owner-full-control&quot;,&quot;x-amz-server-side-encryption&quot;: &quot;AES256&quot;&quot;sharedEventID&quot;: &quot;11d4461b-0604-46c4-b4c9-6a23b3e7f57c&quot;,&quot;sourceIPAddress&quot;: &quot;cloudtrail.amazonaws.com&quot;,&quot;userAgent&quot;: &quot;cloudtrail.amazonaws.com&quot;,&quot;userIdentity&quot;: {&quot;invokedBy&quot;: &quot;cloudtrail.amazonaws.com&quot;,&quot;type&quot;: &quot;AWSService&quot;</code></pre><ul id="cf855d48-4ddd-49a6-9414-2a9ccfc92680" class="bulleted-list"><li style="list-style-type:disc">shows Cloudtrail made <em>PutObject</em> request to Amazon S3 to store its log file (see the <em>key</em> parameter)</li></ul><p id="3ab71be7-94f6-413d-a517-348a7c0f1f98" class=""><em>eventName</em>: name of API called <em>eventSource</em>: AWS service in which API call was made <em>eventTime</em>: time of API call <em>SourceIPAddress</em>: IP that made the API call (if a service did the API call then instead the name of the service would be displayed) <em>userAgent</em>: agent method of request <em>Console.amazonaws.com</em>: determines that root user made request <em>userIdentity</em>: additional info relating to user agent</p><h3 id="76e0b692-c885-4d7c-b8e1-44aa5e060fc9" class="">Amazon Athena</h3><ul id="2aefcc3c-80d6-408b-8334-465f13613d7e" class="bulleted-list"><li style="list-style-type:disc">serverless service</li></ul><ul id="c5fe1246-849b-41f3-aedb-54c6c2307e2b" class="bulleted-list"><li style="list-style-type:disc">analyzes data stored within Amazon S3 (such as CloudTrail logs)</li></ul><ul id="a7834316-a0e5-4c24-aa9f-e53534b8efd1" class="bulleted-list"><li style="list-style-type:disc">uses SQL</li></ul><h3 id="6febc6d4-d251-4bd4-b0a4-ae80f5d6a2d2" class="">CloudWatch</h3><ul id="4c4c53bd-b8c0-40e8-a299-fd8398e98b8b" class="bulleted-list"><li style="list-style-type:disc">main AWS monitoring service</li></ul><ul id="917a3e31-9033-4fc3-9586-61c27941f32b" class="bulleted-list"><li style="list-style-type:disc">collects data and metrics from all supported AWS services</li></ul><ul id="b16bf9df-3d82-4954-8f51-b46cece203e5" class="bulleted-list"><li style="list-style-type:disc">can be implemented in a large scale using AWS Systems Manager (SSM)</li></ul><h1 id="89d29ae4-28cf-4705-a18d-38ecf09f5d53" class="">Automation</h1><p id="7577c68c-7386-44b2-95ee-19829cbd9034" class="">[[AWS Contents]] [[AWS Questions#Automation]]</p><h2 id="2d014300-2e8e-44b5-8997-6d80885603ef" class="">Automating Security Detection and Remediation</h2><h3 id="6fbfa229-6b98-4c95-b366-3dda07c4b8b9" class="">Using CloudWatch Events with AWS Lambda and SNS</h3><ul id="68c5393b-ef88-4577-a97d-2ea060ac2df6" class="bulleted-list"><li style="list-style-type:disc">can identify event to capture and create an automatic response #### AWS Lambda</li></ul><ul id="d3b65619-8fb8-401d-b8ce-ebcfeed953ba" class="bulleted-list"><li style="list-style-type:disc">serverless compute service</li></ul><ul id="44d76d7d-03e1-44f7-8e83-a5dbfd3210b8" class="bulleted-list"><li style="list-style-type:disc">automatically provisions compute power</li></ul><ul id="45e8e80d-4d6d-487b-abe7-600f160f4436" class="bulleted-list"><li style="list-style-type:disc">allows running code for applications either on demand or in response to events without needing to provision any compute instances yourself</li></ul><ul id="59fdc45a-27df-479b-bc54-3b41acd04dbf" class="bulleted-list"><li style="list-style-type:disc">allows freedom of not having to maintain a compute instance (this is handled by AWS)</li></ul><h3 id="e75356b9-94d2-4348-9a50-23cd749b230b" class="">Amazon GuardDuty</h3><ul id="c1e91a7c-82b0-4b8f-a947-3377e7633715" class="bulleted-list"><li style="list-style-type:disc">can be used for automation detection and remediation</li></ul><ul id="2a22efac-912d-491d-b4f4-62f59e9ba361" class="bulleted-list"><li style="list-style-type:disc">powered by machine learning</li></ul><ul id="6f85dfc7-26d3-4876-8639-0b573c81d389" class="bulleted-list"><li style="list-style-type:disc">can capture events from CloudTrail logs, DNS logs, and VPC flow flogs<ul id="dac0a589-1ffe-47b6-af93-36baba377956" class="bulleted-list"><li style="list-style-type:circle">events referenced against threat detection feeds (compared against known sources of malicious activity)</li></ul></li></ul><ul id="e55ad9d6-36ce-4bd8-8624-30384a1411c8" class="bulleted-list"><li style="list-style-type:disc">runs on AWS infrastructure so doesn’t affect performance of your infrastructure</li></ul><h3 id="bdb16f02-6c40-4a78-b9a6-3847cfb37d5b" class="">AWS Security Hub</h3><ul id="9297497a-742e-4def-ab9e-ad0795158159" class="bulleted-list"><li style="list-style-type:disc">collects security findings from:<ul id="93aad96c-c5a0-4ff0-aae4-862b361e082c" class="bulleted-list"><li style="list-style-type:circle">AWS IAM</li></ul><ul id="27a120cd-7d5c-4cd1-a891-602ddbb2a306" class="bulleted-list"><li style="list-style-type:circle">Amazon Macie</li></ul><ul id="d5dec8dd-574b-4870-ba38-6e5aabdf3bec" class="bulleted-list"><li style="list-style-type:circle">Amazon GuardDuty</li></ul><ul id="a9100fe8-0ba5-464b-b828-3c9c0d6874e7" class="bulleted-list"><li style="list-style-type:circle">Amazon Inspector</li></ul><ul id="218212a9-8f91-459b-872e-99b01a8b867b" class="bulleted-list"><li style="list-style-type:circle">AWS Firewall Manager</li></ul></li></ul><ul id="62f5f1c0-301f-48d2-a2d6-b84a39ef2a08" class="bulleted-list"><li style="list-style-type:disc">has predefined and managed insights to identify security-related weaknesses # Discovering Security Best Practices [[AWS Contents]] [[AWS Questions#Discovering Security Best Practices]]</li></ul><ul id="a6d3ee9e-0da3-4023-a0a7-85f61eefa5e7" class="bulleted-list"><li style="list-style-type:disc">Multi-Factor Authentication (MFA)</li></ul><ul id="3457bd35-8a0d-4234-9e30-d6f54b20ad79" class="bulleted-list"><li style="list-style-type:disc">Enable AWS CloudTrail</li></ul><ul id="d0c6ae9b-8290-4bf1-8ce7-b7446f28bc73" class="bulleted-list"><li style="list-style-type:disc">Remove root account access keys<ul id="1f43cc80-d41b-4b0e-a268-330f2ee369e5" class="bulleted-list"><li style="list-style-type:circle">account keys enabled access via AWS CLI, SDK, or other development tools</li></ul></li></ul><ul id="6d4ad2bf-9f15-4af8-926b-6f90992449d2" class="bulleted-list"><li style="list-style-type:disc">Strong passwords</li></ul><ul id="cb6cd7bd-6b62-40ef-a4bf-e8aeae88e354" class="bulleted-list"><li style="list-style-type:disc">Principle of Least Privilege (PoLP)</li></ul><ul id="77cb3aae-34ce-449d-812e-5db9b03ff063" class="bulleted-list"><li style="list-style-type:disc">Encrypt data</li></ul><ul id="eef9ff75-e5c7-4f08-ba16-a775e26cace7" class="bulleted-list"><li style="list-style-type:disc">Automate security threat detection and remediation</li></ul><p id="9b1a578d-e66d-44bc-9002-7a76fd9aa70b" class="">## AWS Trusted Advisor - recommends enhancements against number of predefined best practice checks across five areas of your account: 1. Cost optimization - identifies resources not optimally used 2. Performance - looks for resources that could make use of provisioned throughput - identifies over-utilized resources 3. Security - identifies weaknesses 4. Fault Tolerance - determines whether you have adequate resiliency built into environment 5. Service Limits - checks if services have reached 80% of allotted service limit</p><h2 id="d44831a1-6feb-4485-920a-a1778bf93d13" class="">Pentesting AWS</h2><ul id="c1c48dab-0af4-47ae-b1cc-5bd429e56325" class="bulleted-list"><li style="list-style-type:disc">can’t carry pentest against some services without prior approval from AWS</li></ul><ul id="8839fb6a-f110-424d-9bc8-a06c6befb920" class="bulleted-list"><li style="list-style-type:disc">services you can pentest against:<ul id="8cf5bdd2-8bbf-415b-ab64-6d747ff70438" class="bulleted-list"><li style="list-style-type:circle">Amazon EC2 instances, NAT gateways, and elastic load balancers</li></ul><ul id="3e9ba285-5f66-413b-9aaa-609384352795" class="bulleted-list"><li style="list-style-type:circle">Amazon RDS</li></ul><ul id="da2502c7-d941-4d1e-839c-d7cebca1ae60" class="bulleted-list"><li style="list-style-type:circle">Amazon CloudFront</li></ul><ul id="750ff073-631c-4d9a-b81c-647905716402" class="bulleted-list"><li style="list-style-type:circle">Amazon Aurora</li></ul><ul id="36e4b70c-eeea-4f71-a904-297a5414fdab" class="bulleted-list"><li style="list-style-type:circle">Amazon API Gateways</li></ul><ul id="baf68a4b-039a-4f88-9d1b-562f41365603" class="bulleted-list"><li style="list-style-type:circle">AWS Lambda and Lambda Edge functions</li></ul><ul id="4e5612aa-6f34-4197-9cab-f9daac579ac5" class="bulleted-list"><li style="list-style-type:circle">Amazon Lightsail resources</li></ul><ul id="3a69c728-8d1f-495e-819f-93b6b5d9d9cb" class="bulleted-list"><li style="list-style-type:circle">Amazon Elastic Beanstalk environments</li></ul></li></ul><ul id="5951b3e7-c8e6-4065-8911-77190531c953" class="bulleted-list"><li style="list-style-type:disc">services not to be pentested:<ul id="1ed3fee7-b3d3-4e5c-9a7d-1d41acfc33b3" class="bulleted-list"><li style="list-style-type:circle">DNS zone walking via Amazon Route 53 hosted zones</li></ul><ul id="24ea7363-821b-4305-a31a-e4c8a00ab6df" class="bulleted-list"><li style="list-style-type:circle">Denial of Service (DoS), Distributed Denial of Service (DDoS),</li></ul><ul id="933728bc-6402-4ec6-9452-819059443b18" class="bulleted-list"><li style="list-style-type:circle">simulated DoS, simulated DDoS</li></ul><ul id="29d8a065-eae2-49c9-a564-9fe22a395ed6" class="bulleted-list"><li style="list-style-type:circle">Port flooding</li></ul><ul id="873c3888-e5bf-47f7-9714-ba55e4359e86" class="bulleted-list"><li style="list-style-type:circle">Protocol flooding</li></ul><ul id="8a3695d1-e7a1-4471-a7f6-c8c85c3bb650" class="bulleted-list"><li style="list-style-type:circle">Request flooding (login request flooding and API request flooding)# Managing Data Security [[AWS Contents]] [[AWS Questions#Managing Data Security]]</li></ul></li></ul><h2 id="7e05b7c5-8abe-4d0e-a027-43f1880f7147" class="">Amazon EBS Encryption</h2><ul id="ab0465c2-d1ed-43fb-99bd-4d4655930896" class="bulleted-list"><li style="list-style-type:disc">EBS volumes provide block-level storage to EC2 instance<ul id="8598a6f6-3784-4151-8887-212ae9989897" class="bulleted-list"><li style="list-style-type:circle">gives more flexibility for storage capabilities</li></ul></li></ul><ul id="80301907-f55d-46c4-967a-8e3e88cbc932" class="bulleted-list"><li style="list-style-type:disc">default regional encryption setting can be applied to EBS volumes to automatically encrypt new EBS volumes</li></ul><ul id="c56fb4ae-d315-4f11-876a-5d7d8738f26d" class="bulleted-list"><li style="list-style-type:disc">uses KMS service to encrypt data</li></ul><h2 id="ee8c9b37-55a4-469b-944e-f05c6fea01d7" class="">Amazon EBS</h2><ul id="718cf75a-454c-49e2-a391-6d702e4960cb" class="bulleted-list"><li style="list-style-type:disc">used for file-level storage</li></ul><ul id="356aab16-342f-4ee2-b478-8146d92c2eec" class="bulleted-list"><li style="list-style-type:disc">support in-transit and at-rest encryption</li></ul><ul id="a4d323b1-bfe7-4d2c-9c4e-12253f42b9bc" class="bulleted-list"><li style="list-style-type:disc">uses KMS service to encrypt data</li></ul><h2 id="b4287663-042a-4bc6-9cc3-14758138bb2e" class="">Amazon S3</h2><ul id="ed0010f3-cbfc-4cc7-a20c-1cadcaa58748" class="bulleted-list"><li style="list-style-type:disc">provides object-level storage</li></ul><p id="e5b0dc34-160d-46ae-a1b5-cdfc09444cbe" class="">Five different encryption options for S3 objects: 1. Server-side encryption with S3-managed keys (SSE-S3) 2. Server-side encryption with KMS-managed keys (SSE-KMS) 3. Server-side encryption with customer-managed keys (SSE-C) 4. Client-side encryption with KMS-managed keys (CSE-KMS) 5. Client-side encryption with customer-managed keys (CSE-C)</p><ul id="1d7ad683-62af-4b3d-84cd-f9afccabc1e1" class="bulleted-list"><li style="list-style-type:disc">server-side encryption: encryption algorithm and process run from server-side (i.e. in this case it is within Amazon S3)</li></ul><ul id="09d1b336-1fdb-40c0-aa68-533c37ff6443" class="bulleted-list"><li style="list-style-type:disc">client-side encryption: encryption process executed on client side before data sent to S3</li></ul><h3 id="5168718d-09f7-4442-be7b-3368120c266a" class="">SSE-S3</h3><h3 id="486ba2c3-029b-409d-ad06-3b1cc40e5f52" class="">Encryption</h3><p id="c7e9cd7e-061d-4f34-920d-28f479e907ed" class="">[[Pasted image 20220225215402.png]] 1. Client selects object(s) to upload to S3 and indicates SSE-S3 as encryption algorithm 2. S3 encrypts object with plaintext data key and encrypted object stored in chosen S3 bucket 3. plaintext data key encrypted with S3 master key, and the encrypted key is then stored into S3 and associated with encrypted data object 4. Plaintext data key removed from memory</p><h3 id="09db00ea-fd51-4068-99cb-af4b549f3570" class="">Decryption</h3><p id="d2971f12-af31-4f7e-ad2b-0267ce224e3a" class="">[[Pasted image 20220225215755.png]] 1. User request encrypted object 2. Encrypted data key of object is decrypted with S34 master key 3. Plaintext data key decrypts encrypted data object 4. S3 returns plaintext data object to client</p><h3 id="56a8fdfe-e3d2-4c8a-ab41-6e9514f3b447" class="">SSE-KMS</h3><h3 id="fd1ddf02-2ef4-468d-8d4f-e80fe2aaba8a" class="">Encryption</h3><p id="79dadc32-cc09-4097-81c8-ff9b650d706d" class="">[[Managing Key Infrastructure#SSE-KMS Encryption]] #### Decryption [[Managing Key Infrastructure#SSE-KMS Decryption]]</p><h3 id="9a197b30-8c35-48a4-9afc-2fde880efaac" class="">SSE-C</h3><h3 id="506b171d-841c-4af1-bc1a-8a09402ac028" class="">Encryption</h3><p id="abf48b8b-e5b7-4754-818c-234124674a37" class="">[[Pasted image 20220225220028.png]]</p><ol type="1" id="e9f9ae2b-56a8-466b-b857-47f7e3df5726" class="numbered-list" start="1"><li>Client uploads object to S3 along with plaintext customer-provided key across HTTPS<ul id="6146b792-6e00-4b00-a83b-e01c0c27caf5" class="bulleted-list"><li style="list-style-type:disc">mandatory to use HTTPS</li></ul></li></ol><ol type="1" id="22f11b89-8fba-4b6d-859e-4a374daae802" class="numbered-list" start="2"><li>Object is encrypted with key and a salted HMAC value of customer key is generated for validation upon future access requests. HMAC value and encrypted object stored in S3 with association to each other. Plaintext key removed.</li></ol><h3 id="20c12098-6db5-4254-9bc8-13c3ea19deb4" class="">Decryption</h3><p id="633fbe5a-b36d-43b9-aefb-cc3a3094876f" class="">[[Pasted image 20220225234838.png]] 1. User requests encrypted object via HTTPS. Customer key sent to S3. 2. S3 uses stored HMAC value of key to validate the client sent the correct key. 3. Customer key used to decrypt object data. 4. Plaintext object sent to client.</p><h3 id="59b3fed9-c2d1-4630-aea7-fe0eab80cc19" class="">CSE-KMS</h3><h3 id="3e5bd7b5-5e60-4229-9284-d0ad4e3f332b" class="">Encryption</h3><p id="a8204f8e-efd6-430f-95e3-0e016b8f3079" class="">[[Pasted image 20220225235024.png]] 1. Client uses AWS SDK (Software Development Kit) to request data keys from KMS using specified CMK 2. KMS genrate two data keys using the CMK: plaintext data key and cipher blob of that key 3. KMS sends the keys back to requesting client 4. Client encrypts object data with plaintext version of data key and stores the resulting encrypted object. 5. Client uploads encrypted object data and cipher blob version of key to S3. 6. Cipher blob key stored as metadata against encrypted object.</p><h3 id="9fb9b38e-9e0a-4186-b6da-7e45337784ec" class="">Decryption</h3><p id="934b0081-bcf3-40ed-8ae1-84f04e8d4791" class="">[[Pasted image 20220225235449.png]] 1. User requests access to encrypted S3 object. 2. Encrypted object sent to client with associated cipher blob key. 3. Cipher blob sent back to KMS to generate data key. 4. KMS uses original CMK along with cipher blob to generate a plaintext version of data key. 5. Plaintext data key sent back to requesting Java client. 6. Java client uses plaintext key to decrypt object.</p><h3 id="c1522a8c-93ce-4403-ac3c-fd1c97490392" class="">CSE-C</h3><h3 id="91b222ed-ce59-40d9-b3ea-51fe6cc44674" class="">Encryption</h3><p id="b9fd120c-6990-49a0-800f-f745cff5406b" class="">[[Pasted image 20220225235650.png]] 1. Java client create plaintext data key to encrypt object data. 2. CMK created by customer encrypts plaintext data key. 3. Encrypted data key and encrypted object sent from client to S3 storage. 4. S3 associates encrypted data key with encrypted object and stores both in S3.</p><h3 id="1016231d-fe3c-45eb-bf34-d976312659bc" class="">Decryption</h3><p id="9003a7e1-89b6-46f5-9be2-fce85426e6e8" class="">[[Pasted image 20220225235831.png]] 1. Uses requests access to encrypted object. 2. S3 sends requested object data with associated encrypted data key. 3. Customer CMK used with encrypted data key to generate plaintext version of data key. 4. Encrypted object decrypted using plaintext data key.</p><h2 id="d4573249-2ed5-4c79-bab8-d2ec01ac4c19" class="">Amazon RDS</h2><ul id="4141655b-e966-4ea0-a328-063e44b09396" class="bulleted-list"><li style="list-style-type:disc">database service</li></ul><ul id="d4a7fa9e-70bf-47e7-8a0e-5d3a8dee91e2" class="bulleted-list"><li style="list-style-type:disc">encryption at rest uses AES-256</li></ul><ul id="ee7bb1bc-67e8-4d1d-a2a1-35af06d3fda5" class="bulleted-list"><li style="list-style-type:disc">can only encrypt RDS database during its creation</li></ul><ul id="2bad3788-1e98-4df7-8b23-906ead588f3d" class="bulleted-list"><li style="list-style-type:disc">SSL/TLS used for in-transit encryption</li></ul><h2 id="ee4948ee-0522-4e0a-ac68-db3735e2e1d4" class="">Amazon DynamoDB</h2><ul id="918ee175-8eb9-4e8e-991d-95b72c7c7438" class="bulleted-list"><li style="list-style-type:disc">fully managed key-value and document NoSQL database</li></ul><ul id="4285f832-5278-4713-9e7a-6c6d75e5a394" class="bulleted-list"><li style="list-style-type:disc">at-rest server-side encryption enabled by default<ul id="cbd33a01-90b2-489f-a68e-bbb6dc3bdc29" class="bulleted-list"><li style="list-style-type:circle">this setting cannot be disabled</li></ul></li></ul><p id="310bda4a-7688-4bd2-b075-3dfde7d78e6f" class="">Three options to encrypt data with: 1. DEFAULT: key owned by Amazon DynamoDB 2. KMS - Customer managed CMK 3. KMS - AWS managed CMK</p><ul id="b69ba62c-bf47-4921-962e-2b0ab7a62ad3" class="bulleted-list"><li style="list-style-type:disc">encryption in transit uses HTTPS # Managing Key Infrastructure [[AWS Contents]] [[AWS Questions#Managing Key Infrastructure]]</li></ul><h2 id="94596cdb-d870-4315-951e-43e2b3e575d7" class="">AWS Key Management Service (KMS)</h2><ul id="3ae3bf81-decd-4f8c-95ed-bb4296992b36" class="bulleted-list"><li style="list-style-type:disc">managed service</li></ul><ul id="093a5d66-6b57-42a8-931b-0e25f9ce4643" class="bulleted-list"><li style="list-style-type:disc">allows you to create, store, rotate, and delete encryption keys</li></ul><ul id="b558ce98-64f3-4389-9211-1c82f0e398ac" class="bulleted-list"><li style="list-style-type:disc">unlike SSL, KMS not designed for encryption-in-transit</li></ul><ul id="6e7737af-8744-443d-b202-db75764783aa" class="bulleted-list"><li style="list-style-type:disc">supports symmetric and asymmetric CMKs</li></ul><h3 id="d14a8c72-7ff0-430e-9949-e28095f4ae0e" class="">Customer Master Keys (CMK)</h3><ul id="5be645df-617d-483c-b42d-45523955d1cc" class="bulleted-list"><li style="list-style-type:disc">building block of KMS</li></ul><ul id="92596a37-5d17-4c41-b68c-6d69446af986" class="bulleted-list"><li style="list-style-type:disc">contains material used for encrypting and decrypting data</li></ul><p id="a147a0b5-b8bc-45a1-9e99-ccaa14d871c1" class="">Three different types of CMKs: 1. AWS-owned - rotation period varied from service to service - managed and created by AWS - e.g. Amazon S3 encryption using S3 master key (SSE-S3) - can’t view keys 2. AWS-managed - can’t control rotation frequency - can view keys being used and track their usage and key policies 3. Customer-managed - full control of keys</p><h3 id="c7a9df52-bce7-40de-9593-eeca79725db3" class="">Data Encryption Keys (DEKs)</h3><ul id="d8f0e7b6-d545-488b-93a7-38bf3eadc74c" class="bulleted-list"><li style="list-style-type:disc">created by CMKs</li></ul><ul id="e3ea2e22-7d57-4070-aaf9-0681afbb09da" class="bulleted-list"><li style="list-style-type:disc">unlike CMKs, doesn’t reside within KMS service</li></ul><ul id="f3bfb129-1e6c-4d68-9ef1-7b925e4fdbe9" class="bulleted-list"><li style="list-style-type:disc">used outside of KMS to encrypt data</li></ul><ul id="85823bc1-21ae-4aa7-b03b-b7e7d461b272" class="bulleted-list"><li style="list-style-type:disc">when DEK is generated, the associated CMK will create two DEKs<ol type="1" id="42589f43-ef34-4972-a511-bb99a1a16801" class="numbered-list" start="1"><li>Plaintext Key</li></ol><ol type="1" id="39646a03-fba0-413a-ba13-cb596c249640" class="numbered-list" start="2"><li>Identical (Encrypted) Key</li></ol></li></ul><ul id="58790b62-d5b5-41ea-b25a-ca70bb4d4dc0" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid">Envelope Encryption</span>: using one key to encrypt another key</li></ul><p id="edf00dc9-1f48-4742-99e5-a30c2e37305d" class="">Amazon S3 server-side encryption and decryption with KMS managed keys (SSE-KMS): #### SSE-KMS Encryption [[Pasted image 20220224222854.png]] 1. SSE-KMS encryption mechanism chosen by client and either AWS-managed or customer-managed CMK is selected 2. S3 tells KMS to generate DEKs 3. Plaintext data key and identical (encrypted) data key generated 4. These data keys are sent to S3. 5. S3 encrypts object data with plaintext version of data key. Encrypted data is then stored with encrypted version of key. Plaintext data key is destroyed.</p><h3 id="240fc463-6323-4f48-a9b5-8fc611e3a834" class="">SSE-KMS Decryption</h3><p id="c001f6d2-ba62-4b6c-870a-485d8fbaefa9" class="">[[Pasted image 20220224223534.png]] 1. Request received by S3 to access encrypted object 2. S3 sends encrypted data key associated with object to KMS 3. KMS uses original CMK to decrypt the data key to generate a plaintext version of that key 4. KMS sends plaintext data key to S3 5. Encrypted object decrypted with that key 6. Plaintext object sent back to client</p><h3 id="ceaf67bc-f740-4b6b-8e95-457a9e59eecc" class="">Key Material</h3><p id="1c31c089-f890-4556-9286-b069e97f729c" class=""><span style="border-bottom:0.05em solid">Key Material</span>: Data used to encrypt and decrypt data - stored within CMK - CMK key material can be used to encrypt data key and decrypt it (see [[Managing Key Infrastructure#SSE-KMS Decryption|SSE-KMS Decryption]]) - key material for AWS-managed CMKs gets automatically created - customer-managed CMKs give option of adding key material or not - can even import your own key material known as Bring Your Own Key (BYOK) - BYOK doesn’t support automatic key rotation</p><h3 id="cf8c1109-3bfb-49d7-a068-840b70d5eeea" class="">Key Policies</h3><ul id="0f7704d3-e8a3-4ab0-b142-97def7188365" class="bulleted-list"><li style="list-style-type:disc">cannot control access to CMKs without key policies</li></ul><ul id="0f51e6b1-91ec-4ad5-98ab-d1777b136b8e" class="bulleted-list"><li style="list-style-type:disc">access to CMK can be configured via:<ol type="1" id="e525fe97-32e2-4014-8d9e-b0ad5201ec51" class="numbered-list" start="1"><li>Key Policies: All access governed by key policy</li></ol><ol type="1" id="062c9851-832f-4d34-ac9f-21ed51d8f821" class="numbered-list" start="2"><li>Key Policies and IAM: Access governed by key policy and IAM identity-based policies<ul id="cb0e469a-db94-418e-bccc-4debeafd3bc4" class="bulleted-list"><li style="list-style-type:disc">allows access via groups and other IAM features</li></ul></li></ol><ol type="1" id="800e2971-86fb-41f3-8b31-a9badf58acda" class="numbered-list" start="3"><li>Key Policies and Grants: Access governed by key policy with ability to delete access to other for using the CMK<ul id="10f2096d-0151-4be7-9940-1af475ccb6eb" class="bulleted-list"><li style="list-style-type:disc">check page 508-512, great explanation</li></ul></li></ol></li></ul><h2 id="6782a603-1001-4f15-be25-6c4c1bd70991" class="">AWS CloudHSM</h2><ul id="043f60b1-1bc0-4ac4-a4b4-cba0987561de" class="bulleted-list"><li style="list-style-type:disc">fully managed service used for data encryption</li></ul><ul id="7d485fc6-55dc-4584-ab83-28c6c9fee4ba" class="bulleted-list"><li style="list-style-type:disc">can integrate with KMS in the form of using CloudHSM as a custom key store<ul id="950340b8-bae5-40ec-b99e-a22bfef6bbcd" class="bulleted-list"><li style="list-style-type:circle">allows storage of CMKs outside of KMS and into CloudHSM cluster</li></ul></li></ul><ul id="28134395-2ece-41d6-9c25-92c2bb9b6d5f" class="bulleted-list"><li style="list-style-type:disc">HSM stands for Hardware Security Module<ul id="44888b61-70e8-4e5a-908e-d40320181212" class="bulleted-list"><li style="list-style-type:circle">generates keys and stores them</li></ul><ul id="0e3fb7a7-f9e8-4680-b4f2-08a474e9cdf9" class="bulleted-list"><li style="list-style-type:circle">can use different encryption algorithms for both symmetric keys and asymmetric keys</li></ul><ul id="dbe67913-00fb-452c-80b1-62599ce2a735" class="bulleted-list"><li style="list-style-type:circle">manages symmetric and asymmetric keys</li></ul><ul id="8f351c07-d812-400c-9ea3-2a75b709e6e4" class="bulleted-list"><li style="list-style-type:circle">signs and verifies signatures</li></ul><ul id="3ed70bab-576c-4092-87e3-2070b3a60c84" class="bulleted-list"><li style="list-style-type:circle">can use hash function to compute hash-based message authentication codes (HMACs)</li></ul></li></ul><h3 id="721599e4-1ed5-40b0-849b-eca46ca6ab8d" class="">Cloud HSM Users</h3><p id="91c7eb99-dd6e-4efe-951e-d9a42c257368" class="">User types of CloudHSM 1. Precrypto Office 2. Crypto Office 3. Crypto User 4. Appliance User</p><div id="62b66d20-7445-4894-a778-1f4371626fe4" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Operations</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>PRECO</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>CO</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>CU</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCheckbox"><path d="M0,3 C0,1.34314 1.34326,0 3,0 L11,0 C12.6567,0 14,1.34314 14,3 L14,11 C14,12.6569 12.6567,14 11,14 L3,14 C1.34326,14 0,12.6569 0,11 L0,3 Z M3,1.5 C2.17139,1.5 1.5,2.17157 1.5,3 L1.5,11 C1.5,11.8284 2.17139,12.5 3,12.5 L11,12.5 C11.8286,12.5 12.5,11.8284 12.5,11 L12.5,3 C12.5,2.17157 11.8286,1.5 11,1.5 L3,1.5 Z M2.83252,6.8161 L3.39893,6.27399 L3.57617,6.10425 L3.92334,5.77216 L4.26904,6.10559 L4.44531,6.27582 L5.58398,7.37402 L9.28271,3.81073 L9.45996,3.64008 L9.80664,3.3056 L10.1538,3.63989 L10.3311,3.81067 L10.8936,4.35303 L11.0708,4.52399 L11.4434,4.88379 L11.0708,5.24353 L10.8936,5.41437 L6.1084,10.0291 L5.93115,10.2 L5.58398,10.5344 L5.23682,10.2 L5.05957,10.0292 L2.83057,7.87946 L2.65283,7.70801 L2.27832,7.34674 L2.6543,6.98694 L2.83252,6.8161 Z"></path></svg></span>AU</th></tr></thead><tbody><tr id="58619ba6-70ac-4e86-80d8-b821b7199443"><td class="cell-title"><a href="https://www.notion.so/Obtain-basic-cluster-information-number-of-HSMs-in-cluster-IP-address-serial-number-etc-58619ba670ac4e8680d8b821b7199443">Obtain basic cluster information (number of HSMs in cluster, IP address, serial number, etc.)</a></td><td class="cell-`chT"><div class="checkbox checkbox-off"></div></td><td class="cell-Ok[F"><div class="checkbox checkbox-on"></div></td><td class="cell-muoR"><div class="checkbox checkbox-on"></div></td><td class="cell-fial"><div class="checkbox checkbox-on"></div></td></tr><tr id="6cdff340-0eb2-417b-83d7-907ca80d9bdf"><td class="cell-title"><a href="https://www.notion.so/Zeroize-HSMs-delete-keys-certificates-and-data-on-the-HSM-6cdff3400eb2417b83d7907ca80d9bdf">Zeroize HSMs (delete keys, certificates, and data on the HSM)</a></td><td class="cell-`chT"><div class="checkbox checkbox-off"></div></td><td class="cell-Ok[F"><div class="checkbox checkbox-on"></div></td><td class="cell-muoR"><div class="checkbox checkbox-on"></div></td><td class="cell-fial"><div class="checkbox checkbox-on"></div></td></tr><tr id="9e279086-4ed7-4238-8ece-d09ae1a0ee0a"><td class="cell-title"><a href="https://www.notion.so/Change-own-password-9e2790864ed742388eced09ae1a0ee0a">Change own password</a></td><td class="cell-`chT"><div class="checkbox checkbox-on"></div></td><td class="cell-Ok[F"><div class="checkbox checkbox-on"></div></td><td class="cell-muoR"><div class="checkbox checkbox-on"></div></td><td class="cell-fial"><div class="checkbox checkbox-on"></div></td></tr><tr id="342edca2-2ad7-4c2b-97ad-8f8319deceda"><td class="cell-title"><a href="https://www.notion.so/Change-any-user-s-password-342edca22ad74c2b97ad8f8319deceda">Change any user’s password</a></td><td class="cell-`chT"><div class="checkbox checkbox-off"></div></td><td class="cell-Ok[F"><div class="checkbox checkbox-on"></div></td><td class="cell-muoR"><div class="checkbox checkbox-off"></div></td><td class="cell-fial"><div class="checkbox checkbox-off"></div></td></tr><tr id="4cd8e1de-5516-437a-b6eb-0f8e3fc84cb3"><td class="cell-title"><a href="https://www.notion.so/Add-and-remove-users-4cd8e1de5516437ab6eb0f8e3fc84cb3">Add and remove users</a></td><td class="cell-`chT"><div class="checkbox checkbox-off"></div></td><td class="cell-Ok[F"><div class="checkbox checkbox-on"></div></td><td class="cell-muoR"><div class="checkbox checkbox-off"></div></td><td class="cell-fial"><div class="checkbox checkbox-off"></div></td></tr><tr id="cb4de61d-d6b3-4e56-b67c-1b12dd2ce3c7"><td class="cell-title"><a href="https://www.notion.so/Get-synchronization-status-cb4de61dd6b34e56b67c1b12dd2ce3c7">Get synchronization status</a></td><td class="cell-`chT"><div class="checkbox checkbox-off"></div></td><td class="cell-Ok[F"><div class="checkbox checkbox-on"></div></td><td class="cell-muoR"><div class="checkbox checkbox-on"></div></td><td class="cell-fial"><div class="checkbox checkbox-on"></div></td></tr><tr id="6ca33a1f-a3a3-447b-92dd-e399e49985bf"><td class="cell-title"><a href="https://www.notion.so/Key-management-operations-6ca33a1fa3a3447b92dde399e49985bf">Key management operations</a></td><td class="cell-`chT"><div class="checkbox checkbox-off"></div></td><td class="cell-Ok[F"><div class="checkbox checkbox-off"></div></td><td class="cell-muoR"><div class="checkbox checkbox-on"></div></td><td class="cell-fial"><div class="checkbox checkbox-off"></div></td></tr><tr id="ec2b6260-7082-446c-91bb-c066244376c6"><td class="cell-title"><a href="https://www.notion.so/Encrypt-decrypt-sign-verify-generate-and-digest-HMACs-ec2b62607082446c91bbc066244376c6">Encrypt, decrypt, sign, verify, generate, and digest HMACs</a></td><td class="cell-`chT"><div class="checkbox checkbox-off"></div></td><td class="cell-Ok[F"><div class="checkbox checkbox-off"></div></td><td class="cell-muoR"><div class="checkbox checkbox-on"></div></td><td class="cell-fial"><div class="checkbox checkbox-off"></div></td></tr></tbody></table></div><h3 id="274072cf-e875-4565-8c70-2fc05c72edfe" class="">Precrypto Office (PRECO)</h3><ul id="67f8ad0a-2058-4300-9eaa-a4c6a8126daf" class="bulleted-list"><li style="list-style-type:disc">automatically created upon creating first HSM within cluster</li></ul><ul id="752d3c79-0eae-49ae-8e34-68fe2c929012" class="bulleted-list"><li style="list-style-type:disc">PRECO user has default creds</li></ul><ul id="9095e110-5714-4f03-b3a4-3144e0303b09" class="bulleted-list"><li style="list-style-type:disc">when first connecting to the HSM, you are prompted to change password of PRECO user<ul id="3d21e141-33b8-4e82-a77e-8f9f340d5f33" class="bulleted-list"><li style="list-style-type:circle">this turns the PRECO user into a Crypto Office (CO) user</li></ul></li></ul><h3 id="340dae07-eca0-41b9-8cd6-46174f464708" class="">Crypto Office (CO)</h3><ul id="2ecf0db4-8091-4a88-9598-422f703ee77a" class="bulleted-list"><li style="list-style-type:disc">greater permissions than PRECO</li></ul><p id="e521b689-950e-443d-81b5-0a831c9734ac" class="">Permissions: - create, delete and change passwords of users - delete keys, certificates, and data on HSM - obtain HSM metadata</p><h3 id="00f629f8-2430-4ccc-a137-42d131656d8a" class="">Crypto User (CU)</h3><p id="4faf8293-9964-46b2-8802-cf553bb5237f" class="">Permissions: - perform encryption and decryption - create, delete, wrap, unwrap, and mofity attributes of key - signs and verifies - generate digests and HMACs</p><h3 id="2b50b58a-f700-4ec9-99a8-e7d0389da087" class="">Appliance User (AU)</h3><ul id="b1e2e3a0-4fdc-4b39-8154-8f42fa4e5ff1" class="bulleted-list"><li style="list-style-type:disc">exists on all HSMs</li></ul><ul id="689921e4-ab8d-405a-882e-2be75a553bef" class="bulleted-list"><li style="list-style-type:disc">clones and synchronizes actions of HSMs</li></ul><ul id="2ca0afb6-8f59-4430-b083-b1614ddcd4b6" class="bulleted-list"><li style="list-style-type:disc">has same permissions as CO but cannot change passwords or add/remove user</li></ul><h2 id="d2c5ca2f-fb03-4672-9135-c71c047480e5" class="">AWS Secrets Manager</h2><ul id="22d70de7-1fdd-4629-9c5e-9779e9c6ec39" class="bulleted-list"><li style="list-style-type:disc">managed service</li></ul><ul id="9a5be68a-a584-46bd-8c86-1f88642406e5" class="bulleted-list"><li style="list-style-type:disc">secrets retrieved by calling Secrets Manager API : Anything that is confidential (e.g. passwords, API keys, etc.)<p id="c770bb3f-9976-47d1-a1a5-1b41ef95542a" class=""><span style="border-bottom:0.05em solid">Secrets</span></p></li></ul><ul id="942d4db6-60f2-4f6b-ab92-38b2c249ad21" class="bulleted-list"><li style="list-style-type:disc">removes need for hardcoding credentials in code</li></ul><ul id="143685ea-9bcb-4147-a496-955a9fd33573" class="bulleted-list"><li style="list-style-type:disc">automatically rotates secrets</li></ul><h1 id="cd889a58-c015-4c93-b9e9-f57c1f654f62" class="">AWS Questions</h1><p id="7d35f258-6c04-4ee7-9545-2f15ba6ad187" class="">[[AWS Contents]] [[AWS/Cloud Security - Specialist/Misc|Misc]]</p><p id="5cd35917-81e8-4d89-b5da-41a3aba80249" class="">[[AWS Questions#Section 2 Security Responsibility Access Management|Section 2: Security Responsibility and Access Management]] [[AWS Questions#Section 3 Security - A Layered Approach | Section 3: Security - A Layered Approach]] [[AWS Questions#Section 4 Monitoring Logging and Auditing|Section 4: Monitoring, Logging, and Auditing]] [[AWS Questions#Section 5 Best Practices and Automation | Section 5: Best Practices and Automation]] [[AWS Questions#Section 6 Encryption and Data Security|Section 6: Encryption and Data Security]] ## Section 2: Security Responsibility &amp; Access Management [[Access Management]] ### Access Policies [[Access Policies]] 1. Which format are AWS policies written in?</p><pre id="9596e3d8-7885-4ba7-9226-a2c0eb021d61" class="code code-wrap"><code>collapse:
-**JSON**</code></pre><ol type="1" id="e949f53d-f712-4f02-9232-25ce5b13bbcb" class="numbered-list" start="1"><li>What type of policy are Amazon S3 bucket policies?</li></ol><pre id="971f17b6-63d0-4450-ac16-a59139e4c80c" class="code code-wrap"><code>collapse:
-**Resource-based**</code></pre><ol type="1" id="14e4f5b0-af0e-45de-848e-eced9496098d" class="numbered-list" start="1"><li>What parameter is needed within a resource-based policy to identify who or what the policy should be associated with?</li></ol><pre id="2483300d-265d-4fb1-b40f-7231e73167c4" class="code code-wrap"><code>collapse:
-**Principal**</code></pre><ol type="1" id="41868498-61c8-4ac2-b908-f3232fbdd320" class="numbered-list" start="1"><li>After configuring cross-account access, from which account do you assume the cross-account role from – the trusted account or the trusting account?</li></ol><pre id="a29e5ed3-0022-497e-bef4-b31ac6b67a0a" class="code code-wrap"><code>collapse:
-**Trusted account**</code></pre><ol type="1" id="19ba393d-161e-4b3f-b06f-75a0fe9491a1" class="numbered-list" start="1"><li>True or false: the Access Advisor tab allows you to determine when identities accessed different services.</li></ol><pre id="afe5645f-f5e7-47d9-a646-ad528fbe768b" class="code code-wrap"><code>collapse:
-**True**</code></pre><h3 id="ea2bdc4b-9860-4c42-be38-2c4d1eb6d254" class="">Federated and Mobile Access</h3><p id="d8e85d4c-4bd1-4b02-b22d-5e654b77a986" class="">[<a href="about:blank#federated-and-mobile-access">Federated and Mobile Access</a>] 1. True or false: Federated access within AWS allows access to your AWS resources without needing to create any permissions.</p><pre id="988f3a7d-526b-4b70-87e0-139753488ef0" class="code code-wrap"><code>collapse:
-**False**</code></pre><ol type="1" id="f4c0bdb4-cba3-4404-8ff4-da224a65bef2" class="numbered-list" start="1"><li>Which AWS service uses federation to manage access to web and mobile applications with ease?</li></ol><pre id="f97a0ea1-3837-44fb-898a-9b6f341d739d" class="code code-wrap"><code>collapse:
-**Amazon Cognito**</code></pre><ol type="1" id="095bc44a-812d-4401-af41-9853600f1f20" class="numbered-list" start="1"><li>What are the two common types of federated access with AWS?</li></ol><pre id="6daed113-c51f-46db-8024-20aa5a81a475" class="code code-wrap"><code>collapse:
-**SAML Federation and Social Federation**</code></pre><ol type="1" id="f1d88732-4207-48e4-9559-1e1424a07769" class="numbered-list" start="1"><li>What is IdP short for in relation to federated access?</li></ol><pre id="8a7f4316-ac6a-4414-84a6-04cbf1feb272" class="code code-wrap"><code>collapse:
-**Identity provider**</code></pre><ol type="1" id="fe2ab4b5-336a-440f-b525-f70899475a92" class="numbered-list" start="1"><li>True or false: Identity pools actually provide you with the ability to assign permissions to users to access AWS resources used within a mobile app by using temporary credentials.</li></ol><pre id="7dd75c58-7ed3-4f50-b30d-55cb5f7d5730" class="code code-wrap"><code>collapse:
-**True**</code></pre><h3 id="b306aea3-bbc5-4a65-a14a-f833f6257d07" class="">Shared Responsibility Model</h3><p id="71051d30-3994-41b7-8344-806690d40089" class="">[<a href="about:blank#shared-responsibility-model-1">Shared Responsibility Model</a>] 1. Which shared responsibility model offers the most customization and control for the customer</p><pre id="9c2acfe4-b0e4-4cb9-8624-de04d2529285" class="code code-wrap"><code>collapse:
-**Infrastructure model**</code></pre><ol type="1" id="b31d6543-a559-479e-9794-759dde9035ac" class="numbered-list" start="1"><li>Which shared responsibility model offers the least customization and control for the customer?</li></ol><pre id="0649e217-de1c-4409-859d-35673df903bc" class="code code-wrap"><code>collapse:
-**Abstract**</code></pre><ol type="1" id="9b4d544d-b201-468a-ab74-4758acfd515f" class="numbered-list" start="1"><li>In which model would you expect to find the EC2 service?</li></ol><pre id="255a62a3-86d5-443c-93e1-bc199bcb0b42" class="code code-wrap"><code>collapse:
-**Infrastructure**</code></pre><ol type="1" id="dd26fdc3-b4e2-4c7b-9adb-ffeead52cc34" class="numbered-list" start="1"><li>Which model focuses on services that essentially reside on top of infrastructure services, such as Amazon EMR and Amazon RDS?</li></ol><pre id="107bd546-d983-4405-801e-dd9f0d77b295" class="code code-wrap"><code>collapse:
-**Container**</code></pre><ol type="1" id="8e9a7c26-e2e6-4f50-b4d9-000645a857ec" class="numbered-list" start="1"><li>True or false: the customer’s responsibility is defined as security in the cloud.</li></ol><pre id="17202687-b70c-46d6-9676-9fda9e61e08f" class="code code-wrap"><code>collapse:
-**True**</code></pre><h2 id="1319bec6-62d6-488b-b6ea-cdd36e5fa438" class="">Section 3: Security - A Layered Approach</h2><h3 id="d1c759b3-3510-4a6d-ba8e-7be0df8a8b30" class="">Securing EC2 Instances</h3><p id="7fabdcdd-c8e0-4fcc-96e4-71cc5d0ceb01" class="">[<a href="about:blank#securing-ec2-instances">Securing EC2 Instances</a>] 1. True or False: AWS Systems Manager is a fully managed service that allows you to help secure your instances and the applications that run on top of them by performing vulnerability assessments via an agent.</p><pre id="0bec5bad-6cf1-444e-92d6-f97fe7e6052f" class="code code-wrap"><code>collapse:
-**False**</code></pre><ol type="1" id="0d970a3f-1ddd-484b-ba4d-9ad496fbe9f5" class="numbered-list" start="1"><li>True or False: Amazon Inspector requires an agent to be installed to remotely run assessments.</li></ol><pre id="8f5f23c8-1626-46df-b382-86ab8eb979a1" class="code code-wrap"><code>collapse:
-**False** (Used to be true). It now uses SSM to remove the need for installing an agent.</code></pre><ol type="1" id="3e1d0519-c8c0-401c-996f-516075b28f1b" class="numbered-list" start="1"><li>Is the public key of an EC2 instance key pair held by AWS or you as the customer?</li></ol><pre id="1c47871d-3a12-4921-a2b9-3ebe9e09e52d" class="code code-wrap"><code>collapse:
-**AWS**</code></pre><ol type="1" id="a7bbb2e3-08e0-4b20-89ac-dab5b0b7f7a2" class="numbered-list" start="1"><li>Which service is used to track and record API calls made within your AWS account?</li></ol><pre id="55631698-4743-468a-8ba1-29b5b23c7a8e" class="code code-wrap"><code>collapse:
-**AWS CloudTrail**</code></pre><ol type="1" id="80c5d689-39b3-4629-a220-6df4b0477872" class="numbered-list" start="1"><li>Which service allows you to easily and quickly administer and perform operational actions against your instances (both Windows and Linux-based) at scale for both on-premise resources and within AWS without having to SSH or RDP into those instances?</li></ol><pre id="eec1fea7-a3e3-4caf-b653-b31b682d2fb6" class="code code-wrap"><code>collapse:
-**Systems Manager (SSM)**</code></pre><h3 id="38ae23de-49fe-4a66-9cc7-1c9436b0a586" class="">Configuring Infrastructure Security</h3><p id="114b7369-b71a-47fc-8776-4b5507862162" class="">[<a href="about:blank#configuring-infrastructure-security">Configuring Infrastructure Security</a>] 1. What does VPC stand for?</p><pre id="8c3040ef-ca1b-486e-b70f-b92485c48b0d" class="code code-wrap"><code>collapse:
-**Virtual Private Cloud**</code></pre><ol type="1" id="8a49c14e-56d2-4648-88f7-ede4fd8d0961" class="numbered-list" start="1"><li>Which VPC component provides a connection between your VPC and the outside world?</li></ol><pre id="710d59d6-a829-47f6-a11f-7a287960bd3b" class="code code-wrap"><code>collapse:
-**Internet Gateway (IGW)**</code></pre><ol type="1" id="0666c9fb-7f60-45a8-848b-3594711aa298" class="numbered-list" start="1"><li>Which VPC component allows instances in a private subnet to initiate a connection to the internet, for example, for essential operating system updates, but prevents any inbound access to the private subnet being initiated from the internet?</li></ol><pre id="2f71e7e4-9292-45a2-a547-d937e91e7061" class="code code-wrap"><code>collapse:
-**NAT Gateway**</code></pre><ol type="1" id="01696c24-9ce2-476c-92ba-d634553b83b9" class="numbered-list" start="1"><li>True or false: Security groups provide a virtual firewall level of protection at the instance level.</li></ol><pre id="21767ad7-68d7-44dc-b535-d19f13ebe3b8" class="code code-wrap"><code>collapse:
-**True**</code></pre><ol type="1" id="e8f9c85e-3f20-4f82-ae22-a60e539dd165" class="numbered-list" start="1"><li>True or false: Using the default NACL of your VPC provides enhanced security protection blocking all network traffic, both inbound and outbound.</li></ol><pre id="aa3363ea-9ab6-4343-81a4-dfba95762030" class="code code-wrap"><code>collapse:
-**False**</code></pre><h3 id="d674c753-f3c6-4e98-b1ed-506db2fb6cc4" class="">Implementing Application Security</h3><p id="dec34a2f-2a53-4f5e-b33c-cdba7c210585" class="">[<a href="about:blank#implementing-application-security">Implementing Application Security</a>] 1. True or false: The main function of the AWS WAF service is to provide protection for your web applications from malicious attacks from a wide variety of attack patterns.</p><pre id="003a7b10-fb2f-4144-90ef-33ac2c8b58d7" class="code code-wrap"><code>collapse:
-**True**</code></pre><ol type="1" id="996352c1-ec2e-4da6-9f65-1ec2046c52f4" class="numbered-list" start="1"><li>Which service allows you to manage WAF rules across a multi-account environment when using AWS Organizations?</li></ol><pre id="6f7ad04e-6f0d-46c6-a2cb-8a92a14196d1" class="code code-wrap"><code>collapse:
-**AWS Firewall Manager**</code></pre><ol type="1" id="51570acc-0746-4b8c-9156-ab66e1eacb8b" class="numbered-list" start="1"><li>Which AWS service must you enable as a prerequisite to use AWS Firewall Manager?</li></ol><pre id="823dd83b-acdd-44fc-b8df-07b0df8c0f35" class="code code-wrap"><code>collapse:
-**AWS Config**</code></pre><ol type="1" id="c4bf5669-f201-444e-974f-bdb77b2412a0" class="numbered-list" start="1"><li>Which type of load balancer would you use if low latency and high performance are key to your application architectures?</li></ol><pre id="f0959786-b4d8-4b4c-9b1c-7cc9c899b554" class="code code-wrap"><code>collapse:
-**Network Load Balancer**</code></pre><h3 id="f88b7f69-6d3f-4a3d-bf18-047bb2566093" class="">DDoS Protection</h3><p id="1ec787c9-acf5-4642-a0f8-5626ac864505" class="">[<a href="about:blank#ddos-protection">DDoS Protection</a>] 1. Which type of DDoS attack takes advantage of the three-way handshake that is used to establish a connection between two hosts?</p><pre id="1c89111a-f1a6-4923-87de-c6907866d7d6" class="code code-wrap"><code>collapse:
-**SYN Flood**</code></pre><ol type="1" id="31c398e2-0d06-4362-a54f-f05ea9355a35" class="numbered-list" start="1"><li>How many tiers are there to choose from when working with AWS Shield?</li></ol><pre id="f811812d-1662-4d87-a576-b4b59782be7b" class="code code-wrap"><code>collapse:
-**2**</code></pre><ol type="1" id="90176995-78c3-4eff-8777-f2b690a9df1c" class="numbered-list" start="1"><li>True or false: AWS Shield Advanced is a premium tier that comes with a range of additional features and protection.</li></ol><pre id="30d1d0f3-0136-4f94-82ac-1544e9259dd1" class="code code-wrap"><code>collapse:
-**True**</code></pre><ol type="1" id="e29df7e9-a6df-4e2a-b348-f0d57188d264" class="numbered-list" start="1"><li>True or false: The DDoS Response Team (DRT) is a specialized team at AWS who can help you to review, analyze, and monitor suspected malicious activity within your account and offer help and solutions on how to resolve a potential attack.</li></ol><pre id="68ba96b9-70ec-4607-b0ca-9fa3d071a363" class="code code-wrap"><code>collapse:
-**True**</code></pre><ol type="1" id="0b204440-4821-4c1f-ae05-d9385ac7d288" class="numbered-list" start="1"><li>True or false: By selecting a rate-based rule, you can define the maximum number of requests from a single IP within a 30-minute time frame.</li></ol><pre id="caf1d784-1af3-4461-9c73-c8c362cd3a50" class="code code-wrap"><code>collapse:
-**False**</code></pre><h3 id="73905dfe-0529-472a-a3c4-72e72a18f858" class="">Incident Response</h3><p id="e10c1674-1329-4fde-9f28-f051c798e351" class="">[<a href="about:blank#incident-response">Incident Response</a>] 1. Which framework has been designed by AWS to help you transition and migrate solutions into AWS Cloud that’s based on best practices and recommendations?</p><pre id="bf1b90fa-2361-4875-bfc5-438b634d673a" class="code code-wrap"><code>collapse:
-**Cloud Adoption Framework (CAF)**</code></pre><ol type="1" id="a0b06562-9810-4280-bb3c-35cb857e9baf" class="numbered-list" start="1"><li>Which AWS service is a regional-based managed service that’s powered by machine learning, specifically designed to be an intelligent threat detection service?</li></ol><pre id="ce3226ce-96a1-4924-8fa3-01e68e60836a" class="code code-wrap"><code>collapse:
-**Amazon GuardDuty**</code></pre><ol type="1" id="c1ca9f2f-3a4e-465c-aa4b-b7dfdbdb0ffd" class="numbered-list" start="1"><li>Which AWS service acts as a single-pane-of-glass view across your infrastructure, thus bringing all of your security statistical data into a single place and presented in a series of tables and graphs?</li></ol><pre id="a49012af-8fdb-4a2f-8cea-a8c2c90c9350" class="code code-wrap"><code>collapse:
-**AWS Security Hub**</code></pre><ol type="1" id="006be379-6fb2-47f9-8098-a92b92852d66" class="numbered-list" start="1"><li>True or False: Having a separate AWS account to be used for forensic investigations is essential to helping you diagnose and isolate any affected resource.</li></ol><pre id="ce400ee6-4b4c-4456-b7cc-bab93a21dd40" class="code code-wrap"><code>collapse:
-**True**</code></pre><h3 id="a3b0a2c0-bc76-41ea-a281-438657825311" class="">Secure Connections to AWS Environment</h3><p id="f3df614c-f6e5-44f1-b3ed-5f28eca22838" class="">[<a href="about:blank#secure-connections-to-aws-environment">Secure Connections to AWS Environment</a>] 1. When configuring a VPN connection, a VPN gateway is configured as well as what other type of gateway?</p><pre id="90d69bdc-8216-4260-878d-4254e8b5c6e9" class="code code-wrap"><code>collapse:
-**Customer Gateway**</code></pre><ol type="1" id="cae20e81-0936-4b24-b7f5-b206829ba760" class="numbered-list" start="1"><li>True or false: when an end-to-end connection is established between two gateways using a VPN connection with IPsec, the connection is referred to as a tube.</li></ol><pre id="59842cf2-b971-494f-aacf-b476239de5a8" class="code code-wrap"><code>collapse:
-**False**</code></pre><ol type="1" id="b9a8380d-24bb-47af-ac68-4dc3b0192d64" class="numbered-list" start="1"><li>Does Direct Connect use a public or private network to establish a connection with AWS?</li></ol><pre id="03a53a84-72e5-4e4e-b9b1-330a15c6c3c9" class="code code-wrap"><code>collapse:
-**Private**</code></pre><ol type="1" id="07e084a6-9438-4e59-aeca-a6e0cb6f3b3e" class="numbered-list" start="1"><li>True or false: by enabling route propagation, all other routes to networks represented across your site-to-site VPN connection will be automatically added to your route table, preventing you from having to manually add them.</li></ol><pre id="916c740a-513b-4432-ae3e-718d03cbfc73" class="code code-wrap"><code>collapse:
-**True**</code></pre><h2 id="d1cd725b-1fc2-4736-95ab-dff232601b38" class="">Section 4: Monitoring, Logging, and Auditing</h2><h3 id="f8c85666-6945-4431-bf56-7050bfca6dad" class="">Implementing Logging Mechanisms</h3><p id="358bdfcf-be53-46c3-ba1c-f8c54efde986" class="">[<a href="about:blank#implementing-logging-mechanisms">Implementing Logging Mechanisms</a>] 1. True or false: Amazon S3 server access logging is enabled by default.</p><pre id="936d96c7-da27-4648-a3cb-711b44153593" class="code code-wrap"><code>collapse:
-**False**</code></pre><ol type="1" id="ef8f62e2-f8d6-462b-9a99-cfc0f48ba389" class="numbered-list" start="1"><li>Amazon S3 object-level logging closely integrates with which other AWS service?</li></ol><pre id="6b23f229-83de-4d0d-951c-e5f916e3abb7" class="code code-wrap"><code>collapse:
-**AWS CloudTrail**</code></pre><ol type="1" id="a61d3b85-68a2-43cc-a03c-512b7267767b" class="numbered-list" start="1"><li>Which logging feature allows you the ability to capture IP traffic across the network interfaces attached to your resources?</li></ol><pre id="067a72d3-7fe1-4c79-9611-460a1940dd94" class="code code-wrap"><code>collapse:
-**VPC Flow Logs**</code></pre><ol type="1" id="0fee768d-8bd0-4ea1-a786-3cd31b5a15e2" class="numbered-list" start="1"><li>True or false: A VPC Flow Log can be configured for a subnet with a VPC.</li></ol><pre id="b2a2f7fb-1ff9-42f7-a6c9-5edff8a9cc6d" class="code code-wrap"><code>collapse:
-**True**</code></pre><ol type="1" id="036cae18-76ae-49fa-b208-af3529b46d09" class="numbered-list" start="1"><li>Which AWS service can be used to easily query AWS CloudTrail logs, enabling you to search for specific data?</li></ol><pre id="bb9042d1-3e07-4ca1-9776-3cb2394ceecb" class="code code-wrap"><code>collapse:
-**Amazon Athena**</code></pre><h3 id="87d94ad6-d9fd-47d2-bfff-91213001f236" class="">Auditing and Governance</h3><p id="f661bab0-1248-429f-ad8b-4d45b1644079" class="">[<a href="about:blank#auditing-and-governance">Auditing and Governance</a>] 1. Which AWS service is an on-demand portal to allow you to view and download AWS security and compliance reports, in addition to any online agreements?</p><pre id="b0fd479d-f4d8-481a-b9de-a2d335c896f6" class="code code-wrap"><code>collapse:
-**AWS Artifact**</code></pre><ol type="1" id="6fa02eeb-9698-4c8c-8b00-276376732c7f" class="numbered-list" start="1"><li>Which security feature of AWS CloudTrail ensures that your log files have not been tampered with or modified after they have been written to your bucket in Amazon S3?</li></ol><pre id="2cf137a0-b981-4140-9955-199df3daa472" class="code code-wrap"><code>collapse:
-**Logfile Validation**</code></pre><ol type="1" id="28582e17-34bb-416d-b9cf-f7b125258990" class="numbered-list" start="1"><li>Which feature in AWS Config automatically monitors your resources to ensure they are meeting specific compliance controls?</li></ol><pre id="2534a930-dab3-449a-983a-554fc32f0418" class="code code-wrap"><code>collapse:
-**AWS Managed Rules**</code></pre><ol type="1" id="be2d34da-ebf5-46c6-a862-2ee578af5c33" class="numbered-list" start="1"><li>Which service is backed by machine learning and provides an automatic way of detecting, protecting, and classifying data within your S3 buckets?</li></ol><pre id="0426ebca-34da-45e0-98bc-9ee9aaf8dd01" class="code code-wrap"><code>collapse:
-**Amazon Macie**</code></pre><ol type="1" id="2faeab31-96c5-4b80-9e1d-dd6f2a7e68ea" class="numbered-list" start="1"><li>True or false: Amazon Macie classifies data through a series of automatic content classification mechanisms. It performs its classification using the object-level API data events collated from CloudTrail logs.</li></ol><pre id="0e79d06c-d256-4fae-8d02-75ae5e9c54ce" class="code code-wrap"><code>collapse:
-**True**</code></pre><h2 id="f0c0dd4d-b90f-4448-8112-62e58968a469" class="">Section 5: Best Practices and Automation</h2><h3 id="5cfae0c7-091b-4899-912f-84b6aa08d772" class="">Automation</h3><p id="18eca40f-5327-42b7-8818-df9bb15482ed" class="">[<a href="about:blank#automation-1">Automation</a>] 1. True or false: CloudWatch events can be used to search for specific events within your infrastructure, which can trigger an automated response.</p><pre id="e11074e5-57de-401e-be42-0c293856cccb" class="code code-wrap"><code>collapse:
-**True**</code></pre><ol type="1" id="50ff00fd-6ac5-40d2-a1bf-0fdf315615bf" class="numbered-list" start="1"><li>Amazon GuardDuty is able to process and analyze millions of events that are captured through your AWS CloudTrail logs, DNS logs, and which other logging mechanism?</li></ol><pre id="23bb6f67-0c3e-4a97-9c54-ebbb0acb7c62" class="code code-wrap"><code>collapse:
-**VPC Flow Logs**</code></pre><ol type="1" id="4a6cc46d-5c84-4063-9d11-42937706153c" class="numbered-list" start="1"><li>Which AWS service acts as a single-pane-of-glass approach to your security notifications across your accounts?</li></ol><pre id="da7ce56a-b070-4ee6-9aeb-650dea47b9d4" class="code code-wrap"><code>collapse:
-**AWS Security Hub**</code></pre><ol type="1" id="7602e44a-3169-4f35-853b-2e4ff6fd3303" class="numbered-list" start="1"><li>True or false: AWS Security Hub integrates with AWS Trusted Advisor to help you automate the remediation process of any findings found.</li></ol><pre id="06533e4c-0d1e-4e5b-8479-543a245b1145" class="code code-wrap"><code>collapse:
-**False**</code></pre><h3 id="9d28a46d-9012-4479-9134-e3bc7bbdceb8" class="">Discovering Security Best Practices</h3><p id="ac8d87fe-205e-4c9c-9147-ecddf4cbf476" class="">[<a href="about:blank#discovering-security-best-practices">Discovering Security Best Practices</a>] 1. True or false: You should enable access keys for your root account that would enable programmatic access to your AWS account.</p><pre id="a2b42a12-1fad-4133-9205-b785fcaef681" class="code code-wrap"><code>collapse:
-**False**</code></pre><ol type="1" id="be56495a-6c83-4175-801d-7794318c2ee3" class="numbered-list" start="1"><li>Which AWS service highlights and recommends enhancements against a number of predefined best practice checks across five different areas of your account?</li></ol><pre id="0461ea2a-98ef-40a5-a3b8-6b8b62d946ca" class="code code-wrap"><code>collapse:
-**AWS Trusted Advisor**</code></pre><ol type="1" id="cb5c2ea7-5095-4a6e-b60d-2fedbc6a1ee3" class="numbered-list" start="1"><li>Which check within AWS Trusted Advisor is used to determine whether you have adequate resiliency built into your environment, for example, through making use of multi-Availability Zone features and auto-scaling?</li></ol><pre id="78adc318-1079-46b3-87b4-d8e33d2e3178" class="code code-wrap"><code>collapse:
-**Fault Tolerance**</code></pre><ol type="1" id="fb2f1dee-070c-4a19-91d3-fccd7107fd81" class="numbered-list" start="1"><li>Which support plans only give access to seven core Trusted Advisor checks?</li></ol><pre id="707a4cdf-401d-4b3e-af68-f21f234a27fb" class="code code-wrap"><code>collapse:
-**Basic and Developer**</code></pre><ol type="1" id="e717b8dd-f8e2-4de5-9dbc-564a4140d02e" class="numbered-list" start="1"><li>True or false: A penetration test, or pentest, is essentially an authorized cyber attack on your own environment and infrastructure in an effort to determine its weak points and vulnerabilities, in addition to its strengths, against defined security standards.</li></ol><pre id="02831d93-c1e7-485a-ac06-4fad6a775027" class="code code-wrap"><code>collapse:
-**True**</code></pre><h2 id="2e27b7a2-7cbf-4e67-a248-fe42fa2cb528" class="">Section 6: Encryption and Data Security</h2><h3 id="abdd3bf8-45d4-4eec-ab5e-abd578e62561" class="">Managing Key Infrastructure</h3><p id="2370ac4f-41f1-4a50-ab46-c11eb1aad7eb" class="">[<a href="about:blank#managing-key-infrastructure">Managing Key Infrastructure</a>] 1. True or False: Asymmetric encryption uses a single key to encrypt and decrypt data.</p><pre id="f35e7ce1-4186-4ea7-8397-235c4ae1c00e" class="code code-wrap"><code>collapse:
-**False**</code></pre><ol type="1" id="b2967b60-b83f-4616-96e6-6b996b8e88c0" class="numbered-list" start="1"><li>Which component is the main building block of the KMS service as it contains the key material used for both encrypting and decrypting data?</li></ol><pre id="71d3d29e-3e9b-4c2f-bb48-f106de39c9d1" class="code code-wrap"><code>collapse:
-**Customer Master Key (CMK)**</code></pre><ol type="1" id="18773d5f-78a1-45e3-a8d7-8000ed8d7766" class="numbered-list" start="1"><li>There are three different types of CMKs used by KMS that you need to be familiar with; AWS-owned, customer-managed, and which other?</li></ol><pre id="64fd9ae9-8dac-4ca5-80c4-c717d1acb754" class="code code-wrap"><code>collapse:
-**AWS-managed**</code></pre><ol type="1" id="c389371d-5cb2-4908-87eb-3055f6ddfeff" class="numbered-list" start="1"><li>Which component of KMS is used to determine who can use the key to perform cryptographic operations, such as encrypt, decrypt, and GenerateDataKey, in addition to who can administer the CMK?</li></ol><pre id="0443a054-1d7c-440e-8649-b2d10c141b0a" class="code code-wrap"><code>collapse:
-**Key policy**</code></pre><ol type="1" id="e1f55e71-ffe0-4282-a7ed-e4940c70bab0" class="numbered-list" start="1"><li>Which AWS service offers the ability to maintain a level of security protection for any API keys, in addition to other secrets?</li></ol><pre id="aa19289b-ac62-4508-a2f4-e25f5f5f3621" class="code code-wrap"><code>collapse:
-**AWS Secrets Manager**</code></pre><h3 id="72155c09-93a6-4efa-b996-75859f824dc8" class="">Managing Data Security</h3><p id="67f8be35-60e4-4142-8c5e-5b4751afe0cf" class="">[<a href="about:blank#managing-data-security">Managing Data Security</a>] 1. What does IOPS stand for?</p><pre id="a484c711-7a35-4c8c-a8da-b29fb479caca" class="code code-wrap"><code>collapse:
-**Input/Output Operations Per Second**</code></pre><ol type="1" id="0706228a-f023-4eb8-b656-0b65db1bdf2c" class="numbered-list" start="1"><li>Which AWS service provides persistent block-level storage to your EC2 instance, providing more flexibility to your instance storage capabilities?</li></ol><pre id="1b933ab6-01b5-4e1d-8e19-15cdeb968600" class="code code-wrap"><code>collapse:
-**Amazon  Elastic Block Store (EBS)**</code></pre><ol type="1" id="f4b8743d-0367-42e9-8a5b-855f5d600d03" class="numbered-list" start="1"><li>Which AWS service is used for file-level storage and has the capacity to support access to thousands of instances at once?</li></ol><pre id="ecb2a084-6ab5-4a09-9973-911ac5c25242" class="code code-wrap"><code>collapse:
-**Amazon Elastic File Service (EFS)**</code></pre><ol type="1" id="fdc60393-0b94-4cfb-829c-e23c2c8c4bf1" class="numbered-list" start="1"><li>True or false: you can enable encryption at rest using the AWS CLI, an SDK, the AWS EFS API, or the AWS Management Console.</li></ol><pre id="3f0a00c9-2371-464b-8ba2-187fa8353296" class="code code-wrap"><code>collapse:
-**True**</code></pre><ol type="1" id="fef1d9eb-0944-4551-8df3-719a9d1fd6a1" class="numbered-list" start="1"><li>By default, at-rest encryption using server-side encryption is enabled on all DynamoDB tables. Which AWS service is integrated to perform this encryption?</li></ol><pre id="db128138-1e7e-41ac-b97b-34dbc10489af" class="code code-wrap"><code>collapse:
-**AWS Key Management Service (KMS)**</code></pre><h1 id="ee994c16-a6a3-4551-98e1-e2aa01d25b54" class="">Misc</h1><p id="5644cc03-e38b-4f68-8597-bf8bd1b93809" class="">[[AWS Contents]] [<a href="about:blank#aws-questions">AWS Questions</a>] ## Notes - AWS Artifact is a resource about compliance-related stuff - AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources - Amazon CloudFront is a web service that is used for distributing content - delivers web content through network via edge locations (locations that are closest to the client requesting website), therefore gives client lowest latency - CloudTrail logs can provide detailed API tracking for Amazon S3 bucket-level and object-level operations - VPC Flow logging logs IP data going to and from designated network interfaces and stores this data in Amazon CloudWatch - Amazon Athena is a serverless, interactive query service to query data and analyze big data in Amazon S3 - VPC peering - networking connection between two VPCs that enables traffic to be routed between them - allows instances within those VPCs to communicate with each other as if they were in the same network - Amazon S3 Glacier is a secure, durable, and extremely low-cost Amazon S3 storage class for data archiving and long-term backup - AWS Control Tower enforces and manages governance rules for security, operations, and compliance at scale - ACLs were the first authorization mechanism in S3. Bucket policies are the newer method, and the method used for almost all AWS services. Policies can implement very complex rules and permissions, ACLs are simplistic (they have ALLOW but no DENY). - A majority of modern use cases in Amazon S3 no longer require the use of ACLs, and we recommend that you disable ACLs except in unusual circumstances where you need to control access for each object individually</p><h2 id="27c8e720-3052-4932-8dbb-7aa27d2d2217" class="">Questions</h2><p id="8c783f36-7b84-42ce-b628-df7912ffd4f9" class="">What is the difference between Internet Gateway (IGW) and NAT Gateway (NGW)?</p><ul id="7e9ef41a-e918-408b-9aa5-ee82829a6a00" class="bulleted-list"><li style="list-style-type:disc">internet gateway allows instances with public IP to access internet</li></ul><ul id="8d396bb7-28b4-4698-9821-381477faf173" class="bulleted-list"><li style="list-style-type:disc">NAT gateway allows instances with no public IP to access internet</li></ul><p id="640f394c-1934-4c71-ae0e-71e5fb3e16ff" class="">What is the difference between AWS CloudWatch and Amazon CloudTrail?</p><ul id="933c373b-21ad-47b4-9561-75c34da7a419" class="bulleted-list"><li style="list-style-type:disc">AWS CloudWatch monitors AWS resources and applications while CloudTrail monitors activity within AWS environment# Mock Exam Questions</li></ul><h2 id="eb058b3b-8962-4110-a1b2-4eaf17c6052f" class="">Mock Exam 1</h2><ul id="9a750956-c0e9-4874-a44e-1c865f1637b0" class="bulleted-list"><li style="list-style-type:disc">questions I got wrong or was unsure about</li></ul><ol type="1" id="2989ce44-2ed5-43ef-82a5-ffd59b3543b9" class="numbered-list" start="1"><li>When IAM policies are being evaluated for their logic of access, which two of the following statements are incorrect?<ul id="2d50537a-b4b2-4355-a821-69a858ab76a3" class="bulleted-list"><li style="list-style-type:disc">explicit denies are always overruled by an explicit allow</li></ul><ul id="ccf1ca6f-8eac-43d6-bc6e-e33d0f0b8464" class="bulleted-list"><li style="list-style-type:disc">access to all resources is allowed by default until access is denied</li></ul></li></ol><ol type="1" id="44018038-bf8a-4dbf-b78e-f94a4a394764" class="numbered-list" start="2"><li>Your security team has been tasked with implementing a solution to monitor your EC2 fleet of instances. Upon review, you decide to implement Amazon Inspector. What are the three prerequisites that you would need to implement before using Amazon Inspector? (Choose three answers)<ul id="3150c21a-817e-4e22-ae51-7fd131f289c5" class="bulleted-list"><li style="list-style-type:disc">deploy Amazon Inspector agents to your EC2 fleet</li></ul><ul id="dfcc27d2-0c4d-42d1-9926-4a10d8f3af26" class="bulleted-list"><li style="list-style-type:disc">create an IAM service-linked role that allows Amazon Inspector to access your EC2 feet</li></ul></li></ol><ol type="1" id="42eb279c-865d-403d-9907-ec3ae3d2ab0d" class="numbered-list" start="3"><li>When using AWS Shield, which type of rule counts the number of requests received from a particular IP address over a time period of 5 minutes?<ul id="9cd754c2-3312-4ec5-990e-f7f7b6b24e11" class="bulleted-list"><li style="list-style-type:disc">rate-based</li></ul></li></ol><ol type="1" id="31ef8633-775e-4ebd-8b88-b2b6b19ef3bc" class="numbered-list" start="4"><li>Following a breach on your network, an instance was compromised and you need to perform a forensic investigation of the affected instance. You decide to move the EC2 instance to your forensic account. Which steps would you take to carry out this process?</li></ol><ul id="cac10394-1ec8-4a75-bad3-172b5fb4d15f" class="bulleted-list"><li style="list-style-type:disc">Create an AMI from the affected EC2 instance and then share that AMI image with your forensic account. From within your forensic account, locate the AMI and create a new instance from the shared AMI.</li></ul><ol type="1" id="59ff0bbe-efd2-4f7e-8312-4306b8a728ab" class="numbered-list" start="1"><li>What is the Log Delivery Group account used for within Amazon S3?<ul id="f3182004-66e6-4799-9246-991d1db2dc99" class="bulleted-list"><li style="list-style-type:disc">This is a predefined group by AWS that’s used to deliver S3 server access logs to a bucket.</li></ul></li></ol><ol type="1" id="5a38244f-d350-466b-9fb9-87f868e6dd09" class="numbered-list" start="2"><li>You are using the KMS service called encrypt_me to perform encryption within Amazon S3 using a customer created CMK in eu-west-1. A colleague explains that they are unable to see the CMK when they try to use it to encrypt data in a bucket named encrypt_me_too in us-east-1. What is the most likely cause of this?<ul id="5eeab443-fc6d-4b72-b902-bbcea9e08dda" class="bulleted-list"><li style="list-style-type:disc">CMKs are regional, so it will not appear in us-east-1.</li></ul></li></ol><ol type="1" id="e2ca1c9d-50e6-406c-addc-2f7a5df21f23" class="numbered-list" start="3"><li>A developer in your organization requires access to perform cryptographic functions using a customer-managed CMK. What do you need to update so that you can add permissions for the developer to allow them to use the CMK?<ul id="37153681-5571-4010-81cb-8af850ec0204" class="bulleted-list"><li style="list-style-type:disc">Key policy</li></ul></li></ol><ol type="1" id="dcb94abf-4c56-4a84-9baf-765295e3a745" class="numbered-list" start="4"><li>Your IAM administrator has created 20 IAM users within your organization’s production AWS account. All users must be able to access AWS resources using the AWS Management Console, in addition to programmatic access via the AWS CLI. Which steps must be implemented to allow both methods of access? (Choose two.)<ul id="3a92c8bd-fbab-46c7-a777-df1af38c6455" class="bulleted-list"><li style="list-style-type:disc">Create a user account with their own IAM credentials and password.</li></ul><ul id="1b385139-db7d-4000-8c0b-d0447f796721" class="bulleted-list"><li style="list-style-type:disc">Create an access key and secret access key for every user.</li></ul></li></ol><ol type="1" id="75db3184-cd3e-4094-baa8-3f9c651f9110" class="numbered-list" start="5"><li>Microsoft Active Directory Federation Services (ADFS) can be used as an Identity Provider (IdP) to enable federated access to the AWS Management Console. As part of the authentication process, which API is used to request temporary credentials to enable access?<ul id="16abe09d-9c2c-4eb2-91d6-126a578efefa" class="bulleted-list"><li style="list-style-type:disc">AssumeRoleWithSAML</li></ul></li></ol><ol type="1" id="ff63b7cb-cfac-45bd-b126-ca8b665093e1" class="numbered-list" start="6"><li>When configuring your IdP from within IAM, which document do you need to provide that includes the issuer’s name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that are received from the IdP?<ul id="52c7674b-9c0c-4e67-bb56-e7aa21a59b24" class="bulleted-list"><li style="list-style-type:disc">Metadata document</li></ul></li></ol><ol type="1" id="92c0ca20-9497-4a6a-9488-94856cdda6f7" class="numbered-list" start="7"><li>Your CTO has asked you to find a simple and secure way to perform administrative tasks and configurational changes remotely against a selection of EC2 instances within your production environment. Which option should you choose?<ul id="023ee3e7-f5bd-4f48-b322-95bf89886c8d" class="bulleted-list"><li style="list-style-type:disc">Use the Run command in AWS Systems Manager.</li></ul></li></ol><ol type="1" id="0a42a3b8-9cac-40f1-8566-35ebf8b2a438" class="numbered-list" start="8"><li>Your organization is running a global retail e-commerce website in which customers from around the world search your website, adding products to their shopping cart before ordering and paying for the items. During a meeting to redesign the infrastructure, you have been instructed to define a solution where routing APIs to microservices can be managed, in addition to adding security features so that users can manage authentication and access control and monitor all requests that are made from concurrent API calls. Which service should you implement to manage these requirements?<ul id="fc41776e-35be-4b76-8b82-f722bef8685d" class="bulleted-list"><li style="list-style-type:disc">AWS API Gateway</li></ul></li></ol><ol type="1" id="d89903d1-69ae-4ab3-a7e4-6884d3284c1d" class="numbered-list" start="9"><li>One of your instances within a private subnet of your production network may have been compromised. Since you work within the incident team, you have been asked to isolate the instance from other resources immediately, without affecting other production EC2 instances in the same subnet. Which approaches should be followed in this situation? (Choose two.)<ul id="b3bee2b8-96ca-435f-aff5-d715ada5bd33" class="bulleted-list"><li style="list-style-type:disc">remove any role associated with the EC2 instance</li></ul><ul id="03c73c81-13a0-482c-af09-7a1085498b7a" class="bulleted-list"><li style="list-style-type:disc">change security group of instance to restricted security group, thereby preventing any access to or from the instance</li></ul></li></ol><ol type="1" id="d80db1db-e186-4a74-bbf2-76ae8cb43460" class="numbered-list" start="10"><li>You have implemented a VPN connection between your data center and your AWS VPC. You then enabled route propagation to ensure that all the other routes to networks represented across your site-to site VPN connection are automatically added within your route table. However, you notice that you now have overlapping CIDR blocks between your propagated routes and existing static routes. Which statement is true?<ul id="f31c0018-85d7-499b-a1da-d9b34a793179" class="bulleted-list"><li style="list-style-type:disc">Your static routes will take precedence over propagated routes</li></ul></li></ol><ol type="1" id="7f6cabae-c32b-459a-9fb9-b7e3fbe5b3f7" class="numbered-list" start="11"><li>Your CTO has explained that they are looking for a solution to be able to monitor network packets across your VPC. You suggest VPC flow logs, but the CTO wants to implement a solution whereby captured traffic is sent to a Network Load Balancer, using UDP as a listener, which sits in front of a fleet of appliances dedicated to network analysis. What solution would you suggest to the CTO?<ul id="377fce73-7528-4a09-8da1-792294f69827" class="bulleted-list"><li style="list-style-type:disc">Use Traffic Mirroring to capture packets and use the NLB as a Target.</li></ul></li></ol><ol type="1" id="9461c17d-2d24-4d96-a196-886fba3b1984" class="numbered-list" start="12"><li>You have been tasked with defining a central repository that enables you to view real-time logging information from different AWS services that can be filtered and queried to search for specific events or error codes. Which of the following would you use?<ul id="9df89019-b45a-4bca-bab4-442fe88b48aa" class="bulleted-list"><li style="list-style-type:disc">Amazon CloudWatch logs</li></ul></li></ol><ol type="1" id="5c98c3a5-939a-44a8-8198-28e0af8992f2" class="numbered-list" start="13"><li>Which feature of AWS CloudTrail can be used for forensic investigation to confirm that your log files have not been tampered with?<ul id="8fd40af9-9d66-4c3b-97a3-bb541590f155" class="bulleted-list"><li style="list-style-type:disc">Select Log File Validation</li></ul></li></ol><ol type="1" id="facf8608-cd8a-4aa1-a9ff-ed17f085e948" class="numbered-list" start="14"><li>When encrypting an EBS group, which kind of keys can be used? (Choose three.)<ul id="b5c80af6-dd28-4f00-9a22-fe3635d1568f" class="bulleted-list"><li style="list-style-type:disc">AWS managed CMK key</li></ul><ul id="24fc4f3a-93fa-4755-9e85-8adb2192ff87" class="bulleted-list"><li style="list-style-type:disc">AWS owned CMK key</li></ul><ul id="4bbf1002-8985-4036-b671-a0192f17e511" class="bulleted-list"><li style="list-style-type:disc">Customer CMK key</li></ul></li></ol><ol type="1" id="49d2dce2-15f2-49fd-a374-6e55a018393f" class="numbered-list" start="15"><li>Which policies do NOT require a principal parameter within the context of the policy? (Choose two.)<ul id="1379113b-7be9-40c1-9b82-09cffe3a330e" class="bulleted-list"><li style="list-style-type:disc">An inline IAM policy</li></ul><ul id="83f35e1b-c5bc-439f-aa70-8d6f68b375fd" class="bulleted-list"><li style="list-style-type:disc">A service control policy (SCP)</li></ul></li></ol><ol type="1" id="6b9723aa-d033-4e3f-ad5f-c165198c9764" class="numbered-list" start="16"><li>You have just joined a new startup as a security engineer. One of your first tasks is to implement authentication for a new mobile application that is likely to scale to over a million users within the first few months. Which option is the best for handling scaling with minimal management?<ul id="385c2c41-aea1-482f-8803-0d80b86e1fa0" class="bulleted-list"><li style="list-style-type:disc">Implement Amazon Cognito with Social Federation.</li></ul></li></ol><ol type="1" id="d1d50556-c6c1-437e-a150-1cec70e6c892" class="numbered-list" start="17"><li>Your engineering team has come to you to explain that they have lost the private key associated with one of their Linux instance-stored backed root volume EC2 instances, and they can no longer connect to and access the instance. Which statement is true in this circumstance?<ul id="3ce375c8-a096-49d9-90af-4cbec8bf540a" class="bulleted-list"><li style="list-style-type:disc">When you lose your private key to an EC2 instance that has an instance-stored root volume, there is no way to reestablish connectivity to the instance</li></ul></li></ol><ol type="1" id="150735ee-4085-4fa0-99e9-aa911ba22fca" class="numbered-list" start="18"><li>You are explaining the differences between security groups and Network Access Control Lists to a customer. What key points are important to understand when understanding how these two security controls differ from each other? (Choose three)<ul id="7e485a1d-2e8f-4dfe-b89f-d30d1ece99b6" class="bulleted-list"><li style="list-style-type:disc">Security groups are stateful by design and NACLs are not</li></ul><ul id="64ad6254-6059-43b1-a384-3e79a5b1ec3f" class="bulleted-list"><li style="list-style-type:disc">Securiyt groups controll access at the instance level</li></ul><ul id="a64c9281-7fc9-4f66-8ebd-19dbce262919" class="bulleted-list"><li style="list-style-type:disc">NACLs allow you to add a <code>deny</code> action within the ruleset</li></ul></li></ol><ol type="1" id="77eeb88c-367d-4678-8191-9b13d1ec2043" class="numbered-list" start="19"><li>Your new startup is deploying a highly-scalable multi-tiered application. Your VPC is using both public and private subnets, along with an application load balancer. Your CTO has defined the following requirements:<ul id="42ceabe2-f4d6-46d8-bb90-b120751ea867" class="bulleted-list"><li style="list-style-type:disc">a NAT gateway should be deployed in the public subnet</li></ul><ul id="5de35e42-a6cd-42ce-bbf5-015de06345a7" class="bulleted-list"><li style="list-style-type:disc">Launch the EC2 instances in the private subnet</li></ul></li></ol><ol type="1" id="444d0b6e-0545-42fe-89a2-c4c867a85fcd" class="numbered-list" start="20"><li>You are experiencing an increase in the level of attacks across multiple different AWS accounts against your applications from the internet. This includes XSS and SQL injection attacks. As the security architect for your organization, you are responsible for implementing a solution to help reduce and minimize these threats. Which AWS services should you implement to help protect against these attacks? (Choose two.)<ul id="cfc6f5d5-f377-471f-910d-c049a481589b" class="bulleted-list"><li style="list-style-type:disc">AWS Firewall Manager</li></ul><ul id="374ec457-5b3b-4e48-8133-817fc66cd502" class="bulleted-list"><li style="list-style-type:disc">AWS Web Application Firewall</li></ul></li></ol><ol type="1" id="7e1bce03-b598-4a6c-af9e-d2562c9df5b9" class="numbered-list" start="21"><li>During the deployment of a new application, you are implementing a public-facing Elastic Load Balancer (ELB). Due to the exposed risk, you need to implement encryption across your ELB, so you select HTTPS as the protocol listener. During this configuration, you will need to select a certificate from a certificate authority (CA). Which CA is the recommended choice for creating the X.509 certificate?<ul id="776debdf-d989-4a89-ab97-5d7b2dd34c7c" class="bulleted-list"><li style="list-style-type:disc">AWS Certificate Manager</li></ul></li></ol><ol type="1" id="4de8200d-79e0-42e7-810f-d18a5de74a70" class="numbered-list" start="22"><li>Recently, you have noticed an increase in the number of DDoS attacks against your public web servers. You decide to implement AWS Shield Advanced to help protect your EC2 instances. Which configurational change do you need to implement before you can protect your instance using the advanced features?<ul id="3563a53a-e933-4d7e-a354-b5cdfa21fa37" class="bulleted-list"><li style="list-style-type:disc">Assign an EIP to the EC2 instance.</li></ul></li></ol><ol type="1" id="428e1f39-7c82-4a9e-812a-4f6afc7ff4c6" class="numbered-list" start="23"><li>Which layer of the OSI model do both Amazon CloudFront (with AWS WAF) and Route 53 offer attack mitigation against? (Choose three.)<ul id="e3c59db6-2083-490a-9a35-ce26a7444feb" class="bulleted-list"><li style="list-style-type:disc">They offer attack mitigation against layers 3,4, and 7</li></ul></li></ol><ol type="1" id="e00e440f-7fd1-4880-bb1a-705dd591b107" class="numbered-list" start="24"><li>An engineer has raised a concern regarding one of your buckets and wants to understand details about when a particular bucket has been accessed to help ascertain the frequency and by whom. Which method would be the MOST appropriate to get the data required?<ul id="ae7ca8f5-9cc2-45c5-bfeb-58bcd1850650" class="bulleted-list"><li style="list-style-type:disc">Analyze S3 Server Access Logs</li></ul></li></ol><ol type="1" id="77ed3434-de78-47bc-9714-e5727ac22ea0" class="numbered-list" start="25"><li>Amazon S3 object-level logging integrates with which other AWS service?<ul id="6193e355-7a9a-417e-899c-58b718f47ecf" class="bulleted-list"><li style="list-style-type:disc">AWS CloudTrail</li></ul></li></ol><ol type="1" id="6644832d-e383-4d57-bded-6ba00daf7ffd" class="numbered-list" start="26"><li>You are currently monitoring the traffic flow between a number of different subnets using VPC flow logs. Currently, the configuration of the capture is capturing ALL packets. However, to refine the flow log details, you want to modify the configuration of the flow log so that it only captures rejected packets instead. Which of the following statements is true?<ul id="05750562-0b37-41b4-b643-58c0f394f8c8" class="bulleted-list"><li style="list-style-type:disc">You can’t change the configuration of an existing flow log once it’s been created.</li></ul></li></ol><ol type="1" id="f0a2f57f-381f-466e-8acb-f7dcb9010a2d" class="numbered-list" start="27"><li>Your CTO is concerned about the sensitivity of the data being captured by AWS CloudTrail. As a result, you suggest encrypting the log files when they are sent to S3. Which encryption mechanism is available to you during the configuration of your Trail?<ul id="1378b36a-dac6-4408-a4cc-549fe187bdb0" class="bulleted-list"><li style="list-style-type:disc">SSE-KMS</li></ul></li></ol><ol type="1" id="bc5314e5-8ada-4e34-8a99-ea864397474b" class="numbered-list" start="28"><li>As part of your security procedures, you need to ensure that, when using the Elastic File System (EFS), you enable encryption-in-transit using TLS as a mount option, which uses a client tunnel process. Assuming your filesystem is fs-12345678 and your filesystem’s identifier is /mnt/efs, which command would you enter to mount the EFS file stems with encryption enabled?<ul id="e13ea54a-61be-41af-854a-78e0d15e7468" class="bulleted-list"><li style="list-style-type:disc"><code>sudo mount -t efs -o tls fs-12345678:/ /mnt/efs</code></li></ul></li></ol><ol type="1" id="d6f00705-bfc3-44b3-b020-b47bc309b501" class="numbered-list" start="29"><li>You are configuring your AWS environment in preparation for downloading and installing the CloudWatch agent to offer additional monitoring. Which two tasks should you complete prior to installing the agent?<ul id="166e4c34-45aa-464f-a73d-ef60d611ee7b" class="bulleted-list"><li style="list-style-type:disc">Ensure that your EC2 instance is running the latest version of the SSM agent.</li></ul><ul id="a8c7d10a-d33f-4d2c-8a86-2ff5678f1dac" class="bulleted-list"><li style="list-style-type:disc">Ensure that your EC2 instances have outbound internet access.</li></ul></li></ol><ol type="1" id="2c62f290-99d2-489e-9b88-f306c0e7419e" class="numbered-list" start="30"><li>You have been approached by your compliance team to define what data is encrypted on an EBS volume when EBS encryption has been enabled. Which of the following should you choose? (Choose three.)<ul id="07c1ad4c-6824-45e9-8e9d-9891e525506f" class="bulleted-list"><li style="list-style-type:disc">the root and data volume</li></ul><ul id="f2ad7ed0-66db-4b9d-bea8-1b12358d15d9" class="bulleted-list"><li style="list-style-type:disc">All data moving between the EBS volume and the associated EC2 instance</li></ul><ul id="130a5d9d-7eaf-405b-8a20-a5e3633e5d2b" class="bulleted-list"><li style="list-style-type:disc">All snapshots of the EBS volume</li></ul></li></ol><ol type="1" id="b490cd49-9e8f-42f4-a956-79d7b653608f" class="numbered-list" start="31"><li>You are being audited by an external auditor against PCI-DSS, who is accessing your solutions that utilize AWS. You have been asked to provide evidence that certain controls are being met against infrastructure that is maintained by AWS. What is the best way to provide this evidence?<ul id="eb161ef0-47a0-44ed-97b6-e9a01ee3deec" class="bulleted-list"><li style="list-style-type:disc">Use AWS Artifact to download the appropriate compliance records.</li></ul></li></ol><ol type="1" id="71a5af05-6415-49bd-a9d8-488ec171fbc2" class="numbered-list" start="32"><li>Which part of AWS CloudHSM can carry out the following functions?</li></ol><ul id="6ba59566-4a20-49f2-a264-5271317a52bb" class="bulleted-list"><li style="list-style-type:disc">Perform encryption and decryption.</li></ul><ul id="56cc3159-1505-461b-a540-9fd4a3abc854" class="bulleted-list"><li style="list-style-type:disc">Create, delete, wrap, unwrap, and modify attributes of keys.</li></ul><ul id="8070395c-dbbc-4323-8f93-496bcfcf4588" class="bulleted-list"><li style="list-style-type:disc">Sign and verify.</li></ul><ul id="7647f3ac-194a-4936-addd-86cd4a4b4abd" class="bulleted-list"><li style="list-style-type:disc">Generate digests and HMACs.  Crypto User (CU)</li></ul><ol type="1" id="837e99e2-5cd4-4322-8934-8bbaa8d857c4" class="numbered-list" start="1"><li>Amazon GuardDuty uses different logs to process and analyze millions of events that are then referenced against numerous threat detection feeds, many of which contain known sources of malicious activity, including specific URLs and IP addresses. Which of the following logs are NOT used by Amazon GuardDuty? (Choose two.)<ul id="d193e3a7-11cd-4abf-8c98-ad9bfaaad1d2" class="bulleted-list"><li style="list-style-type:disc">S3 Server Access logs</li></ul><ul id="df2b105b-ca16-45bd-8ae8-7f7a726af782" class="bulleted-list"><li style="list-style-type:disc">CloudWatch Event logs</li></ul></li></ol><ol type="1" id="ef87eb9c-8585-4198-a34d-40d4d034cccd" class="numbered-list" start="2"><li>You have been asked to upload the company’s own key material instead of using the key material generated by KMS. In preparation for doing this, you download the public key and import token. What format must your key material be in prior to it being uploaded?<ul id="35e63171-50ee-4c8b-88f6-ee585a1ce43d" class="bulleted-list"><li style="list-style-type:disc">Binary</li></ul></li></ol><ol type="1" id="3eff66ff-bd4a-47e8-af07-72c9b58e070b" class="numbered-list" start="3"><li>Which of the following is NOT considered an asymmetric key encryption mechanism?<ul id="13acc891-bfb6-4cb4-970b-013fc0e9c136" class="bulleted-list"><li style="list-style-type:disc">Advanced Encryption Standard (AES)</li></ul></li></ol><ol type="1" id="69846c03-e3d5-4c32-b364-511db273505e" class="numbered-list" start="4"><li>AWS Trusted Advisor helps customers optimize their AWS environment through recommended best practices. Which of the following is NOT one of the five categories that it checks in your account?<ul id="849acf72-f0b2-4878-80db-77d649013986" class="bulleted-list"><li style="list-style-type:disc">Monitoring</li></ul></li></ol><ol type="1" id="bb5dc2f7-0a28-470d-b005-576e39dc5de6" class="numbered-list" start="5"><li>Which of the following keys shows an AWS managed key when using Amazon S3 SSE-KMS?<ul id="77f5ea82-47cc-42c1-aea1-d70d13a4b900" class="bulleted-list"><li style="list-style-type:disc">aws/s3</li></ul></li></ol><ol type="1" id="6f924539-0e11-4787-ac10-8e253ea9a56c" class="numbered-list" start="6"><li>Which keys used in conjunction with KMS are used outside of the KMS platform to perform encryption against your data?</li></ol><ul id="fe16c2cb-9fbd-40ed-b45d-3f0f23be4242" class="bulleted-list"><li style="list-style-type:disc">Data Encryption key</li></ul></div></article></body></html>
+![[Pasted image 20220131192503.png]]
+- Policy Types:
+	## Identity-based Policies
+	- attached to IAM user, group, or role
+	- controls what actions an identity (users, groups of users, roles) can perform on which resources and under what conditions
+		- e.g. allowing user John to run the EC2 `RunInstances` action 
+	- can be AWS-managed, customer-managed or in-line policies
+		### AWS-managed
+		- policies that are created and managed by AWS
+		### Customer-managed
+		- custom policy that is made by the customer 
+		### In-line 
+		- added directly to user, group, or role
+		- deleted when the identity is deleted
+	## Resource-based Policies
+	- very similar to in-line policies except they are attached to resources instead of identities
+	- can be attached to buckets and S3 objects
+	- lets you specify who has access to resource and what actions they can perform on it
+	- policy looks the same as in the example policy, however includes a *Principal* parameter
+		- identifies user, role, account, or federated user that permissions should be applied to
+	## Permissions boundaries
+	- governs maximum permissions an identity-based policy can associate with any user or role
+	## Access Control Lists (ACLs)
+	- can attach to buckets and S3 objects
+	- similar to resource-based policies
+	- use only to control cross-account access from different AWS account or public access
+	## Organization SCPs
+	- SCP stands for Service Control Policy
+	- used by AWS organizations to manage multiple AWS accounts
+	- similar to permissions boundaries within identity objects
+		- they also set maximum permission level that can be given to members of an AWS account or organization unit (OU)
+		- restrict permissions for resource-based and identity-based policies
+		- restricts permissions, doesn't grant permissions
+
+## Policy evaluation
+Determination of permissions when accessing resource:
+1. Authentication
+2. Determine context of request
+	- request processed and associated permissions are defined
+	- actions, resources, principals, environment data, and resource data are examined
+3. Policy evaluation
+	- policy types evaluated in order of identity-based, resource-based, IAM permissions boundaries, and SCPs
+4. Permission Result
+	- access granted or denied
+
+- deny actions overrule allow actions 
+# Federated and Mobile Access
+[[AWS Contents]]
+[[AWS Questions#Federated and Mobile Access]]
+
+- used for providing resource to a large amount of users
+	- unfeasible to create individual IAM accounts for every user to access the resource
+- allows access to AWS resources without IAM user account
+- credentials federated by identity provider (IDP)
+	- e.g. Microsoft Active Directory Accounts, Google, Facebook, etc.
+
+<u>Security Assertion Markup Language (SAML)</u>
+- allows secure exchange of authentication data between different domains
+- users security tokens between an IdP and a SAML consumer
+
+## Social Federation
+### Amazon Cognito
+- made for enabling secure authentication and access control for new and existing users accessing web or mobile applications
+- generate tokens after  authentication that manages access 
+- best practice when creating applications that require social IdPs for authentication
+
+Two main Components:
+
+1. User Pools
+	- scalable user directories
+	- allow users to login to mobile application
+	- ![[Pasted image 20220203163059.png]]
+2. Identity Pools
+	- assigns permissions to user to access AWS resources (uses temporary credentials
+	- ![[Pasted image 20220203163348.png]]
+
+# Shared Responsibility Model
+[[AWS Contents]]
+[[AWS Questions#Shared Responsibility Model]]
+
+Three different shared responsibility models:
+1. Infrastructure
+	- most common model
+	- covers infrastructure as a Service (IaaS) services such as Elastic Compute Cloud (EC2)
+	- ![[Pasted image 20220131154703.png]]
+	- AWS responsible for security of the cloud, customer is responsible for security in the cloud
+2. Container
+	- customer does not have access to some of infrastructure-level components such as the operating system
+	- examples of services in container model: Elastic MapReduce (EMR), Relational Database Service (RDS), Elastic Beanstalk
+	- ![[Pasted image 20220131161816.png]]
+	- AWS has more responsibilities with this model than the infrastructure model
+		- platform and application management, operating system, and network configuration are responsibility of AWS
+3. Abstract
+	- ![[Pasted image 20220131162045.png]]
+	- AWS responsible for even more security
+		- in addition manages server-side encryption and network traffic protection
+	- examples of services in abstract model: Simple Queue Service (SQS), DynamoDB, and S3
+	- accessed through endpoints
+		- no access to operating system (infrastructure) or platform running these services (container)# Configuring Infrastructure Security
+[[AWS Contents]]
+[[AWS Questions#Configuring Infrastructure Security]]
+## Virtual Private Cloud (VPC)
+- private section of AWS network
+- can be public-face 
+
+### Subnets
+- can only reside in a single availability zone (e.g. only in eu-west-1bAZ)
+- each subnet should be configured for a specific use (i.e. segmentation); this is security best practice
+	- e.g. subnet can contain only application servers, other subnet can contain only database servers, etc.
+- falls within CIDR (classless inter-domain routing) block of VPC
+	- e.g. if VPC CIDR block is $10.0.0.0/16$, subnets can be the following:
+		- $10.0.1.0/24$
+			- $10.0.1.0$ - Network address
+			- $10.0.1.1$ - AWS routing
+			- $10.0.1.2$ - AWS DNS
+			- $10.0.1.3$ - AWS future use
+			- $10.0.1.255$ - Broadcast address
+		- $10.0.2.0/24$
+		- $10.0.3.0/24$
+		- etc.
+	- note the first address is reserved for the network address, and the last address is reserved for the broadcast address
+	- AWS reserves the first three host addresses in any subnet
+		- first host address reserved for internal AWS VPC routing
+		- second host address for AWS DNS
+		- third host address for future use
+	- therefore, 251 (out of 256) available host addresses for customer use in /16 subnet
+	
+	<u>Route Table</u>: table subnet uses for routing traffic
+	- if no route table is defined, default VPC route table is used
+
+### Flow Logs Tab
+- captures IP traffic sent between network interfaces of subnet
+- captured within CloudWatch
+
+## Internet Gateway (IGW)
+- helps create a public subnet
+- allows traffic to traverse from subnet in VPC to internet and vice versa
+
+## Network Access Control Lists (NACLs)
+- virtual network level firewalls
+- stateless
+- default NACL created when VPC is created
+	- all traffic allowed by default (therefore default NACL is insecure)
+- two fundamental components
+	1. Inbound Rules
+	2. Outbound Rules
+- final rule of NACL is that any traffic that isn't categorized by any of the rules gets dropped
+- rules read in ascending order until match is found
+
+## Security Groups
+- similar to NACLs (provide virtual firewall) except operates at instance level rather than network level
+- associated with instances rather than subnets
+- controls traffic to and from instances within VPC
+- stateful
+- no field for *Allow* or *Deny* traffic, as all rules in security group are assumed to be allowed (traffic not categorized as such is dropped)
+	- works as a whitelist for traffic
+- all rules evaluated before decision is made
+
+## Bastion Hosts
+- used to gain access to instances that reside within private subnets
+- bastion host resides within public subnet
+- hardened EC2 instance with restrictive controls
+- acts as ingress gateway
+
+<u>Public Subnet</u>: a subnet associated with a route table pointing to an internet gateway (IGW) with a destination address of 0.0.0.0/0
+
+- no packet is directly exchanged between internet and IPs inside private subnet (it goes first through the bastion host)
+
+## NAT Instances and NAT Gateways
+- kind of like the opposite of bastion host
+- allows instances in private subnets to initiate a connection out to the internet via NAT resource
+- blocks all inbound public-initiated traffic
+- allows private instances access to internet
+	- usually used for maintenance-related tasks such as updates
+
+### NAT Gateway
+- AWS managed resource
+- offers enhanced bandwidth and availability in comparison to NAT instance
+- requires far less administrative configuration than NAT instance# DDoS Protection
+[[AWS Contents]]
+[[AWS Questions#DDoS Protection]]
+- protections include AWS Shield Advanced ($3000 a month) and AWS Shield Standard (free)
+## DDoS Patterns
+### SYN Floods
+- abuses three-way handshake when connection is being established between client and server
+![[Pasted image 20220213185859.png]]
+- the final ACK completes the handshake, but this is dropped in SYN Flood attack to leave connection open
+
+### HTTP Floods
+- many GET or POST requests sent to server
+
+### Ping of Death (POD)
+- oversized ping packets sent to target
+- maximum size of packet is 65,535 bytes, but with fragmentation you can send a lot of data to target
+
+## AWS Shield
+- specify ARN of resources and services Shield should protect
+- Elastic IP Address (EIP) should be specified first for EC2 instance in order to use Shield on it
+### AWS Shield Standard
+- free
+- helps protect against common DDoS attacks operating at network and transport layers
+
+### AWS Shield Advanced
+- $3000 per month
+- application traffic monitoring
+- monitors network, transport, and application layers
+- comes with AWS DDoS Response Team (known as DRT)
+
+### Rate-Based Rules
+- counts number of requests received from IP address over 5 minutes
+- can define max number of request from singe IP within 5 minutes (must be over 2000)
+
+### AWS CloudFront and Amazon Route 53
+- edge services 
+- recommended to use these in conjunction with Shield to further decrease chances of compromise
+- helps detect DDoS attacks
+- allows for layer 3, 4, and 7 attack mitigation (also 6 in the case of CloudFront used in conjunction with AWS WAF) # Implementing Application Security
+[[AWS Contents]]
+[[AWS Questions#Implementing Application Security]]
+
+## AWS WAF
+Three primary elements:
+1. Web ACL (Access Control List)
+	- contains rules and rule groups (defines what should be inspected within requests)
+2. Rules
+	- defines specific criteria for what web ACL should be inspecting and what action to take (allow/block/count)
+3. Rule Groups
+	- allows you to group a set of rules
+
+### AWS Firewall Manager
+- manages WAF rules across multi-account environment when using AWS Organizations
+- uses WAF rules that are grouped together within a rule group
+
+## Managing Security Configuration of ELBs
+- ELB stands for Elastic Load Balancing
+	- controls, manages, and distributes incoming requests to a specified resource group 
+- can be internal or internet-facing
+	- internal ELBs only have private internal IP addresses and can only serve requests originating from within VPC
+	- internet-facing ELBs have public DNS names and have public and internal IP addresses
+### Types of ELBs
+Three different ELBs:
+<u>Application Load Balancer</u>
+- supports incoming traffic for web applications running HTTP or HTTPS
+- allows routing of requests such as to different ports
+
+<u>Network Load Balancer</u>
+- supports millions of incoming requests per second
+- ideal if low latency and high performance are priorities
+
+<u>Classic Load Balancer</u>
+Using a Classic Load Balancer instead of an Application Load Balancer has the following benefits:
+-   Support for EC2-Classic
+-   Support for TCP and SSL listeners
+-   Support for sticky sessions using application-generated cookies
+
+## Securing APIs
+- AWS API gateway
+### Controlling Access to APIs
+Methods for controlling authentication and authorization:
+#### IAM Roles and Policies
+- using IAM, policies can be associated with user, role, or group to dictate permissions
+#### IAM Tags
+- can be used in conjunction with IAM policies
+- used for references pertaining to security controls such as in the following example: a user being able to perform a specific action based on the resource tag 
+#### Resource Policies
+- attached to resources (unlike IAM which is attached to identity)
+- specifies principal that has been granted or denied access to invoke associate API
+#### VPC Endpoint Policies
+- also a resource-based policy, but is a VPC endpoint
+	- VPC endpoints allows access to AWS services using private IP addresses
+- controls access to private APIs
+- can be used in conjunction with API Gateway resource policies for additional security
+#### Lambda Authorizers
+- uses AWS Lambda functions to restrict who can invoke REST API methods
+- can use bearer-based tokens or HTML headers, paths, query string parameters, and stage variables
+#### Amazon Cognito User Pools
+- APIs can be configured to have `COGNITO_USER_POOLS` authorizer  to authenticate users via Amazon Cognito user pool API gateway
+	- token is validated before allowing access# Incident Response
+[[AWS Contents]]
+[[AWS Questions#Incident Response]]
+
+## AWS Cloud Adoption Framework (CAF)
+Addresses four primary control areas:
+1. Directive Controls
+	- establishes governance, risk, and compliance models
+2. Preventative Controls
+	- protects workloads and mitigates threats and vulnerabilities
+3. Detective Controls
+	- provides full visibility and transparency over operation of deployments
+4. Responsive Controls
+	- drives the remediation of potential deviation from security baselines
+
+## Threat Detection and Management
+### AWS GuardDuty
+- regional-based managed service
+- powered machine learning
+- monitors logs and detects unexpected / unusual behavior
+
+### AWS Security Hub
+- brings security statistical data into single place
+	- presented in series of tables and graphs
+- insights - grouping of findings that meet specific criteria base from specific filters and statements
+	- e.g. users with most suspicious activity, S3 buckets with public write or read permissions, EC2 instances with missing security patches, etc.
+
+## Forensics
+- recommended to have an account with preconfigured settings dedicated to forensics
+	- compromised instances can be moved to forensics account
+	- note that the instance cannot be moved to different AWS account
+- can also create forensic instance for forensic analysis
+	- could take snapshot of compromised instance / EBS volume and attach it to forensic instance
+
+## Common Infrastructure Security Incident
+Common approach in a breach scenario (blue side):
+1. Capture - obtain metadata from instance
+2. Protect - prevent EC2 instance from being terminated (enable termination protection)
+3. Isolate - isolate instance by modifying security group or updated NACL to deny all traffic destined for IP address of instance
+4. Detach - remove affected instance from any autoscaling groups
+5. Deregister - remove EC2 instance from any associated ELBs
+6. Snapshot - take snapshot of EBS volumes for forensics
+7. Tag - highlight instance that is prepared for forensic investigation
+# Secure Connections to AWS Environment
+[[AWS Contents]]
+[[AWS Questions#Secure Connections to AWS Environment]]
+- can connect securely using either VPN connection or Direct Connect connection
+
+## AWS VPN
+Uses two components:
+1. Virtual Private Gateway (VPN gateway)
+	- resides within AWS
+	- consists of two endpoints located in different data centers
+2. Customer gateway
+
+![[Pasted image 20220215120110.png]]
+- consists of two IPsec tunnel
+	- <u>IPsec Tunnel</u>: secure network protocol allowing encrypted communication between two endpoints 
+	- implemented at IP layer
+- uses public network to establish connection
+### Routing
+Route table example:
+
+Destination|Target
+----|--------
+10.0.0.0/16|Local
+172.16.0.0/16|pcx-1234abcd
+172.16.1.0/24|vgw-wxyz6789
+
+1. First route is local route of VPC (found in every route table)
+2. Second route points to target relating to VPC peering connection
+3. Third route point to VPN gateway
+
+- if packet is meant for destination that is covered by two subnets, it will go to the more specific subnet
+	- e.g. if packet is meant for 172.16.1.5, it will go to the third route even though route 1 and route 2 both cover that destination
+- route propagation can be enabled in VPN gateway to automatically add site-to-site VPN connections to route table
+
+## AWS Direct Connect
+- like VPN connection; joins your own infrastructure with AWS architecture as if it were a single network
+- generally provides more consistent and reliable connection
+- Connection runs across private network via an AWS Direct Connect location
+![[Pasted image 20220216094601.png]]
+Three distinct locations involved to establish link:
+1. Corporate site where your own private network resides
+2. AWS Direct Connect location (typically owned by AWS partner)
+3. AWS VPC within specific AWS region
+
+Prerequisites for configuring and establish connection:
+1. Your organization works with an AWS Direct Connect partner who is a member of AWS Partner Network (APN)
+2. Your network has co-location connection to AWS Direct Connect location
+3. Your organization works with an IPS allowing connection to AWS Direct Connect
+
+Once physical network connection to AWS Direct Connect location established, network must follow this criteria:
+1. Authentication - router must support Border Gateway Protocol (BGP) and MD5
+2. Network must use single-mode fiber
+3. Manually configured speed and full-duplex enabled
+4. 802.1Q VLAN encapsulation support enabled
+
+### Virtual Interfaces
+- connection can be partitioned into virtual interfaces 
+- allows access to other AWS services other than what is within your VPC
+# Securing EC2 Instances
+[[AWS Contents]]
+[[AWS Questions#Securing EC2 Instances]]
+- Elastic Compute Cloud (EC2) is the most common of the compute services
+- can use Amazon Inspector (vulnerability scanner)
+
+## Key Pairs
+- used to allow connection to instance
+- uses public key cryptography (2048 bit SSH-2 RSA)
+- public key maintained by EC2 instance, private key is with customer
+	- keys are unrecoverable if lost
+	- public key encrypts creds, private key decrypts
+
+## Monitoring and Logging
+### AWS CloudTrail
+- tracks and records API calls
+- for every API call the following is tracked:
+	- API that was called
+	- service to which API call was made against
+	- timestamp when it was called
+	- source IP address of requester
+
+### AWS Config
+- logs any change to resources
+- acts as resource inventory
+- stores and reviews configuration history of resources
+- integrates with CloudTrail
+	- shows which API call made specific changes
+- checks compliance rules
+
+### Amazon CloudWatch
+- most common AWS monitoring service
+- monitors resource performance over time
+- can be used with unified Cloud Agent to collect logs of applications
+
+### VPC Flow Logs
+- Virtual Private Cloud (VPC)
+- captures all IP traffic 
+
+## Isolation
+- security group should be created so that a compromised instance can quickly be changed to this group
+	- the group should not be able to communicate with any other resources 
+- log data should be stored in dedicated S3 bucket
+- create IAM roles that only allow read-only access to resources
+	- prevents accidentally changing data on instance
+
+## Systems Manager (SSM)
+- allows to quickly administer and perform operational actions against instances without SSH or RDP
+### Actions
+#### Automation
+- automate processes against groups of resources via SSM documents
+- e.g. patching EC2 instances or creating AMI (Amazon Machine Image)
+
+#### Run Command
+- manage fleet of EC2 instances remotely and securely
+- can perform maintenance and management without logging into instances
+- uses SSM documents to help perform administrative tasks and configuration changes
+
+#### Distributor
+- distributes software across instances
+
+#### State Manager
+- maintains state of EC2 instances
+- uses of state manager:
+	- configuring network settings
+	- bootstrapping instances
+	- ensuring installation of agents are schedually updated
+	- running scripts on instances
+
+#### Patch Manager
+- automates management of patch updates across EC2 instances
+- you can create patch groups which associates a number of instances with a group
+	- allows you to associate a group with a single patch baseline
+	- instances not associated with patch group will receive default patch baseline# Auditing and Governance
+[[AWS Contents]]
+[[AWS Questions#Auditing and Governance]]
+## AWS Artifact
+- on-demand portal allowing viewing and downloading AWS security and compliance reports and online agreements
+	- these reports are undetaken by external auditors of AWS
+	- agreements for accounts made with AWS 
+
+## Securing with CloudTrail
+- data (logs) can be encrypted with SSE-KMS
+- SHA-256 used for file validation
+- when validation is enabled, digest files are created
+	- digest files reference every log file delivered within specific timeframe along with associated hash
+	- digest files are signed using private key of a public/private key pair used by CloudTrail for that region
+
+Validating if log was tampered with or moved:
+`aws cloudtrail validate-logs --trail-arn <trailARN> --start-time <start-time>`
+
+## AWS Config
+- useful for seeing history of modifications to a resource via looking at the history of configuration items
+
+Components of AWS Config:
+- Configuration items
+- Configuration streams
+- Configuration history
+- Configuration snapshots
+- Configuration recorder
+- Config rules
+- Resource relationships
+- Config role
+
+### Configuration Items (CI)
+- fundamental element of AWS Config
+- contains point-in-time snapshot info on configuration data of attributes of an AWS resource such as:
+	- current configuration
+	- direct relationships resource has with other resources
+	- metadata
+	- events
+- CI updated each time change is made on resource (e.g. create, update, or delete API call made against resource)
+
+Components of Configuration Item:
+**Metadata**: info and data about config item
+**Attributes**: data of actual resource that CI relates to
+**Relationship**: data related to any connected resource (e.g. if CI is related to a subnet, the relationship could contain data related to associated VPC that subnet is part of)
+**Current Configuration**:  shows same info that would be generated upon performing a *describe* or *list* API call
+
+## Amazon Macie
+- managed service backed by machine learning
+- automatically detects, protects, and classifies data within S3 buckets
+- classifies data to determine its level of sensitivity# Implementing Logging Mechanisms
+[[AWS Contents]]
+[[AWS Questions#Implementing Logging Mechanisms]]
+
+## Amazon S3 Logging
+- most common AWS storage service
+- logs can be sent to S3 or Amazon CloudWatch Logs
+
+
+Two types of logging within S3:
+1. Server access logs
+2. Object-level logs
+
+### Server Access Logs
+Log details captured:
+- identity of requester accessing bucket
+- name of bucket being accessed
+- timestamp of when action was carried against bucket
+- action that was done
+- HTML response status
+- any error codes
+<br>
+- source and target buckets must be in same region
+
+### Object-Level Logging
+- must be associated with CloudTrail which will record write and read API activity
+
+### Flow Logs
+- captures IP traffic across network interfaces
+- default log file format:
+```bash
+${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}
+```
+1. version: version of the flow log
+2. account-id: AWS account ID
+3. interface-id: interface ID that log stream data applies to
+4. srcaddr: IP source address
+5. dstaddr: IP destination address
+6. srcport: source port used for traffic
+7. dstport: destination port for traffic
+8. protocol: protocol number being used for traffic
+9. packets: total number of packets sent during capture 
+10. bytes: total number of bytes sent during capture
+11. start: timestamp of when capture window started
+12. end: timestamp of when capture windows finished
+13. action: whether traffic was accepted or rejected by security groups
+14. log-status: status of logging, which is one of three codes:
+	- OK: data is being received
+	- NoData: no traffic to capture during capture window
+	- SkipData: some data within log was captured due to an error 
+
+## VPC Traffic Mirroring
+- duplicates network traffic from elastic network interfaces attached to instances
+	- duplicated traffic sent to third-party tools and services for analysis
+
+## CloudTrail
+**Trails**: contain configurable options for what to monitor and track
+**Events**: every API call is stored as an event
+**Log Files**: created every 5 minutes; stored within S3 bucket
+**CloudWatch Logs**: logs can be sent to CloudWatch for analysis and monitoring
+**API Activity Filters**: provide search and filter functionality when looking at API activity
+
+### Understanding CloudTrail Logs
+<center>Example of CloudTrail Log</center>
+
+```json
+"awsRegion": "eu-west-1",
+"eventID": "6ce47c89-5908-452d-87cc-a7c251ac4ac0",
+"eventName": "PutObject",
+"eventSource": "s3.amazonaws.com",
+"eventTime": "2019-11-27T23:54:21Z",
+"eventType": "AwsApiCall",
+"eventVersion": "1.05",
+"readOnly": false,
+"recipientAccountId": "730739171055",
+"requestID": "95BAC3B3C83CCC5D",
+"requestParameters": {
+"bucketName": "cloudtrailpackt",
+"Host": "cloudtrailpackt.s3.eu-west-1.amazonaws.com",
+"key": "Packt/AWSLogs/730739171055/CloudTrail/eu-west-
+1/2019/11/27/730739171055_CloudTrail_eu-west-
+1_20191127T2321Z_oDOj4tmndoN0pCW3.json.gz",
+"x-amz-acl": "bucket-owner-full-control",
+"x-amz-server-side-encryption": "AES256"
+"sharedEventID": "11d4461b-0604-46c4-b4c9-6a23b3e7f57c",
+"sourceIPAddress": "cloudtrail.amazonaws.com",
+"userAgent": "cloudtrail.amazonaws.com",
+"userIdentity": {
+"invokedBy": "cloudtrail.amazonaws.com",
+"type": "AWSService"
+```
+- shows Cloudtrail made *PutObject* request to Amazon S3 to store its log file (see the *key* parameter)
+
+*eventName*: name of API called
+*eventSource*: AWS service in which API call was made
+*eventTime*: time of API call
+*SourceIPAddress*: IP that made the API call (if a service did the API call then instead the name of the service would be displayed)
+*userAgent*: agent method of request
+*Console.amazonaws.com*: determines that root user made request
+*userIdentity*: additional info relating to user agent
+
+### Amazon Athena
+- serverless service
+- analyzes data stored within Amazon S3 (such as CloudTrail logs)
+- uses SQL 
+
+### CloudWatch
+- main AWS monitoring service
+- collects data and metrics from all supported AWS services 
+- can be implemented in a large scale using AWS Systems Manager (SSM)
+
+# Automation
+[[AWS Contents]]
+[[AWS Questions#Automation]]
+
+## Automating Security Detection and Remediation
+### Using CloudWatch Events with AWS Lambda and SNS
+- can identify event to capture and create an automatic response
+#### AWS Lambda 
+- serverless compute service
+- automatically provisions compute power
+- allows running code for applications either on demand or in response to events without needing to provision any compute instances yourself
+- allows freedom of not having to maintain a compute instance (this is handled by AWS)
+
+### Amazon GuardDuty
+- can be used for automation detection and remediation 
+- powered by machine learning
+- can capture events from CloudTrail logs, DNS logs, and VPC flow flogs
+	- events referenced against threat detection feeds (compared against known sources of malicious activity)
+- runs on AWS infrastructure so doesn't affect performance of your infrastructure
+
+### AWS Security Hub
+- collects security findings from:
+	- AWS IAM
+	- Amazon Macie
+	- Amazon GuardDuty
+	- Amazon Inspector
+	- AWS Firewall Manager
+- has predefined and managed insights to identify security-related weaknesses
+# Discovering Security Best Practices
+[[AWS Contents]]
+[[AWS Questions#Discovering Security Best Practices]]
+ - Multi-Factor Authentication (MFA)
+ - Enable AWS CloudTrail
+ - Remove root account access keys
+	 - account keys enabled access via AWS CLI, SDK, or other development tools
+ - Strong passwords
+ - Principle of Least Privilege (PoLP)
+ - Encrypt data
+ - Automate security threat detection and remediation
+ 
+ ## AWS Trusted Advisor
+ - recommends enhancements against number of predefined best practice checks across five areas of your account:
+	 1. Cost optimization
+		 - identifies resources not optimally used
+	 2. Performance
+		 - looks for resources that could make use of provisioned throughput
+		 - identifies over-utilized resources
+	 3. Security
+		 - identifies weaknesses 
+	 4. Fault Tolerance
+		- determines whether you have adequate resiliency built into environment
+	 5. Service Limits
+		 - checks if services have reached 80% of allotted service limit
+
+## Pentesting AWS
+- can't carry pentest against some services without prior approval from AWS
+- services you can pentest against:
+	- Amazon EC2 instances, NAT gateways, and elastic load balancers
+	- Amazon RDS
+	- Amazon CloudFront
+	- Amazon Aurora
+	- Amazon API Gateways
+	- AWS Lambda and Lambda Edge functions
+	- Amazon Lightsail resources
+	- Amazon Elastic Beanstalk environments
+- services not to be pentested:
+	- DNS zone walking via Amazon Route 53 hosted zones
+	- Denial of Service (DoS), Distributed Denial of Service (DDoS),
+	- simulated DoS, simulated DDoS
+	- Port flooding
+	- Protocol flooding
+	- Request flooding (login request flooding and API request flooding)# Managing Data Security
+[[AWS Contents]]
+[[AWS Questions#Managing Data Security]]
+
+## Amazon EBS Encryption
+- EBS volumes provide block-level storage to EC2 instance
+	- gives more flexibility for storage capabilities
+- default regional encryption setting can be applied to EBS volumes to automatically encrypt new EBS volumes 
+- uses KMS service to encrypt data
+
+## Amazon EBS
+- used for file-level storage
+- support in-transit and at-rest encryption
+- uses KMS service to encrypt data
+
+## Amazon S3
+- provides object-level storage
+
+Five different encryption options for S3 objects:
+1. Server-side encryption with S3-managed keys (SSE-S3)
+2. Server-side encryption with KMS-managed keys (SSE-KMS)
+3. Server-side encryption with customer-managed keys (SSE-C)
+4. Client-side encryption with KMS-managed keys (CSE-KMS)
+5. Client-side encryption with customer-managed keys (CSE-C)
+
+- server-side encryption: encryption algorithm and process run from server-side (i.e. in this case it is within Amazon S3)
+- client-side encryption: encryption process executed on client side before data sent to S3
+
+### SSE-S3
+#### Encryption
+![[Pasted image 20220225215402.png]]
+1. Client selects object(s) to upload to S3 and indicates SSE-S3 as encryption algorithm
+2. S3 encrypts object with plaintext data key and encrypted object stored in chosen S3 bucket
+3. plaintext data key encrypted with S3 master key, and the encrypted key is then stored into S3 and associated with encrypted data object
+4. Plaintext data key removed from memory
+
+#### Decryption
+![[Pasted image 20220225215755.png]]
+1. User request encrypted object
+2. Encrypted data key of object is decrypted with S34 master key
+3. Plaintext data key decrypts encrypted data object
+4. S3 returns plaintext data object to client
+
+### SSE-KMS
+#### Encryption
+[[Managing Key Infrastructure#SSE-KMS Encryption]]
+#### Decryption
+[[Managing Key Infrastructure#SSE-KMS Decryption]]
+
+### SSE-C
+#### Encryption
+![[Pasted image 20220225220028.png]]
+
+1. Client uploads object to S3 along with plaintext customer-provided key across HTTPS
+	- mandatory to use HTTPS
+2. Object is encrypted with key and a salted HMAC value of customer key is generated for validation upon future access requests. HMAC value and encrypted object stored in S3 with association to each other. Plaintext key removed.
+
+#### Decryption
+![[Pasted image 20220225234838.png]]
+1. User requests encrypted object via HTTPS. Customer key sent to S3.
+2. S3 uses stored HMAC value of key to validate the client sent the correct key.
+3. Customer key used to decrypt object data.
+4. Plaintext object sent to client.
+
+### CSE-KMS
+#### Encryption
+![[Pasted image 20220225235024.png]]
+1. Client uses AWS SDK (Software Development Kit) to request data keys from KMS using specified CMK
+2. KMS genrate two data keys using the CMK: plaintext data key and cipher blob of that key
+3. KMS sends the keys back to requesting client
+4. Client encrypts object data with plaintext version of data key and stores the resulting encrypted object.
+5. Client uploads encrypted object data and cipher blob version of key to S3. 
+6. Cipher blob key stored as metadata against encrypted object.
+
+#### Decryption
+![[Pasted image 20220225235449.png]]
+1. User requests access to encrypted S3 object.
+2. Encrypted object sent to client with associated cipher blob key.
+3. Cipher blob sent back to KMS to generate data key.
+4. KMS uses original CMK along with cipher blob to generate a plaintext version of data key.
+5. Plaintext data key sent back to requesting Java client.
+6. Java client uses plaintext key to decrypt object.
+
+### CSE-C
+#### Encryption
+![[Pasted image 20220225235650.png]]
+1. Java client create plaintext data key to encrypt object data.
+2. CMK created by customer encrypts plaintext data key.
+3. Encrypted data key and encrypted object sent from client to S3 storage.
+4. S3 associates encrypted data key with encrypted object and stores both in S3.
+
+#### Decryption
+![[Pasted image 20220225235831.png]]
+1. Uses requests access to encrypted object.
+2. S3 sends requested object data with associated encrypted data key.
+3. Customer CMK used with encrypted data key to generate plaintext version of data key.
+4. Encrypted object decrypted using plaintext data key.
+
+## Amazon RDS
+- database service
+- encryption at rest uses AES-256
+- can only encrypt RDS database during its creation
+- SSL/TLS used for in-transit encryption
+
+## Amazon DynamoDB
+- fully managed key-value and document NoSQL database
+- at-rest server-side encryption enabled by default
+	- this setting cannot be disabled
+
+Three options to encrypt data with:
+1. DEFAULT: key owned by Amazon DynamoDB
+2. KMS - Customer managed CMK
+3. KMS - AWS managed CMK
+
+- encryption in transit uses HTTPS
+# Managing Key Infrastructure
+[[AWS Contents]]
+[[AWS Questions#Managing Key Infrastructure]]
+
+## AWS Key Management Service (KMS)
+- managed service
+- allows you to create, store, rotate, and delete encryption keys
+- unlike SSL, KMS not designed for encryption-in-transit
+- supports symmetric and asymmetric CMKs
+
+### Customer Master Keys (CMK)
+- building block of KMS
+- contains material used for encrypting and decrypting data
+
+Three different types of CMKs:
+1. AWS-owned
+	- rotation period varied from service to service
+	- managed and created by AWS
+	- e.g. Amazon S3 encryption using S3 master key (SSE-S3)
+	- can't view keys
+2. AWS-managed
+	- can't control rotation frequency
+	- can view keys being used and track their usage and key policies
+3. Customer-managed
+	- full control of keys
+
+### Data Encryption Keys (DEKs)
+- created by CMKs
+- unlike CMKs, doesn't reside within KMS service
+- used outside of KMS to encrypt data
+- when DEK is generated, the associated CMK will create two DEKs
+	1. Plaintext Key
+	2. Identical (Encrypted) Key
+- <u>Envelope Encryption</u>: using one key to encrypt another key
+
+Amazon S3 server-side encryption and decryption with KMS managed keys (SSE-KMS):
+#### SSE-KMS Encryption
+![[Pasted image 20220224222854.png]]
+1. SSE-KMS encryption mechanism chosen by client and either AWS-managed or customer-managed CMK is selected
+2. S3 tells KMS to generate DEKs 
+3. Plaintext data key and identical (encrypted) data key generated
+4. These data keys are sent to S3. 
+5. S3 encrypts object data with plaintext version of data key. Encrypted data is then stored with encrypted version of key. Plaintext data key is destroyed.  
+
+#### SSE-KMS Decryption
+![[Pasted image 20220224223534.png]]
+1. Request received by S3 to access encrypted object 
+2. S3 sends encrypted data key associated with object to KMS
+3. KMS uses original CMK to decrypt the data key to generate a plaintext version of that key
+4. KMS sends plaintext data key to S3
+5. Encrypted object decrypted with that key
+6. Plaintext object sent back to client
+
+### Key Material
+<u>Key Material</u>: Data used to encrypt and decrypt data
+- stored within CMK
+- CMK key material can be used to encrypt data key and decrypt it (see [[Managing Key Infrastructure#SSE-KMS Decryption|SSE-KMS Decryption]])
+- key material for AWS-managed CMKs gets automatically created
+- customer-managed CMKs give option of adding key material or not
+	- can even import your own key material known as Bring Your Own Key (BYOK)
+	- BYOK doesn't support automatic key rotation
+
+### Key Policies
+- cannot control access to CMKs without key policies
+- access to CMK can be configured via:
+	1. Key Policies: All access governed by key policy
+	2. Key Policies and IAM: Access governed by key policy and IAM identity-based policies
+		- allows access via groups and other IAM features
+	3. Key Policies and Grants: Access governed by key policy with ability to delete access to other for using the CMK
+		- check page 508-512, great explanation
+	
+## AWS CloudHSM
+- fully managed service used for data encryption
+- can integrate with KMS in the form of using CloudHSM as a custom key store
+	- allows storage of CMKs outside of KMS and into CloudHSM cluster
+- HSM stands for Hardware Security Module
+	- generates keys and stores them
+	- can use different encryption algorithms for both symmetric keys and asymmetric keys
+	- manages symmetric and asymmetric keys
+	- signs and verifies signatures
+	- can use hash function to compute hash-based message authentication codes (HMACs)
+
+### Cloud HSM Users
+User types of CloudHSM
+1. Precrypto Office
+2. Crypto Office
+3. Crypto User
+4. Appliance User
+
+Operations | PRECO | CO | CU| AU|
+-----|-----|-------|------|-----|
+Obtain basic cluster information (number of HSMs in cluster, IP address, serial number, etc.) | No | Yes | Yes | Yes
+Zeroize HSMs (delete keys, certificates, and data  on the HSM) | No | Yes | Yes | Yes
+Change own password | Yes | Yes | Yes | Yes
+Change any user's password | No | Yes | No | No
+Add and remove users | No | Yes | No | No
+Get synchronization status | No | Yes | Yes | Yes
+Key management operations | No | No | Yes | No
+Encrypt, decrypt, sign, verify, generate, and digest HMACs | No | No | Yes | No
+#### Precrypto Office (PRECO)
+- automatically created upon creating first HSM within cluster
+- PRECO user has default creds
+- when first connecting to the HSM, you are prompted to change password of PRECO user
+	- this turns the PRECO user into a Crypto Office (CO) user
+
+#### Crypto Office (CO)
+- greater permissions than PRECO
+
+Permissions:
+- create, delete and change passwords of users
+- delete keys, certificates, and data on HSM
+- obtain HSM metadata
+
+#### Crypto User (CU)
+Permissions:
+- perform encryption and decryption
+- create, delete, wrap, unwrap, and mofity attributes of key
+- signs and verifies
+- generate digests and HMACs
+
+#### Appliance User (AU)
+- exists on all HSMs
+- clones and synchronizes actions of HSMs
+- has same permissions as CO but cannot change passwords or add/remove user
+
+## AWS Secrets Manager
+- managed service
+- secrets retrieved by calling Secrets Manager API
+<u>Secrets</u>: Anything that is confidential (e.g. passwords, API keys, etc.)
+- removes need for hardcoding credentials in code
+- automatically rotates secrets
+
+# AWS Questions
+[[AWS Contents]]
+[[AWS/Cloud Security - Specialist/Misc|Misc]]
+
+[[AWS Questions#Section 2 Security Responsibility Access Management|Section 2: Security Responsibility and Access Management]]
+[[AWS Questions#Section 3 Security - A Layered Approach | Section 3: Security - A Layered Approach]]
+[[AWS Questions#Section 4 Monitoring Logging and Auditing|Section 4: Monitoring, Logging, and Auditing]]
+[[AWS Questions#Section 5 Best Practices and Automation | Section 5: Best Practices and Automation]]
+[[AWS Questions#Section 6 Encryption and Data Security|Section 6: Encryption and Data Security]]
+## Section 2: Security Responsibility & Access Management
+[[Access Management]]
+### Access Policies 
+[[Access Policies]]
+1. Which format are AWS policies written in?
+```ad-note
+collapse:
+**JSON**
+```
+2. What type of policy are Amazon S3 bucket policies?
+```ad-note
+collapse:
+**Resource-based**
+```
+3. What parameter is needed within a resource-based policy to identify who or what the policy should be associated with?
+```ad-note
+collapse:
+**Principal**
+```
+4. After configuring cross-account access, from which account do you assume the cross-account role from – the trusted account or the trusting account?
+```ad-note
+collapse:
+**Trusted account**
+```
+5. True or false: the Access Advisor tab allows you to determine when identities accessed different services.
+```ad-note
+collapse:
+**True**
+```
+
+### Federated and Mobile Access
+[[Federated and Mobile Access]]
+ 1. True or false: Federated access within AWS allows access to your AWS resources without needing to create any permissions.
+```ad-note
+collapse:
+**False**
+```
+2. Which AWS service uses federation to manage access to web and mobile applications with ease?
+```ad-note
+collapse:
+**Amazon Cognito**
+```
+3. What are the two common types of federated access with AWS?
+```ad-note
+collapse:
+**SAML Federation and Social Federation**
+```
+4. What is IdP short for in relation to federated access?
+```ad-note
+collapse:
+**Identity provider**
+```
+5. True or false: Identity pools actually provide you with the ability to assign permissions to users to access AWS resources used within a mobile app by using temporary credentials.
+```ad-note
+collapse:
+**True**
+```
+
+
+### Shared Responsibility Model
+[[Shared Responsibility Model]]
+1. Which shared responsibility model offers the most customization and  control for the customer 
+```ad-note
+collapse:
+**Infrastructure model**
+```
+2. Which shared responsibility model offers the least customization and  control for the customer?
+```ad-note
+collapse:
+**Abstract**
+```
+3. In which model would you expect to find the EC2 service?
+```ad-note
+collapse:
+**Infrastructure**
+```
+4. Which model focuses on services that essentially reside on top of infrastructure services, such as Amazon EMR and Amazon RDS?
+```ad-note
+collapse:
+**Container**
+```
+5. True or false: the customer's responsibility is defined as security in the  cloud.
+```ad-note
+collapse:
+**True**
+```
+
+## Section 3: Security - A Layered Approach
+### Securing EC2 Instances
+[[Securing EC2 Instances]]
+1. True or False: AWS Systems Manager is a fully managed service that allows you to help secure your instances and the applications that run on top of them by performing vulnerability assessments via an agent.
+```ad-note
+collapse:
+**False**
+```
+2. True or False: Amazon Inspector requires an agent to be installed to remotely run assessments.
+```ad-note
+collapse:
+**False** (Used to be true). It now uses SSM to remove the need for installing an agent.
+```
+3. Is the public key of an EC2 instance key pair held by AWS or you as the customer?
+```ad-note
+collapse:
+**AWS**
+```
+4. Which service is used to track and record API calls made within your AWS account?
+```ad-note
+collapse:
+**AWS CloudTrail**
+```
+5. Which service allows you to easily and quickly administer and perform operational actions against your instances (both Windows and Linux-based) at scale for both on-premise resources and within AWS without having to SSH or RDP into those instances?
+```ad-note
+collapse:
+**Systems Manager (SSM)**
+```
+
+### Configuring Infrastructure Security
+[[Configuring Infrastructure Security]]
+1. What does VPC stand for?
+```ad-note
+collapse:
+**Virtual Private Cloud**
+```
+2.  Which VPC component provides a connection between your VPC and the outside world?
+```ad-note
+collapse:
+**Internet Gateway (IGW)**
+```
+3. Which VPC component allows instances in a private subnet to initiate a connection to the internet, for example, for essential operating system updates, but prevents any inbound access to the private subnet being initiated from the internet?
+```ad-note
+collapse:
+**NAT Gateway**
+```
+4. True or false: Security groups provide a virtual firewall level of protection at the instance level.
+```ad-note
+collapse:
+**True**
+```
+5. True or false: Using the default NACL of your VPC provides enhanced security protection blocking all network traffic, both inbound and outbound.
+```ad-note
+collapse:
+**False**
+```
+
+### Implementing Application Security
+[[Implementing Application Security]]
+1. True or false: The main function of the AWS WAF service is to provide protection for your web applications from malicious attacks from a wide variety of attack patterns.
+```ad-note
+collapse:
+**True**
+```
+2. Which service allows you to manage WAF rules across a multi-account environment when using AWS Organizations?
+```ad-note
+collapse:
+**AWS Firewall Manager**
+```
+3. Which AWS service must you enable as a prerequisite to use AWS Firewall Manager?
+```ad-note
+collapse:
+**AWS Config**
+```
+4. Which type of load balancer would you use if low latency and high performance are key to your application architectures?
+```ad-note
+collapse:
+**Network Load Balancer**
+```
+
+### DDoS Protection
+[[DDoS Protection]]
+1. Which type of DDoS attack takes advantage of the three-way handshake that is used to establish a connection between two hosts?
+```ad-note
+collapse:
+**SYN Flood**
+```
+2. How many tiers are there to choose from when working with AWS
+Shield?
+```ad-note
+collapse:
+**2**
+```
+3. True or false: AWS Shield Advanced is a premium tier that comes with a range of additional features and protection.
+```ad-note
+collapse:
+**True**
+```
+4. True or false: The DDoS Response Team (DRT) is a specialized team at AWS who can help you to review, analyze, and monitor suspected malicious activity within your account and offer help and solutions on how to resolve a potential attack.
+```ad-note
+collapse:
+**True**
+```
+5. True or false: By selecting a rate-based rule, you can define the maximum number of requests from a single IP within a 30-minute time frame.
+```ad-note
+collapse:
+**False**
+```
+
+### Incident Response
+[[Incident Response]]
+1. Which framework has been designed by AWS to help you transition and migrate solutions into AWS Cloud that's based on best practices and recommendations?
+```ad-note
+collapse:
+**Cloud Adoption Framework (CAF)**
+```
+2. Which AWS service is a regional-based managed service that's powered by machine learning, specifically designed to be an intelligent threat detection service?
+```ad-note
+collapse:
+**Amazon GuardDuty**
+```
+3. Which AWS service acts as a single-pane-of-glass view across your infrastructure, thus bringing all of your security statistical data into a single place and presented in a series of tables and graphs?
+```ad-note
+collapse:
+**AWS Security Hub**
+```
+4. True or False: Having a separate AWS account to be used for forensic investigations is essential to helping you diagnose and isolate any affected resource.
+```ad-note
+collapse:
+**True**
+```
+
+### Secure Connections to AWS Environment
+[[Secure Connections to AWS Environment]]
+1. When configuring a VPN connection, a VPN gateway is configured as well as what other type of gateway?
+```ad-note
+collapse:
+**Customer Gateway**
+```
+2. True or false: when an end-to-end connection is established between two gateways using a VPN connection with IPsec, the connection is referred to as a tube.
+```ad-note
+collapse:
+**False**
+```
+3. Does Direct Connect use a public or private network to establish a connection with AWS?
+```ad-note
+collapse:
+**Private**
+```
+4. True or false: by enabling route propagation, all other routes to networks represented across your site-to-site VPN connection will be automatically added to your route table, preventing you from having to manually add them.
+```ad-note
+collapse:
+**True**
+```
+## Section 4: Monitoring, Logging, and Auditing
+### Implementing Logging Mechanisms
+[[Implementing Logging Mechanisms]]
+1. True or false: Amazon S3 server access logging is enabled by default.
+```ad-note
+collapse:
+**False**
+```
+2. Amazon S3 object-level logging closely integrates with which other AWS service?
+```ad-note
+collapse:
+**AWS CloudTrail**
+```
+3. Which logging feature allows you the ability to capture IP traffic across the network interfaces attached to your resources?
+```ad-note
+collapse:
+**VPC Flow Logs**
+```
+4. True or false: A VPC Flow Log can be configured for a subnet with a VPC.
+```ad-note
+collapse:
+**True**
+```
+5. Which AWS service can be used to easily query AWS CloudTrail logs, enabling you to search for specific data?
+```ad-note
+collapse:
+**Amazon Athena**
+```
+
+### Auditing and Governance
+[[Auditing and Governance]]
+1. Which AWS service is an on-demand portal to allow you to view and download AWS security and compliance reports, in addition to any online agreements?
+```ad-note
+collapse:
+**AWS Artifact**
+```
+2. Which security feature of AWS CloudTrail ensures that your log files have not been tampered with or modified after they have been written to your bucket in Amazon S3?
+```ad-note
+collapse:
+**Logfile Validation**
+```
+3. Which feature in AWS Config automatically monitors your resources to ensure they are meeting specific compliance controls?
+```ad-note
+collapse:
+**AWS Managed Rules**
+```
+4. Which service is backed by machine learning and provides an automatic way of detecting, protecting, and classifying data within your S3 buckets?
+```ad-note
+collapse:
+**Amazon Macie**
+```
+5. True or false: Amazon Macie classifies data through a series of automatic content classification mechanisms. It performs its classification using the object-level API data events collated from CloudTrail logs.
+```ad-note
+collapse:
+**True**
+```
+
+## Section 5: Best Practices and Automation
+### Automation
+[[Automation]]
+1. True or false: CloudWatch events can be used to search for specific events within your infrastructure, which can trigger an automated response.
+```ad-note
+collapse:
+**True**
+```
+2. Amazon GuardDuty is able to process and analyze millions of events that are captured through your AWS CloudTrail logs, DNS logs, and which other logging mechanism?
+```ad-note
+collapse:
+**VPC Flow Logs**
+```
+3. Which AWS service acts as a single-pane-of-glass approach to your security notifications across your accounts?
+```ad-note
+collapse:
+**AWS Security Hub**
+```
+4. True or false: AWS Security Hub integrates with AWS Trusted Advisor to help you automate the remediation process of any findings found.
+```ad-note
+collapse:
+**False**
+```
+
+### Discovering Security Best Practices
+[[Discovering Security Best Practices]]
+1. True or false: You should enable access keys for your root account that would enable programmatic access to your AWS account.
+```ad-note
+collapse:
+**False**
+```
+2. Which AWS service highlights and recommends enhancements against a number of predefined best practice checks across five different areas of your account?
+```ad-note
+collapse:
+**AWS Trusted Advisor**
+```
+3. Which check within AWS Trusted Advisor is used to determine whether you have adequate resiliency built into your environment, for example, through making use of multi-Availability Zone features and auto-scaling?
+```ad-note
+collapse:
+**Fault Tolerance**
+```
+4. Which support plans only give access to seven core Trusted Advisor checks?
+```ad-note
+collapse:
+**Basic and Developer**
+```
+5. True or false: A penetration test, or pentest, is essentially an authorized cyber attack on your own environment and infrastructure in an effort to determine its weak points and vulnerabilities, in addition to its strengths, against defined security standards.
+```ad-note
+collapse:
+**True**
+```
+
+## Section 6: Encryption and Data Security
+### Managing Key Infrastructure
+[[Managing Key Infrastructure]]
+1. True or False: Asymmetric encryption uses a single key to encrypt and decrypt data.
+```ad-note
+collapse:
+**False**
+```
+2. Which component is the main building block of the KMS service as it contains the key material used for both encrypting and decrypting data?
+```ad-note
+collapse:
+**Customer Master Key (CMK)**
+```
+3. There are three different types of CMKs used by KMS that you need to be familiar with; AWS-owned, customer-managed, and which other?
+```ad-note
+collapse:
+**AWS-managed**
+```
+4. Which component of KMS is used to determine who can use the key to perform cryptographic operations, such as encrypt, decrypt, and GenerateDataKey, in addition to who can administer the CMK?
+```ad-note
+collapse:
+**Key policy**
+```
+5. Which AWS service offers the ability to maintain a level of security protection for any API keys, in addition to other secrets?
+```ad-note
+collapse:
+**AWS Secrets Manager**
+```
+
+### Managing  Data Security
+[[Managing Data Security]]
+1. What does IOPS stand for?
+```ad-note
+collapse:
+**Input/Output Operations Per Second**
+```
+2. Which AWS service provides persistent block-level storage to your EC2 instance, providing more flexibility to your instance storage capabilities?
+```ad-note
+collapse:
+**Amazon  Elastic Block Store (EBS)**
+```
+3. Which AWS service is used for file-level storage and has the capacity to support access to thousands of instances at once?
+```ad-note
+collapse:
+**Amazon Elastic File Service (EFS)**
+```
+4. True or false: you can enable encryption at rest using the AWS CLI, an SDK, the AWS EFS API, or the AWS Management Console.
+```ad-note
+collapse:
+**True**
+```
+5.  By default, at-rest encryption using server-side encryption is enabled on all DynamoDB tables. Which AWS service is integrated to perform this encryption?
+```ad-note
+collapse:
+**AWS Key Management Service (KMS)**
+```
+# Misc 
+[[AWS Contents]]
+[[AWS Questions]]
+## Notes
+- AWS Artifact is a resource about compliance-related stuff
+- AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources
+- Amazon CloudFront is a web service that is used for distributing content 
+	- delivers web content through network via edge locations (locations that are closest to the client requesting website), therefore gives client lowest latency
+- CloudTrail logs can provide detailed API tracking for Amazon S3 bucket-level and object-level operations
+- VPC Flow logging logs IP data going to and from designated network interfaces and stores this data in Amazon CloudWatch
+- Amazon Athena is a serverless, interactive query service to query data and analyze big data in Amazon S3
+- VPC peering - networking connection between two VPCs that enables traffic to be routed between them 
+	- allows instances within those VPCs to communicate with each other as if they were in the same network
+- Amazon S3 Glacier is a secure, durable, and extremely low-cost Amazon S3 storage class for data archiving and long-term backup
+- AWS Control Tower enforces and manages governance rules for security, operations, and compliance at scale
+- ACLs were the first authorization mechanism in S3. Bucket policies are the newer method, and the method used for almost all AWS services. Policies can implement very complex rules and permissions, ACLs are simplistic (they have ALLOW but no DENY).
+	- A majority of modern use cases in Amazon S3 no longer require the use of ACLs, and we recommend that you disable ACLs except in unusual circumstances where you need to control access for each object individually
+
+
+## Questions
+What is the difference between Internet Gateway (IGW) and NAT Gateway (NGW)?
+
+- internet gateway allows instances with public IP to access internet
+- NAT gateway allows instances with no public IP to access internet
+
+What is the difference between AWS CloudWatch and Amazon CloudTrail?
+
+- AWS CloudWatch monitors AWS resources and applications while CloudTrail monitors activity within AWS environment# Mock Exam Questions 
+
+## Mock Exam 1
+- questions I got wrong or was unsure about
+
+1. When IAM policies are being evaluated for their logic of access, which two of the following statements are incorrect?
+
+	- explicit denies are always overruled by an explicit allow
+	- access to all resources is allowed by default until access is denied
+
+2. Your security team has been tasked with implementing a solution to monitor your EC2 fleet of instances. Upon review, you decide to implement Amazon Inspector. What are the three prerequisites that you would need to implement before using Amazon Inspector? (Choose three answers)
+
+	- deploy Amazon Inspector agents to your EC2 fleet
+	- create an IAM service-linked role that allows Amazon Inspector to access your EC2 feet
+
+4. When using AWS Shield, which type of rule counts the number of requests received from a particular IP address over a time period of 5 minutes?
+
+	- rate-based
+
+5. Following a breach on your network, an instance was compromised and you need to perform a forensic investigation of the affected instance. You decide to move the EC2 instance to your forensic account. Which steps would you take to carry out this process?
+
+- Create an AMI from the affected EC2 instance and then share that AMI image with your forensic account. From within your forensic account, locate the AMI and create a new instance from the shared AMI.
+
+6. What is the Log Delivery Group account used for within Amazon S3?
+
+	- This is a predefined group by AWS that's used to deliver S3 server access logs to a bucket.
+
+10. You are using the KMS service called encrypt_me to perform encryption within Amazon S3 using a customer created CMK in eu-west-1. A colleague explains that they are unable to see the CMK when they try to use it to encrypt data in a bucket named encrypt_me_too in us-east-1. What is the most likely cause of this?
+
+	- CMKs are regional, so it will not appear in us-east-1.
+
+11. A developer in your organization requires access to perform cryptographic functions using a customer-managed CMK. What do you need to update so that you can add permissions for the developer to allow them to use the CMK?
+
+	- Key policy
+
+14. Your IAM administrator has created 20 IAM users within your organization's production AWS account. All users must be able to access AWS resources using the AWS Management Console, in addition to programmatic access via the AWS CLI. Which steps must be implemented to allow both methods of access? (Choose two.)
+
+	- Create a user account with their own IAM credentials and password.
+	- Create an access key and secret access key for every user.
+
+16. Microsoft Active Directory Federation Services (ADFS) can be used as an Identity Provider (IdP) to enable federated access to the AWS Management Console. As part of the authentication process, which API is used to request temporary credentials to enable access?
+
+	- AssumeRoleWithSAML
+
+17. When configuring your IdP from within IAM, which document do you need to provide that includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that are received from the IdP?
+
+	- Metadata document
+
+18. Your CTO has asked you to find a simple and secure way to perform administrative tasks and configurational changes remotely against a selection of EC2 instances within your production environment. Which option should you choose?
+
+	- Use the Run command in AWS Systems Manager.
+
+19. Your organization is running a global retail e-commerce website in which customers from around the world search your website, adding products to their shopping cart before ordering and paying for the items. During a meeting to redesign the infrastructure, you have been instructed to define a solution where routing APIs to microservices can be managed, in addition to adding security features so that users can manage authentication and access control and monitor all requests that are made from concurrent API calls. Which service should you implement to manage these requirements?
+
+	- AWS API Gateway
+
+21. One of your instances within a private subnet of your production network may have been compromised. Since you work within the incident team, you have been asked to isolate the instance from other resources immediately, without affecting other production EC2 instances in the same subnet. Which approaches should be followed in this situation? (Choose two.)
+
+	- remove any role associated with the EC2 instance
+	- change security group of instance to restricted security group, thereby preventing any access to or from the instance
+	
+22. You have implemented a VPN connection between your data center and your AWS VPC. You then enabled route propagation to ensure that all the other routes to networks represented across your site-to site VPN connection are automatically added within your route table. However, you notice that you now have overlapping CIDR blocks between your propagated routes and existing static routes. Which statement is true?
+
+	- Your static routes will take precedence over propagated routes
+
+23. Your CTO has explained that they are looking for a solution to be able to monitor network packets across your VPC. You suggest VPC flow logs, but the CTO wants to implement a solution whereby captured traffic is sent to a Network Load Balancer, using UDP as a listener, which sits in front of a fleet of appliances dedicated to network analysis. What solution would you suggest to the CTO?
+
+	- Use Traffic Mirroring to capture packets and use the NLB as a Target.
+
+24. You have been tasked with defining a central repository that enables you to view real-time logging information from different AWS services that can be filtered and queried to search for specific events or error codes. Which of the following would you use?
+
+	- Amazon CloudWatch logs
+
+25. Which feature of AWS CloudTrail can be used for forensic investigation to confirm that your log files have not been tampered with?
+
+	- Select Log File Validation
+
+31. When encrypting an EBS group, which kind of keys can be used? (Choose three.)
+
+	- AWS managed CMK key
+	- AWS owned CMK key
+	- Customer CMK key
+
+34. Which policies do NOT require a principal parameter within the context of the policy? (Choose two.)
+
+	- An inline IAM policy
+	- A service control policy (SCP)
+
+35. You have just joined a new startup as a security engineer. One of your first tasks is to implement authentication for a new mobile application that is likely to scale to over a million users within the first few months. Which option is the best for handling scaling with minimal management?
+
+	- Implement Amazon Cognito with Social Federation.
+
+36. Your engineering team has come to you to explain that they have lost the private key associated with one of their Linux instance-stored backed root volume EC2 instances, and they can no longer connect to and access the instance. Which statement is true in this circumstance?
+
+	- When you lose your private key to an EC2 instance that has an instance-stored root volume, there is no way to reestablish connectivity to the instance
+
+37. You are explaining the differences between security groups and Network Access Control Lists to a customer. What key points are important to understand when understanding how these two security controls differ from each other? (Choose three)
+
+	- Security groups are stateful by design and NACLs are not
+	- Securiyt groups controll access at the instance level
+	- NACLs allow you to add a `deny` action within the ruleset
+
+38. Your new startup is deploying a highly-scalable multi-tiered application. Your VPC is using both public and private subnets, along with an application load balancer. Your CTO has defined the following requirements:
+
+	- a NAT gateway should be deployed in the public subnet
+	- Launch the EC2 instances in the private subnet
+
+39. You are experiencing an increase in the level of attacks across multiple different AWS accounts against your applications from the internet. This includes XSS and SQL injection attacks. As the security architect for your organization, you are responsible for implementing a solution to help reduce and minimize these threats. Which AWS services should you implement to help protect against these attacks? (Choose two.)
+
+	- AWS Firewall Manager
+	- AWS Web Application Firewall
+
+40. During the deployment of a new application, you are implementing a public-facing Elastic Load Balancer (ELB). Due to the exposed risk, you need to implement encryption across your ELB, so you select HTTPS as the protocol listener. During this configuration, you will need to select a certificate from a certificate authority (CA). Which CA is the recommended choice for creating the X.509 certificate?
+
+	- AWS Certificate Manager
+
+41. Recently, you have noticed an increase in the number of DDoS attacks against your public web servers. You decide to implement AWS Shield Advanced to help protect your EC2 instances. Which configurational change do you need to implement before you can protect your instance using the advanced features?
+
+	- Assign an EIP to the EC2 instance.
+
+42. Which layer of the OSI model do both Amazon CloudFront (with AWS WAF) and Route 53 offer attack mitigation against? (Choose three.)
+
+	- They offer attack mitigation against layers 3,4, and 7
+
+45. An engineer has raised a concern regarding one of your buckets and wants to understand details about when a particular bucket has been accessed to help ascertain the frequency and by whom. Which method would be the MOST appropriate to get the data required?
+
+	- Analyze S3 Server Access Logs
+
+46. Amazon S3 object-level logging integrates with which other AWS service?
+
+	- AWS CloudTrail
+
+47. You are currently monitoring the traffic flow between a number of different subnets using VPC flow logs. Currently, the configuration of the capture is capturing ALL packets. However, to refine the flow log details, you want to modify the configuration of the flow log so that it only captures rejected packets instead. Which of the following statements is true?
+
+	- You can't change the configuration of an existing flow log once it's been created.
+
+48. Your CTO is concerned about the sensitivity of the data being captured by AWS CloudTrail. As a result, you suggest encrypting the log files when they are sent to S3. Which encryption mechanism is available to you during the configuration of your Trail?
+
+	- SSE-KMS
+
+49. As part of your security procedures, you need to ensure that, when using the Elastic File System (EFS), you enable encryption-in-transit using TLS as a mount option, which uses a client tunnel process. Assuming your filesystem is fs-12345678 and your filesystem's identifier is /mnt/efs, which command would you enter to mount the EFS file stems with encryption enabled?
+
+	- `sudo mount -t efs -o tls fs-12345678:/ /mnt/efs`
+
+50. You are configuring your AWS environment in preparation for downloading and installing the CloudWatch agent to offer additional monitoring. Which two tasks should you complete prior to installing the agent?
+
+	- Ensure that your EC2 instance is running the latest version of the SSM agent.
+	 - Ensure that your EC2 instances have outbound internet access.
+
+51. You have been approached by your compliance team to define what data is encrypted on an EBS volume when EBS encryption has been enabled. Which of the following should you choose? (Choose three.)
+
+	- the root and data volume
+	- All data moving between the EBS volume and the associated EC2 instance
+	- All snapshots of the EBS volume
+
+52. You are being audited by an external auditor against PCI-DSS, who is accessing your solutions that utilize AWS. You have been asked to provide evidence that certain controls are being met against infrastructure that is maintained by AWS. What is the best way to provide this evidence?
+
+	- Use AWS Artifact to download the appropriate compliance records.
+
+53. Which part of AWS CloudHSM can carry out the following functions? 
+- Perform encryption and decryption.
+- Create, delete, wrap, unwrap, and modify attributes of keys.
+- Sign and verify.
+- Generate digests and HMACs.
+<br>
+	Crypto User (CU)
+	
+56. Amazon GuardDuty uses different logs to process and analyze millions of events that are then referenced against numerous threat detection feeds, many of which contain known sources of malicious activity, including specific URLs and IP addresses. Which of the following logs are NOT used by Amazon GuardDuty? (Choose two.)
+
+	- S3 Server Access logs
+	- CloudWatch Event logs
+
+59. You have been asked to upload the company's own key material instead of using the key material generated by KMS. In preparation for doing this, you download the public key and import token. What format must your key material be in prior to it being uploaded?
+
+	- Binary
+
+61. Which of the following is NOT considered an asymmetric key encryption mechanism?
+
+	- Advanced Encryption Standard (AES)
+
+62. AWS Trusted Advisor helps customers optimize their AWS environment through recommended best practices. Which of the following is NOT one of the five categories that it checks in your account?
+
+	- Monitoring
+
+63. Which of the following keys shows an AWS managed key when using Amazon S3 SSE-KMS?
+
+	- aws/s3
+
+64. Which keys used in conjunction with KMS are used outside of the KMS platform to perform encryption against your data?
+- Data Encryption key
