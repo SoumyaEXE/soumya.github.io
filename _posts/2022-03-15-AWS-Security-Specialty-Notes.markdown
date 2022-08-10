@@ -6,8 +6,10 @@ date:   2022-03-15
 image:  '/images/aws.png'
 tags:   [AWS Security]
 ---
+
 # AWS Security Specialty
 These are all the notes that I took after reading the entire exam guide for the AWS Ceritifed Security - Specialty exam (ISBN-13: 978-1789534474). It is recommended that you install Obsidian and download the <a href="https://github.com/0xd4y/notes/blob/main/AWS%20-%20Security%20Specialty/AWS-notes.zip">zip file</a> instead, as this will allow you to quickly and easily navigate through these notes. You can also download the <a href="https://github.com/0xd4y/notes/blob/main/AWS%20-%20Security%20Specialty/AWS%20-%20Security%20Specialty.pdf">PDF file</a>, as this contains rendered images related to the notes.
+
 # Things to Know on Exam
 - need to know logging
 	- how to handle monitoring and logging
@@ -28,6 +30,7 @@ Data Protection | 22%
 - order in which thigs are resolved
 	- explicit deny, explicit allow, default implicit deny
 - know cloudwatch, KMS, IAM, cloudtrail, etc.
+
 # Table of Contents
 [[AWS Questions]]
 [[AWS/Cloud Security - Specialist/Misc|Misc]]
@@ -57,6 +60,7 @@ Data Protection | 22%
 ## Section 6: Encryption and Data Security
 [[Managing Key Infrastructure]]
 [[Managing Data Security]]
+
 
 # Identity and Access Management (IAM)
 [[AWS Contents]]
@@ -99,6 +103,7 @@ Data Protection | 22%
 - allows creation of roles that have been federated through one's internal corporate directory 
 - the external authentication system is one's own corporate directory of users
 	- e.g. Microsoft Active Directory (MSAD)
+
 # Access Policies 
 [[AWS Contents]]
 [[AWS Questions#Access Policies]]
@@ -176,6 +181,7 @@ Determination of permissions when accessing resource:
 4. Permission Result
 	- access granted or denied
 - deny actions overrule allow actions 
+
 # Federated and Mobile Access
 [[AWS Contents]]
 [[AWS Questions#Federated and Mobile Access]]
@@ -202,6 +208,7 @@ Two main Components:
 2. Identity Pools
 	- assigns permissions to user to access AWS resources (uses temporary credentials
 	- ![[Pasted image 20220203163348.png]]
+
 # Shared Responsibility Model
 [[AWS Contents]]
 [[AWS Questions#Shared Responsibility Model]]
@@ -344,6 +351,7 @@ Three different shared responsibility models:
 - recommended to use these in conjunction with Shield to further decrease chances of compromise
 - helps detect DDoS attacks
 - allows for layer 3, 4, and 7 attack mitigation (also 6 in the case of CloudFront used in conjunction with AWS WAF)
+
 # Implementing Application Security
 [[AWS Contents]]
 [[AWS Questions#Implementing Application Security]]
@@ -455,6 +463,7 @@ Common approach in a breach scenario (blue side):
 5. Deregister - remove EC2 instance from any associated ELBs
 6. Snapshot - take snapshot of EBS volumes for forensics
 7. Tag - highlight instance that is prepared for forensic investigation
+
 # Secure Connections to AWS Environment
 [[AWS Contents]]
 [[AWS Questions#Secure Connections to AWS Environment]]
@@ -508,6 +517,7 @@ Once physical network connection to AWS Direct Connect location established, net
 ### Virtual Interfaces
 - connection can be partitioned into virtual interfaces 
 - allows access to other AWS services other than what is within your VPC
+
 # Securing EC2 Instances
 [[AWS Contents]]
 [[AWS Questions#Securing EC2 Instances]]
@@ -738,6 +748,7 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 - main AWS monitoring service
 - collects data and metrics from all supported AWS services 
 - can be implemented in a large scale using AWS Systems Manager (SSM)
+
 # Automation
 [[AWS Contents]]
 [[AWS Questions#Automation]]
@@ -768,6 +779,7 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 	- Amazon Inspector
 	- AWS Firewall Manager
 - has predefined and managed insights to identify security-related weaknesses
+
 # Discovering Security Best Practices
 [[AWS Contents]]
 [[AWS Questions#Discovering Security Best Practices]]
@@ -928,6 +940,7 @@ Three options to encrypt data with:
 2. KMS - Customer managed CMK
 3. KMS - AWS managed CMK
 - encryption in transit uses HTTPS
+
 # Managing Key Infrastructure
 [[AWS Contents]]
 [[AWS Questions#Managing Key Infrastructure]]
@@ -1058,6 +1071,7 @@ Permissions:
 <u>Secrets</u>: Anything that is confidential (e.g. passwords, API keys, etc.)
 - removes need for hardcoding credentials in code
 - automatically rotates secrets
+
 # AWS Questions
 [[AWS Contents]]
 [[AWS/Cloud Security - Specialist/Misc|Misc]]
@@ -1478,6 +1492,7 @@ collapse:
 collapse:
 **AWS Key Management Service (KMS)**
 ```
+
 # Misc 
 [[AWS Contents]]
 [[AWS Questions]]
@@ -1504,7 +1519,7 @@ What is the difference between Internet Gateway (IGW) and NAT Gateway (NGW)?
 What is the difference between AWS CloudWatch and Amazon CloudTrail?
 - AWS CloudWatch monitors AWS resources and applications while CloudTrail monitors activity within AWS environment# Mock Exam Questions 
 
-## Mock Exam 1
+## Mock Exam 2
 - questions I got wrong or was unsure about
 1. When IAM policies are being evaluated for their logic of access, which two of the following statements are incorrect?
 	- explicit denies are always overruled by an explicit allow
