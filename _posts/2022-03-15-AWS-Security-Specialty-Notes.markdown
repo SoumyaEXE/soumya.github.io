@@ -460,7 +460,7 @@ Uses two components:
 Route table example:
 Destination | Target
 ----|--------
-10.0.0.0/16 |Local
+10.0.0.0/16 | Local
 172.16.0.0/16 | pcx-1234abcd
 172.16.1.0/24 | vgw-wxyz6789
 1. First route is local route of VPC (found in every route table)
