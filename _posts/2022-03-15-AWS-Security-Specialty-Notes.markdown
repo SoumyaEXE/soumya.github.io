@@ -132,31 +132,31 @@ Data Protection | 22%
 	
 ![[Pasted image 20220131192503.png]]
 - Policy Types:
-	## Identity-based Policies
+## Identity-based Policies
 	- attached to IAM user, group, or role
 	- controls what actions an identity (users, groups of users, roles) can perform on which resources and under what conditions
 		- e.g. allowing user John to run the EC2 `RunInstances` action 
 	- can be AWS-managed, customer-managed or in-line policies
-		### AWS-managed
+### AWS-managed
 		- policies that are created and managed by AWS
-		### Customer-managed
+### Customer-managed
 		- custom policy that is made by the customer 
-		### In-line 
+### In-line 
 		- added directly to user, group, or role
 		- deleted when the identity is deleted
-	## Resource-based Policies
+## Resource-based Policies
 	- very similar to in-line policies except they are attached to resources instead of identities
 	- can be attached to buckets and S3 objects
 	- lets you specify who has access to resource and what actions they can perform on it
 	- policy looks the same as in the example policy, however includes a *Principal* parameter
 		- identifies user, role, account, or federated user that permissions should be applied to
-	## Permissions boundaries
+## Permissions boundaries
 	- governs maximum permissions an identity-based policy can associate with any user or role
-	## Access Control Lists (ACLs)
+## Access Control Lists (ACLs)
 	- can attach to buckets and S3 objects
 	- similar to resource-based policies
 	- use only to control cross-account access from different AWS account or public access
-	## Organization SCPs
+## Organization SCPs
 	- SCP stands for Service Control Policy
 	- used by AWS organizations to manage multiple AWS accounts
 	- similar to permissions boundaries within identity objects
