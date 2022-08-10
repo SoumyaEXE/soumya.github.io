@@ -671,7 +671,7 @@ Log details captured:
 ### Flow Logs
 - captures IP traffic across network interfaces
 - default log file format:
-```bash
+```
 ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstport} ${protocol} ${packets} ${bytes} ${start} ${end} ${action} ${log-status}
 ```
 1. version: version of the flow log
@@ -705,7 +705,7 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 
 ### Understanding CloudTrail Logs
 <center>Example of CloudTrail Log</center>
-```json
+```
 "awsRegion": "eu-west-1",
 "eventID": "6ce47c89-5908-452d-87cc-a7c251ac4ac0",
 "eventName": "PutObject",
@@ -1030,6 +1030,7 @@ User types of CloudHSM
 2. Crypto Office
 3. Crypto User
 4. Appliance User
+
 Operations | PRECO | CO | CU| AU|
 -----|-----|-------|------|-----|
 Obtain basic cluster information (number of HSMs in cluster, IP address, serial number, etc.) | No | Yes | Yes | Yes
