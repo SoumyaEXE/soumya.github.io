@@ -2,22 +2,18 @@
 layout: post
 title:  AWS Security Specialty Notes
 description: Notes that I wrote in preparation for the Certified AWS Security - Specialty exam. These notes cover fundamental information about the AWS infrastructure. It is recommended that you install Obsidian and download the zip file instead. This way you can navigate through these notes a lot more quickly.
-
 date:   2022-03-15 
 image:  '/images/aws.png'
 tags:   [AWS Security]
 ---
-
 # AWS Security Specialty
 These are all the notes that I took after reading the entire exam guide for the AWS Ceritifed Security - Specialty exam (ISBN-13: 978-1789534474). It is recommended that you install Obsidian and download the <a href="https://github.com/0xd4y/notes/blob/main/AWS%20-%20Security%20Specialty/AWS-notes.zip">zip file</a> instead, as this will allow you to quickly and easily navigate through these notes. You can also download the <a href="https://github.com/0xd4y/notes/blob/main/AWS%20-%20Security%20Specialty/AWS%20-%20Security%20Specialty.pdf">PDF file</a>, as this contains rendered images related to the notes.
-
 # Things to Know on Exam
 - need to know logging
 	- how to handle monitoring and logging
 	- how to automate responses to incidents found in those logs
 - know troubleshooting
 	- if logs from lambda are not showing up in cloudwatch, why is this?
-
 
 Knowledge Domain | % of Exam
 ------------|------
@@ -26,7 +22,6 @@ Logging and Monitoring | 20%
 Infrastructure Security | 26%
 Identity and Access Management | 20%
 Data Protection | 22%
-
 - scenario-based
 	- automating response to security issues
 - know format of policies in json
@@ -43,7 +38,6 @@ Data Protection | 22%
 [[Shared Responsibility Model]]
 
 ## Section 3: Security - A Layered Approach
-
 [[Configuring Infrastructure Security]]
 [[Implementing Application Security]]
 [[Securing EC2 Instances]]
@@ -63,11 +57,9 @@ Data Protection | 22%
 [[Managing Key Infrastructure]]
 [[Managing Data Security]]
 
-
 # Identity and Access Management (IAM)
 [[AWS Contents]]
 [[AWS Questions]]
-
 - contains details and credentials of root user account
 - access keys should not be configured for root user (additional user with relevant privileges should be created instead)
 	- limit access methods to root account
@@ -82,6 +74,7 @@ Data Protection | 22%
 	- not associated with users or groups
 	- sort of works like discord roles
 ### Examples of roles:
+
 #### Service Roles
 - allows other AWS services to perform actions on one's behalf
 - only exist in account in which they were created (can't be used for cross-account access)
@@ -107,9 +100,7 @@ Data Protection | 22%
 # Access Policies 
 [[AWS Contents]]
 [[AWS Questions#Access Policies]]
-
 - define who or what can or can't access AWS resources
-
 <u>Policy Structure</u>:
 1. Version
 	- shows version of policy language
@@ -174,18 +165,15 @@ Determination of permissions when accessing resource:
 	- policy types evaluated in order of identity-based, resource-based, IAM permissions boundaries, and SCPs
 4. Permission Result
 	- access granted or denied
-
 - deny actions overrule allow actions 
 # Federated and Mobile Access
 [[AWS Contents]]
 [[AWS Questions#Federated and Mobile Access]]
-
 - used for providing resource to a large amount of users
 	- unfeasible to create individual IAM accounts for every user to access the resource
 - allows access to AWS resources without IAM user account
 - credentials federated by identity provider (IDP)
 	- e.g. Microsoft Active Directory Accounts, Google, Facebook, etc.
-
 <u>Security Assertion Markup Language (SAML)</u>
 - allows secure exchange of authentication data between different domains
 - users security tokens between an IdP and a SAML consumer
@@ -195,9 +183,7 @@ Determination of permissions when accessing resource:
 - made for enabling secure authentication and access control for new and existing users accessing web or mobile applications
 - generate tokens after  authentication that manages access 
 - best practice when creating applications that require social IdPs for authentication
-
 Two main Components:
-
 1. User Pools
 	- scalable user directories
 	- allow users to login to mobile application
@@ -205,11 +191,9 @@ Two main Components:
 2. Identity Pools
 	- assigns permissions to user to access AWS resources (uses temporary credentials
 	- ![[Pasted image 20220203163348.png]]
-
 # Shared Responsibility Model
 [[AWS Contents]]
 [[AWS Questions#Shared Responsibility Model]]
-
 Three different shared responsibility models:
 1. Infrastructure
 	- most common model
@@ -293,9 +277,7 @@ Three different shared responsibility models:
 - bastion host resides within public subnet
 - hardened EC2 instance with restrictive controls
 - acts as ingress gateway
-
 <u>Public Subnet</u>: a subnet associated with a route table pointing to an internet gateway (IGW) with a destination address of 0.0.0.0/0
-
 - no packet is directly exchanged between internet and IPs inside private subnet (it goes first through the bastion host)
 
 ## NAT Instances and NAT Gateways
@@ -375,11 +357,9 @@ Three different ELBs:
 <u>Application Load Balancer</u>
 - supports incoming traffic for web applications running HTTP or HTTPS
 - allows routing of requests such as to different ports
-
 <u>Network Load Balancer</u>
 - supports millions of incoming requests per second
 - ideal if low latency and high performance are priorities
-
 <u>Classic Load Balancer</u>
 Using a Classic Load Balancer instead of an Application Load Balancer has the following benefits:
 -   Support for EC2-Classic
@@ -390,22 +370,28 @@ Using a Classic Load Balancer instead of an Application Load Balancer has the fo
 - AWS API gateway
 ### Controlling Access to APIs
 Methods for controlling authentication and authorization:
+
 #### IAM Roles and Policies
 - using IAM, policies can be associated with user, role, or group to dictate permissions
+
 #### IAM Tags
 - can be used in conjunction with IAM policies
 - used for references pertaining to security controls such as in the following example: a user being able to perform a specific action based on the resource tag 
+
 #### Resource Policies
 - attached to resources (unlike IAM which is attached to identity)
 - specifies principal that has been granted or denied access to invoke associate API
+
 #### VPC Endpoint Policies
 - also a resource-based policy, but is a VPC endpoint
 	- VPC endpoints allows access to AWS services using private IP addresses
 - controls access to private APIs
 - can be used in conjunction with API Gateway resource policies for additional security
+
 #### Lambda Authorizers
 - uses AWS Lambda functions to restrict who can invoke REST API methods
 - can use bearer-based tokens or HTML headers, paths, query string parameters, and stage variables
+
 #### Amazon Cognito User Pools
 - APIs can be configured to have `COGNITO_USER_POOLS` authorizer  to authenticate users via Amazon Cognito user pool API gateway
 	- token is validated before allowing access# Incident Response
@@ -462,7 +448,6 @@ Uses two components:
 	- resides within AWS
 	- consists of two endpoints located in different data centers
 2. Customer gateway
-
 ![[Pasted image 20220215120110.png]]
 - consists of two IPsec tunnel
 	- <u>IPsec Tunnel</u>: secure network protocol allowing encrypted communication between two endpoints 
@@ -470,17 +455,14 @@ Uses two components:
 - uses public network to establish connection
 ### Routing
 Route table example:
-
 Destination|Target
 ----|--------
 10.0.0.0/16|Local
 172.16.0.0/16|pcx-1234abcd
 172.16.1.0/24|vgw-wxyz6789
-
 1. First route is local route of VPC (found in every route table)
 2. Second route points to target relating to VPC peering connection
 3. Third route point to VPN gateway
-
 - if packet is meant for destination that is covered by two subnets, it will go to the more specific subnet
 	- e.g. if packet is meant for 172.16.1.5, it will go to the third route even though route 1 and route 2 both cover that destination
 - route propagation can be enabled in VPN gateway to automatically add site-to-site VPN connections to route table
@@ -494,12 +476,10 @@ Three distinct locations involved to establish link:
 1. Corporate site where your own private network resides
 2. AWS Direct Connect location (typically owned by AWS partner)
 3. AWS VPC within specific AWS region
-
 Prerequisites for configuring and establish connection:
 1. Your organization works with an AWS Direct Connect partner who is a member of AWS Partner Network (APN)
 2. Your network has co-location connection to AWS Direct Connect location
 3. Your organization works with an IPS allowing connection to AWS Direct Connect
-
 Once physical network connection to AWS Direct Connect location established, network must follow this criteria:
 1. Authentication - router must support Border Gateway Protocol (BGP) and MD5
 2. Network must use single-mode fiber
@@ -558,6 +538,7 @@ Once physical network connection to AWS Direct Connect location established, net
 ## Systems Manager (SSM)
 - allows to quickly administer and perform operational actions against instances without SSH or RDP
 ### Actions
+
 #### Automation
 - automate processes against groups of resources via SSM documents
 - e.g. patching EC2 instances or creating AMI (Amazon Machine Image)
@@ -596,13 +577,11 @@ Once physical network connection to AWS Direct Connect location established, net
 - when validation is enabled, digest files are created
 	- digest files reference every log file delivered within specific timeframe along with associated hash
 	- digest files are signed using private key of a public/private key pair used by CloudTrail for that region
-
 Validating if log was tampered with or moved:
 `aws cloudtrail validate-logs --trail-arn <trailARN> --start-time <start-time>`
 
 ## AWS Config
 - useful for seeing history of modifications to a resource via looking at the history of configuration items
-
 Components of AWS Config:
 - Configuration items
 - Configuration streams
@@ -621,7 +600,6 @@ Components of AWS Config:
 	- metadata
 	- events
 - CI updated each time change is made on resource (e.g. create, update, or delete API call made against resource)
-
 Components of Configuration Item:
 **Metadata**: info and data about config item
 **Attributes**: data of actual resource that CI relates to
@@ -638,7 +616,6 @@ Components of Configuration Item:
 ## Amazon S3 Logging
 - most common AWS storage service
 - logs can be sent to S3 or Amazon CloudWatch Logs
-
 
 Two types of logging within S3:
 1. Server access logs
@@ -695,7 +672,6 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 
 ### Understanding CloudTrail Logs
 <center>Example of CloudTrail Log</center>
-
 ```json
 "awsRegion": "eu-west-1",
 "eventID": "6ce47c89-5908-452d-87cc-a7c251ac4ac0",
@@ -723,7 +699,6 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 "type": "AWSService"
 ```
 - shows Cloudtrail made *PutObject* request to Amazon S3 to store its log file (see the *key* parameter)
-
 *eventName*: name of API called
 *eventSource*: AWS service in which API call was made
 *eventTime*: time of API call
@@ -741,7 +716,6 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 - main AWS monitoring service
 - collects data and metrics from all supported AWS services 
 - can be implemented in a large scale using AWS Systems Manager (SSM)
-
 # Automation
 [[AWS Contents]]
 [[AWS Questions#Automation]]
@@ -749,6 +723,7 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 ## Automating Security Detection and Remediation
 ### Using CloudWatch Events with AWS Lambda and SNS
 - can identify event to capture and create an automatic response
+
 #### AWS Lambda 
 - serverless compute service
 - automatically provisions compute power
@@ -830,18 +805,17 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 
 ## Amazon S3
 - provides object-level storage
-
 Five different encryption options for S3 objects:
 1. Server-side encryption with S3-managed keys (SSE-S3)
 2. Server-side encryption with KMS-managed keys (SSE-KMS)
 3. Server-side encryption with customer-managed keys (SSE-C)
 4. Client-side encryption with KMS-managed keys (CSE-KMS)
 5. Client-side encryption with customer-managed keys (CSE-C)
-
 - server-side encryption: encryption algorithm and process run from server-side (i.e. in this case it is within Amazon S3)
 - client-side encryption: encryption process executed on client side before data sent to S3
 
 ### SSE-S3
+
 #### Encryption
 ![[Pasted image 20220225215402.png]]
 1. Client selects object(s) to upload to S3 and indicates SSE-S3 as encryption algorithm
@@ -857,15 +831,17 @@ Five different encryption options for S3 objects:
 4. S3 returns plaintext data object to client
 
 ### SSE-KMS
+
 #### Encryption
 [[Managing Key Infrastructure#SSE-KMS Encryption]]
+
 #### Decryption
 [[Managing Key Infrastructure#SSE-KMS Decryption]]
 
 ### SSE-C
+
 #### Encryption
 ![[Pasted image 20220225220028.png]]
-
 1. Client uploads object to S3 along with plaintext customer-provided key across HTTPS
 	- mandatory to use HTTPS
 2. Object is encrypted with key and a salted HMAC value of customer key is generated for validation upon future access requests. HMAC value and encrypted object stored in S3 with association to each other. Plaintext key removed.
@@ -878,6 +854,7 @@ Five different encryption options for S3 objects:
 4. Plaintext object sent to client.
 
 ### CSE-KMS
+
 #### Encryption
 ![[Pasted image 20220225235024.png]]
 1. Client uses AWS SDK (Software Development Kit) to request data keys from KMS using specified CMK
@@ -897,6 +874,7 @@ Five different encryption options for S3 objects:
 6. Java client uses plaintext key to decrypt object.
 
 ### CSE-C
+
 #### Encryption
 ![[Pasted image 20220225235650.png]]
 1. Java client create plaintext data key to encrypt object data.
@@ -921,12 +899,10 @@ Five different encryption options for S3 objects:
 - fully managed key-value and document NoSQL database
 - at-rest server-side encryption enabled by default
 	- this setting cannot be disabled
-
 Three options to encrypt data with:
 1. DEFAULT: key owned by Amazon DynamoDB
 2. KMS - Customer managed CMK
 3. KMS - AWS managed CMK
-
 - encryption in transit uses HTTPS
 # Managing Key Infrastructure
 [[AWS Contents]]
@@ -941,7 +917,6 @@ Three options to encrypt data with:
 ### Customer Master Keys (CMK)
 - building block of KMS
 - contains material used for encrypting and decrypting data
-
 Three different types of CMKs:
 1. AWS-owned
 	- rotation period varied from service to service
@@ -962,8 +937,8 @@ Three different types of CMKs:
 	1. Plaintext Key
 	2. Identical (Encrypted) Key
 - <u>Envelope Encryption</u>: using one key to encrypt another key
-
 Amazon S3 server-side encryption and decryption with KMS managed keys (SSE-KMS):
+
 #### SSE-KMS Encryption
 ![[Pasted image 20220224222854.png]]
 1. SSE-KMS encryption mechanism chosen by client and either AWS-managed or customer-managed CMK is selected
@@ -1016,7 +991,6 @@ User types of CloudHSM
 2. Crypto Office
 3. Crypto User
 4. Appliance User
-
 Operations | PRECO | CO | CU| AU|
 -----|-----|-------|------|-----|
 Obtain basic cluster information (number of HSMs in cluster, IP address, serial number, etc.) | No | Yes | Yes | Yes
@@ -1027,6 +1001,7 @@ Add and remove users | No | Yes | No | No
 Get synchronization status | No | Yes | Yes | Yes
 Key management operations | No | No | Yes | No
 Encrypt, decrypt, sign, verify, generate, and digest HMACs | No | No | Yes | No
+
 #### Precrypto Office (PRECO)
 - automatically created upon creating first HSM within cluster
 - PRECO user has default creds
@@ -1035,7 +1010,6 @@ Encrypt, decrypt, sign, verify, generate, and digest HMACs | No | No | Yes | No
 
 #### Crypto Office (CO)
 - greater permissions than PRECO
-
 Permissions:
 - create, delete and change passwords of users
 - delete keys, certificates, and data on HSM
@@ -1059,11 +1033,9 @@ Permissions:
 <u>Secrets</u>: Anything that is confidential (e.g. passwords, API keys, etc.)
 - removes need for hardcoding credentials in code
 - automatically rotates secrets
-
 # AWS Questions
 [[AWS Contents]]
 [[AWS/Cloud Security - Specialist/Misc|Misc]]
-
 [[AWS Questions#Section 2 Security Responsibility Access Management|Section 2: Security Responsibility and Access Management]]
 [[AWS Questions#Section 3 Security - A Layered Approach | Section 3: Security - A Layered Approach]]
 [[AWS Questions#Section 4 Monitoring Logging and Auditing|Section 4: Monitoring, Logging, and Auditing]]
@@ -1126,7 +1098,6 @@ collapse:
 collapse:
 **True**
 ```
-
 
 ### Shared Responsibility Model
 [[Shared Responsibility Model]]
@@ -1493,174 +1464,100 @@ collapse:
 - ACLs were the first authorization mechanism in S3. Bucket policies are the newer method, and the method used for almost all AWS services. Policies can implement very complex rules and permissions, ACLs are simplistic (they have ALLOW but no DENY).
 	- A majority of modern use cases in Amazon S3 no longer require the use of ACLs, and we recommend that you disable ACLs except in unusual circumstances where you need to control access for each object individually
 
-
 ## Questions
 What is the difference between Internet Gateway (IGW) and NAT Gateway (NGW)?
-
 - internet gateway allows instances with public IP to access internet
 - NAT gateway allows instances with no public IP to access internet
-
 What is the difference between AWS CloudWatch and Amazon CloudTrail?
-
 - AWS CloudWatch monitors AWS resources and applications while CloudTrail monitors activity within AWS environment# Mock Exam Questions 
 
 ## Mock Exam 1
 - questions I got wrong or was unsure about
-
 1. When IAM policies are being evaluated for their logic of access, which two of the following statements are incorrect?
-
 	- explicit denies are always overruled by an explicit allow
 	- access to all resources is allowed by default until access is denied
-
 2. Your security team has been tasked with implementing a solution to monitor your EC2 fleet of instances. Upon review, you decide to implement Amazon Inspector. What are the three prerequisites that you would need to implement before using Amazon Inspector? (Choose three answers)
-
 	- deploy Amazon Inspector agents to your EC2 fleet
 	- create an IAM service-linked role that allows Amazon Inspector to access your EC2 feet
-
 4. When using AWS Shield, which type of rule counts the number of requests received from a particular IP address over a time period of 5 minutes?
-
 	- rate-based
-
 5. Following a breach on your network, an instance was compromised and you need to perform a forensic investigation of the affected instance. You decide to move the EC2 instance to your forensic account. Which steps would you take to carry out this process?
-
 - Create an AMI from the affected EC2 instance and then share that AMI image with your forensic account. From within your forensic account, locate the AMI and create a new instance from the shared AMI.
-
 6. What is the Log Delivery Group account used for within Amazon S3?
-
 	- This is a predefined group by AWS that's used to deliver S3 server access logs to a bucket.
-
 10. You are using the KMS service called encrypt_me to perform encryption within Amazon S3 using a customer created CMK in eu-west-1. A colleague explains that they are unable to see the CMK when they try to use it to encrypt data in a bucket named encrypt_me_too in us-east-1. What is the most likely cause of this?
-
 	- CMKs are regional, so it will not appear in us-east-1.
-
 11. A developer in your organization requires access to perform cryptographic functions using a customer-managed CMK. What do you need to update so that you can add permissions for the developer to allow them to use the CMK?
-
 	- Key policy
-
 14. Your IAM administrator has created 20 IAM users within your organization's production AWS account. All users must be able to access AWS resources using the AWS Management Console, in addition to programmatic access via the AWS CLI. Which steps must be implemented to allow both methods of access? (Choose two.)
-
 	- Create a user account with their own IAM credentials and password.
 	- Create an access key and secret access key for every user.
-
 16. Microsoft Active Directory Federation Services (ADFS) can be used as an Identity Provider (IdP) to enable federated access to the AWS Management Console. As part of the authentication process, which API is used to request temporary credentials to enable access?
-
 	- AssumeRoleWithSAML
-
 17. When configuring your IdP from within IAM, which document do you need to provide that includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that are received from the IdP?
-
 	- Metadata document
-
 18. Your CTO has asked you to find a simple and secure way to perform administrative tasks and configurational changes remotely against a selection of EC2 instances within your production environment. Which option should you choose?
-
 	- Use the Run command in AWS Systems Manager.
-
 19. Your organization is running a global retail e-commerce website in which customers from around the world search your website, adding products to their shopping cart before ordering and paying for the items. During a meeting to redesign the infrastructure, you have been instructed to define a solution where routing APIs to microservices can be managed, in addition to adding security features so that users can manage authentication and access control and monitor all requests that are made from concurrent API calls. Which service should you implement to manage these requirements?
-
 	- AWS API Gateway
-
 21. One of your instances within a private subnet of your production network may have been compromised. Since you work within the incident team, you have been asked to isolate the instance from other resources immediately, without affecting other production EC2 instances in the same subnet. Which approaches should be followed in this situation? (Choose two.)
-
 	- remove any role associated with the EC2 instance
 	- change security group of instance to restricted security group, thereby preventing any access to or from the instance
 	
 22. You have implemented a VPN connection between your data center and your AWS VPC. You then enabled route propagation to ensure that all the other routes to networks represented across your site-to site VPN connection are automatically added within your route table. However, you notice that you now have overlapping CIDR blocks between your propagated routes and existing static routes. Which statement is true?
-
 	- Your static routes will take precedence over propagated routes
-
 23. Your CTO has explained that they are looking for a solution to be able to monitor network packets across your VPC. You suggest VPC flow logs, but the CTO wants to implement a solution whereby captured traffic is sent to a Network Load Balancer, using UDP as a listener, which sits in front of a fleet of appliances dedicated to network analysis. What solution would you suggest to the CTO?
-
 	- Use Traffic Mirroring to capture packets and use the NLB as a Target.
-
 24. You have been tasked with defining a central repository that enables you to view real-time logging information from different AWS services that can be filtered and queried to search for specific events or error codes. Which of the following would you use?
-
 	- Amazon CloudWatch logs
-
 25. Which feature of AWS CloudTrail can be used for forensic investigation to confirm that your log files have not been tampered with?
-
 	- Select Log File Validation
-
 31. When encrypting an EBS group, which kind of keys can be used? (Choose three.)
-
 	- AWS managed CMK key
 	- AWS owned CMK key
 	- Customer CMK key
-
 34. Which policies do NOT require a principal parameter within the context of the policy? (Choose two.)
-
 	- An inline IAM policy
 	- A service control policy (SCP)
-
 35. You have just joined a new startup as a security engineer. One of your first tasks is to implement authentication for a new mobile application that is likely to scale to over a million users within the first few months. Which option is the best for handling scaling with minimal management?
-
 	- Implement Amazon Cognito with Social Federation.
-
 36. Your engineering team has come to you to explain that they have lost the private key associated with one of their Linux instance-stored backed root volume EC2 instances, and they can no longer connect to and access the instance. Which statement is true in this circumstance?
-
 	- When you lose your private key to an EC2 instance that has an instance-stored root volume, there is no way to reestablish connectivity to the instance
-
 37. You are explaining the differences between security groups and Network Access Control Lists to a customer. What key points are important to understand when understanding how these two security controls differ from each other? (Choose three)
-
 	- Security groups are stateful by design and NACLs are not
 	- Securiyt groups controll access at the instance level
 	- NACLs allow you to add a `deny` action within the ruleset
-
 38. Your new startup is deploying a highly-scalable multi-tiered application. Your VPC is using both public and private subnets, along with an application load balancer. Your CTO has defined the following requirements:
-
 	- a NAT gateway should be deployed in the public subnet
 	- Launch the EC2 instances in the private subnet
-
 39. You are experiencing an increase in the level of attacks across multiple different AWS accounts against your applications from the internet. This includes XSS and SQL injection attacks. As the security architect for your organization, you are responsible for implementing a solution to help reduce and minimize these threats. Which AWS services should you implement to help protect against these attacks? (Choose two.)
-
 	- AWS Firewall Manager
 	- AWS Web Application Firewall
-
 40. During the deployment of a new application, you are implementing a public-facing Elastic Load Balancer (ELB). Due to the exposed risk, you need to implement encryption across your ELB, so you select HTTPS as the protocol listener. During this configuration, you will need to select a certificate from a certificate authority (CA). Which CA is the recommended choice for creating the X.509 certificate?
-
 	- AWS Certificate Manager
-
 41. Recently, you have noticed an increase in the number of DDoS attacks against your public web servers. You decide to implement AWS Shield Advanced to help protect your EC2 instances. Which configurational change do you need to implement before you can protect your instance using the advanced features?
-
 	- Assign an EIP to the EC2 instance.
-
 42. Which layer of the OSI model do both Amazon CloudFront (with AWS WAF) and Route 53 offer attack mitigation against? (Choose three.)
-
 	- They offer attack mitigation against layers 3,4, and 7
-
 45. An engineer has raised a concern regarding one of your buckets and wants to understand details about when a particular bucket has been accessed to help ascertain the frequency and by whom. Which method would be the MOST appropriate to get the data required?
-
 	- Analyze S3 Server Access Logs
-
 46. Amazon S3 object-level logging integrates with which other AWS service?
-
 	- AWS CloudTrail
-
 47. You are currently monitoring the traffic flow between a number of different subnets using VPC flow logs. Currently, the configuration of the capture is capturing ALL packets. However, to refine the flow log details, you want to modify the configuration of the flow log so that it only captures rejected packets instead. Which of the following statements is true?
-
 	- You can't change the configuration of an existing flow log once it's been created.
-
 48. Your CTO is concerned about the sensitivity of the data being captured by AWS CloudTrail. As a result, you suggest encrypting the log files when they are sent to S3. Which encryption mechanism is available to you during the configuration of your Trail?
-
 	- SSE-KMS
-
 49. As part of your security procedures, you need to ensure that, when using the Elastic File System (EFS), you enable encryption-in-transit using TLS as a mount option, which uses a client tunnel process. Assuming your filesystem is fs-12345678 and your filesystem's identifier is /mnt/efs, which command would you enter to mount the EFS file stems with encryption enabled?
-
 	- `sudo mount -t efs -o tls fs-12345678:/ /mnt/efs`
-
 50. You are configuring your AWS environment in preparation for downloading and installing the CloudWatch agent to offer additional monitoring. Which two tasks should you complete prior to installing the agent?
-
 	- Ensure that your EC2 instance is running the latest version of the SSM agent.
 	 - Ensure that your EC2 instances have outbound internet access.
-
 51. You have been approached by your compliance team to define what data is encrypted on an EBS volume when EBS encryption has been enabled. Which of the following should you choose? (Choose three.)
-
 	- the root and data volume
 	- All data moving between the EBS volume and the associated EC2 instance
 	- All snapshots of the EBS volume
-
 52. You are being audited by an external auditor against PCI-DSS, who is accessing your solutions that utilize AWS. You have been asked to provide evidence that certain controls are being met against infrastructure that is maintained by AWS. What is the best way to provide this evidence?
-
 	- Use AWS Artifact to download the appropriate compliance records.
-
 53. Which part of AWS CloudHSM can carry out the following functions? 
 - Perform encryption and decryption.
 - Create, delete, wrap, unwrap, and modify attributes of keys.
@@ -1670,25 +1567,15 @@ What is the difference between AWS CloudWatch and Amazon CloudTrail?
 	Crypto User (CU)
 	
 56. Amazon GuardDuty uses different logs to process and analyze millions of events that are then referenced against numerous threat detection feeds, many of which contain known sources of malicious activity, including specific URLs and IP addresses. Which of the following logs are NOT used by Amazon GuardDuty? (Choose two.)
-
 	- S3 Server Access logs
 	- CloudWatch Event logs
-
 59. You have been asked to upload the company's own key material instead of using the key material generated by KMS. In preparation for doing this, you download the public key and import token. What format must your key material be in prior to it being uploaded?
-
 	- Binary
-
 61. Which of the following is NOT considered an asymmetric key encryption mechanism?
-
 	- Advanced Encryption Standard (AES)
-
 62. AWS Trusted Advisor helps customers optimize their AWS environment through recommended best practices. Which of the following is NOT one of the five categories that it checks in your account?
-
 	- Monitoring
-
 63. Which of the following keys shows an AWS managed key when using Amazon S3 SSE-KMS?
-
 	- aws/s3
-
 64. Which keys used in conjunction with KMS are used outside of the KMS platform to perform encryption against your data?
 - Data Encryption key
