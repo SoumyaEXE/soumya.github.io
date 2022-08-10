@@ -458,11 +458,11 @@ Uses two components:
 
 ### Routing
 Route table example:
-Destination|Target
+Destination | Target
 ----|--------
-10.0.0.0/16|Local
-172.16.0.0/16|pcx-1234abcd
-172.16.1.0/24|vgw-wxyz6789
+10.0.0.0/16 |Local
+172.16.0.0/16 | pcx-1234abcd
+172.16.1.0/24 | vgw-wxyz6789
 1. First route is local route of VPC (found in every route table)
 2. Second route points to target relating to VPC peering connection
 3. Third route point to VPN gateway
