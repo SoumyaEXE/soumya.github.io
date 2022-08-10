@@ -24,6 +24,7 @@ Logging and Monitoring | 20%
 Infrastructure Security | 26%
 Identity and Access Management | 20%
 Data Protection | 22%
+
 - scenario-based
 - automating response to security issues
 - know format of policies in json
@@ -138,14 +139,14 @@ Data Protection | 22%
 - can be AWS-managed, customer-managed or in-line policies
 
 ### AWS-managed
-	- policies that are created and managed by AWS
+- policies that are created and managed by AWS
 
 ### Customer-managed
-	- custom policy that is made by the customer 
+- custom policy that is made by the customer 
 
 ### In-line 
-	- added directly to user, group, or role
-	- deleted when the identity is deleted
+- added directly to user, group, or role
+- deleted when the identity is deleted
 
 ## Resource-based Policies
 - very similar to in-line policies except they are attached to resources instead of identities
