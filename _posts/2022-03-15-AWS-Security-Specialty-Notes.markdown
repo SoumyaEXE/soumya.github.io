@@ -1031,7 +1031,7 @@ User types of CloudHSM
 3. Crypto User
 4. Appliance User
 
-Operations | PRECO | CO | CU| AU|
+Operations | PRECO | CO | CU | AU |
 -----|-----|-------|------|-----|
 Obtain basic cluster information (number of HSMs in cluster, IP address, serial number, etc.) | No | Yes | Yes | Yes
 Zeroize HSMs (delete keys, certificates, and data  on the HSM) | No | Yes | Yes | Yes
