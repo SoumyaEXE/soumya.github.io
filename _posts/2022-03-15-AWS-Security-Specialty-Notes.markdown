@@ -31,11 +31,13 @@ Data Protection | 22%
 # Table of Contents
 [[AWS Questions]]
 [[AWS/Cloud Security - Specialist/Misc|Misc]]
+
 ## Section 2: Security Responsibility & Access Management
 [[Access Management]]
 [[Access Policies]]
 [[Federated and Mobile Access]]
 [[Shared Responsibility Model]]
+
 
 ## Section 3: Security - A Layered Approach
 [[Configuring Infrastructure Security]]
@@ -45,13 +47,16 @@ Data Protection | 22%
 [[Incident Response]]
 [[Secure Connections to AWS Environment]]
 
+
 ## Section 4: Monitoring, Logging, and Auditing
 [[Implementing Logging Mechanisms]]
 [[Auditing and Governance]]
 
+
 ## Section 5: Best Practices and Automation
 [[Automation]]
 [[Discovering Security Best Practices]]
+
 
 ## Section 6: Encryption and Data Security
 [[Managing Key Infrastructure]]
@@ -64,16 +69,20 @@ Data Protection | 22%
 - access keys should not be configured for root user (additional user with relevant privileges should be created instead)
 	- limit access methods to root account
 
+
 ## Groups
 - groups are associated with set of permissions allowing members of that group to inherit those permissions
 	- groups don't have credentials associated with it
 	- object within IAM
 
+
 ## Roles
 - associated set of permissions that allows access to AWS resources
 	- not associated with users or groups
 	- sort of works like discord roles
+
 ### Examples of roles:
+
 
 #### Service Roles
 - allows other AWS services to perform actions on one's behalf
@@ -85,13 +94,16 @@ Data Protection | 22%
 		- used to pass data to EC2 instance
 
 
+
 #### User Roles
 - when user assumes a role, their current permissions get temporarily replaced by the role's permissions
+
 
 #### Web Identity Federate Role
 - allows a single sign on (SSO) approach
 - federated access means user has been authenticated by external source 
 	- can be through well-known identity providers (IDPs) such as Amazon, Google, or Facebook
+
 
 #### SAML 2.0 federated roles
 - allows creation of roles that have been federated through one's internal corporate directory 
@@ -123,30 +135,38 @@ Data Protection | 22%
 	
 ![[Pasted image 20220131192503.png]]
 - Policy Types:
+
 ## Identity-based Policies
 	- attached to IAM user, group, or role
 	- controls what actions an identity (users, groups of users, roles) can perform on which resources and under what conditions
 		- e.g. allowing user John to run the EC2 `RunInstances` action 
 	- can be AWS-managed, customer-managed or in-line policies
+
 ### AWS-managed
 		- policies that are created and managed by AWS
+
 ### Customer-managed
 		- custom policy that is made by the customer 
+
 ### In-line 
 		- added directly to user, group, or role
 		- deleted when the identity is deleted
+
 ## Resource-based Policies
 	- very similar to in-line policies except they are attached to resources instead of identities
 	- can be attached to buckets and S3 objects
 	- lets you specify who has access to resource and what actions they can perform on it
 	- policy looks the same as in the example policy, however includes a *Principal* parameter
 		- identifies user, role, account, or federated user that permissions should be applied to
+
 ## Permissions boundaries
 	- governs maximum permissions an identity-based policy can associate with any user or role
+
 ## Access Control Lists (ACLs)
 	- can attach to buckets and S3 objects
 	- similar to resource-based policies
 	- use only to control cross-account access from different AWS account or public access
+
 ## Organization SCPs
 	- SCP stands for Service Control Policy
 	- used by AWS organizations to manage multiple AWS accounts
@@ -154,6 +174,7 @@ Data Protection | 22%
 		- they also set maximum permission level that can be given to members of an AWS account or organization unit (OU)
 		- restrict permissions for resource-based and identity-based policies
 		- restricts permissions, doesn't grant permissions
+
 
 ## Policy evaluation
 Determination of permissions when accessing resource:
@@ -178,7 +199,9 @@ Determination of permissions when accessing resource:
 - allows secure exchange of authentication data between different domains
 - users security tokens between an IdP and a SAML consumer
 
+
 ## Social Federation
+
 ### Amazon Cognito
 - made for enabling secure authentication and access control for new and existing users accessing web or mobile applications
 - generate tokens after  authentication that manages access 
@@ -215,9 +238,11 @@ Three different shared responsibility models:
 		- no access to operating system (infrastructure) or platform running these services (container)# Configuring Infrastructure Security
 [[AWS Contents]]
 [[AWS Questions#Configuring Infrastructure Security]]
+
 ## Virtual Private Cloud (VPC)
 - private section of AWS network
 - can be public-face 
+
 
 ### Subnets
 - can only reside in a single availability zone (e.g. only in eu-west-1bAZ)
@@ -244,13 +269,16 @@ Three different shared responsibility models:
 	<u>Route Table</u>: table subnet uses for routing traffic
 	- if no route table is defined, default VPC route table is used
 
+
 ### Flow Logs Tab
 - captures IP traffic sent between network interfaces of subnet
 - captured within CloudWatch
 
+
 ## Internet Gateway (IGW)
 - helps create a public subnet
 - allows traffic to traverse from subnet in VPC to internet and vice versa
+
 
 ## Network Access Control Lists (NACLs)
 - virtual network level firewalls
@@ -263,6 +291,7 @@ Three different shared responsibility models:
 - final rule of NACL is that any traffic that isn't categorized by any of the rules gets dropped
 - rules read in ascending order until match is found
 
+
 ## Security Groups
 - similar to NACLs (provide virtual firewall) except operates at instance level rather than network level
 - associated with instances rather than subnets
@@ -272,6 +301,7 @@ Three different shared responsibility models:
 	- works as a whitelist for traffic
 - all rules evaluated before decision is made
 
+
 ## Bastion Hosts
 - used to gain access to instances that reside within private subnets
 - bastion host resides within public subnet
@@ -280,12 +310,14 @@ Three different shared responsibility models:
 <u>Public Subnet</u>: a subnet associated with a route table pointing to an internet gateway (IGW) with a destination address of 0.0.0.0/0
 - no packet is directly exchanged between internet and IPs inside private subnet (it goes first through the bastion host)
 
+
 ## NAT Instances and NAT Gateways
 - kind of like the opposite of bastion host
 - allows instances in private subnets to initiate a connection out to the internet via NAT resource
 - blocks all inbound public-initiated traffic
 - allows private instances access to internet
 	- usually used for maintenance-related tasks such as updates
+
 
 ### NAT Gateway
 - AWS managed resource
@@ -294,25 +326,32 @@ Three different shared responsibility models:
 [[AWS Contents]]
 [[AWS Questions#DDoS Protection]]
 - protections include AWS Shield Advanced ($3000 a month) and AWS Shield Standard (free)
+
 ## DDoS Patterns
+
 ### SYN Floods
 - abuses three-way handshake when connection is being established between client and server
 ![[Pasted image 20220213185859.png]]
 - the final ACK completes the handshake, but this is dropped in SYN Flood attack to leave connection open
 
+
 ### HTTP Floods
 - many GET or POST requests sent to server
+
 
 ### Ping of Death (POD)
 - oversized ping packets sent to target
 - maximum size of packet is 65,535 bytes, but with fragmentation you can send a lot of data to target
 
+
 ## AWS Shield
 - specify ARN of resources and services Shield should protect
 - Elastic IP Address (EIP) should be specified first for EC2 instance in order to use Shield on it
+
 ### AWS Shield Standard
 - free
 - helps protect against common DDoS attacks operating at network and transport layers
+
 
 ### AWS Shield Advanced
 - $3000 per month
@@ -320,9 +359,11 @@ Three different shared responsibility models:
 - monitors network, transport, and application layers
 - comes with AWS DDoS Response Team (known as DRT)
 
+
 ### Rate-Based Rules
 - counts number of requests received from IP address over 5 minutes
 - can define max number of request from singe IP within 5 minutes (must be over 2000)
+
 
 ### AWS CloudFront and Amazon Route 53
 - edge services 
@@ -333,6 +374,7 @@ Three different shared responsibility models:
 [[AWS Contents]]
 [[AWS Questions#Implementing Application Security]]
 
+
 ## AWS WAF
 Three primary elements:
 1. Web ACL (Access Control List)
@@ -342,9 +384,11 @@ Three primary elements:
 3. Rule Groups
 	- allows you to group a set of rules
 
+
 ### AWS Firewall Manager
 - manages WAF rules across multi-account environment when using AWS Organizations
 - uses WAF rules that are grouped together within a rule group
+
 
 ## Managing Security Configuration of ELBs
 - ELB stands for Elastic Load Balancing
@@ -352,6 +396,7 @@ Three primary elements:
 - can be internal or internet-facing
 	- internal ELBs only have private internal IP addresses and can only serve requests originating from within VPC
 	- internet-facing ELBs have public DNS names and have public and internal IP addresses
+
 ### Types of ELBs
 Three different ELBs:
 <u>Application Load Balancer</u>
@@ -366,21 +411,27 @@ Using a Classic Load Balancer instead of an Application Load Balancer has the fo
 -   Support for TCP and SSL listeners
 -   Support for sticky sessions using application-generated cookies
 
+
 ## Securing APIs
 - AWS API gateway
+
 ### Controlling Access to APIs
 Methods for controlling authentication and authorization:
 
+
 #### IAM Roles and Policies
 - using IAM, policies can be associated with user, role, or group to dictate permissions
+
 
 #### IAM Tags
 - can be used in conjunction with IAM policies
 - used for references pertaining to security controls such as in the following example: a user being able to perform a specific action based on the resource tag 
 
+
 #### Resource Policies
 - attached to resources (unlike IAM which is attached to identity)
 - specifies principal that has been granted or denied access to invoke associate API
+
 
 #### VPC Endpoint Policies
 - also a resource-based policy, but is a VPC endpoint
@@ -388,15 +439,18 @@ Methods for controlling authentication and authorization:
 - controls access to private APIs
 - can be used in conjunction with API Gateway resource policies for additional security
 
+
 #### Lambda Authorizers
 - uses AWS Lambda functions to restrict who can invoke REST API methods
 - can use bearer-based tokens or HTML headers, paths, query string parameters, and stage variables
+
 
 #### Amazon Cognito User Pools
 - APIs can be configured to have `COGNITO_USER_POOLS` authorizer  to authenticate users via Amazon Cognito user pool API gateway
 	- token is validated before allowing access# Incident Response
 [[AWS Contents]]
 [[AWS Questions#Incident Response]]
+
 
 ## AWS Cloud Adoption Framework (CAF)
 Addresses four primary control areas:
@@ -409,11 +463,14 @@ Addresses four primary control areas:
 4. Responsive Controls
 	- drives the remediation of potential deviation from security baselines
 
+
 ## Threat Detection and Management
+
 ### AWS GuardDuty
 - regional-based managed service
 - powered machine learning
 - monitors logs and detects unexpected / unusual behavior
+
 
 ### AWS Security Hub
 - brings security statistical data into single place
@@ -421,12 +478,14 @@ Addresses four primary control areas:
 - insights - grouping of findings that meet specific criteria base from specific filters and statements
 	- e.g. users with most suspicious activity, S3 buckets with public write or read permissions, EC2 instances with missing security patches, etc.
 
+
 ## Forensics
 - recommended to have an account with preconfigured settings dedicated to forensics
 	- compromised instances can be moved to forensics account
 	- note that the instance cannot be moved to different AWS account
 - can also create forensic instance for forensic analysis
 	- could take snapshot of compromised instance / EBS volume and attach it to forensic instance
+
 
 ## Common Infrastructure Security Incident
 Common approach in a breach scenario (blue side):
@@ -442,6 +501,7 @@ Common approach in a breach scenario (blue side):
 [[AWS Questions#Secure Connections to AWS Environment]]
 - can connect securely using either VPN connection or Direct Connect connection
 
+
 ## AWS VPN
 Uses two components:
 1. Virtual Private Gateway (VPN gateway)
@@ -453,6 +513,7 @@ Uses two components:
 	- <u>IPsec Tunnel</u>: secure network protocol allowing encrypted communication between two endpoints 
 	- implemented at IP layer
 - uses public network to establish connection
+
 ### Routing
 Route table example:
 Destination|Target
@@ -466,6 +527,7 @@ Destination|Target
 - if packet is meant for destination that is covered by two subnets, it will go to the more specific subnet
 	- e.g. if packet is meant for 172.16.1.5, it will go to the third route even though route 1 and route 2 both cover that destination
 - route propagation can be enabled in VPN gateway to automatically add site-to-site VPN connections to route table
+
 
 ## AWS Direct Connect
 - like VPN connection; joins your own infrastructure with AWS architecture as if it were a single network
@@ -486,6 +548,7 @@ Once physical network connection to AWS Direct Connect location established, net
 3. Manually configured speed and full-duplex enabled
 4. 802.1Q VLAN encapsulation support enabled
 
+
 ### Virtual Interfaces
 - connection can be partitioned into virtual interfaces 
 - allows access to other AWS services other than what is within your VPC
@@ -495,6 +558,7 @@ Once physical network connection to AWS Direct Connect location established, net
 - Elastic Compute Cloud (EC2) is the most common of the compute services
 - can use Amazon Inspector (vulnerability scanner)
 
+
 ## Key Pairs
 - used to allow connection to instance
 - uses public key cryptography (2048 bit SSH-2 RSA)
@@ -502,7 +566,9 @@ Once physical network connection to AWS Direct Connect location established, net
 	- keys are unrecoverable if lost
 	- public key encrypts creds, private key decrypts
 
+
 ## Monitoring and Logging
+
 ### AWS CloudTrail
 - tracks and records API calls
 - for every API call the following is tracked:
@@ -510,6 +576,7 @@ Once physical network connection to AWS Direct Connect location established, net
 	- service to which API call was made against
 	- timestamp when it was called
 	- source IP address of requester
+
 
 ### AWS Config
 - logs any change to resources
@@ -519,14 +586,17 @@ Once physical network connection to AWS Direct Connect location established, net
 	- shows which API call made specific changes
 - checks compliance rules
 
+
 ### Amazon CloudWatch
 - most common AWS monitoring service
 - monitors resource performance over time
 - can be used with unified Cloud Agent to collect logs of applications
 
+
 ### VPC Flow Logs
 - Virtual Private Cloud (VPC)
 - captures all IP traffic 
+
 
 ## Isolation
 - security group should be created so that a compromised instance can quickly be changed to this group
@@ -535,21 +605,27 @@ Once physical network connection to AWS Direct Connect location established, net
 - create IAM roles that only allow read-only access to resources
 	- prevents accidentally changing data on instance
 
+
 ## Systems Manager (SSM)
 - allows to quickly administer and perform operational actions against instances without SSH or RDP
+
 ### Actions
+
 
 #### Automation
 - automate processes against groups of resources via SSM documents
 - e.g. patching EC2 instances or creating AMI (Amazon Machine Image)
+
 
 #### Run Command
 - manage fleet of EC2 instances remotely and securely
 - can perform maintenance and management without logging into instances
 - uses SSM documents to help perform administrative tasks and configuration changes
 
+
 #### Distributor
 - distributes software across instances
+
 
 #### State Manager
 - maintains state of EC2 instances
@@ -559,6 +635,7 @@ Once physical network connection to AWS Direct Connect location established, net
 	- ensuring installation of agents are schedually updated
 	- running scripts on instances
 
+
 #### Patch Manager
 - automates management of patch updates across EC2 instances
 - you can create patch groups which associates a number of instances with a group
@@ -566,10 +643,12 @@ Once physical network connection to AWS Direct Connect location established, net
 	- instances not associated with patch group will receive default patch baseline# Auditing and Governance
 [[AWS Contents]]
 [[AWS Questions#Auditing and Governance]]
+
 ## AWS Artifact
 - on-demand portal allowing viewing and downloading AWS security and compliance reports and online agreements
 	- these reports are undetaken by external auditors of AWS
 	- agreements for accounts made with AWS 
+
 
 ## Securing with CloudTrail
 - data (logs) can be encrypted with SSE-KMS
@@ -579,6 +658,7 @@ Once physical network connection to AWS Direct Connect location established, net
 	- digest files are signed using private key of a public/private key pair used by CloudTrail for that region
 Validating if log was tampered with or moved:
 `aws cloudtrail validate-logs --trail-arn <trailARN> --start-time <start-time>`
+
 
 ## AWS Config
 - useful for seeing history of modifications to a resource via looking at the history of configuration items
@@ -591,6 +671,7 @@ Components of AWS Config:
 - Config rules
 - Resource relationships
 - Config role
+
 
 ### Configuration Items (CI)
 - fundamental element of AWS Config
@@ -606,12 +687,14 @@ Components of Configuration Item:
 **Relationship**: data related to any connected resource (e.g. if CI is related to a subnet, the relationship could contain data related to associated VPC that subnet is part of)
 **Current Configuration**:  shows same info that would be generated upon performing a *describe* or *list* API call
 
+
 ## Amazon Macie
 - managed service backed by machine learning
 - automatically detects, protects, and classifies data within S3 buckets
 - classifies data to determine its level of sensitivity# Implementing Logging Mechanisms
 [[AWS Contents]]
 [[AWS Questions#Implementing Logging Mechanisms]]
+
 
 ## Amazon S3 Logging
 - most common AWS storage service
@@ -620,6 +703,7 @@ Components of Configuration Item:
 Two types of logging within S3:
 1. Server access logs
 2. Object-level logs
+
 
 ### Server Access Logs
 Log details captured:
@@ -632,8 +716,10 @@ Log details captured:
 <br>
 - source and target buckets must be in same region
 
+
 ### Object-Level Logging
 - must be associated with CloudTrail which will record write and read API activity
+
 
 ### Flow Logs
 - captures IP traffic across network interfaces
@@ -659,9 +745,11 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 	- NoData: no traffic to capture during capture window
 	- SkipData: some data within log was captured due to an error 
 
+
 ## VPC Traffic Mirroring
 - duplicates network traffic from elastic network interfaces attached to instances
 	- duplicated traffic sent to third-party tools and services for analysis
+
 
 ## CloudTrail
 **Trails**: contain configurable options for what to monitor and track
@@ -669,6 +757,7 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 **Log Files**: created every 5 minutes; stored within S3 bucket
 **CloudWatch Logs**: logs can be sent to CloudWatch for analysis and monitoring
 **API Activity Filters**: provide search and filter functionality when looking at API activity
+
 
 ### Understanding CloudTrail Logs
 <center>Example of CloudTrail Log</center>
@@ -707,10 +796,12 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 *Console.amazonaws.com*: determines that root user made request
 *userIdentity*: additional info relating to user agent
 
+
 ### Amazon Athena
 - serverless service
 - analyzes data stored within Amazon S3 (such as CloudTrail logs)
 - uses SQL 
+
 
 ### CloudWatch
 - main AWS monitoring service
@@ -720,9 +811,12 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 [[AWS Contents]]
 [[AWS Questions#Automation]]
 
+
 ## Automating Security Detection and Remediation
+
 ### Using CloudWatch Events with AWS Lambda and SNS
 - can identify event to capture and create an automatic response
+
 
 #### AWS Lambda 
 - serverless compute service
@@ -730,12 +824,14 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 - allows running code for applications either on demand or in response to events without needing to provision any compute instances yourself
 - allows freedom of not having to maintain a compute instance (this is handled by AWS)
 
+
 ### Amazon GuardDuty
 - can be used for automation detection and remediation 
 - powered by machine learning
 - can capture events from CloudTrail logs, DNS logs, and VPC flow flogs
 	- events referenced against threat detection feeds (compared against known sources of malicious activity)
 - runs on AWS infrastructure so doesn't affect performance of your infrastructure
+
 
 ### AWS Security Hub
 - collects security findings from:
@@ -757,6 +853,7 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
  - Encrypt data
  - Automate security threat detection and remediation
  
+
 ## AWS Trusted Advisor
  - recommends enhancements against number of predefined best practice checks across five areas of your account:
 	 1. Cost optimization
@@ -770,6 +867,7 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 		- determines whether you have adequate resiliency built into environment
 	 5. Service Limits
 		 - checks if services have reached 80% of allotted service limit
+
 
 ## Pentesting AWS
 - can't carry pentest against some services without prior approval from AWS
@@ -792,16 +890,19 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
 [[AWS Contents]]
 [[AWS Questions#Managing Data Security]]
 
+
 ## Amazon EBS Encryption
 - EBS volumes provide block-level storage to EC2 instance
 	- gives more flexibility for storage capabilities
 - default regional encryption setting can be applied to EBS volumes to automatically encrypt new EBS volumes 
 - uses KMS service to encrypt data
 
+
 ## Amazon EBS
 - used for file-level storage
 - support in-transit and at-rest encryption
 - uses KMS service to encrypt data
+
 
 ## Amazon S3
 - provides object-level storage
@@ -814,7 +915,9 @@ Five different encryption options for S3 objects:
 - server-side encryption: encryption algorithm and process run from server-side (i.e. in this case it is within Amazon S3)
 - client-side encryption: encryption process executed on client side before data sent to S3
 
+
 ### SSE-S3
+
 
 #### Encryption
 ![[Pasted image 20220225215402.png]]
@@ -823,6 +926,7 @@ Five different encryption options for S3 objects:
 3. plaintext data key encrypted with S3 master key, and the encrypted key is then stored into S3 and associated with encrypted data object
 4. Plaintext data key removed from memory
 
+
 #### Decryption
 ![[Pasted image 20220225215755.png]]
 1. User request encrypted object
@@ -830,21 +934,27 @@ Five different encryption options for S3 objects:
 3. Plaintext data key decrypts encrypted data object
 4. S3 returns plaintext data object to client
 
+
 ### SSE-KMS
+
 
 #### Encryption
 [[Managing Key Infrastructure#SSE-KMS Encryption]]
 
+
 #### Decryption
 [[Managing Key Infrastructure#SSE-KMS Decryption]]
 
+
 ### SSE-C
+
 
 #### Encryption
 ![[Pasted image 20220225220028.png]]
 1. Client uploads object to S3 along with plaintext customer-provided key across HTTPS
 	- mandatory to use HTTPS
 2. Object is encrypted with key and a salted HMAC value of customer key is generated for validation upon future access requests. HMAC value and encrypted object stored in S3 with association to each other. Plaintext key removed.
+
 
 #### Decryption
 ![[Pasted image 20220225234838.png]]
@@ -853,7 +963,9 @@ Five different encryption options for S3 objects:
 3. Customer key used to decrypt object data.
 4. Plaintext object sent to client.
 
+
 ### CSE-KMS
+
 
 #### Encryption
 ![[Pasted image 20220225235024.png]]
@@ -864,6 +976,7 @@ Five different encryption options for S3 objects:
 5. Client uploads encrypted object data and cipher blob version of key to S3. 
 6. Cipher blob key stored as metadata against encrypted object.
 
+
 #### Decryption
 ![[Pasted image 20220225235449.png]]
 1. User requests access to encrypted S3 object.
@@ -873,7 +986,9 @@ Five different encryption options for S3 objects:
 5. Plaintext data key sent back to requesting Java client.
 6. Java client uses plaintext key to decrypt object.
 
+
 ### CSE-C
+
 
 #### Encryption
 ![[Pasted image 20220225235650.png]]
@@ -882,6 +997,7 @@ Five different encryption options for S3 objects:
 3. Encrypted data key and encrypted object sent from client to S3 storage.
 4. S3 associates encrypted data key with encrypted object and stores both in S3.
 
+
 #### Decryption
 ![[Pasted image 20220225235831.png]]
 1. Uses requests access to encrypted object.
@@ -889,11 +1005,13 @@ Five different encryption options for S3 objects:
 3. Customer CMK used with encrypted data key to generate plaintext version of data key.
 4. Encrypted object decrypted using plaintext data key.
 
+
 ## Amazon RDS
 - database service
 - encryption at rest uses AES-256
 - can only encrypt RDS database during its creation
 - SSL/TLS used for in-transit encryption
+
 
 ## Amazon DynamoDB
 - fully managed key-value and document NoSQL database
@@ -908,11 +1026,13 @@ Three options to encrypt data with:
 [[AWS Contents]]
 [[AWS Questions#Managing Key Infrastructure]]
 
+
 ## AWS Key Management Service (KMS)
 - managed service
 - allows you to create, store, rotate, and delete encryption keys
 - unlike SSL, KMS not designed for encryption-in-transit
 - supports symmetric and asymmetric CMKs
+
 
 ### Customer Master Keys (CMK)
 - building block of KMS
@@ -929,6 +1049,7 @@ Three different types of CMKs:
 3. Customer-managed
 	- full control of keys
 
+
 ### Data Encryption Keys (DEKs)
 - created by CMKs
 - unlike CMKs, doesn't reside within KMS service
@@ -939,6 +1060,7 @@ Three different types of CMKs:
 - <u>Envelope Encryption</u>: using one key to encrypt another key
 Amazon S3 server-side encryption and decryption with KMS managed keys (SSE-KMS):
 
+
 #### SSE-KMS Encryption
 ![[Pasted image 20220224222854.png]]
 1. SSE-KMS encryption mechanism chosen by client and either AWS-managed or customer-managed CMK is selected
@@ -946,6 +1068,7 @@ Amazon S3 server-side encryption and decryption with KMS managed keys (SSE-KMS):
 3. Plaintext data key and identical (encrypted) data key generated
 4. These data keys are sent to S3. 
 5. S3 encrypts object data with plaintext version of data key. Encrypted data is then stored with encrypted version of key. Plaintext data key is destroyed.  
+
 
 #### SSE-KMS Decryption
 ![[Pasted image 20220224223534.png]]
@@ -956,6 +1079,7 @@ Amazon S3 server-side encryption and decryption with KMS managed keys (SSE-KMS):
 5. Encrypted object decrypted with that key
 6. Plaintext object sent back to client
 
+
 ### Key Material
 <u>Key Material</u>: Data used to encrypt and decrypt data
 - stored within CMK
@@ -964,6 +1088,7 @@ Amazon S3 server-side encryption and decryption with KMS managed keys (SSE-KMS):
 - customer-managed CMKs give option of adding key material or not
 	- can even import your own key material known as Bring Your Own Key (BYOK)
 	- BYOK doesn't support automatic key rotation
+
 
 ### Key Policies
 - cannot control access to CMKs without key policies
@@ -974,6 +1099,7 @@ Amazon S3 server-side encryption and decryption with KMS managed keys (SSE-KMS):
 	3. Key Policies and Grants: Access governed by key policy with ability to delete access to other for using the CMK
 		- check page 508-512, great explanation
 	
+
 ## AWS CloudHSM
 - fully managed service used for data encryption
 - can integrate with KMS in the form of using CloudHSM as a custom key store
@@ -984,6 +1110,7 @@ Amazon S3 server-side encryption and decryption with KMS managed keys (SSE-KMS):
 	- manages symmetric and asymmetric keys
 	- signs and verifies signatures
 	- can use hash function to compute hash-based message authentication codes (HMACs)
+
 
 ### Cloud HSM Users
 User types of CloudHSM
@@ -1002,11 +1129,13 @@ Get synchronization status | No | Yes | Yes | Yes
 Key management operations | No | No | Yes | No
 Encrypt, decrypt, sign, verify, generate, and digest HMACs | No | No | Yes | No
 
+
 #### Precrypto Office (PRECO)
 - automatically created upon creating first HSM within cluster
 - PRECO user has default creds
 - when first connecting to the HSM, you are prompted to change password of PRECO user
 	- this turns the PRECO user into a Crypto Office (CO) user
+
 
 #### Crypto Office (CO)
 - greater permissions than PRECO
@@ -1015,6 +1144,7 @@ Permissions:
 - delete keys, certificates, and data on HSM
 - obtain HSM metadata
 
+
 #### Crypto User (CU)
 Permissions:
 - perform encryption and decryption
@@ -1022,10 +1152,12 @@ Permissions:
 - signs and verifies
 - generate digests and HMACs
 
+
 #### Appliance User (AU)
 - exists on all HSMs
 - clones and synchronizes actions of HSMs
 - has same permissions as CO but cannot change passwords or add/remove user
+
 
 ## AWS Secrets Manager
 - managed service
@@ -1041,8 +1173,10 @@ Permissions:
 [[AWS Questions#Section 4 Monitoring Logging and Auditing|Section 4: Monitoring, Logging, and Auditing]]
 [[AWS Questions#Section 5 Best Practices and Automation | Section 5: Best Practices and Automation]]
 [[AWS Questions#Section 6 Encryption and Data Security|Section 6: Encryption and Data Security]]
+
 ## Section 2: Security Responsibility & Access Management
 [[Access Management]]
+
 ### Access Policies 
 [[Access Policies]]
 1. Which format are AWS policies written in?
@@ -1070,6 +1204,7 @@ collapse:
 collapse:
 **True**
 ```
+
 
 ### Federated and Mobile Access
 [[Federated and Mobile Access]]
@@ -1099,6 +1234,7 @@ collapse:
 **True**
 ```
 
+
 ### Shared Responsibility Model
 [[Shared Responsibility Model]]
 1. Which shared responsibility model offers the most customization and  control for the customer 
@@ -1127,7 +1263,9 @@ collapse:
 **True**
 ```
 
+
 ## Section 3: Security - A Layered Approach
+
 ### Securing EC2 Instances
 [[Securing EC2 Instances]]
 1. True or False: AWS Systems Manager is a fully managed service that allows you to help secure your instances and the applications that run on top of them by performing vulnerability assessments via an agent.
@@ -1155,6 +1293,7 @@ collapse:
 collapse:
 **Systems Manager (SSM)**
 ```
+
 
 ### Configuring Infrastructure Security
 [[Configuring Infrastructure Security]]
@@ -1184,6 +1323,7 @@ collapse:
 **False**
 ```
 
+
 ### Implementing Application Security
 [[Implementing Application Security]]
 1. True or false: The main function of the AWS WAF service is to provide protection for your web applications from malicious attacks from a wide variety of attack patterns.
@@ -1206,6 +1346,7 @@ collapse:
 collapse:
 **Network Load Balancer**
 ```
+
 
 ### DDoS Protection
 [[DDoS Protection]]
@@ -1236,6 +1377,7 @@ collapse:
 **False**
 ```
 
+
 ### Incident Response
 [[Incident Response]]
 1. Which framework has been designed by AWS to help you transition and migrate solutions into AWS Cloud that's based on best practices and recommendations?
@@ -1259,6 +1401,7 @@ collapse:
 **True**
 ```
 
+
 ### Secure Connections to AWS Environment
 [[Secure Connections to AWS Environment]]
 1. When configuring a VPN connection, a VPN gateway is configured as well as what other type of gateway?
@@ -1281,7 +1424,9 @@ collapse:
 collapse:
 **True**
 ```
+
 ## Section 4: Monitoring, Logging, and Auditing
+
 ### Implementing Logging Mechanisms
 [[Implementing Logging Mechanisms]]
 1. True or false: Amazon S3 server access logging is enabled by default.
@@ -1309,6 +1454,7 @@ collapse:
 collapse:
 **Amazon Athena**
 ```
+
 
 ### Auditing and Governance
 [[Auditing and Governance]]
@@ -1338,7 +1484,9 @@ collapse:
 **True**
 ```
 
+
 ## Section 5: Best Practices and Automation
+
 ### Automation
 [[Automation]]
 1. True or false: CloudWatch events can be used to search for specific events within your infrastructure, which can trigger an automated response.
@@ -1361,6 +1509,7 @@ collapse:
 collapse:
 **False**
 ```
+
 
 ### Discovering Security Best Practices
 [[Discovering Security Best Practices]]
@@ -1390,7 +1539,9 @@ collapse:
 **True**
 ```
 
+
 ## Section 6: Encryption and Data Security
+
 ### Managing Key Infrastructure
 [[Managing Key Infrastructure]]
 1. True or False: Asymmetric encryption uses a single key to encrypt and decrypt data.
@@ -1418,6 +1569,7 @@ collapse:
 collapse:
 **AWS Secrets Manager**
 ```
+
 
 ### Managing  Data Security
 [[Managing Data Security]]
@@ -1449,6 +1601,7 @@ collapse:
 # Misc 
 [[AWS Contents]]
 [[AWS Questions]]
+
 ## Notes
 - AWS Artifact is a resource about compliance-related stuff
 - AWS Config is a service that enables you to assess, audit, and evaluate the configurations of your AWS resources
@@ -1464,12 +1617,14 @@ collapse:
 - ACLs were the first authorization mechanism in S3. Bucket policies are the newer method, and the method used for almost all AWS services. Policies can implement very complex rules and permissions, ACLs are simplistic (they have ALLOW but no DENY).
 	- A majority of modern use cases in Amazon S3 no longer require the use of ACLs, and we recommend that you disable ACLs except in unusual circumstances where you need to control access for each object individually
 
+
 ## Questions
 What is the difference between Internet Gateway (IGW) and NAT Gateway (NGW)?
 - internet gateway allows instances with public IP to access internet
 - NAT gateway allows instances with no public IP to access internet
 What is the difference between AWS CloudWatch and Amazon CloudTrail?
 - AWS CloudWatch monitors AWS resources and applications while CloudTrail monitors activity within AWS environment# Mock Exam Questions 
+
 
 ## Mock Exam 1
 - questions I got wrong or was unsure about
