@@ -103,7 +103,8 @@ Data Protection | 22%
 #### SAML 2.0 federated roles
 - allows creation of roles that have been federated through one's internal corporate directory 
 - the external authentication system is one's own corporate directory of users
-	- e.g. Microsoft Active Directory (MSAD) # Access Policies 
+	- e.g. Microsoft Active Directory (MSAD)
+# Access Policies 
 [[AWS Contents]]
 [[AWS Questions#Access Policies]]
 
@@ -345,7 +346,8 @@ Three different shared responsibility models:
 - edge services 
 - recommended to use these in conjunction with Shield to further decrease chances of compromise
 - helps detect DDoS attacks
-- allows for layer 3, 4, and 7 attack mitigation (also 6 in the case of CloudFront used in conjunction with AWS WAF) # Implementing Application Security
+- allows for layer 3, 4, and 7 attack mitigation (also 6 in the case of CloudFront used in conjunction with AWS WAF)
+# Implementing Application Security
 [[AWS Contents]]
 [[AWS Questions#Implementing Application Security]]
 
@@ -780,7 +782,7 @@ ${version} ${account-id} ${interface-id} ${srcaddr} ${dstaddr} ${srcport} ${dstp
  - Encrypt data
  - Automate security threat detection and remediation
  
- ## AWS Trusted Advisor
+## AWS Trusted Advisor
  - recommends enhancements against number of predefined best practice checks across five areas of your account:
 	 1. Cost optimization
 		 - identifies resources not optimally used
