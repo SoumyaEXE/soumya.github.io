@@ -528,8 +528,8 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
-<head><title>Hands on AWS Penetration Testing</title><style>
-</style></head><body><article id="dddff3ee-2f87-4167-8423-bb35d276f7dd" class="page sans"><header><h1 class="page-title">Hands on AWS Penetration Testing</h1></header><div class="page-body"><h1 id="8e4e44f9-a9fb-483e-a534-8dd55ee805ab" class="">Table of Contents</h1><nav id="53984eaa-6bcd-46cb-a631-f472ea0347e6" class="block-color-gray table_of_contents">
+# Hands on AWS Penetration Testing Notes
+
 <div class="table_of_contents-item table_of_contents-indent-0">
 <a class="table_contents-link" href="#8e4e44f9-a9fb-483e-a534-8dd55ee805ab">Table of Contents</a>
 </div>
@@ -1058,23 +1058,22 @@ key): </li></ul><p id="932b1993-3af5-4701-b4c0-fa84e5083986" class=""><code>aws 
 Is the password policy weak? 
 Is deletion protection being implemented on appropriate resources?</td></tr></tbody></table>
 <h1 id="f657b434-e280-49b2-8831-9b1a045d6c01" class="">Tools</h1>
-https://github.com/jordanpotti/AWSBucketDump
+[AWSBucketDump](https://github.com/jordanpotti/AWSBucketDump)
 <ul id="0445673a-932d-4f7c-8e84-2645ac6193e1" class="bulleted-list"><li style="list-style-type:disc">enumerate S3 buckets and download interesting files</li></ul>
-https://github.com/RhinoSecurityLabs/pacu
+[pacu](https://github.com/RhinoSecurityLabs/pacu)
 <ul id="eadff7d4-0847-47ee-bad7-ef7de3ec38db" class="bulleted-list"><li style="list-style-type:disc">like linPEAS and winPEAS, except it’s for AWS and automates exploitation </li></ul>
-https://github.com/Skyscanner/cfripper
-https://github.com/stelligent/cfn_nag
+[cfripper](https://github.com/Skyscanner/cfripper)
+[cfn_nag](https://github.com/stelligent/cfn_nag)
 <ul id="fe28cd9d-9445-49b7-9c63-054ec39f109b" class="bulleted-list"><li style="list-style-type:disc"><code>cfripper</code> and <code>cfn_nag</code> can be run against CloudFormation templates to identify insecure configurations</li></ul>
-https://github.com/anchore/anchore-engine
+[anchore-engine](https://github.com/anchore/anchore-engine)
 <ul id="f807b9f6-5807-4b44-bd28-e7805db0d32a" class="bulleted-list"><li style="list-style-type:disc">analyzes docker images and scans for vulnerabilities</li></ul>
-https://github.com/coreos/clair
+[clair](https://github.com/coreos/clair)
 <ul id="743ae093-f332-4cda-951f-049c7b1cb015" class="bulleted-list"><li style="list-style-type:disc">container static analysis</li></ul>
-https://github.com/Frichetten/SneakyEndpoints
+[SneakyEndpoints](https://github.com/Frichetten/SneakyEndpoints)
 <ul id="a45b38aa-0154-4d3b-a29a-879dd914305b" class="bulleted-list"><li style="list-style-type:disc">VPC endpoints with EC2 instance for performing API calls with exfiltrated EC2 credentials without triggering GuardDuty <code>UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.OutsideAWS</code></li></ul>
-https://github.com/nccgroup/Scout2
+[Scout2](https://github.com/nccgroup/Scout2)
 <ul id="65e26376-4b50-40ac-b7fd-7ebecb5158c3" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul>
-https://github.com/prowler-cloud/prowler
+[prowler](https://github.com/prowler-cloud/prowler)
 <ul id="52144489-03c6-40ca-89ba-bc1dcb6575c9" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul>
-https://github.com/Netflix/security_monkey
+[security_monkey](https://github.com/Netflix/security_monkey)
 <ul id="d8356dcd-24f3-4d71-9ab2-691e4cdc2b8a" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul>
-</article></body>
