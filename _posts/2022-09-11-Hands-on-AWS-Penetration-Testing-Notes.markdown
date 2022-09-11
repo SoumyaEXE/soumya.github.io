@@ -532,6 +532,7 @@ blockquote {
 </style><body><article id="dddff3ee-2f87-4167-8423-bb35d276f7dd" class="page sans"><header><h1 class="page-title">Hands on AWS Penetration Testing</h1></header><div class="page-body">
 
 The PDF version of these notes can be found [here](/misc/Hands_on_AWS_Penetration_Testing.pdf).
+<br>
 <div class="table_of_contents-item table_of_contents-indent-0">
 <a class="table_contents-link" href="#8e4e44f9-a9fb-483e-a534-8dd55ee805ab">Table of Contents</a>
 </div>
@@ -771,7 +772,7 @@ The PDF version of these notes can be found [here](/misc/Hands_on_AWS_Penetratio
 </div>
 <div class="table_of_contents-item table_of_contents-indent-0">
 <a class="table_contents-link" href="#f657b434-e280-49b2-8831-9b1a045d6c01">Tools</a>
-</div></nav>
+</div>
 
 <h1 id="853e9941-f331-4cac-b759-4c7ffe7ccef5" class="">Chapter 4: Setting up EC2 Instance</h1>
 <h2 id="0f42d58c-2059-4ea5-a69d-2f8afb3daac1" class="">Storage Types Used in EC2 Instances</h2><ul id="97ebe36f-dbf4-49e0-b36d-760d00b92fac" class="bulleted-list"><li style="list-style-type:disc">note that there are many different types of storage types, but these are the main ones:</li></ul>
