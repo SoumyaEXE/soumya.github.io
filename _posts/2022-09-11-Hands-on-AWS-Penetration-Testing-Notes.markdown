@@ -3,14 +3,11 @@ layout: post
 title:  Hands on AWS Penetration Testing Notes
 description: These are my notes for the Hands on AWS Penetration Testing book by Benjamin Caudill and Karl Gilbert.
 date:   2022-09-11 
-image:  '/images/aws.png'
-tags:   [AWS Security]
+image:  '/images/hands_on_aws_pentesting.jpg'
+tags:   [Notes, Bypass, GuardDuty, Privesc ]
 ---
 
 <style>
-/* cspell:disable-file */
-/* webkit printing magic: print all background colors */
-
 .table_of_contents-item {
 	display: block;
 	font-size: 0.875rem;
@@ -531,6 +528,7 @@ blockquote {
 	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
 }
 	
+<head><title>Hands on AWS Penetration Testing</title><style>
 </style></head><body><article id="dddff3ee-2f87-4167-8423-bb35d276f7dd" class="page sans"><header><h1 class="page-title">Hands on AWS Penetration Testing</h1></header><div class="page-body"><h1 id="8e4e44f9-a9fb-483e-a534-8dd55ee805ab" class="">Table of Contents</h1><nav id="53984eaa-6bcd-46cb-a631-f472ea0347e6" class="block-color-gray table_of_contents">
 <div class="table_of_contents-item table_of_contents-indent-0">
 <a class="table_contents-link" href="#8e4e44f9-a9fb-483e-a534-8dd55ee805ab">Table of Contents</a>
