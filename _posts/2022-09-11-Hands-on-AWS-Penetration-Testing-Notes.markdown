@@ -1061,23 +1061,22 @@ Is the password policy weak?
 Is deletion protection being implemented on appropriate resources?</td></tr></tbody></table>
 <h1 id="f657b434-e280-49b2-8831-9b1a045d6c01" class="">Tools</h1>
 https://github.com/jordanpotti/AWSBucketDump
-</figure><ul id="0445673a-932d-4f7c-8e84-2645ac6193e1" class="bulleted-list"><li style="list-style-type:disc">enumerate S3 buckets and download interesting files</li></ul><figure id="1bcf8f72-bf59-4770-99c1-515564e16b26">
+<ul id="0445673a-932d-4f7c-8e84-2645ac6193e1" class="bulleted-list"><li style="list-style-type:disc">enumerate S3 buckets and download interesting files</li></ul>
 https://github.com/RhinoSecurityLabs/pacu
-</figure><ul id="eadff7d4-0847-47ee-bad7-ef7de3ec38db" class="bulleted-list"><li style="list-style-type:disc">like linPEAS and winPEAS, except it’s for AWS and automates exploitation </li></ul><figure id="1ee3a799-63de-4f2b-9079-6120aff18222">
+<ul id="eadff7d4-0847-47ee-bad7-ef7de3ec38db" class="bulleted-list"><li style="list-style-type:disc">like linPEAS and winPEAS, except it’s for AWS and automates exploitation </li></ul>
 https://github.com/Skyscanner/cfripper
-</figure><figure id="88815abc-9e63-4d37-a981-168702dc632d">
 https://github.com/stelligent/cfn_nag
-</figure><ul id="fe28cd9d-9445-49b7-9c63-054ec39f109b" class="bulleted-list"><li style="list-style-type:disc"><code>cfripper</code> and <code>cfn_nag</code> can be run against CloudFormation templates to identify insecure configurations</li></ul><figure id="e6560306-c912-4cc8-955b-fbfb7ce5450a">
+<ul id="fe28cd9d-9445-49b7-9c63-054ec39f109b" class="bulleted-list"><li style="list-style-type:disc"><code>cfripper</code> and <code>cfn_nag</code> can be run against CloudFormation templates to identify insecure configurations</li></ul>
 https://github.com/anchore/anchore-engine
-</figure><ul id="f807b9f6-5807-4b44-bd28-e7805db0d32a" class="bulleted-list"><li style="list-style-type:disc">analyzes docker images and scans for vulnerabilities</li></ul><figure id="a2495930-b520-4470-b06b-f35b2dfe6e21">
+<ul id="f807b9f6-5807-4b44-bd28-e7805db0d32a" class="bulleted-list"><li style="list-style-type:disc">analyzes docker images and scans for vulnerabilities</li></ul>
 https://github.com/coreos/clair
-</figure><ul id="743ae093-f332-4cda-951f-049c7b1cb015" class="bulleted-list"><li style="list-style-type:disc">container static analysis</li></ul><figure id="ee665ac8-2860-411d-b102-dbeae2962847">
+<ul id="743ae093-f332-4cda-951f-049c7b1cb015" class="bulleted-list"><li style="list-style-type:disc">container static analysis</li></ul>
 https://github.com/Frichetten/SneakyEndpoints
-</figure><ul id="a45b38aa-0154-4d3b-a29a-879dd914305b" class="bulleted-list"><li style="list-style-type:disc">VPC endpoints with EC2 instance for performing API calls with exfiltrated EC2 credentials without triggering GuardDuty <code>UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.OutsideAWS</code></li></ul><figure id="0d34c45c-f2db-4bb5-a6d2-0785ab2b31b6">
+<ul id="a45b38aa-0154-4d3b-a29a-879dd914305b" class="bulleted-list"><li style="list-style-type:disc">VPC endpoints with EC2 instance for performing API calls with exfiltrated EC2 credentials without triggering GuardDuty <code>UnauthorizedAccess:IAMUser/InstanceCredentialExfiltration.OutsideAWS</code></li></ul>
 https://github.com/nccgroup/Scout2
-</figure><ul id="65e26376-4b50-40ac-b7fd-7ebecb5158c3" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul><figure id="a3cdae6b-9386-41f9-b821-18663794306e">
+<ul id="65e26376-4b50-40ac-b7fd-7ebecb5158c3" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul>
 https://github.com/prowler-cloud/prowler
-</figure><ul id="52144489-03c6-40ca-89ba-bc1dcb6575c9" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul><figure id="fc21cef2-cae8-45c3-bfad-497aae2287ea">
+<ul id="52144489-03c6-40ca-89ba-bc1dcb6575c9" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul>
 https://github.com/Netflix/security_monkey
-</figure><ul id="d8356dcd-24f3-4d71-9ab2-691e4cdc2b8a" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul>
+<ul id="d8356dcd-24f3-4d71-9ab2-691e4cdc2b8a" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul>
 </article></body>
