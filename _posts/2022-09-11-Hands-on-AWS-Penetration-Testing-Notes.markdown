@@ -530,6 +530,8 @@ blockquote {
 	
 
 </style><body><article id="dddff3ee-2f87-4167-8423-bb35d276f7dd" class="page sans"><header><h1 class="page-title">Hands on AWS Penetration Testing</h1></header><div class="page-body">
+
+The PDF version of these notes can be found [here](/misc/Hands_on_AWS_Penetration_Testing.pdf).
 <div class="table_of_contents-item table_of_contents-indent-0">
 <a class="table_contents-link" href="#8e4e44f9-a9fb-483e-a534-8dd55ee805ab">Table of Contents</a>
 </div>
@@ -585,7 +587,7 @@ blockquote {
 <a class="table_contents-link" href="#7d5494c1-c186-4219-80e2-0ff334493c44">Backdooring S3 Buckets for Persistence</a>
 </div>
 <div class="table_of_contents-item table_of_contents-indent-2">
-<a class="table_contents-link" href="#5acfa147-39ef-4569-a034-9b7126113126"><strong>Bucket Hijack</strong></a>
+<a class="table_contents-link" href="#5acfa147-39ef-4569-a034-9b7126113126">Bucket Hijack</a>
 </div>
 <div class="table_of_contents-item table_of_contents-indent-0">
 <a class="table_contents-link" href="#87725274-3a1b-4c31-88ed-16209f53ac7f">Chapter 9: IAM </a>
