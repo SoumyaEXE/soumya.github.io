@@ -7,7 +7,7 @@ image:  '/images/aws.png'
 tags:   [AWS Security]
 ---
 
-<head><title>Hands on AWS Penetration Testing</title><style>
+<style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 
