@@ -529,7 +529,7 @@ blockquote {
 }
 	
 
-</style></head><body><article id="dddff3ee-2f87-4167-8423-bb35d276f7dd" class="page sans"><header><h1 class="page-title">Hands on AWS Penetration Testing</h1></header><div class="page-body"><h1 id="8e4e44f9-a9fb-483e-a534-8dd55ee805ab" class="">Table of Contents</h1><nav id="53984eaa-6bcd-46cb-a631-f472ea0347e6" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8e4e44f9-a9fb-483e-a534-8dd55ee805ab">
+</style><body><article id="dddff3ee-2f87-4167-8423-bb35d276f7dd" class="page sans"><header><h1 class="page-title">Hands on AWS Penetration Testing</h1></header><div class="page-body">
 <div class="table_of_contents-item table_of_contents-indent-0">
 <a class="table_contents-link" href="#8e4e44f9-a9fb-483e-a534-8dd55ee805ab">Table of Contents</a>
 </div>
