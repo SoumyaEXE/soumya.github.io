@@ -1077,4 +1077,4 @@ Is deletion protection being implemented on appropriate resources?</td></tr></tb
 <ul id="52144489-03c6-40ca-89ba-bc1dcb6575c9" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul>
 [security_monkey](https://github.com/Netflix/security_monkey)
 <ul id="d8356dcd-24f3-4d71-9ab2-691e4cdc2b8a" class="bulleted-list"><li style="list-style-type:disc">AWS auditing tool</li></ul>
-</body>
+</article></body>
