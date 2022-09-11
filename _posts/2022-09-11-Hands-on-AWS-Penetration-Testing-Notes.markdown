@@ -1,15 +1,13 @@
 ---
 layout: post
-title:  AWS Security Specialty Notes
-description: Notes from the Hands on AWS Penetration Testing book by Benjamin Caudill and Karl Gilbert.
+title:  Hands on AWS Penetration Testing Notes
+description: My notes from the Hands on AWS Penetration Testing book by Benjamin Caudill and Karl Gilbert.
 date:   2022-09-11 
-image:  '/images/aws.png'
+image:  '/images/hands_on_aws_pentesting.jpg'
 tags:   [AWS Security, Penetration Testing, Bypass, Privesc]
 ---
 
-<head><title>Hands on AWS Penetration Testing</title><style>
-/* cspell:disable-file */
-/* webkit printing magic: print all background colors */
+<style>
 html {
 	-webkit-print-color-adjust: exact;
 }
