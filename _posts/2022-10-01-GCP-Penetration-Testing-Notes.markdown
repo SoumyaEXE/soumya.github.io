@@ -7,7 +7,6 @@ image:  '/images/GCP-Penetration-Testing-Notes.jpg'
 tags:   [Notes, Privesc, GCP]
 ---
 
-# GCP Penetration Testing Notes
 The PDF version of these notes can be found [here](/misc/GCP_Penetration_Testing_Notes.pdf).
 
 <style>
