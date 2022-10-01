@@ -3,11 +3,12 @@ layout: post
 title:  GCP Penetration Testing Notes
 description: Notes I wrote while reading a blog post written about GCP penetration testing techniques and methodologies by Chris Moberly.
 date:   2022-10-01 
-image:  '/images/hands_on_aws_pentesting.jpg'
+image:  '/images/GCP-Penetration-Testing-Notes.jpg'
 tags:   [Notes, Privesc, GCP]
 ---
 
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>GCP Penetration Testing</title>
+# GCP Penetration Testing Notes
+The PDF version of these notes can be found [here](/misc/GCP_Penetration_Testing_Notes.pdf).
 
 <style>
 /* cspell:disable-file */
