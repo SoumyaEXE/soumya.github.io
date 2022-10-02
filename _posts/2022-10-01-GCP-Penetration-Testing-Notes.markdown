@@ -9,6 +9,8 @@ tags:   [Notes, Privesc, GCP]
 
 
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>GCP Penetration Testing Notes</title>
+The PDF version of these notes can be found [here](/misc/GCP_Penetration_Testing_Notes.pdf).
+
 <style>
 
 .table_of_contents-item {
