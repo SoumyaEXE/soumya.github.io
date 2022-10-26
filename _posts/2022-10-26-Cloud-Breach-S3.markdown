@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Hacking in the Cloud - cloud_breacah_s3
+title: Hacking in the Cloud - cloud_breach_s3
 description: In this video we compromise an EC2 instance's metadata service, obtain credentials that result in exfiltrating sensitive data, and we do all of this while being completely undetected!
 date:   2022-10-26
 image:  '/images/cloud_breach_s3_web.png'
