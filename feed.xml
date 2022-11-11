@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Blog Posts</title>
+        <link>https://0xd4y.com</link>
+        <description>All content produced by 0xd4y (https://LinkedIn.com/in/SegevEliezer).</description>
+        <language>en</language>
+        <copyright></copyright>   
+        <ttl>60</ttl>
+        <lastBuildDate>Thu, 10 Nov 2022 18:28:05 -08:00</lastBuildDate> 
+        <generator>www.whiterocksoftware.com</generator>
+        <atom:link href="https://0xd4y.com" rel="self" type="application/rss+xml" />
+			<item><title>Hacking in the Cloud - Cloudgoat: cloud_breach_s3</title><description><![CDATA[]]></description><link>/videos/2022/10/26/Cloud-Breach-S3/</link><guid>/videos/2022/10/26/Cloud-Breach-S3/</guid><pubDate>Oct 26, 2022</pubDate><category></category></item><item><title>GCP Penetration Testing Notes 2</title><description><![CDATA[]]></description><link>/2022/10/24/GCP-Penetration-Testing-Notes-2/</link><guid>/2022/10/24/GCP-Penetration-Testing-Notes-2/</guid><pubDate>Oct 24, 2022</pubDate><category></category></item><item><title>GCP Penetration Testing Notes</title><description><![CDATA[]]></description><link>/2022/10/01/GCP-Penetration-Testing-Notes/</link><guid>/2022/10/01/GCP-Penetration-Testing-Notes/</guid><pubDate>Oct 01, 2022</pubDate><category></category></item><item><title>Hands on AWS Penetration Testing Notes</title><description><![CDATA[]]></description><link>/2022/09/11/Hands-on-AWS-Penetration-Testing-Notes/</link><guid>/2022/09/11/Hands-on-AWS-Penetration-Testing-Notes/</guid><pubDate>Sep 11, 2022</pubDate><category></category></item><item><title>Hacking in the Cloud - Cloudgoat: lambda_privesc</title><description><![CDATA[]]></description><link>/videos/2022/07/16/Lambda-Privesc/</link><guid>/videos/2022/07/16/Lambda-Privesc/</guid><pubDate>Jul 16, 2022</pubDate><category></category></item><item><title>Attention!!! This app is in demo mode - only part of the  data will be processed.Unlock app to switch to full mode and process all data.</title><description>Attention!!! This app is in demo mode - only part of the  data will be processed.Unlock app to switch to full mode and process all data.</description><link>Thu, 10 Nov 2022 18:28:05 -08:00</link><guid>Thu, 10 Nov 2022 18:28:05 -08:00</guid><pubDate>http://www.whiterocksoftware.com/p/buy.html</pubDate><category>whiterocksoftware.com</category></item>
+		</channel></rss>
+
+
