@@ -11,7 +11,7 @@ tags:   [Videos, Cloudgoat, AWS, IAM, EC2]
 We start off as a fairly high-privileged user who can perform multiple IAM and EC2 API calls. Using these permissions, it was possible to obtain full control over the AWS account by creating an EC2 instance with a high-privileged instance profile. 
 
 
-<iframe src="https://www.youtube.com/embed/1MS0GPwmVMI" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/wCKTkoXyGYs" frameborder="0" allowfullscreen></iframe>
 
 [00:00](https://www.youtube.com/watch?v=wCKTkoXyGYs&t=0s) - Video context<br>
 [01:07](https://www.youtube.com/watch?v=wCKTkoXyGYs&t=67s) - Configuring profile & AWSealion<br>
