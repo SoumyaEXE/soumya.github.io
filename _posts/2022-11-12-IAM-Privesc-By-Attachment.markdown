@@ -12,7 +12,7 @@ We start off as a fairly high-privileged user who can perform multiple IAM and E
 
 
 <iframe src="https://www.youtube.com/embed/wCKTkoXyGYs" frameborder="0" allowfullscreen></iframe>
-
+<br>
 [00:00](https://www.youtube.com/watch?v=wCKTkoXyGYs&t=0s) - Video context<br>
 [01:07](https://www.youtube.com/watch?v=wCKTkoXyGYs&t=67s) - Configuring profile & AWSealion<br>
 [03:31](https://www.youtube.com/watch?v=wCKTkoXyGYs&t=211s) - Enumerating environment<br>
