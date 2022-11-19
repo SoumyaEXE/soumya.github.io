@@ -10,4 +10,3 @@ Here are some of the videos that I posted on my <a href="https://www.youtube.com
 **You can search for videos and writeups by using the search feature located at the top right of the webpage.**
 
 <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
-<div class="commonninja_component pid-0ff4aeef-7317-4d77-8181-473702414727"></div>
