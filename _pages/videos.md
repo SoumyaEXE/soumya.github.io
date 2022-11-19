@@ -9,4 +9,5 @@ Here are some of the videos that I posted on my <a href="https://www.youtube.com
 
 **You can search for videos and writeups by using the search feature located at the top right of the webpage.**
 
-<rssapp-imageboard id="cyINQ9M6NOV0i1VW"></rssapp-imageboard><script src="https://widget.rss.app/v1/imageboard.js" type="text/javascript" async></script>
+<script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
+<div class="commonninja_component pid-0ff4aeef-7317-4d77-8181-473702414727"></div>
