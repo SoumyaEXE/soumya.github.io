@@ -9,6 +9,6 @@ Here are some of the videos that I posted on my <a href="https://www.youtube.com
 
 **You can search for videos and writeups by using the search feature located at the top right of the webpage.**
 
-<iframe src="https://www.youtube.com/embed?listType=playlist&list=UULFSumP9z5Rzquqih-jpusTOQ&index=1"></iframe>
+<iframe width="630" height="472" src="https://www.youtube.com/embed?listType=playlist&list=UULFSumP9z5Rzquqih-jpusTOQ&index=1" frameborder="0" allowfullscreen></iframe>
 
-<iframe src="https://www.youtube.com/embed?listType=playlist&list=UULFSumP9z5Rzquqih-jpusTOQ&index=2"></iframe>
+<iframe width="420" height="315" src="https://www.youtube.com/embed?listType=playlist&list=UULFSumP9z5Rzquqih-jpusTOQ&index=2" frameborder="0" allowfullscreen></iframe>
