@@ -22,4 +22,4 @@ Exploiting this vulnerability gives the credentials for the role of the IAM inst
 [06:15](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=375s) - Configuring EC2 role creds and lateral movement<br>
 [06:54](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=414s) - Looking into Lambda function<br>
 [08:31](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=511s) - Privilege escalation to Admin user<br>
-[12:10](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=730s) - Showing off enumerate-iam too
+[12:10](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=730s) - Showing off enumerate-iam tool
