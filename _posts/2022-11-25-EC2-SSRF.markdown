@@ -1,0 +1,25 @@
+---
+layout: post
+title: Hacking in the Cloud - ec2_ssrf
+description: As a low-privileged user, we compromised multiple other users and moved laterally within the environment. We then found a vulnerable EC2 instance which, when exploited, revealed the credentials for the role of the instance profile, which contained permissions to list and download credentials from a confidential S3 bucket. 
+date:   2022-11-25
+image:  '/images/ec2_ssrf_web.png'
+category: Videos
+tags:   [Videos, Cloudgoat, AWS, IAM, EC2, Lambda]
+---
+
+Starting off as a low-privileged user, a misconfiguration in the Lambda service made lateral movement to a user with EC2 access was possible. This resulted in knowing the IP address of an EC2 instance running a vulnerable web application which contains an SSRF vulnerability. 
+Exploiting this vulnerability gives the credentials for the role of the IAM instance profile attached to the EC2 instance, and the access key and secret access key could then be obtained via the S3 service.
+
+<iframe src="https://www.youtube.com/embed/4ghLqwAXQfQ" frameborder="0" allowfullscreen></iframe>
+<br>
+[00:00](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=0s) - Video Context<br> 
+[01:06](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=66s) - Configuring profile and AWSealion<br>
+[01:30](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=90s) - Enumerating Solus permissions<br>
+[02:50](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=170s) - Finding Lambda misconfiguration with EC2 user creds<br>
+[04:12](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=252s) - Enumerating EC2 user permissions and finding vulnerable EC2 instance<br>
+[05:01](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=301s) - Exploiting EC2 instance<br>
+[06:15](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=375s) - Configuring EC2 role creds and lateral movement<br>
+[06:54](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=414s) - Looking into Lambda function<br>
+[08:31](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=511s) - Privilege escalation to Admin user<br>
+[12:10](https://www.youtube.com/watch?v=4ghLqwAXQfQ&t=730s) - Showing off enumerate-iam too
