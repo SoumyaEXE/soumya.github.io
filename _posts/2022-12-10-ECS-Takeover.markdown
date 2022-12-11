@@ -5,7 +5,7 @@ description: We gain access to the targeted AWS account by finding an SSRF and R
 date:   2022-12-10
 image:  '/images/ecs_takeover_web.png'
 category: Videos
-tags: [Videos, Cloudgoat, AWS, IAM, EC2, Lambda]
+tags: [Videos, Cloudgoat, AWS, RCE, EC2, ECS]
 ---
 
 Starting with no access to the AWS account, we compromise a webapp hosted in an EC2 instance by finding both an SSRF and RCE vulnerability.
