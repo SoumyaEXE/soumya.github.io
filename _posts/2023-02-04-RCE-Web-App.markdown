@@ -2,7 +2,7 @@
 layout: post
 title:  Hacking in the Cloud - Cloudgoat: rce_web_app
 description: The objective of this scenario was to gain access to an RDS instance. We were provided with the credentials of two different users, and exploited this AWS environment in two different ways.
-date:   2023-02-24 
+date:   2023-02-04 
 image:  '/images/rce_web_app_web.png'
 tags:   [Video, Cloudgoat, Walkthrough, EC2, RDS, AWS]
 ---
