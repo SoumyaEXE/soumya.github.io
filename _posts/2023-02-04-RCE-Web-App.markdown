@@ -5,7 +5,7 @@ description: The objective of this scenario was to gain access to an RDS instanc
 date:   2023-02-04 
 image:  '/images/rce_web_app_web.png'
 category: Videos
-tags:   [Video, Cloudgoat, Walkthrough, EC2, RDS, AWS]
+tags:   [Videos, Cloudgoat, Walkthrough, EC2, RDS, AWS]
 ---
 
 The objective of this scenario was to gain access to an RDS instance. We were provided with the credentials of two different users.
