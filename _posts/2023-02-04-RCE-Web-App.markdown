@@ -14,6 +14,8 @@ The McDuck user had access to an S3 bucket that contained an SSH private key wit
 
 The Lara user has access to an S3 bucket with logs for an ELB within the workload. This allows us to find a hidden directory within the application that contains an RCE vulnerability, thus allowing us to gain access to the EC2 instance.
 
+<iframe src="https://www.youtube.com/embed/Izs7BBDMmv0" frameborder="0" allowfullscreen></iframe>
+
 [00:00](https://www.youtube.com/watch?v=Izs7BBDMmv0&t=0s) - Video Context<br>
 [01:12](https://www.youtube.com/watch?v=Izs7BBDMmv0&t=72s) - Configuring AWSealion and users<br>
 [02:38](https://www.youtube.com/watch?v=Izs7BBDMmv0&t=158s) - McDuck - Enumeration<br>
